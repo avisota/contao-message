@@ -33,11 +33,6 @@
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
-	"conflict": {
-		"contao-legacy/avisota": "*",
-		"contao-legacy/avisota2": "*",
-		"avisota/contao": "*"
-	},
 	"autoload":{
 		"psr-0":{
 			"Avisota\\Contao\\Message": "src/"
