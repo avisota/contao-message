@@ -13,10 +13,10 @@
  * @filesource
  */
 
-namespace Avisota\Contao\Message\Core\Renderer;
+namespace Avisota\Contao\Core\Message\Core\Renderer;
 
 use Avisota\Contao\Entity\Message;
-use Avisota\Contao\Message\PreRenderedMessageTemplateInterface;
+use Avisota\Contao\Core\Message\PreRenderedMessageTemplateInterface;
 use Avisota\Recipient\RecipientInterface;
 
 interface MessagePreRendererInterface extends MessageContentPreRendererInterface

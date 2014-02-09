@@ -17,8 +17,8 @@
 /**
  * Entities
  */
-$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Layout']  = 'Avisota\Contao\Message\Core\Entity\AbstractLayout';
-$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Message'] = 'Avisota\Contao\Message\Core\Entity\AbstractMessage';
+$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Layout']  = 'Avisota\Contao\Core\Message\Core\Entity\AbstractLayout';
+$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Message'] = 'Avisota\Contao\Core\Message\Core\Entity\AbstractMessage';
 
 $GLOBALS['DOCTRINE_ENTITIES'][] = 'orm_avisota_layout';
 $GLOBALS['DOCTRINE_ENTITIES'][] = 'orm_avisota_message';
@@ -31,7 +31,7 @@ $GLOBALS['DOCTRINE_ENTITIES'][] = 'orm_avisota_theme';
  * Back end modules
  */
 $GLOBALS['BE_MOD']['avisota']['avisota_outbox']     = array(
-	'callback'   => 'Avisota\Contao\Backend\Outbox',
+	'callback'   => 'Avisota\Contao\Core\Backend\Outbox',
 	'icon'       => 'system/modules/avisota/html/outbox.png',
 	'stylesheet' => 'assets/avisota-core/css/stylesheet.css'
 );
@@ -42,7 +42,7 @@ $GLOBALS['BE_MOD']['avisota']['avisota_newsletter'] = array(
 		'orm_avisota_message_content',
 		'orm_avisota_message_create_from_draft'
 	),
-	'send'       => array('Avisota\Contao\Backend\Preview', 'sendMessage'),
+	'send'       => array('Avisota\Contao\Core\Backend\Preview', 'sendMessage'),
 	'icon'       => 'system/modules/avisota/html/newsletter.png',
 	'stylesheet' => 'assets/avisota-core/css/stylesheet.css'
 );

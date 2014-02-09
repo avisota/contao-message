@@ -35,13 +35,13 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 		'enableVersioning'  => true,
 		'palettes_callback' => array
 		(
-			array('Avisota\Contao\DataContainer\Message', 'updatePalette'),
+			array('Avisota\Contao\Core\DataContainer\Message', 'updatePalette'),
 		),
 		'onload_callback'   => array
 		(
 			// we don�t have an permission management yet so don�t check permissions. 
 			// It might throw an error if the user is not an admin.
-			//array('Avisota\Contao\DataContainer\Message', 'checkPermission'),
+			//array('Avisota\Contao\Core\DataContainer\Message', 'checkPermission'),
 		)
 	),
 	// DataContainer
@@ -115,13 +115,13 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 			'fields'                => array('sendOn'),
 			'panelLayout'           => 'search,limit',
 			'headerFields'          => array('title'),
-			'header_callback'       => array('Avisota\Contao\DataContainer\Message', 'addHeader'),
-			'child_record_callback' => array('Avisota\Contao\DataContainer\Message', 'addMessageRow'),
+			'header_callback'       => array('Avisota\Contao\Core\DataContainer\Message', 'addHeader'),
+			'child_record_callback' => array('Avisota\Contao\Core\DataContainer\Message', 'addMessageRow'),
 			'child_record_class'    => 'no_padding',
 		),
 		'label'             => array
 		(
-			'group_callback' => array('Avisota\Contao\DataContainer\Message', 'addGroup')
+			'group_callback' => array('Avisota\Contao\Core\DataContainer\Message', 'addGroup')
 		),
 		'global_operations' => array
 		(
@@ -147,14 +147,14 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message']['edit'],
 				'href'            => 'table=orm_avisota_message_content',
 				'icon'            => 'edit.gif',
-				'button_callback' => array('Avisota\Contao\DataContainer\Message', 'editMessage')
+				'button_callback' => array('Avisota\Contao\Core\DataContainer\Message', 'editMessage')
 			),
 			'editheader' => array
 			(
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message']['editheader'],
 				'href'            => 'act=edit',
 				'icon'            => 'header.gif',
-				'button_callback' => array('Avisota\Contao\DataContainer\Message', 'editHeader')
+				'button_callback' => array('Avisota\Contao\Core\DataContainer\Message', 'editHeader')
 			),
 			'copy'       => array
 			(
@@ -162,7 +162,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'href'            => 'act=paste&amp;mode=copy',
 				'icon'            => 'copy.gif',
 				'attributes'      => 'onclick="Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\DataContainer\Message', 'copyMessage')
+				'button_callback' => array('Avisota\Contao\Core\DataContainer\Message', 'copyMessage')
 			),
 			'delete'     => array
 			(
@@ -170,7 +170,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'href'            => 'act=delete',
 				'icon'            => 'delete.gif',
 				'attributes'      => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\DataContainer\Message', 'deleteMessage')
+				'button_callback' => array('Avisota\Contao\Core\DataContainer\Message', 'deleteMessage')
 			),
 			'show'       => array
 			(
@@ -183,7 +183,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message']['send'],
 				'href'            => 'key=send',
 				'icon'            => 'system/modules/avisota/html/send.png',
-				'button_callback' => array('Avisota\Contao\DataContainer\Message', 'sendMessage')
+				'button_callback' => array('Avisota\Contao\Core\DataContainer\Message', 'sendMessage')
 			)
 		),
 	),

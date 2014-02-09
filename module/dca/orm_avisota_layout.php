@@ -33,11 +33,11 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 		'enableVersioning'  => true,
 		'onload_callback'   => array
 		(
-			array('Avisota\Contao\DataContainer\Theme', 'checkPermission')
+			array('Avisota\Contao\Core\DataContainer\Theme', 'checkPermission')
 		),
 		'onsubmit_callback' => array
 		(
-			array('Avisota\Contao\Backend', 'regenerateDynamics')
+			array('Avisota\Contao\Core\Backend', 'regenerateDynamics')
 		)
 	),
 	// DataContainer
@@ -92,7 +92,7 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 			'fields'                => array('title'),
 			'panelLayout'           => 'filter;search,limit',
 			'headerFields'          => array('title'),
-			'child_record_callback' => array('Avisota\Contao\DataContainer\Layout', 'addElement')
+			'child_record_callback' => array('Avisota\Contao\Core\DataContainer\Layout', 'addElement')
 		),
 		'label'             => array
 		(
@@ -123,7 +123,7 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 				'href'            => 'act=copy',
 				'icon'            => 'copy.gif',
 				'attributes'      => 'onclick="Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\DataContainer\Theme', 'copyCategory')
+				'button_callback' => array('Avisota\Contao\Core\DataContainer\Theme', 'copyCategory')
 			),
 			'delete' => array
 			(
@@ -131,7 +131,7 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 				'href'            => 'act=delete',
 				'icon'            => 'delete.gif',
 				'attributes'      => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\DataContainer\Theme', 'deleteCategory')
+				'button_callback' => array('Avisota\Contao\Core\DataContainer\Theme', 'deleteCategory')
 			),
 			'show'   => array
 			(
@@ -274,10 +274,10 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 			),
 			'field'            => array(),
 			'getter_callback'  => array(
-				array('Avisota\Contao\DataContainer\Layout', 'getterCallbackAllowedCellContents')
+				array('Avisota\Contao\Core\DataContainer\Layout', 'getterCallbackAllowedCellContents')
 			),
 			'setter_callback'  => array(
-				array('Avisota\Contao\DataContainer\Layout', 'setterCallbackAllowedCellContents')
+				array('Avisota\Contao\Core\DataContainer\Layout', 'setterCallbackAllowedCellContents')
 			),
 		),
 		'clearStyles' => array
@@ -293,7 +293,7 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 			'default'          => 'mail_html_default',
 			'exclude'          => true,
 			'inputType'        => 'select',
-			'options_callback' => array('Avisota\Contao\DataContainer\Theme', 'getHtmlTemplates'),
+			'options_callback' => array('Avisota\Contao\Core\DataContainer\Theme', 'getHtmlTemplates'),
 			'eval'             => array('tl_class' => 'w50')
 		),
 		'template_plain'    => array
@@ -302,7 +302,7 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 			'default'          => 'mail_plain_default',
 			'exclude'          => true,
 			'inputType'        => 'select',
-			'options_callback' => array('Avisota\Contao\DataContainer\Theme', 'getPlainTemplates'),
+			'options_callback' => array('Avisota\Contao\Core\DataContainer\Theme', 'getPlainTemplates'),
 			'eval'             => array('tl_class' => 'w50')
 		),
 		*/

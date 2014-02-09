@@ -35,7 +35,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 		(
 			// we don�t have an permission management yet so don�t check permissions. 
 			// It might throw an error if the user is not an admin.
-			//array('Avisota\Contao\DataContainer\MessageContent', 'checkPermission')
+			//array('Avisota\Contao\Core\DataContainer\MessageContent', 'checkPermission')
 		)
 	),
 	// DataContainer
@@ -89,7 +89,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 			'fields'                => array('sorting'),
 			'panelLayout'           => 'filter;search,limit',
 			'headerFields'          => array('subject'),
-			'child_record_callback' => array('Avisota\Contao\DataContainer\MessageContent', 'addElement')
+			'child_record_callback' => array('Avisota\Contao\Core\DataContainer\MessageContent', 'addElement')
 		),
 		'global_operations' => array
 		(
@@ -98,7 +98,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message']['view'],
 				'href'            => 'table=orm_avisota_message&amp;key=send',
 				'class'           => 'header_send',
-				'button_callback' => array('Avisota\Contao\DataContainer\MessageContent', 'sendMessageButton')
+				'button_callback' => array('Avisota\Contao\Core\DataContainer\MessageContent', 'sendMessageButton')
 			),
 			'all'  => array
 			(
@@ -142,7 +142,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['toggle'],
 				'icon'            => 'visible.gif',
 				'attributes'      => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
-				'button_callback' => array('Avisota\Contao\DataContainer\MessageContent', 'toggleIcon')
+				'button_callback' => array('Avisota\Contao\Core\DataContainer\MessageContent', 'toggleIcon')
 			),
 			'show'   => array
 			(

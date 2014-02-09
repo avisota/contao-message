@@ -32,11 +32,11 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 		'enableVersioning'  => true,
 		'onload_callback'   => array
 		(
-			array('Avisota\Contao\DataContainer\Theme', 'checkPermission')
+			array('Avisota\Contao\Core\DataContainer\Theme', 'checkPermission')
 		),
 		'onsubmit_callback' => array
 		(
-			array('Avisota\Contao\Backend', 'regenerateDynamics')
+			array('Avisota\Contao\Core\Backend', 'regenerateDynamics')
 		)
 	),
 	// DataContainer
@@ -115,7 +115,7 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 				'href'            => 'act=copy',
 				'icon'            => 'copy.gif',
 				'attributes'      => 'onclick="Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\DataContainer\Theme', 'copyCategory')
+				'button_callback' => array('Avisota\Contao\Core\DataContainer\Theme', 'copyCategory')
 			),
 			'delete'  => array
 			(
@@ -123,7 +123,7 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 				'href'            => 'act=delete',
 				'icon'            => 'delete.gif',
 				'attributes'      => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\DataContainer\Theme', 'deleteCategory')
+				'button_callback' => array('Avisota\Contao\Core\DataContainer\Theme', 'deleteCategory')
 			),
 			'show'    => array
 			(

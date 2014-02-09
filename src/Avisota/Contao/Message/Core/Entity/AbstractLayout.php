@@ -13,9 +13,9 @@
  * @filesource
  */
 
-namespace Avisota\Contao\Message\Core\Entity;
+namespace Avisota\Contao\Core\Message\Core\Entity;
 
-use Avisota\Contao\Event\ResolveStylesheetEvent;
+use Avisota\Contao\Core\Event\ResolveStylesheetEvent;
 use Contao\Doctrine\ORM\Entity;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
