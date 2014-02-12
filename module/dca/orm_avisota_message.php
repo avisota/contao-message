@@ -52,12 +52,12 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 		(
 			'default' => array
 			(
-				'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityData',
+				'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider',
 				'source' => 'orm_avisota_message'
 			),
 			'parent'  => array
 			(
-				'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityData',
+				'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider',
 				'source' => 'orm_avisota_message_category'
 			)
 		),
