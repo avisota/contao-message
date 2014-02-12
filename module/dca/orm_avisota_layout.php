@@ -35,10 +35,6 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 		(
 			array('Avisota\Contao\Core\DataContainer\Theme', 'checkPermission')
 		),
-		'onsubmit_callback' => array
-		(
-			array('Avisota\Contao\Core\Backend', 'regenerateDynamics')
-		)
 	),
 	// DataContainer
 	'dca_config'      => array

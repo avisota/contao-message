@@ -36,10 +36,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 		(
 			array('Avisota\Contao\Core\DataContainer\MessageCategory', 'checkPermission')
 		),
-		'onsubmit_callback' => array
-		(
-			array('Avisota\Contao\Core\Backend', 'regenerateDynamics')
-		)
 	),
 	// DataContainer
 	'dca_config'            => array
