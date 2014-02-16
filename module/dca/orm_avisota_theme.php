@@ -163,12 +163,14 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 		'createdAt'         => array(
 			'field' => array(
 				'type'          => 'datetime',
+				'nullable'      => true,
 				'timestampable' => array('on' => 'create')
 			)
 		),
 		'updatedAt'         => array(
 			'field' => array(
 				'type'          => 'datetime',
+				'nullable'      => true,
 				'timestampable' => array('on' => 'update')
 			)
 		),
