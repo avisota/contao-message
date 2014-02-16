@@ -18,9 +18,10 @@ namespace Avisota\Contao\Core\Message\Core\Entity;
 use Avisota\Contao\Core\Event\ResolveStylesheetEvent;
 use Contao\Doctrine\ORM\AliasableInterface;
 use Contao\Doctrine\ORM\Entity;
+use Contao\Doctrine\ORM\EntityInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-abstract class AbstractMessage extends Entity implements AliasableInterface
+abstract class AbstractMessage implements EntityInterface, AliasableInterface
 {
 	/**
 	 * @var string

@@ -17,9 +17,10 @@ namespace Avisota\Contao\Core\Message\Core\Entity;
 
 use Avisota\Contao\Core\Event\ResolveStylesheetEvent;
 use Contao\Doctrine\ORM\Entity;
+use Contao\Doctrine\ORM\EntityInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-abstract class AbstractLayout extends Entity
+abstract class AbstractLayout implements EntityInterface
 {
 	public function getStylesheetPaths()
 	{
