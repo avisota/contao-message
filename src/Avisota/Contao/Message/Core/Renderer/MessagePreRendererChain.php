@@ -13,7 +13,7 @@
  * @filesource
  */
 
-namespace Avisota\Contao\Core\Message\Core\Renderer;
+namespace Avisota\Contao\Message\Core\Renderer;
 
 use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Entity\MessageContent;

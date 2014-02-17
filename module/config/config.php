@@ -17,8 +17,8 @@
 /**
  * Entities
  */
-$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Layout']  = 'Avisota\Contao\Core\Message\Core\Entity\AbstractLayout';
-$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Message'] = 'Avisota\Contao\Core\Message\Core\Entity\AbstractMessage';
+$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Layout']  = 'Avisota\Contao\Message\Core\Entity\AbstractLayout';
+$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Message'] = 'Avisota\Contao\Message\Core\Entity\AbstractMessage';
 
 $GLOBALS['DOCTRINE_ENTITIES'][] = 'orm_avisota_layout';
 $GLOBALS['DOCTRINE_ENTITIES'][] = 'orm_avisota_message';

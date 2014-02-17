@@ -13,7 +13,7 @@
  * @filesource
  */
 
-namespace Avisota\Contao\Core\Message\Core\Entity;
+namespace Avisota\Contao\Message\Core\Entity;
 
 use Avisota\Contao\Core\Event\ResolveStylesheetEvent;
 use Contao\Doctrine\ORM\AliasableInterface;
