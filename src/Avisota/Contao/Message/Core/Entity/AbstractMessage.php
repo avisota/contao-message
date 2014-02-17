@@ -28,7 +28,7 @@ abstract class AbstractMessage implements EntityInterface, AliasableInterface
 	 */
 	protected $language;
 
-	function __construct()
+	public function __construct()
 	{
 		if (isset($GLOBALS['TL_LANGUAGE'])) {
 			$this->language = $GLOBALS['TL_LANGUAGE'];
