@@ -54,6 +54,47 @@ $GLOBALS['BE_MOD']['avisota']['avisota_theme']            = array
 	'stylesheet' => 'assets/avisota-core/css/stylesheet.css'
 );
 
+/**
+ * Front end modules
+ */
+$GLOBALS['FE_MOD']['avisota']['avisota_list']         = 'Avisota\Contao\Core\Message\List';
+$GLOBALS['FE_MOD']['avisota']['avisota_reader']       = 'Avisota\Contao\Core\Message\Reader';
+
+/**
+ * Events
+ */
+$GLOBALS['TL_EVENTS']['avisota/message.collect-stylesheets'][] = array(
+	'Avisota\Contao\Message\Core\Layout\ContaoStylesheets',
+	'collectStylesheets'
+);
+$GLOBALS['TL_EVENTS']['avisota/message.resolve-stylesheet'][]  = array(
+	'Avisota\Contao\Message\Core\Layout\ContaoStylesheets',
+	'resolveStylesheet'
+);
+
+/**
+ * Hooks
+ */
+$GLOBALS['TL_HOOKS']['initializeSystem']['avisota-custom-menu'] = array(
+	'Avisota\Contao\Message\Core\Backend\CustomMenu',
+	'injectMenu'
+);
+$GLOBALS['TL_HOOKS']['getUserNavigation']['avisota-custom-menu']     = array(
+	'Avisota\Contao\Message\Core\Backend\CustomMenu',
+	'hookGetUserNavigation'
+);
+$GLOBALS['TL_HOOKS']['loadLanguageFile']['avisota-custom-menu']      = array(
+	'Avisota\Contao\Message\Core\Backend\CustomMenu',
+	'hookLoadLanguageFile'
+);
+
+/**
+ * Send modules
+ */
+$GLOBALS['AVISOTA_SEND_MODULE']['avisota_preview']          = 'Avisota\Contao\Message\Core\Send\PreviewModule';
+$GLOBALS['AVISOTA_SEND_MODULE']['avisota_preview_to_user']  = 'Avisota\Contao\Message\Core\Send\SendPreviewToUserModule';
+$GLOBALS['AVISOTA_SEND_MODULE']['avisota_preview_to_email'] = 'Avisota\Contao\Message\Core\Send\SendPreviewToEmailModule';
+$GLOBALS['AVISOTA_SEND_MODULE']['avisota_send_immediate']   = 'Avisota\Contao\Message\Core\Send\SendImmediateModule';
 
 /**
  * Message elements
