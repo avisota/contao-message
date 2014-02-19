@@ -26,6 +26,10 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['type']         = array(
 	'Element type',
 	'Please choose the type of content element.'
 );
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']            = array(
+	'Cell',
+	'Please choose the cell the content element should be showed in.'
+);
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['text']         = array(
 	'Text',
 	'You can use HTML tags to format the text.'
@@ -37,10 +41,6 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['definePlain']  = array(
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['plain']        = array(
 	'Plain text',
 	'Plain text without html formatting.'
-);
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['personalize']  = array(
-	'Personalisieren <strong style="color:red">REMOVE</strong>',
-	'Hier können Sie auswählen, ob dieses Element personalisiert werden soll.'
 );
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['tableitems']   = array(
 	'Table items',
@@ -118,11 +118,11 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['expert_legend']    = 'Expert
  */
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['anonymous']      = 'Anonym personalisieren, falls keine persönlichen Daten verfügbar sind <strong style="color:red">REMOVE</strong>';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['private']        = 'Persönlich personalisieren, blendet das Element aus, wenn keine persönlichen Daten verfügbar sind <strong style="color:red">REMOVE</strong>';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']['body']   = 'Inhalt <strong style="color:red">REMOVE</strong>';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']['header'] = 'Kopfzeile <strong style="color:red">REMOVE</strong>';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']['footer'] = 'Fußzeile <strong style="color:red">REMOVE</strong>';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']['left']   = 'Linke Spalte <strong style="color:red">REMOVE</strong>';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']['right']  = 'Rechte Spalte <strong style="color:red">REMOVE</strong>';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['header'] = 'Header';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['left']   = 'Left column';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['main']   = 'Main column';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['right']  = 'Right column';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['footer'] = 'Footer';
 
 
 /**

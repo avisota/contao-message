@@ -30,28 +30,33 @@ $GLOBALS['DOCTRINE_ENTITIES'][] = 'orm_avisota_theme';
 /**
  * Back end modules
  */
-$GLOBALS['BE_MOD']['avisota']['avisota_outbox']     = array(
-	'callback'   => 'Avisota\Contao\Core\Backend\Outbox',
-	'icon'       => 'system/modules/avisota/html/outbox.png',
-	'stylesheet' => 'assets/avisota-core/css/stylesheet.css'
-);
-$GLOBALS['BE_MOD']['avisota']['avisota_newsletter'] = array(
-	'tables'     => array(
-		'orm_avisota_message_category',
-		'orm_avisota_message',
-		'orm_avisota_message_content',
-		'orm_avisota_message_create_from_draft'
+$settingsModuleIndex = 1 + array_search('avisota_settings', array_keys($GLOBALS['BE_MOD']['avisota']));
+
+$GLOBALS['BE_MOD']['avisota'] = array_merge(
+	array(
+		'avisota_newsletter' => array(
+			'tables'     => array(
+				'orm_avisota_message_category',
+				'orm_avisota_message',
+				'orm_avisota_message_content',
+				'orm_avisota_message_create_from_draft'
+			),
+			'send'       => array('Avisota\Contao\Core\Backend\Preview', 'sendMessage'),
+			'icon'       => 'assets/avisota/message/images/newsletter.png',
+			'stylesheet' => 'assets/avisota/message/css/stylesheet.css'
+		)
 	),
-	'send'       => array('Avisota\Contao\Core\Backend\Preview', 'sendMessage'),
-	'icon'       => 'system/modules/avisota/html/newsletter.png',
-	'stylesheet' => 'assets/avisota-core/css/stylesheet.css'
-);
-$GLOBALS['BE_MOD']['avisota']['avisota_theme']            = array
-(
-	'nested'     => 'avisota_config:newsletter',
-	'tables'     => array('orm_avisota_theme', 'orm_avisota_layout'),
-	'icon'       => 'assets/avisota-core/images/theme.png',
-	'stylesheet' => 'assets/avisota-core/css/stylesheet.css'
+	array_slice($GLOBALS['BE_MOD']['avisota'], 0, $settingsModuleIndex),
+	array(
+		'avisota_theme' => array
+		(
+			'nested'     => 'avisota_config:newsletter',
+			'tables'     => array('orm_avisota_theme', 'orm_avisota_layout'),
+			'icon'       => 'assets/avisota/message/images/theme.png',
+			'stylesheet' => 'assets/avisota/message/css/stylesheet.css'
+		)
+	),
+	array_slice($GLOBALS['BE_MOD']['avisota'], $settingsModuleIndex)
 );
 
 /**
@@ -63,29 +68,21 @@ $GLOBALS['FE_MOD']['avisota']['avisota_reader']       = 'Avisota\Contao\Core\Mes
 /**
  * Events
  */
-$GLOBALS['TL_EVENTS']['avisota/message.collect-stylesheets'][] = array(
-	'Avisota\Contao\Message\Core\Layout\ContaoStylesheets',
-	'collectStylesheets'
-);
-$GLOBALS['TL_EVENTS']['avisota/message.resolve-stylesheet'][]  = array(
-	'Avisota\Contao\Message\Core\Layout\ContaoStylesheets',
-	'resolveStylesheet'
-);
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\Message';
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\MessageContent';
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\OptionsBuilder';
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\Layout\ContaoStylesheets';
 
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['initializeSystem']['avisota-custom-menu'] = array(
+$GLOBALS['TL_HOOKS']['initializeDependencyContainer']['avisota-custom-menu'] = array(
 	'Avisota\Contao\Message\Core\Backend\CustomMenu',
 	'injectMenu'
 );
 $GLOBALS['TL_HOOKS']['getUserNavigation']['avisota-custom-menu']     = array(
 	'Avisota\Contao\Message\Core\Backend\CustomMenu',
 	'hookGetUserNavigation'
-);
-$GLOBALS['TL_HOOKS']['loadLanguageFile']['avisota-custom-menu']      = array(
-	'Avisota\Contao\Message\Core\Backend\CustomMenu',
-	'hookLoadLanguageFile'
 );
 
 /**
@@ -101,4 +98,11 @@ $GLOBALS['AVISOTA_SEND_MODULE']['avisota_send_immediate']   = 'Avisota\Contao\Me
  */
 if (!isset($GLOBALS['TL_MCE'])) {
 	$GLOBALS['TL_MCE'] = array();
+}
+
+/**
+ * Message renderer
+ */
+if (!isset($GLOBALS['AVISOTA_MESSAGE_RENDERER'])) {
+	$GLOBALS['AVISOTA_MESSAGE_RENDERER'] = array();
 }

@@ -15,12 +15,12 @@
 
 namespace Avisota\Contao\Message\Core\Event;
 
-use Avisota\Contao\Core\Message\Renderer;
+use Avisota\Contao\Message\Core\Message\Renderer;
 use Symfony\Component\EventDispatcher\Event;
 
 class CollectStylesheetsEvent extends Event
 {
-	const NAME = 'Avisota\Contao\Core\Event\CollectStylesheets';
+	const NAME = 'Avisota\Contao\Message\Core\Event\CollectStylesheets';
 
 	/**
 	 * @var \ArrayObject

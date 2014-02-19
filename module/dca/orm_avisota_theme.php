@@ -13,6 +13,7 @@
  * @filesource
  */
 
+use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory;
 
 /**
  * Table orm_avisota_theme
@@ -27,12 +28,12 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 	// Config
 	'config'          => array
 	(
-		'dataContainer'     => 'General',
-		'ctable'            => array('orm_avisota_layout'),
-		'enableVersioning'  => true,
-		'onload_callback'   => array
+		'dataContainer'    => 'General',
+		'ctable'           => array('orm_avisota_layout'),
+		'enableVersioning' => true,
+		'onload_callback'  => array
 		(
-			array('Avisota\Contao\Core\DataContainer\Theme', 'checkPermission')
+			array('Avisota\Contao\Message\Core\DataContainer\Theme', 'checkPermission')
 		),
 	),
 	// DataContainer
@@ -108,7 +109,7 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 				'href'            => 'act=copy',
 				'icon'            => 'copy.gif',
 				'attributes'      => 'onclick="Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\Core\DataContainer\Theme', 'copyCategory')
+				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\Theme', 'copyCategory')
 			),
 			'delete'  => array
 			(
@@ -116,7 +117,7 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 				'href'            => 'act=delete',
 				'icon'            => 'delete.gif',
 				'attributes'      => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\Core\DataContainer\Theme', 'deleteCategory')
+				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\Theme', 'deleteCategory')
 			),
 			'show'    => array
 			(
@@ -126,9 +127,10 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 			),
 			'layouts' => array
 			(
-				'label' => &$GLOBALS['TL_LANG']['orm_avisota_theme']['layouts'],
-				'href'  => 'table=orm_avisota_layout',
-				'icon'  => 'assets/avisota-core/images/layout.png'
+				'label'   => &$GLOBALS['TL_LANG']['orm_avisota_theme']['layouts'],
+				'href'    => 'table=orm_avisota_layout',
+				'icon'    => 'assets/avisota/message/images/layout.png',
+				'idparam' => 'pid',
 			)
 		),
 	),
@@ -137,10 +139,8 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 	(
 		'default' => array
 		(
-			'theme'     => array('title', 'alias', 'preview'),
-			'structure' => array('areas'),
-			'template'  => array('stylesheets'),
-			'expert'    => array(':hide', 'templateDirectory')
+			'theme'  => array('title', 'alias'),
+			'expert' => array(':hide', 'templateDirectory')
 		)
 	),
 	// Subpalettes
@@ -218,11 +218,11 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['orm_avisota_theme']['templateDirectory'],
 			'exclude'   => true,
-			'inputType' => 'fileTree',
+			'inputType' => 'select',
+			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-template-directory-options'),
 			'eval'      => array(
-				'tl_class'  => 'clr',
-				'fieldType' => 'radio',
-				'path'      => 'templates'
+				'tl_class'           => 'clr',
+				'includeBlankOption' => true,
 			),
 			'field'     => array(),
 		)

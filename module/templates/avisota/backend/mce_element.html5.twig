@@ -1,0 +1,18 @@
+
+{% if _lang.MCE[type] %}
+	{% set label = _lang.MCE[type][0] %}
+{% else %}
+	{% set label = type %}
+{% endif %}
+
+<div class="cte_type {{ key }}">
+	{{ label }}
+	{% if protected %}
+		({{ _lang.MSC.protected }})
+	{% elseif guests %}
+		({{ _lang.MSC.guests }})
+	{% endif %}
+</div>
+<div class="limit_height{% if _config.doNotCollapse %} h64{% endif %} block">
+	{{ element }}
+</div>

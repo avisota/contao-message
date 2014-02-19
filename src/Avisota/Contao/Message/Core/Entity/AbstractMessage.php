@@ -16,18 +16,18 @@
 namespace Avisota\Contao\Message\Core\Entity;
 
 use Avisota\Contao\Core\Event\ResolveStylesheetEvent;
+use Avisota\Contao\Entity\Layout;
+use Avisota\Contao\Entity\MessageCategory;
+use Avisota\Contao\Entity\Queue;
+use Avisota\Contao\Entity\RecipientSource;
 use Contao\Doctrine\ORM\AliasableInterface;
 use Contao\Doctrine\ORM\Entity;
+use Contao\Doctrine\ORM\EntityHelper;
 use Contao\Doctrine\ORM\EntityInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 abstract class AbstractMessage implements EntityInterface, AliasableInterface
 {
-	/**
-	 * @var string
-	 */
-	protected $language;
-
 	public function __construct()
 	{
 		if (isset($GLOBALS['TL_LANGUAGE'])) {
@@ -62,7 +62,7 @@ abstract class AbstractMessage implements EntityInterface, AliasableInterface
 			throw new \RuntimeException('Could not find recipients for message ' . $this->getId());
 		}
 
-		return $this->callGetterCallbacks('recipients', $recipients);
+		return EntityHelper::callGetterCallbacks($this, 'orm_avisota_message', 'recipients', $recipients);
 	}
 
 	/**
@@ -92,7 +92,7 @@ abstract class AbstractMessage implements EntityInterface, AliasableInterface
 			throw new \RuntimeException('Could not find layout for message ' . $this->getId());
 		}
 
-		return $this->callGetterCallbacks('layout', $layout);
+		return EntityHelper::callGetterCallbacks($this, 'orm_avisota_message', 'layout', $layout);
 	}
 
 	/**
@@ -122,7 +122,7 @@ abstract class AbstractMessage implements EntityInterface, AliasableInterface
 			throw new \RuntimeException('Could not find queue for message ' . $this->getId());
 		}
 
-		return $this->callGetterCallbacks('queue', $queue);
+		return EntityHelper::callGetterCallbacks($this, 'orm_avisota_message', 'queue', $queue);
 	}
 
 	/**

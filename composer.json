@@ -42,7 +42,7 @@
 		"contao": {
 			"sources": {
 				"module": "system/modules/avisota-message",
-				"assets": "assets/avisota-message"
+				"assets": "assets/avisota/message"
 			},
 			"transifex": {
 				"project": "avisota-contao",

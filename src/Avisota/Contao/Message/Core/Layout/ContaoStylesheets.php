@@ -15,20 +15,33 @@
 
 namespace Avisota\Contao\Message\Core\Layout;
 
-use Avisota\Contao\Core\Event\CollectStylesheetsEvent;
-use Avisota\Contao\Core\Event\CollectThemeStylesheetsEvent;
-use Avisota\Contao\Core\Event\ResolveStylesheetEvent;
+use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
+use Avisota\Contao\Message\Core\Event\CollectStylesheetsEvent;
+use Avisota\Contao\Message\Core\Event\CollectThemeStylesheetsEvent;
+use Avisota\Contao\Message\Core\Event\ResolveStylesheetEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ContaoStylesheets
+class ContaoStylesheets implements EventSubscriberInterface
 {
-	static public function collectStylesheets(CollectStylesheetsEvent $event)
+	/**
+	 * {@inheritdoc}
+	 */
+	static public function getSubscribedEvents()
+	{
+		return array(
+			AvisotaMessageEvents::COLLECT_STYLESHEETS => 'collectStylesheets',
+			AvisotaMessageEvents::RESOLVE_STYLESHEET  => 'resolveStylesheet',
+		);
+	}
+
+	public function collectStylesheets(CollectStylesheetsEvent $event)
 	{
 		/** @var EventDispatcher $eventDispatcher */
 		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 
 		$database = \Database::getInstance();
-		$theme = $database->query("SELECT * FROM tl_theme ORDER BY name");
+		$theme    = $database->query("SELECT * FROM tl_theme ORDER BY name");
 
 		$stylesheets = $event->getStylesheets();
 
@@ -40,11 +53,11 @@ class ContaoStylesheets
 				$stylesheets['contao:' . $stylesheet->name] = '<span style="color:#A6A6A6;display:inline">' . $theme->name . ': </span>' . $stylesheet->name . '<span style="color:#A6A6A6;display:inline">.css</span>';
 			}
 
-			$eventDispatcher->dispatch(CollectThemeStylesheetsEvent::NAME, new CollectThemeStylesheetsEvent($theme->row(), $stylesheets));
+			$eventDispatcher->dispatch(AvisotaMessageEvents::COLLECT_THEME_STYLESHEETS, new CollectThemeStylesheetsEvent($theme->row(), $stylesheets));
 		}
 	}
 
-	static public function resolveStylesheet(ResolveStylesheetEvent $event)
+	public function resolveStylesheet(ResolveStylesheetEvent $event)
 	{
 		$stylesheet = $event->getStylesheet();
 

@@ -28,13 +28,13 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 	// Config
 	'config'                => array
 	(
-		'dataContainer'     => 'General',
-		'ctable'            => array('orm_avisota_message'),
-		'switchToEdit'      => true,
-		'enableVersioning'  => true,
-		'onload_callback'   => array
+		'dataContainer'    => 'General',
+		'ctable'           => array('orm_avisota_message'),
+		'switchToEdit'     => true,
+		'enableVersioning' => true,
+		'onload_callback'  => array
 		(
-			array('Avisota\Contao\Core\DataContainer\MessageCategory', 'checkPermission')
+			array('Avisota\Contao\Message\Core\DataContainer\MessageCategory', 'checkPermission')
 		),
 	),
 	// DataContainer
@@ -100,16 +100,17 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 		(
 			'edit'       => array
 			(
-				'label' => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['edit'],
-				'href'  => 'table=orm_avisota_message',
-				'icon'  => 'edit.gif',
+				'label'   => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['edit'],
+				'href'    => 'table=orm_avisota_message',
+				'icon'    => 'edit.gif',
+				'idparam' => 'pid',
 			),
 			'editheader' => array
 			(
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['editheader'],
 				'href'            => 'act=edit',
 				'icon'            => 'header.gif',
-				'button_callback' => array('Avisota\Contao\Core\DataContainer\MessageCategory', 'editHeader'),
+				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\MessageCategory', 'editHeader'),
 			),
 			'copy'       => array
 			(
@@ -117,7 +118,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 				'href'            => 'act=copy',
 				'icon'            => 'copy.gif',
 				'attributes'      => 'onclick="Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\Core\DataContainer\MessageCategory', 'copyCategory')
+				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\MessageCategory', 'copyCategory')
 			),
 			'delete'     => array
 			(
@@ -125,7 +126,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 				'href'            => 'act=delete',
 				'icon'            => 'delete.gif',
 				'attributes'      => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\Core\DataContainer\MessageCategory', 'deleteCategory')
+				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\MessageCategory', 'deleteCategory')
 			),
 			'show'       => array
 			(
@@ -267,7 +268,9 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['recipients'],
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-recipient-source-options'),
+			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
+					'avisota.create-recipient-source-options'
+				),
 			'eval'             => array(
 				'mandatory'          => true,
 				'includeBlankOption' => true,

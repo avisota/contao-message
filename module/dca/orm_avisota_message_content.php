@@ -35,7 +35,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 		(
 			// we don�t have an permission management yet so don�t check permissions. 
 			// It might throw an error if the user is not an admin.
-			//array('Avisota\Contao\Core\DataContainer\MessageContent', 'checkPermission')
+			//array('Avisota\Contao\Message\Core\DataContainer\MessageContent', 'checkPermission')
 		)
 	),
 	// DataContainer
@@ -83,10 +83,14 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 		'sorting'           => array
 		(
 			'mode'                  => 4,
-			'fields'                => array('sorting'),
+			'fields'                => array('cell', 'sorting'),
 			'panelLayout'           => 'filter;search,limit',
 			'headerFields'          => array('subject'),
-			'child_record_callback' => array('Avisota\Contao\Core\DataContainer\MessageContent', 'addElement')
+		),
+		'label'             => array
+		(
+			'fields' => array('title'),
+			'format' => '%s'
 		),
 		'global_operations' => array
 		(
@@ -95,7 +99,10 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message']['view'],
 				'href'            => 'table=orm_avisota_message&amp;key=send',
 				'class'           => 'header_send',
-				'button_callback' => array('Avisota\Contao\Core\DataContainer\MessageContent', 'sendMessageButton')
+				'button_callback' => array(
+					'Avisota\Contao\Message\Core\DataContainer\MessageContent',
+					'sendMessageButton'
+				)
 			),
 			'all'  => array
 			(
@@ -139,7 +146,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['toggle'],
 				'icon'            => 'visible.gif',
 				'attributes'      => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
-				'button_callback' => array('Avisota\Contao\Core\DataContainer\MessageContent', 'toggleIcon')
+				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\MessageContent', 'toggleIcon')
 			),
 			'show'   => array
 			(
@@ -156,7 +163,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 	),
 	'metapalettes'    => array
 	(
-		'default'   => array
+		'default' => array
 		(
 			'type' => array('type', 'cell')
 		),
@@ -164,12 +171,12 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 	// Subpalettes
 	'metasubpalettes' => array
 	(
-		'protected'   => array('groups')
+		'protected' => array('groups')
 	),
 	// Fields
 	'fields'          => array
 	(
-		'id'              => array(
+		'id'           => array(
 			'field' => array(
 				'id'      => true,
 				'type'    => 'string',
@@ -177,21 +184,21 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				'options' => array('fixed' => true),
 			)
 		),
-		'createdAt'       => array(
+		'createdAt'    => array(
 			'field' => array(
 				'type'          => 'datetime',
 				'nullable'      => true,
 				'timestampable' => array('on' => 'create')
 			)
 		),
-		'updatedAt'       => array(
+		'updatedAt'    => array(
 			'field' => array(
 				'type'          => 'datetime',
 				'nullable'      => true,
 				'timestampable' => array('on' => 'update')
 			)
 		),
-		'message'         => array(
+		'message'      => array(
 			'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['message'],
 			'eval'      => array(
 				'doNotShow' => true,
@@ -209,44 +216,49 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				)
 			)
 		),
-		'sorting'         => array
+		'sorting'      => array
 		(
-			'field' => array(
+			'default' => 0,
+			'field'   => array(
 				'type' => 'integer'
 			)
 		),
-		'type'            => array
+		'type'         => array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['type'],
 			'exclude'          => true,
 			'filter'           => true,
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-message-content-type-options'),
+			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
+					'avisota.create-message-content-type-options'
+				),
 			'reference'        => &$GLOBALS['TL_LANG']['MCE'],
-			'eval'             => array('includeBlankOption' => true, 'helpwizard' => true, 'submitOnChange' => true, 'tl_class' => 'w50')
+			'eval'             => array(
+				'includeBlankOption' => true,
+				'helpwizard'         => true,
+				'submitOnChange'     => true,
+				'tl_class'           => 'w50'
+			)
 		),
-		'cell'            => array
+		'cell'         => array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell'],
 			'exclude'          => true,
 			'filter'           => true,
+			'flag'             => 1,
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-message-content-cell-options'),
-			'reference'        => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell'],
-			'eval'             => array('mandatory' => true, 'submitOnChange' => true, 'includeBlankOption' => true, 'tl_class' => 'w50')
+			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
+					'avisota.create-message-content-cell-options'
+				),
+			'reference'        => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells'],
+			'eval'             => array(
+				'mandatory'          => true,
+				'submitOnChange'     => true,
+				'includeBlankOption' => true,
+				'tl_class'           => 'w50'
+			)
 		),
-		'personalize'     => array
-		(
-			'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['personalize'],
-			'exclude'   => true,
-			'filter'    => true,
-			'inputType' => 'select',
-			'options'   => array('anonymous', 'private'),
-			'reference' => &$GLOBALS['TL_LANG']['orm_avisota_message_content'],
-			'eval'      => array('tl_class' => 'long')
-		),
-
-		'protected'       => array
+		'protected'    => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['protected'],
 			'exclude'   => true,
@@ -254,7 +266,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 			'inputType' => 'checkbox',
 			'eval'      => array('submitOnChange' => true)
 		),
-		'groups'          => array
+		'groups'       => array
 		(
 			'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['groups'],
 			'exclude'    => true,
@@ -262,28 +274,28 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 			'foreignKey' => 'tl_member_group.name',
 			'eval'       => array('mandatory' => true, 'multiple' => true)
 		),
-		'guests'          => array
+		'guests'       => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['guests'],
 			'exclude'   => true,
 			'filter'    => true,
 			'inputType' => 'checkbox'
 		),
-		'cssID'           => array
+		'cssID'        => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['cssID'],
 			'exclude'   => true,
 			'inputType' => 'text',
 			'eval'      => array('multiple' => true, 'size' => 2, 'tl_class' => 'w50')
 		),
-		'space'           => array
+		'space'        => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['space'],
 			'exclude'   => true,
 			'inputType' => 'text',
 			'eval'      => array('multiple' => true, 'size' => 2, 'rgxp' => 'digit', 'nospace' => true)
 		),
-		'invisible'       => array
+		'invisible'    => array
 		(
 			'label'   => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['invisible'],
 			'default' => false,
@@ -291,7 +303,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				'type' => 'boolean'
 			)
 		),
-		'unmodifiable'    => array
+		'unmodifiable' => array
 		(
 			'label'   => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['unmodifiable'],
 			'default' => false,
@@ -299,7 +311,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				'type' => 'boolean'
 			)
 		),
-		'undeletable'     => array
+		'undeletable'  => array
 		(
 			'label'   => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['undeletable'],
 			'default' => false,

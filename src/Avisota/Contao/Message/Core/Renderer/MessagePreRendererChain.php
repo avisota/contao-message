@@ -17,7 +17,6 @@ namespace Avisota\Contao\Message\Core\Renderer;
 
 use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Entity\MessageContent;
-use Avisota\Recipient\RecipientInterface;
 
 class MessagePreRendererChain implements MessagePreRendererInterface
 {

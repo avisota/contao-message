@@ -17,8 +17,25 @@
 /**
  * Define message renderer
  */
-$container['avisota.renderer'] = $container->share(
+$container['avisota.message.renderer'] = $container->share(
 	function () {
-		return new \Avisota\Contao\Core\Message\Renderer\MessagePreRendererChain($GLOBALS['AVISOTA_MESSAGE_RENDERER']);
+		return new \Avisota\Contao\Message\Core\Renderer\MessageRenderer();
+	}
+);
+
+$container['avisota.message.tagReplacementEngine'] = $container->share(
+	function () {
+		$loader = new \Twig_Loader_Array(array());
+		$twig   = new \Twig_Environment($loader, array('autoescape' => false));
+
+		$lexer = new Twig_Lexer($twig, array(
+			'tag_comment'   => array('{#', '#}'),
+			'tag_block'     => array('{{', '}}'),
+			'tag_variable'  => array('##', '##'),
+			'interpolation' => array('#{', '}'),
+		));
+		$twig->setLexer($lexer);
+
+		return new \Avisota\Contao\Message\Core\Renderer\TagReplacementService($twig);
 	}
 );

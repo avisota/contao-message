@@ -18,34 +18,26 @@ namespace Avisota\Contao\Message\Core\Event;
 use Avisota\Contao\Message\Core\Message\Renderer;
 use Symfony\Component\EventDispatcher\Event;
 
-class ResolveStylesheetEvent extends Event
+class CollectThemeStylesheetsEvent extends CollectStylesheetsEvent
 {
-	const NAME = 'Avisota\Contao\Message\Core\Event\ResolveStylesheet';
+	const NAME = 'Avisota\Contao\Message\Core\Event\CollectThemeStylesheets';
 
 	/**
-	 * @var string
+	 * @var array
 	 */
-	protected $stylesheet;
+	protected $theme;
 
-	function __construct($stylesheet)
+	function __construct(array $theme, \ArrayObject $stylesheets)
 	{
-		$this->stylesheet = $stylesheet;
+		$this->theme = $theme;
+		parent::__construct($stylesheets);
 	}
 
 	/**
-	 * @param string $stylesheet
+	 * @return array
 	 */
-	public function setStylesheet($stylesheet)
+	public function getTheme()
 	{
-		$this->stylesheet = $stylesheet;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getStylesheet()
-	{
-		return $this->stylesheet;
+		return $this->theme;
 	}
 }
