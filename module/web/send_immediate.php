@@ -15,6 +15,8 @@
 
 use Avisota\Contao\Entity\Message;
 use Contao\Doctrine\ORM\EntityHelper;
+use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
+use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 
 $dir = dirname(isset($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : __FILE__);
 
@@ -95,7 +97,10 @@ class send_immediate extends \Avisota\Contao\Core\Send\AbstractWebRunner
 		$eventDispatcher->dispatch('avisota.post-send-immediate', $event);
 
 		if ($count || ($turn * 30 + 30) < $recipientSource->countRecipients()) {
-			$this->loadLanguageFile('avisota_message_preview');
+			$eventDispatcher->dispatch(
+				ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE,
+				new LoadLanguageFileEvent('avisota_message_preview')
+			);
 
 			$_SESSION['TL_CONFIRM'][] = sprintf(
 				$GLOBALS['TL_LANG']['avisota_message_preview']['messagesEnqueued'],

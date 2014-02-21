@@ -43,7 +43,6 @@ $GLOBALS['BE_MOD']['avisota'] = array_merge(
 			),
 			'send'       => array('Avisota\Contao\Core\Backend\Preview', 'sendMessage'),
 			'icon'       => 'assets/avisota/message/images/newsletter.png',
-			'stylesheet' => 'assets/avisota/message/css/stylesheet.css'
 		)
 	),
 	array_slice($GLOBALS['BE_MOD']['avisota'], 0, $settingsModuleIndex),
@@ -53,7 +52,6 @@ $GLOBALS['BE_MOD']['avisota'] = array_merge(
 			'nested'     => 'avisota_config:newsletter',
 			'tables'     => array('orm_avisota_theme', 'orm_avisota_layout'),
 			'icon'       => 'assets/avisota/message/images/theme.png',
-			'stylesheet' => 'assets/avisota/message/css/stylesheet.css'
 		)
 	),
 	array_slice($GLOBALS['BE_MOD']['avisota'], $settingsModuleIndex)

@@ -30,34 +30,6 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']            = array(
 	'Cell',
 	'Please choose the cell the content element should be showed in.'
 );
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['text']         = array(
-	'Text',
-	'You can use HTML tags to format the text.'
-);
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['definePlain']  = array(
-	'Define plain text',
-	'Define custom plain text instead of generate it from html.'
-);
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['plain']        = array(
-	'Plain text',
-	'Plain text without html formatting.'
-);
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['tableitems']   = array(
-	'Table items',
-	'If JavaScript is disabled, make sure to save your changes before modifying the order.'
-);
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['summary']      = array(
-	'Table summary',
-	'Please enter a short summary of the table and describe its purpose or structure.'
-);
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['thead']        = array(
-	'Add table header',
-	'Make the first row of the table the table header.'
-);
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['tfoot']        = array(
-	'Add table footer',
-	'Make the last row of the table the table footer.'
-);
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['protected']    = array(
 	'Element schützen <strong style="color:red">REMOVE</strong>',
 	'Das Inhaltselement nur bestimmten Gruppen anzeigen.'
@@ -78,35 +50,13 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['space']        = array(
 	'Space in front and after',
 	'Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.'
 );
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['source']       = array(
-	'Quelldateien <strong style="color:red">REMOVE</strong>',
-	'Bitte wählen Sie die zu importierenden CSV-Dateien aus der Dateiübersicht.'
-);
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['events']       = array(
-	'Events <strong style="color:red">REMOVE</strong>',
-	'Hier können Events gewählt werden, welche in den Message eingebunden werden sollen.'
-);
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['news']         = array(
-	'Nachrichten <strong style="color:red">REMOVE</strong>',
-	'Hier können Nachrichten gewählt werden, welche in den Message eingebunden werden sollen.'
-);
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['articleAlias'] = array(
-	'Bezogener Artikel <strong style="color:red">REMOVE</strong>',
-	'Bitte wählen Sie den Artikel aus, den Sie einfügen möchten.'
-);
 
 
 /**
  * Legends
  */
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['type_legend']      = 'Element type';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['text_legend']      = 'Text';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['image_legend']     = 'Image settings';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['table_legend']     = 'Table items';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['tconfig_legend']   = 'Table configuration';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['sortable_legend']  = 'Sorting options';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['link_legend']      = 'Hyperlink settings';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['imglink_legend']   = 'Image link settings';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['template_legend']  = 'Template settings';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['include_legend']   = 'Include settings';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['protected_legend'] = 'Access protection';
@@ -116,8 +66,6 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['expert_legend']    = 'Expert
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['anonymous']      = 'Anonym personalisieren, falls keine persönlichen Daten verfügbar sind <strong style="color:red">REMOVE</strong>';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['private']        = 'Persönlich personalisieren, blendet das Element aus, wenn keine persönlichen Daten verfügbar sind <strong style="color:red">REMOVE</strong>';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['header'] = 'Header';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['left']   = 'Left column';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['main']   = 'Main column';

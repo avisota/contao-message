@@ -20,6 +20,8 @@ use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\CollectStylesheetsEvent;
 use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
 use Contao\Doctrine\ORM\EntityHelper;
+use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
+use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent;
 use DcGeneral\Contao\Compatibility\DcCompat;
 use DcGeneral\Contao\View\Contao2BackendView\Event\GetPropertyOptionsEvent;
@@ -336,7 +338,7 @@ class OptionsBuilder implements EventSubscriberInterface
 				return $options;
 			}
 
-			$alias = $this->Database->execute(
+			$alias = \Database::getInstance()->execute(
 				"SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(" . implode(
 					',',
 					array_map('intval', array_unique($pids))
@@ -344,13 +346,19 @@ class OptionsBuilder implements EventSubscriberInterface
 			);
 		}
 		else {
-			$alias = $this->Database->execute(
+			$alias = \Database::getInstance()->execute(
 				"SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid ORDER BY parent, a.sorting"
 			);
 		}
 
 		if ($alias->numRows) {
-			$this->loadLanguageFile('tl_article');
+			/** @var EventDispatcher $eventDispatcher */
+			$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+
+			$eventDispatcher->dispatch(
+				ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE,
+				new LoadLanguageFileEvent('tl_article')
+			);
 
 			while ($alias->next()) {
 				$options[$alias->parent][$alias->id] = $alias->title . ' (' . (strlen(

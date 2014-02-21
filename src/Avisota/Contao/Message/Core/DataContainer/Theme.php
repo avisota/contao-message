@@ -77,7 +77,7 @@ class Theme extends \Backend
 					) {
 						// Add permissions on user level
 						if ($this->User->inherit == 'custom' || !$this->User->groups[0]) {
-							$user = $this->Database
+							$user = \Database::getInstance()
 								->prepare(
 								"SELECT avisota_newsletter_categories, avisota_newsletter_category_permissions FROM tl_user WHERE id=?"
 							)
@@ -96,7 +96,7 @@ class Theme extends \Backend
 								$newsletterCategories   = deserialize($user->avisota_newsletter_categories);
 								$newsletterCategories[] = $this->Input->get('id');
 
-								$this->Database
+								\Database::getInstance()
 									->prepare("UPDATE tl_user SET avisota_newsletter_categories=? WHERE id=?")
 									->execute(serialize($newsletterCategories), $this->User->id);
 							}
@@ -104,7 +104,7 @@ class Theme extends \Backend
 
 						// Add permissions on group level
 						elseif ($this->User->groups[0] > 0) {
-							$group = $this->Database
+							$group = \Database::getInstance()
 								->prepare(
 								"SELECT avisota_newsletter_categories, avisota_newsletter_category_permissions FROM tl_user_group WHERE id=?"
 							)
@@ -123,7 +123,7 @@ class Theme extends \Backend
 								$newsletterCategories   = deserialize($group->avisota_newsletter_categories);
 								$newsletterCategories[] = $this->Input->get('id');
 
-								$this->Database
+								\Database::getInstance()
 									->prepare("UPDATE tl_user_group SET avisota_newsletter_categories=? WHERE id=?")
 									->execute(serialize($newsletterCategories), $this->User->groups[0]);
 							}

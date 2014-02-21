@@ -64,24 +64,6 @@ class MessageContent implements EventSubscriberInterface
 		) . '" title="' . specialchars($title) . '"' . $attributes . ' class="header_send">' . $label . '</a> ';
 	}
 
-
-	/**
-	 * Return the link picker wizard
-	 *
-	 * @param object
-	 *
-	 * @return string
-	 */
-	public function pagePicker(\DataContainer $dc)
-	{
-		$fieldId = 'ctrl_' . $dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '');
-		return ' ' . $this->generateImage(
-			'pickpage.gif',
-			$GLOBALS['TL_LANG']['MSC']['pagepicker'],
-			'style="vertical-align:top; cursor:pointer;" onclick="Backend.pickPage(\'' . $fieldId . '\')"'
-		);
-	}
-
 	/**
 	 * Return the "toggle visibility" button
 	 *
@@ -141,7 +123,7 @@ class MessageContent implements EventSubscriberInterface
 		}
 
 		// Update the database
-		$this->Database
+		\Database::getInstance()
 			->prepare(
 			"UPDATE orm_avisota_message_content SET tstamp=" . time() . ", invisible='" . ($visible ? ''
 				: 1) . "' WHERE id=?"
@@ -150,28 +132,6 @@ class MessageContent implements EventSubscriberInterface
 
 		$this->createNewVersion('orm_avisota_message_content', $contentId);
 		*/
-	}
-
-
-	/**
-	 * Return the edit article alias wizard
-	 *
-	 * @param object
-	 *
-	 * @return string
-	 */
-	public function editArticleAlias(DataContainer $dc)
-	{
-		return ($dc->value < 1)
-			? ''
-			: ' <a href="contao/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '" title="' . sprintf(
-				specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]),
-				$dc->value
-			) . '" style="padding-left:3px;">' . $this->generateImage(
-				'alias.gif',
-				$GLOBALS['TL_LANG']['tl_content']['editalias'][0],
-				'style="vertical-align:top;"'
-			) . '</a>';
 	}
 
 	public function getGroupHeader(GetGroupHeaderEvent $event)

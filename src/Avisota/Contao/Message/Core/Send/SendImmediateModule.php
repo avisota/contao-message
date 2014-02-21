@@ -17,6 +17,9 @@ namespace Avisota\Contao\Core\Send;
 
 use Avisota\Contao\Entity\Message;
 use Avisota\RecipientSource\RecipientSourceInterface;
+use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
+use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class SendImmediateModule extends \Controller implements SendModuleInterface
 {
@@ -29,7 +32,13 @@ class SendImmediateModule extends \Controller implements SendModuleInterface
 	{
 		global $container;
 
-		$this->loadLanguageFile('avisota_send_immediate');
+		/** @var EventDispatcher $eventDispatcher */
+		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+
+		$eventDispatcher->dispatch(
+			ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE,
+			new LoadLanguageFileEvent('avisota_send_immediate')
+		);
 
 		$recipientSourceData = $message->getRecipients();
 
