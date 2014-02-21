@@ -67,7 +67,7 @@ class preview
 		$recipient = new \Avisota\Recipient\MutableRecipient($user->email, $data);
 
 		$additionalData = array(
-			'view_online_link' => 'system/modules/avisota/web/preview.php?id=' . $message->getId(),
+			'view_online_link' => 'system/modules/avisota-message/web/preview.php?id=' . $message->getId(),
 		);
 
 		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRenderer $renderer */

@@ -52,5 +52,7 @@ class TagReplacementService
 		/** @var \Twig_Loader_Array $loader */
 		$loader = $this->twigEnvironment->getLoader();
 		$loader->setTemplate('__TEMPLATE__', $buffer);
+
+		return $this->twigEnvironment->render('__TEMPLATE__', $context);
 	}
 }

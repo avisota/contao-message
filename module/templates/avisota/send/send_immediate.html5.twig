@@ -1,5 +1,5 @@
 
-<form action="system/modules/avisota/web/send_immediate.php" class="tl_form tl_form_avisota_inline" method="get">
+<form action="system/modules/avisota-message/web/send_immediate.php" class="tl_form tl_form_avisota_inline" method="get">
 	<input name="id" value="{{ message.id }}" type="hidden">
 
 	<fieldset id="pal_avisota_send_immediate" class="tl_box block">
@@ -23,7 +23,7 @@
 						type="submit"
 						value="schedule"
 						onclick="return confirm(confirmationMessage);">
-					<img style="display: none;" src="system/modules/avisota/html/loading.gif"
+					<img style="display: none;" src="assets/avisota/core/images/loading.gif"
 						 alt=""/> {{ _lang.avisota_send_immediate.action }}
 				</button>
 			</div>

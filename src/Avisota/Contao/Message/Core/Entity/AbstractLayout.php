@@ -15,7 +15,7 @@
 
 namespace Avisota\Contao\Message\Core\Entity;
 
-use Avisota\Contao\Core\Event\ResolveStylesheetEvent;
+use Avisota\Contao\Message\Core\Event\ResolveStylesheetEvent;
 use Contao\Doctrine\ORM\Entity;
 use Contao\Doctrine\ORM\EntityInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;

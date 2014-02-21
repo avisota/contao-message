@@ -15,6 +15,7 @@
 
 namespace Avisota\Contao\Message\Core\Event;
 
+use Avisota\Contao\Entity\Layout;
 use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Entity\MessageContent;
 use Avisota\Contao\Message\Core\Message\Renderer;
@@ -28,17 +29,19 @@ class RenderMessageContentEvent extends Event
 	protected $messageContent;
 
 	/**
+	 * @var Layout
+	 */
+	protected $layout;
+
+	/**
 	 * @var string
 	 */
 	protected $renderedContent;
 
-	/**
-	 * @param MessageContent $messageContent
-	 */
-	public function setMessageContent(MessageContent $messageContent)
+	public function __construct(MessageContent $messageContent, Layout $layout = null)
 	{
 		$this->messageContent = $messageContent;
-		return $this;
+		$this->layout         = $layout;
 	}
 
 	/**
@@ -47,6 +50,29 @@ class RenderMessageContentEvent extends Event
 	public function getMessageContent()
 	{
 		return $this->messageContent;
+	}
+
+	/**
+	 * @param Layout $layout
+	 */
+	public function setLayout(Layout $layout = null)
+	{
+		$this->layout = $layout;
+		return $this;
+	}
+
+	/**
+	 * @return Layout
+	 */
+	public function getLayout()
+	{
+		if ($this->layout) {
+			return $this->layout;
+		}
+
+		return $this->messageContent
+			->getMessage()
+			->getLayout();
 	}
 
 	/**

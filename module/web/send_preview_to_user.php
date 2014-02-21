@@ -33,7 +33,7 @@ if (!is_file($dir . '/system/initialize.php')) {
 define('TL_MODE', 'FE');
 require($dir . '/system/initialize.php');
 
-class send_preview_to_user extends \Avisota\Contao\Core\Send\AbstractWebRunner
+class send_preview_to_user extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 {
 	protected function execute(Message $message, \BackendUser $user)
 	{
@@ -77,7 +77,7 @@ class send_preview_to_user extends \Avisota\Contao\Core\Send\AbstractWebRunner
 		$messageTemplate = $renderer->renderMessage($message);
 		$messageMail     = $messageTemplate->render($recipient, $additionalData);
 
-		/** @var TransportInterface $transport */
+		/** @var \Avisota\Transport\TransportInterface $transport */
 		$transport = $GLOBALS['container']['avisota.transport.' . $message
 			->getQueue()
 			->getTransport()
@@ -85,7 +85,13 @@ class send_preview_to_user extends \Avisota\Contao\Core\Send\AbstractWebRunner
 
 		$transport->send($messageMail);
 
-		$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['avisota_message_preview']['previewSend'], $email);
+		$event = new \ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent('avisota_message_preview');
+
+		/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
+		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+		$eventDispatcher->dispatch(\ContaoCommunityAlliance\Contao\Bindings\ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
+
+		$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['avisota_message_preview']['previewSend'], $data['email']);
 
 		header('Location: ' . $url);
 		exit;

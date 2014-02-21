@@ -36,8 +36,7 @@ class MessageRenderer
 	 */
 	public function renderMessage(Message $message)
 	{
-		$event = new RenderMessageEvent();
-		$event->setMessage($message);
+		$event = new RenderMessageEvent($message);
 
 		/** @var EventDispatcher $eventDispatcher */
 		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
@@ -84,8 +83,7 @@ class MessageRenderer
 	 */
 	public function renderContent(MessageContent $messageContent)
 	{
-		$event = new RenderMessageContentEvent();
-		$event->setMessageContent($messageContent);
+		$event = new RenderMessageContentEvent($messageContent);
 
 		/** @var EventDispatcher $eventDispatcher */
 		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];

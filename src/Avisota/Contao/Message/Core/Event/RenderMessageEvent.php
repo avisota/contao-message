@@ -15,6 +15,7 @@
 
 namespace Avisota\Contao\Message\Core\Event;
 
+use Avisota\Contao\Entity\Layout;
 use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Message\Core\Message\Renderer;
 use Symfony\Component\EventDispatcher\Event;
@@ -27,17 +28,19 @@ class RenderMessageEvent extends Event
 	protected $message;
 
 	/**
+	 * @var Layout
+	 */
+	protected $layout;
+
+	/**
 	 * @var PreRenderMessageTemplateEvent
 	 */
 	protected $preRenderedMessageTemplate;
 
-	/**
-	 * @param Message $message
-	 */
-	public function setMessage(Message $message)
+	public function __construct(Message $message, Layout $layout = null)
 	{
 		$this->message = $message;
-		return $this;
+		$this->layout  = $layout;
 	}
 
 	/**
@@ -49,7 +52,29 @@ class RenderMessageEvent extends Event
 	}
 
 	/**
-	 * @param \Avisota\Contao\Message\Core\Event\PreRenderMessageTemplateEvent $preRenderedMessageTemplate
+	 * @param Layout $layout
+	 */
+	public function setLayout(Layout $layout = null)
+	{
+		$this->layout = $layout;
+		return $this;
+	}
+
+	/**
+	 * @return Layout
+	 */
+	public function getLayout()
+	{
+		if ($this->layout) {
+			return $this->layout;
+		}
+
+		return $this->message
+			->getLayout();
+	}
+
+	/**
+	 * @param PreRenderMessageTemplateEvent $preRenderedMessageTemplate
 	 */
 	public function setPreRenderedMessageTemplate($preRenderedMessageTemplate)
 	{
@@ -58,7 +83,7 @@ class RenderMessageEvent extends Event
 	}
 
 	/**
-	 * @return \Avisota\Contao\Message\Core\Event\PreRenderMessageTemplateEvent
+	 * @return PreRenderMessageTemplateEvent
 	 */
 	public function getPreRenderedMessageTemplate()
 	{

@@ -13,7 +13,7 @@
  * @filesource
  */
 
-namespace Avisota\Contao\Core\Send;
+namespace Avisota\Contao\Message\Core\Send;
 
 use Avisota\Contao\Entity\Message;
 use Doctrine\DBAL\Connection;

@@ -36,7 +36,7 @@ if (!is_file($dir . '/system/initialize.php')) {
 define('TL_MODE', 'FE');
 require($dir . '/system/initialize.php');
 
-class send_immediate extends \Avisota\Contao\Core\Send\AbstractWebRunner
+class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 {
 	protected function execute(Message $message, \BackendUser $user)
 	{
@@ -114,7 +114,7 @@ class send_immediate extends \Avisota\Contao\Core\Send\AbstractWebRunner
 				'loop' => $loop,
 			);
 			$url        = sprintf(
-				'%ssystem/modules/avisota/web/send_immediate.php?%s',
+				'%ssystem/modules/avisota-message/web/send_immediate.php?%s',
 				$environment->base,
 				http_build_query($parameters)
 			);

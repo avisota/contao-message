@@ -1,5 +1,5 @@
 
-<form action="system/modules/avisota/web/send_preview_to_email.php" class="tl_form tl_form_avisota_inline"
+<form action="system/modules/avisota-message/web/send_preview_to_email.php" class="tl_form tl_form_avisota_inline"
 	  method="get">
 	<input name="id" value="{{ message.id }}" type="hidden">
 	<input name="REQUEST_TOKEN" value="{{ REQUEST_TOKEN }}" type="hidden">
@@ -26,7 +26,7 @@
 		<div class="tl_formbody_submit">
 			<div class="tl_submit_container">
 				<button id="btn-preview-to-email" name="preview-to-email" class="tl_submit" accesskey="p" type="submit" value="preview">
-					<img style="display: none;" src="system/modules/avisota/html/loading.gif"
+					<img style="display: none;" src="assets/avisota/core/images/loading.gif"
 						 alt=""/> {{ _lang.avisota_message_preview.sendPreview }}
 				</button>
 			</div>

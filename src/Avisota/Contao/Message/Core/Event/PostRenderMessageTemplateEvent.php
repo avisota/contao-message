@@ -15,9 +15,9 @@
 
 namespace Avisota\Contao\Message\Core\Event;
 
+use Avisota\Contao\Core\Message\ContaoAwareNativeMessage;
+use Avisota\Contao\Core\Message\PreRenderedMessageTemplateInterface;
 use Avisota\Contao\Entity\Message;
-use Avisota\Contao\Message\Core\Message\ContaoAwareNativeMessage;
-use Avisota\Contao\Message\Core\Message\PreRenderedMessageTemplateInterface;
 use Avisota\Recipient\RecipientInterface;
 use Symfony\Component\EventDispatcher\Event;
 
