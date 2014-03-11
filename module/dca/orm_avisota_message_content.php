@@ -31,12 +31,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 		'dataContainer'    => 'General',
 		'ptable'           => 'orm_avisota_message',
 		'enableVersioning' => true,
-		'onload_callback'  => array
-		(
-			// we don�t have an permission management yet so don�t check permissions. 
-			// It might throw an error if the user is not an admin.
-			//array('Avisota\Contao\Message\Core\DataContainer\MessageContent', 'checkPermission')
-		)
 	),
 	// DataContainer
 	'dca_config'      => array
