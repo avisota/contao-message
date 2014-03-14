@@ -8,9 +8,8 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-03-11T14:17:11+01:00
+ * last-updated: 2014-03-11T14:17:15+01:00
  */
-
 
 $GLOBALS['TL_LANG']['orm_avisota_message']['addFile']['0']           = 'Agiuntar datotecas';
 $GLOBALS['TL_LANG']['orm_avisota_message']['addFile']['1']           = 'Agiuntar datotecas supplementaras al newsletter';
@@ -41,6 +40,7 @@ $GLOBALS['TL_LANG']['orm_avisota_message']['meta_legend']            = 'Detagls'
 $GLOBALS['TL_LANG']['orm_avisota_message']['new']['0']               = 'Nov newsletter';
 $GLOBALS['TL_LANG']['orm_avisota_message']['new']['1']               = 'Agiuntar in nov newsletter';
 $GLOBALS['TL_LANG']['orm_avisota_message']['newsletter_legend']      = 'Messadi';
+$GLOBALS['TL_LANG']['orm_avisota_message']['notSend']                = 'Anc betg trametter';
 $GLOBALS['TL_LANG']['orm_avisota_message']['queue']['0']             = 'Colonna da spetga';
 $GLOBALS['TL_LANG']['orm_avisota_message']['queue']['1']             = 'Tscherna la colonna da spetga per quest newsletter.';
 $GLOBALS['TL_LANG']['orm_avisota_message']['queue_legend']           = 'Configuraziun da la colonna da spetga';

@@ -8,10 +8,16 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-03-11T14:17:14+01:00
+ * last-updated: 2014-03-11T14:17:15+01:00
  */
 
-
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']['0']        = 'Cella';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']['1']        = 'Tscherna la cella en la quala l\'element da cuntegn duai vegnir mussada.';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['footer']  = 'Pè';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['header']  = 'Chau';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['left']    = 'Colonna sanestra';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['main']    = 'Colonna principala';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['right']   = 'Colonna dretga';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['copy']['0']        = 'Duplitgar l\'element';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['copy']['1']        = 'Duplitgar l\'element da cuntegn cun l\'ID %s';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cssID']['0']       = 'ID/class da CSS';
