@@ -33,7 +33,9 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['editalias']['1']   = 'Modifi
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['editarticle']['0'] = 'Modifitgar l\'aritgel';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['editarticle']['1'] = 'Modifitgar l\'aritgel cun l\'ID %s';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['expert_legend']    = 'Configuraziun avanzada';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['groups']['0']      = 'Gruppas da commembers lubidas  <strong style="color:red">ALLONTANAR</strong>';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['groups']['1']      = 'Questas gruppas pon vesesir l\'element da cuntegn.';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['guests']['0']      = 'Be mussar a giasts  <strong style="color:red">ALLONTANAR</strong>';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['guests']['1']      = 'Zuppentar l\'element da cuntegn uschèprest ch\'in commember è s\'annunzià.';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['include_legend']   = 'Configuraziun dad includer';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['invisible']['0']   = 'Invisibel';
