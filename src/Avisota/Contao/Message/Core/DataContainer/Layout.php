@@ -15,7 +15,7 @@
 
 namespace Avisota\Contao\Message\Core\DataContainer;
 
-use DcGeneral\DC_General;
+use ContaoCommunityAlliance\DcGeneral\DC_General;
 
 class Layout
 {
