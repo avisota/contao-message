@@ -69,6 +69,7 @@ $GLOBALS['FE_MOD']['avisota']['avisota_reader']       = 'Avisota\Contao\Core\Mes
 $GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\Message';
 $GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\MessageContent';
 $GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\OptionsBuilder';
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\EventsSubscriber';
 $GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\Layout\ContaoStylesheets';
 
 /**
