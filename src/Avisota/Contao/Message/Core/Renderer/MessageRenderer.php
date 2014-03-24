@@ -31,7 +31,7 @@ class MessageRenderer implements MessageRendererInterface
 	 */
 	public function renderMessage(Message $message, Layout $layout = null)
 	{
-		$event = new RenderMessageEvent($message, $layout);
+		$event = new RenderMessageEvent($message, $layout ?: $message->getLayout());
 
 		/** @var EventDispatcher $eventDispatcher */
 		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
@@ -58,7 +58,7 @@ class MessageRenderer implements MessageRendererInterface
 
 		$elements = array();
 		foreach ($contents as $content) {
-			$elements[] = $this->renderContent($content, $layout);
+			$elements[] = $this->renderContent($content, $layout ?: $message->getLayout());
 		}
 
 		return $elements;
@@ -69,7 +69,7 @@ class MessageRenderer implements MessageRendererInterface
 	 */
 	public function renderContent(MessageContent $messageContent, Layout $layout = null)
 	{
-		$event = new RenderMessageContentEvent($messageContent, $layout);
+		$event = new RenderMessageContentEvent($messageContent, $layout ?: $messageContent->getMessage()->getLayout());
 
 		/** @var EventDispatcher $eventDispatcher */
 		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
