@@ -76,29 +76,34 @@ class CustomMenu extends \BackendModule
 		$beModules = array();
 
 		if (class_exists('Avisota\Contao\Entity\MessageCategory')) {
-			$messageCategoryRepository = EntityHelper::getRepository('Avisota\Contao:MessageCategory');
-			$queryBuilder              = $messageCategoryRepository->createQueryBuilder('mc');
-			$queryBuilder
-				->select('mc')
-				->where('mc.showInMenu=:showInMenu')
-				->setParameter('showInMenu', true);
-			$query = $queryBuilder->getQuery();
-			/** @var MessageCategory[] $messageCategories */
-			$messageCategories = $query->getResult();
+			try {
+				$messageCategoryRepository = EntityHelper::getRepository('Avisota\Contao:MessageCategory');
+				$queryBuilder              = $messageCategoryRepository->createQueryBuilder('mc');
+				$queryBuilder
+					->select('mc')
+					->where('mc.showInMenu=:showInMenu')
+					->setParameter('showInMenu', true);
+				$query = $queryBuilder->getQuery();
+				/** @var MessageCategory[] $messageCategories */
+				$messageCategories = $query->getResult();
 
-			foreach ($messageCategories as $messageCategory) {
-				$id    = $messageCategory->getId();
-				$icon  = $messageCategory->getUseCustomMenuIcon()
-					? $messageCategory->getMenuIcon()
-					: 'assets/avisota/message/images/newsletter.png';
-				$title = $messageCategory->getTitle();
+				foreach ($messageCategories as $messageCategory) {
+					$id    = $messageCategory->getId();
+					$icon  = $messageCategory->getUseCustomMenuIcon()
+						? $messageCategory->getMenuIcon()
+						: 'assets/avisota/message/images/newsletter.png';
+					$title = $messageCategory->getTitle();
 
-				$beModules['avisota_category_' . $id] = array(
-					'callback' => 'Avisota\Contao\Message\Core\Backend\CustomMenu',
-					'icon'     => $icon,
-				);
+					$beModules['avisota_category_' . $id] = array(
+						'callback' => 'Avisota\Contao\Message\Core\Backend\CustomMenu',
+						'icon'     => $icon,
+					);
 
-				$GLOBALS['TL_LANG']['MOD']['avisota_category_' . $id] = array($title);
+					$GLOBALS['TL_LANG']['MOD']['avisota_category_' . $id] = array($title);
+				}
+			}
+			catch (\Exception $e) {
+				// silently ignore
 			}
 		}
 
