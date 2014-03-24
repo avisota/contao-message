@@ -368,9 +368,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
 							}
 
-							$or = new PropertyConditionChain(array(), PropertyConditionChain::OR_CONJUNCTION);
-							$or->addCondition($boilerplateCondition);
-							$or->addCondition(
+							$visibleCondition->addCondition(
 								new PropertyCallbackCondition(
 									function (ModelInterface $model = null, PropertyValueBag $input = null) {
 										/** @var Message $message */
@@ -380,8 +378,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 									}
 								)
 							);
-
-							$visibleCondition->addCondition($or);
 
 							$property->setVisibleCondition($visibleCondition);
 							break;
