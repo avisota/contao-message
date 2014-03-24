@@ -15,28 +15,23 @@
 
 namespace Avisota\Contao\Message\Core\Renderer;
 
+use Avisota\Contao\Entity\Layout;
 use Avisota\Contao\Entity\Message;
-use Avisota\Contao\Core\Message\PreRenderedMessageTemplateInterface;
 use Avisota\Contao\Entity\MessageContent;
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\RenderMessageContentEvent;
 use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
-use Avisota\Recipient\RecipientInterface;
 use Contao\Doctrine\ORM\EntityHelper;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class MessageRenderer
+class MessageRenderer implements MessageRendererInterface
 {
 	/**
-	 * Render a complete message.
-	 *
-	 * @param Message            $message
-	 *
-	 * @return PreRenderedMessageTemplateInterface
+	 * {@inheritdoc}
 	 */
-	public function renderMessage(Message $message)
+	public function renderMessage(Message $message, Layout $layout = null)
 	{
-		$event = new RenderMessageEvent($message);
+		$event = new RenderMessageEvent($message, $layout);
 
 		/** @var EventDispatcher $eventDispatcher */
 		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
@@ -46,14 +41,9 @@ class MessageRenderer
 	}
 
 	/**
-	 * Render content from a cell.
-	 *
-	 * @param Message $message
-	 * @param string  $cell
-	 *
-	 * @return string
+	 * {@inheritdoc}
 	 */
-	public function renderCell(Message $message, $cell)
+	public function renderCell(Message $message, $cell, Layout $layout = null)
 	{
 		$messageContentRepository = EntityHelper::getRepository('Avisota\Contao:MessageContent');
 		$queryBuilder = $messageContentRepository->createQueryBuilder('mc');
@@ -68,22 +58,18 @@ class MessageRenderer
 
 		$elements = array();
 		foreach ($contents as $content) {
-			$elements[] = $this->renderContent($content);
+			$elements[] = $this->renderContent($content, $layout);
 		}
 
 		return $elements;
 	}
 
 	/**
-	 * Render a single message content element.
-	 *
-	 * @param MessageContent $messageContent
-	 *
-	 * @return string
+	 * {@inheritdoc}
 	 */
-	public function renderContent(MessageContent $messageContent)
+	public function renderContent(MessageContent $messageContent, Layout $layout = null)
 	{
-		$event = new RenderMessageContentEvent($messageContent);
+		$event = new RenderMessageContentEvent($messageContent, $layout);
 
 		/** @var EventDispatcher $eventDispatcher */
 		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];

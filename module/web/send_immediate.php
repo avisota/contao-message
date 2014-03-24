@@ -57,7 +57,7 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 		/** @var \Avisota\RecipientSource\RecipientSourceInterface $recipientSource */
 		$recipientSource = $container[$serviceName];
 
-		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRenderer $renderer */
+		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRendererInterface $renderer */
 		$renderer        = $container['avisota.message.renderer'];
 		$messageTemplate = $renderer->renderMessage($message);
 

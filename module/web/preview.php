@@ -70,7 +70,7 @@ class preview
 			'view_online_link' => 'system/modules/avisota-message/web/preview.php?id=' . $message->getId(),
 		);
 
-		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRenderer $renderer */
+		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRendererInterface $renderer */
 		$renderer = $container['avisota.message.renderer'];
 		$messageTemplate = $renderer->renderMessage($message);
 		$messagePreview = $messageTemplate->renderPreview($recipient, $additionalData);

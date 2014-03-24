@@ -60,7 +60,7 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
 
 		$additionalData = array('view_online_link' => $url);
 
-		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRenderer $renderer */
+		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRendererInterface $renderer */
 		$renderer        = $container['avisota.message.renderer'];
 		$messageTemplate = $renderer->renderMessage($message);
 		$messageMail     = $messageTemplate->render($recipient, $additionalData);

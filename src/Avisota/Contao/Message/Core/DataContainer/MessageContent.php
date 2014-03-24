@@ -17,13 +17,11 @@ namespace Avisota\Contao\Message\Core\DataContainer;
 
 use Avisota\Contao\Core\Message\Renderer\MessagePreRendererInterface;
 use Avisota\Contao\Message\Core\Renderer\MessageRenderer;
-use Avisota\Renderer\MessageRendererInterface;
+use Avisota\Contao\Message\Core\Renderer\MessageRendererInterface;
 use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
 use Contao\Doctrine\ORM\EntityAccessor;
-use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
-use ContaoCommunityAlliance\DcGeneral\DC_General;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MessageContent implements EventSubscriberInterface
@@ -107,7 +105,6 @@ class MessageContent implements EventSubscriberInterface
 		// Check permissions to edit
 		$this->Input->setGet('id', $contentId);
 		$this->Input->setGet('act', 'toggle');
-		$this->checkPermission();
 
 		$this->createInitialVersion('orm_avisota_message_content', $contentId);
 
@@ -153,7 +150,7 @@ class MessageContent implements EventSubscriberInterface
 	 */
 	public function parentViewChildRecord(ParentViewChildRecordEvent $event)
 	{
-		/** @var MessageRenderer $renderer */
+		/** @var MessageRendererInterface $renderer */
 		$renderer = $GLOBALS['container']['avisota.message.renderer'];
 
 		/** @var EntityModel $model */

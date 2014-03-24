@@ -15,9 +15,12 @@
 
 namespace Avisota\Contao\Message\Core\Backend;
 
+use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Entity\MessageCategory;
+use Avisota\Contao\Entity\MessageContent;
 use BackendTemplate;
 use Contao\Doctrine\ORM\EntityHelper;
+use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
 
 class CustomMenu extends \BackendModule
 {
@@ -26,72 +29,32 @@ class CustomMenu extends \BackendModule
 		if (TL_MODE == 'BE') {
 			try {
 				if (!$showAll) {
-					$input = \Input::getInstance();
-					$do    = $input->get('do');
-					$table = $input->get('table');
-					$id    = $input->get('id');
-					$pid   = $input->get('pid');
+					$database = \Database::getInstance();
 
-					if ($do == 'avisota_newsletter') {
-						if ($table == 'orm_avisota_message_category') {
-							// the $id is already the category id
-						}
-						else if ($table == 'orm_avisota_message') {
-							if ($input->get('key') == 'send') {
-								$messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');
-								$message           = $messageRepository->find($id);
-								$id                = $message->getCategory()
-									->getId();
-							}
-							// parent-view -> $pid contains the category id
-							else {
-								$id = $pid;
-							}
-						}
-						else if ($table == 'orm_avisota_message_content') {
-							$act = $input->get('act');
-							if ($act == 'create') {
-								$messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');
-								$message           = $messageRepository->find($pid);
-								$id                = $message->getCategory()
-									->getId();
-							}
-							else if ($act) {
-								$contentRepository = EntityHelper::getRepository('Avisota\Contao:MessageContent');
-								$content           = $contentRepository->find($id);
-								$id                = $content->getMessage()
-									->getCategory()
-									->getId();
-							}
-							else {
-								$messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');
-								$message           = $messageRepository->find($pid);
-								$id                = $message->getCategory()
-									->getId();
-							}
-						}
-						else {
-							return $navigation;
-						}
+					if ($database->tableExists('orm_avisota_message_category')) {
 
-						$foundCustomEntry = false;
+						$category = Helper::resolveCategoryFromInput();
 
-						$menu = & $navigation['avisota'];
-						foreach ($menu['modules'] as $name => &$module) {
-							if ($name == 'avisota_category_' . $id) {
-								$module['class'] .= ' active';
-								$foundCustomEntry = true;
-							}
-						}
+						if ($category) {
+							$foundCustomEntry = false;
 
-						if ($foundCustomEntry) {
-							$classes = explode(' ', $menu['modules']['avisota_newsletter']['class']);
-							$classes = array_map('trim', $classes);
-							$pos     = array_search('active', $classes);
-							if ($pos !== false) {
-								unset($classes[$pos]);
+							$menu = & $navigation['avisota'];
+							foreach ($menu['modules'] as $name => &$module) {
+								if ($name == 'avisota_category_' . $category->getId()) {
+									$module['class'] .= ' active';
+									$foundCustomEntry = true;
+								}
 							}
-							$menu['modules']['avisota_newsletter']['class'] = implode(' ', $classes);
+
+							if ($foundCustomEntry) {
+								$classes = explode(' ', $menu['modules']['avisota_newsletter']['class']);
+								$classes = array_map('trim', $classes);
+								$pos     = array_search('active', $classes);
+								if ($pos !== false) {
+									unset($classes[$pos]);
+								}
+								$menu['modules']['avisota_newsletter']['class'] = implode(' ', $classes);
+							}
 						}
 					}
 				}

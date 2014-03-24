@@ -31,10 +31,6 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 		'dataContainer'    => 'General',
 		'ctable'           => array('orm_avisota_layout'),
 		'enableVersioning' => true,
-		'onload_callback'  => array
-		(
-			array('Avisota\Contao\Message\Core\DataContainer\Theme', 'checkPermission')
-		),
 	),
 	// DataContainer
 	'dca_config'      => array

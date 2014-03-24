@@ -32,10 +32,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 		'ctable'           => array('orm_avisota_message'),
 		'switchToEdit'     => true,
 		'enableVersioning' => true,
-		'onload_callback'  => array
-		(
-			array('Avisota\Contao\Message\Core\DataContainer\MessageCategory', 'checkPermission')
-		),
 	),
 	// DataContainer
 	'dca_config'            => array

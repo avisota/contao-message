@@ -16,6 +16,7 @@
 namespace Avisota\Contao\Message\Core\DataContainer;
 
 use Avisota\Contao\Entity\RecipientSource;
+use Avisota\Contao\Message\Core\Backend\Helper;
 use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
 use Contao\Doctrine\ORM\EntityHelper;
 use Contao\Doctrine\ORM\EntityInterface;
@@ -42,158 +43,45 @@ class Message implements EventSubscriberInterface
 
 	public function updatePalette()
 	{
-		$input    = \Input::getInstance();
 		$database = \Database::getInstance();
 
-		if ($input->get('do') == 'avisota_newsletter' &&
-			$input->get('table') == 'orm_avisota_message' &&
-			$database->tableExists('orm_avisota_message_category')
-		) {
-			try {
-				$messageCategory = false;
-				if ($input->get('act') == 'create') {
-					$messageCategoryRepository = EntityHelper::getRepository('Avisota\Contao:MessageCategory');
-					/** @var \Avisota\Contao\Entity\Message $message */
-					$messageCategory = $messageCategoryRepository->find($input->get('pid'));
-				}
-				if ($input->get('act') == 'edit') {
-					$messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');
-					/** @var \Avisota\Contao\Entity\Message $newsletter */
-					$message         = $messageRepository->find($input->get('id'));
-					$messageCategory = $message->getCategory();
-				}
-
-				if ($messageCategory) {
-					if ($messageCategory->getBoilerplates() ||
-						$messageCategory->getRecipientsMode() == 'byMessageOrCategory'
-					) {
-						$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['recipient'][] = 'setRecipients';
-					}
-					else if ($messageCategory->getRecipientsMode() == 'byMessage') {
-						$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['recipient'][] = 'recipients';
-					}
-
-					if ($messageCategory->getBoilerplates() ||
-						$messageCategory->getLayoutMode() == 'byMessage'
-					) {
-						$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['layout'][] = 'layout';
-					}
-					else if ($messageCategory->getLayoutMode() == 'byMessageOrCategory') {
-						$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['layout'][] = 'setLayout';
-					}
-
-					if ($messageCategory->getBoilerplates() ||
-						$messageCategory->getQueueMode() == 'byMessageOrCategory'
-					) {
-						$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['queue'][] = 'setQueue';
-					}
-					else if ($messageCategory->getQueueMode() == 'byMessage') {
-						$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['queue'][] = 'queue';
-					}
-				}
-			}
-			catch (MappingException $e) {
-
-			}
-		}
-	}
-
-	/**
-	 * Check permissions to edit table tl_newsletter_channel
-	 */
-	public function checkPermission()
-	{
-		$user = \BackendUser::getInstance();
-
-		if ($user->isAdmin) {
+		if (!$database->tableExists('orm_avisota_message_category')) {
 			return;
 		}
 
-		$input    = \Input::getInstance();
-		$database = \Database::getInstance();
+		$messageCategory = Helper::resolveCategoryFromInput();
 
-		// Set root IDs
-		if (!is_array($user->avisota_newsletter_categories) || count(
-				$user->avisota_newsletter_categories
-			) < 1
-		) {
-			$root = array(0);
-		}
-		else {
-			$root = $user->avisota_newsletter_categories;
-		}
+		if ($messageCategory) {
+			if (
+				$messageCategory->getBoilerplates() ||
+				$messageCategory->getRecipientsMode() == 'byMessageOrCategory'
+			) {
+				$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['recipient'][] = 'setRecipients';
+			}
+			else if ($messageCategory->getRecipientsMode() == 'byMessage') {
+				$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['recipient'][] = 'recipients';
+			}
 
-		// Check permissions to add channels
-		if (!$user->hasAccess('create', 'avisota_newsletter_permissions')) {
-			$GLOBALS['TL_DCA']['orm_avisota_message']['config']['closed'] = true;
-		}
+			if ($messageCategory->getBoilerplates() ||
+				$messageCategory->getLayoutMode() == 'byMessage'
+			) {
+				$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['layout'][] = 'layout';
+			}
+			else if ($messageCategory->getLayoutMode() == 'byMessageOrCategory') {
+				$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['layout'][] = 'setLayout';
+			}
 
-		// Check current action
-		switch ($input->get('act')) {
-			case 'create':
-			case 'select':
-				// Allow
-				break;
-
-			case 'edit':
-			case 'copy':
-			case 'paste':
-			case 'delete':
-			case 'show':
-				$pid = -1;
-				if ($input->get('id')) {
-					$newsletter = $database
-						->prepare("SELECT * FROM orm_avisota_message WHERE id=?")
-						->execute($input->get('id'));
-					if ($newsletter->next()) {
-						$pid = $newsletter->pid;
-					}
-				}
-				if (!in_array($pid, $root) || ($input->get('act') == 'delete' && !$user->hasAccess(
-							'delete',
-							'avisota_newsletter_permissions'
-						))
-				) {
-					$this->log(
-						'Not enough permissions to ' . $input->get(
-							'act'
-						) . ' avisota newsletter ID "' . $input->get('id') . '"',
-						'orm_avisota_message checkPermission',
-						TL_ERROR
-					);
-					$this->redirect('contao/main.php?act=error');
-				}
-				break;
-
-			case 'editAll':
-			case 'deleteAll':
-			case 'overrideAll':
-				$session = $this->Session->getData();
-				if ($input->get('act') == 'deleteAll' && !$user->hasAccess(
-						'delete',
-						'avisota_newsletter_permissions'
-					)
-				) {
-					$session['CURRENT']['IDS'] = array();
-				}
-				else {
-					$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
-				}
-				$this->Session->setData($session);
-				break;
-
-			default:
-				if (strlen($input->get('act'))) {
-					$this->log(
-						'Not enough permissions to ' . $input->get('act') . ' avisota newsletter',
-						'orm_avisota_message checkPermission',
-						TL_ERROR
-					);
-					$this->redirect('contao/main.php?act=error');
-				}
-				break;
+			if ($messageCategory->getBoilerplates() ||
+				$messageCategory->getQueueMode() == 'byMessageOrCategory'
+			) {
+				$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['queue'][] = 'setQueue';
+			}
+			else if ($messageCategory->getQueueMode() == 'byMessage') {
+				$GLOBALS['TL_DCA']['orm_avisota_message']['metapalettes']['default']['queue'][] = 'queue';
+			}
 		}
 	}
+
 
 	/**
 	 * Return the edit button
@@ -330,7 +218,7 @@ class Message implements EventSubscriberInterface
 
 		$key = $GLOBALS['TL_LANG']['orm_avisota_message_category']['recipients'][0];
 		if (!$newsletterCategory->getBoilerplates() && $newsletterCategory->getRecipientsMode() != 'byMessage') {
-			$fallback  = $newsletterCategory->getRecipientsMode() == 'byMessageOrCategory';
+			$fallback = $newsletterCategory->getRecipientsMode() == 'byMessageOrCategory';
 
 			/** @var RecipientSource $recipientSource */
 			$recipientSource = $newsletterCategory->getRecipients();
@@ -419,7 +307,7 @@ class Message implements EventSubscriberInterface
 
 		/** @var EventDispatcher $eventDispatcher */
 		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
-		$getThemeEvent = new GetThemeEvent();
+		$getThemeEvent   = new GetThemeEvent();
 		$eventDispatcher->dispatch(ContaoEvents::BACKEND_GET_THEME, $getThemeEvent);
 
 		$event->setHtml(

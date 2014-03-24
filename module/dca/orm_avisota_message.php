@@ -13,7 +13,14 @@
  * @filesource
  */
 
+use Avisota\Contao\Entity\Message;
 use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory;
+use ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\NotCondition;
+use ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition;
+use ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain;
+use ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Palette;
+use ContaoCommunityAlliance\DcGeneral\Data\ModelInterface;
+use ContaoCommunityAlliance\DcGeneral\Data\PropertyValueBag;
 
 /**
  * Table orm_avisota_message
@@ -173,7 +180,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 			'send'       => array
 			(
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message']['send'],
-				'href'            => 'key=send',
+				'href'            => 'act=preview',
 				'icon'            => 'assets/avisota/message/images/send.png',
 				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\Message', 'sendMessage')
 			)
@@ -186,10 +193,201 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 		(
 			'newsletter' => array('subject', 'alias', 'language'),
 			'meta'       => array('description', 'keywords'),
-			'recipient'  => array(),
-			'layout'     => array(),
-			'queue'      => array(),
+			'recipient'  => array('setRecipients', 'recipients'),
+			'layout'     => array('setLayout', 'layout'),
+			'queue'      => array('setQueue', 'queue'),
 			'attachment' => array('addFile'),
+			function (Palette $palette) {
+				$properties = $palette->getProperties();
+
+				$boilerplateCondition = new PropertyCallbackCondition(
+					function (ModelInterface $model = null, PropertyValueBag $input = null) {
+						/** @var Message $message */
+						$message = $model->getEntity();
+
+						return $message->getCategory()->getBoilerplates();
+					}
+				);
+
+				/** @var \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\PropertyInterface $property */
+				foreach ($properties as $property) {
+					switch ($property->getName()) {
+						case 'setRecipients':
+							$visibleCondition = $property->getVisibleCondition();
+
+							if (!$visibleCondition) {
+								$visibleCondition = new PropertyConditionChain();
+							}
+							else if (
+								!$visibleCondition instanceof PropertyConditionChain ||
+								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+							) {
+								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+							}
+
+							$visibleCondition->addCondition(new NotCondition($boilerplateCondition));
+							$visibleCondition->addCondition(
+								new PropertyCallbackCondition(
+									function (ModelInterface $model = null, PropertyValueBag $input = null) {
+										/** @var Message $message */
+										$message = $model->getEntity();
+
+										return $message->getCategory()->getRecipientsMode() == 'byMessageOrCategory';
+									}
+								)
+							);
+
+							$property->setVisibleCondition($visibleCondition);
+							break;
+
+						case 'recipients':
+							$visibleCondition = $property->getVisibleCondition();
+
+							if (!$visibleCondition) {
+								$visibleCondition = new PropertyConditionChain();
+							}
+							else if (
+								!$visibleCondition instanceof PropertyConditionChain ||
+								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+							) {
+								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+							}
+
+							$visibleCondition->addCondition(new NotCondition($boilerplateCondition));
+							$visibleCondition->addCondition(
+								new PropertyCallbackCondition(
+									function (ModelInterface $model = null, PropertyValueBag $input = null) {
+										/** @var Message $message */
+										$message = $model->getEntity();
+
+										return $message->getCategory()->getRecipientsMode() == 'byMessage';
+									}
+								)
+							);
+
+							$property->setVisibleCondition($visibleCondition);
+							break;
+
+						case 'setLayout':
+							$visibleCondition = $property->getVisibleCondition();
+
+							if (!$visibleCondition) {
+								$visibleCondition = new PropertyConditionChain();
+							}
+							else if (
+								!$visibleCondition instanceof PropertyConditionChain ||
+								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+							) {
+								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+							}
+
+							$visibleCondition->addCondition(new NotCondition($boilerplateCondition));
+							$visibleCondition->addCondition(
+								new PropertyCallbackCondition(
+									function (ModelInterface $model = null, PropertyValueBag $input = null) {
+										/** @var Message $message */
+										$message = $model->getEntity();
+
+										return $message->getCategory()->getLayoutMode() == 'byMessageOrCategory';
+									}
+								)
+							);
+
+							$property->setVisibleCondition($visibleCondition);
+							break;
+
+						case 'layout':
+							$visibleCondition = $property->getVisibleCondition();
+
+							if (!$visibleCondition) {
+								$visibleCondition = new PropertyConditionChain();
+							}
+							else if (
+								!$visibleCondition instanceof PropertyConditionChain ||
+								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+							) {
+								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+							}
+
+							$or = new PropertyConditionChain(array(), PropertyConditionChain::OR_CONJUNCTION);
+							$or->addCondition($boilerplateCondition);
+							$or->addCondition(
+								new PropertyCallbackCondition(
+									function (ModelInterface $model = null, PropertyValueBag $input = null) {
+										/** @var Message $message */
+										$message = $model->getEntity();
+
+										return $message->getCategory()->getLayoutMode() == 'byMessage';
+									}
+								)
+							);
+
+							$visibleCondition->addCondition($or);
+
+							$property->setVisibleCondition($visibleCondition);
+							break;
+
+						case 'setQueue':
+							$visibleCondition = $property->getVisibleCondition();
+
+							if (!$visibleCondition) {
+								$visibleCondition = new PropertyConditionChain();
+							}
+							else if (
+								!$visibleCondition instanceof PropertyConditionChain ||
+								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+							) {
+								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+							}
+
+							$visibleCondition->addCondition(new NotCondition($boilerplateCondition));
+							$visibleCondition->addCondition(
+								new PropertyCallbackCondition(
+									function (ModelInterface $model = null, PropertyValueBag $input = null) {
+										/** @var Message $message */
+										$message = $model->getEntity();
+
+										return $message->getCategory()->getQueueMode() == 'byMessageOrCategory';
+									}
+								)
+							);
+
+							$property->setVisibleCondition($visibleCondition);
+							break;
+
+						case 'queue':
+							$visibleCondition = $property->getVisibleCondition();
+
+							if (!$visibleCondition) {
+								$visibleCondition = new PropertyConditionChain();
+							}
+							else if (
+								!$visibleCondition instanceof PropertyConditionChain ||
+								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+							) {
+								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+							}
+
+							$or = new PropertyConditionChain(array(), PropertyConditionChain::OR_CONJUNCTION);
+							$or->addCondition($boilerplateCondition);
+							$or->addCondition(
+								new PropertyCallbackCondition(
+									function (ModelInterface $model = null, PropertyValueBag $input = null) {
+										/** @var Message $message */
+										$message = $model->getEntity();
+
+										return $message->getCategory()->getQueueMode() == 'byMessage';
+									}
+								)
+							);
+
+							$visibleCondition->addCondition($or);
+
+							$property->setVisibleCondition($visibleCondition);
+							break;
+					}
+				}
+			}
 		),
 	),
 	// Subpalettes
@@ -341,8 +539,8 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message']['recipients'],
 			'inputType'        => 'select',
 			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-					'avisota.create-recipient-source-options'
-				),
+				'avisota.create-recipient-source-options'
+			),
 			'eval'             => array(
 				'mandatory' => true,
 				'tl_class'  => 'w50'
