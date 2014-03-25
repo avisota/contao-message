@@ -43,11 +43,6 @@ class Layout
 	{
 		$value = array();
 
-		/*
-		if ($layout instanceof DC_General) {
-			$layout = $layout->getEnvironment()->getCurrentModel()->getEntity();
-		}
-
 		list($group, $mailChimpTemplate) = explode(':', $layout->getMailchimpTemplate());
 		if (isset($GLOBALS['AVISOTA_MAILCHIMP_TEMPLATE'][$group][$mailChimpTemplate])) {
 			$config = $GLOBALS['AVISOTA_MAILCHIMP_TEMPLATE'][$group][$mailChimpTemplate];
@@ -69,7 +64,6 @@ class Layout
 				}
 			}
 		}
-		*/
 
 		return $value;
 	}
