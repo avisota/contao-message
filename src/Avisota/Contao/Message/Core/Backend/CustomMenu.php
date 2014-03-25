@@ -121,7 +121,11 @@ class CustomMenu extends \BackendModule
 			->get('do');
 		$id = preg_replace('#^avisota_category_(.*)$#', '$1', $do);
 
-		$this->redirect('contao/main.php?do=avisota_newsletter&table=orm_avisota_message&pid=' . $id);
+		$serializer = new IdSerializer();
+		$serializer->setDataProviderName('orm_avisota_message_category');
+		$serializer->setId($id);
+
+		$this->redirect('contao/main.php?do=avisota_newsletter&table=orm_avisota_message&pid=' . $serializer->getSerialized());
 	}
 
 	/**
