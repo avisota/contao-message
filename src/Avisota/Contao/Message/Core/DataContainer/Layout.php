@@ -54,8 +54,8 @@ class Layout
 
 			if (isset($config['cells'])) {
 				foreach ($config['cells'] as $cellName => $cellConfig) {
-					if (isset($cellConfig['preferedElements'])) {
-						foreach ($cellConfig['preferedElements'] as $elementName) {
+					if (isset($cellConfig['preferredElements'])) {
+						foreach ($cellConfig['preferredElements'] as $elementName) {
 							$value[] = $cellName . ':' . $elementName;
 						}
 					}
