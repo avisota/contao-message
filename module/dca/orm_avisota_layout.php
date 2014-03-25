@@ -141,9 +141,6 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 			'layout' => array('type', 'title', 'alias', 'preview'),
 		),
 	),
-	// Subpalettes
-	'metasubpalettes' => array
-	(),
 	// Fields
 	'fields'          => array
 	(
