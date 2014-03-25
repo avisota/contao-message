@@ -110,7 +110,11 @@ class OptionsBuilder implements EventSubscriberInterface
 	public function getLayoutTypeOptions($options = array())
 	{
 		foreach ($GLOBALS['AVISOTA_MESSAGE_RENDERER'] as $rendererKey) {
-			$options[] = $rendererKey;
+			$label = isset($GLOBALS['TL_LANG']['orm_avisota_layout'][$rendererKey])
+				? $GLOBALS['TL_LANG']['orm_avisota_layout'][$rendererKey]
+				: $rendererKey;
+
+			$options[$rendererKey] = $label;
 		}
 
 		return $options;
@@ -275,8 +279,24 @@ class OptionsBuilder implements EventSubscriberInterface
 	public function getMessageContentTypeOptions($dc, $options = array())
 	{
 		foreach ($GLOBALS['TL_MCE'] as $elementGroup => $elements) {
+			if (isset($GLOBALS['TL_LANG']['MCE'][$elementGroup])) {
+				$elementGroup = $GLOBALS['TL_LANG']['MCE'][$elementGroup];
+			}
+
+			if (!isset($options[$elementGroup])) {
+				$options[$elementGroup] = array();
+			}
+
 			foreach ($elements as $elementType) {
-				$options[$elementGroup][] = $elementType;
+				$label = isset($GLOBALS['TL_LANG']['MCE'][$elementType])
+					? $GLOBALS['TL_LANG']['MCE'][$elementType]
+					: $elementType;
+
+				if (is_array($label)) {
+					$label = $label[0];
+				}
+
+				$options[$elementGroup][$elementType] = $label;
 			}
 		}
 
