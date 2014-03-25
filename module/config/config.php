@@ -35,13 +35,14 @@ $settingsModuleIndex = 1 + array_search('avisota_settings', array_keys($GLOBALS[
 $GLOBALS['BE_MOD']['avisota'] = array_merge(
 	array(
 		'avisota_newsletter' => array(
-			'tables' => array(
+			'tables'     => array(
 				'orm_avisota_message_category',
 				'orm_avisota_message',
 				'orm_avisota_message_content',
 				'orm_avisota_message_create_from_draft'
 			),
-			'icon'   => 'assets/avisota/message/images/newsletter.png',
+			'icon'       => 'assets/avisota/message/images/newsletter.png',
+			'stylesheet' => 'assets/avisota/message/css/backend.css',
 		)
 	),
 	array_slice($GLOBALS['BE_MOD']['avisota'], 0, $settingsModuleIndex),
