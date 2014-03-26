@@ -274,7 +274,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 			),
 			'manyToOne'        => array(
 				'targetEntity' => 'Avisota\Contao\Entity\RecipientSource',
-				'cascade'      => array('all'),
+				'cascade'      => array('persist', 'detach', 'merge', 'refresh'),
 				'joinColumns'  => array(
 					array(
 						'name'                 => 'recipientSource',
@@ -308,7 +308,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 			),
 			'manyToOne'        => array(
 				'targetEntity' => 'Avisota\Contao\Entity\Layout',
-				'cascade'      => array('all'),
+				'cascade'      => array('persist', 'detach', 'merge', 'refresh'),
 				'joinColumns'  => array(
 					array(
 						'name'                 => 'layout',
@@ -342,7 +342,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 			),
 			'manyToOne'        => array(
 				'targetEntity' => 'Avisota\Contao\Entity\Queue',
-				'cascade'      => array('all'),
+				'cascade'      => array('persist', 'detach', 'merge', 'refresh'),
 				'joinColumns'  => array(
 					array(
 						'name'                 => 'queue',
