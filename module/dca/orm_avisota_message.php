@@ -119,6 +119,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 		),
 		'global_operations' => array
 		(
+			/*
 			'createFromDraft' => array
 			(
 				'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message']['create_from_draft'],
@@ -126,6 +127,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'class'      => 'header_new',
 				'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="d"'
 			),
+			*/
 			'all'             => array
 			(
 				'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
