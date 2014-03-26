@@ -103,9 +103,21 @@ class Message implements EventSubscriberInterface
 
 	public function getGroupHeader(GetGroupHeaderEvent $event)
 	{
+		/** @var EntityModel $model */
 		$model = $event->getModel();
+		/** @var \Avisota\Contao\Entity\Message $message */
+		$message = $model->getEntity();
 
-		if ($model->getProperty('sendOn') > 0) {
+		if ($message->getCategory()->getBoilerplates()) {
+			$language = $message->getLanguage();
+
+			if (isset($GLOBALS['TL_LANG']['LNG'][$language])) {
+				$language = $GLOBALS['TL_LANG']['LNG'][$language];
+			}
+
+			$event->setValue($language);
+		}
+		else if ($model->getProperty('sendOn') > 0) {
 			$event->setValue($this->parseDate('F Y', $model->getProperty('sendOn')));
 		}
 		else {
