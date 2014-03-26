@@ -182,7 +182,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 	(
 		'default' => array
 		(
-			'type' => array('type', 'cell')
+			'type' => array('cell', 'type')
 		),
 	),
 	// Subpalettes
@@ -240,23 +240,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				'type' => 'integer'
 			)
 		),
-		'type'         => array
-		(
-			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['type'],
-			'exclude'          => true,
-			'filter'           => true,
-			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-					'avisota.create-message-content-type-options'
-				),
-			'reference'        => &$GLOBALS['TL_LANG']['MCE'],
-			'eval'             => array(
-				'includeBlankOption' => true,
-				'helpwizard'         => true,
-				'submitOnChange'     => true,
-				'tl_class'           => 'w50'
-			)
-		),
 		'cell'         => array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell'],
@@ -272,6 +255,23 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				'mandatory'          => true,
 				'submitOnChange'     => true,
 				'includeBlankOption' => true,
+				'tl_class'           => 'w50'
+			)
+		),
+		'type'         => array
+		(
+			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['type'],
+			'exclude'          => true,
+			'filter'           => true,
+			'inputType'        => 'select',
+			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
+					'avisota.create-message-content-type-options'
+				),
+			'reference'        => &$GLOBALS['TL_LANG']['MCE'],
+			'eval'             => array(
+				'includeBlankOption' => true,
+				'helpwizard'         => true,
+				'submitOnChange'     => true,
 				'tl_class'           => 'w50'
 			)
 		),

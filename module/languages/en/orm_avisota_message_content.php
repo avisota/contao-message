@@ -22,13 +22,13 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['invisible']    = array(
 	'Invisible',
 	'Hide the element on the email.'
 );
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['type']         = array(
-	'Element type',
-	'Please choose the type of content element.'
-);
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']            = array(
 	'Cell',
 	'Please choose the cell the content element should be showed in.'
+);
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['type']         = array(
+	'Element type',
+	'Please choose the type of content element.'
 );
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['protected']    = array(
 	'Element schützen <strong style="color:red">REMOVE</strong>',
