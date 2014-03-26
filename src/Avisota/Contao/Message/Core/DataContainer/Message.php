@@ -134,30 +134,49 @@ class Message implements EventSubscriberInterface
 	{
 		/** @var EntityModel $model */
 		$model = $event->getModel();
+		/** @var \Avisota\Contao\Entity\Message $message */
+		$message = $model->getEntity();
 
-		$icon = $model->getProperty('sendOn') ? 'visible' : 'invisible';
+		if ($message->getCategory()->getBoilerplates()) {
+			$language = $message->getLanguage();
 
-		$label = $model->getProperty('subject');
+			if (isset($GLOBALS['TL_LANG']['LNG'][$language])) {
+				$language = $GLOBALS['TL_LANG']['LNG'][$language];
+			}
 
-		if ($model->getProperty('sendOn')) {
-			$label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . sprintf(
-					$GLOBALS['TL_LANG']['orm_avisota_recipient']['sended'],
-					$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $model->getProperty('sendOn'))
-				) . ')</span>';
+			$label = sprintf(
+				'%s [%s]',
+				$message->getSubject(),
+				$language
+			);
+
+			$event->setHtml($label);
 		}
+		else {
+			$icon = $model->getProperty('sendOn') ? 'visible' : 'invisible';
 
-		/** @var EventDispatcher $eventDispatcher */
-		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
-		$getThemeEvent   = new GetThemeEvent();
-		$eventDispatcher->dispatch(ContaoEvents::BACKEND_GET_THEME, $getThemeEvent);
+			$label = $model->getProperty('subject');
 
-		$event->setHtml(
-			sprintf(
-				'<div class="list_icon" style="background-image:url(\'system/themes/%s/images/%s.gif\');">%s</div>',
-				$getThemeEvent->getTheme(),
-				$icon,
-				$label
-			)
-		);
+			if ($model->getProperty('sendOn')) {
+				$label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . sprintf(
+						$GLOBALS['TL_LANG']['orm_avisota_recipient']['sended'],
+						$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $model->getProperty('sendOn'))
+					) . ')</span>';
+			}
+
+			/** @var EventDispatcher $eventDispatcher */
+			$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+			$getThemeEvent   = new GetThemeEvent();
+			$eventDispatcher->dispatch(ContaoEvents::BACKEND_GET_THEME, $getThemeEvent);
+
+			$event->setHtml(
+				sprintf(
+					'<div class="list_icon" style="background-image:url(\'system/themes/%s/images/%s.gif\');">%s</div>',
+					$getThemeEvent->getTheme(),
+					$icon,
+					$label
+				)
+			);
+		}
 	}
 }
