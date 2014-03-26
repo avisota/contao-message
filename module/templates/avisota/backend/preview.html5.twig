@@ -9,12 +9,13 @@
 	<div class="tl_listing_container parent_view">
 		<div class="tl_header" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);">
 			<div class="tl_content_right">
-				<a href="contao/main.php?do=avisota_newsletter&amp;table=orm_avisota_message&amp;act=edit&amp;id={{ message.id }}"
+				<a href="contao/main.php?do=avisota_newsletter&amp;table=orm_avisota_message&amp;act=edit&amp;id={{ message|serializeEntityId }}&amp;pid={{ message.category|serializeEntityId }}"
 				   accesskey="e" title="{{ _lang.orm_avisota_message.editheader[1]|format(message.id) }}">
 					<img src="system/themes/{{ _user.backendTheme ? _user.backendTheme : 'default' }}/images/header.gif"
 						 alt="{{ _lang.orm_avisota_message.editheader[0]|format(message.id) }}"/>
 				</a>
-				<a href="contao/main.php?do=avisota_newsletter&amp;table=orm_avisota_message_content&amp;id={{ message.id }}"
+				&nbsp;
+				<a href="contao/main.php?do=avisota_newsletter&amp;table=orm_avisota_message_content&amp;pid={{ message|serializeEntityId }}"
 				   accesskey="b" title="{{ _lang.orm_avisota_message.edit[1]|format(message.id) }}">
 					<img src="system/themes/{{ _user.backendTheme ? _user.backendTheme : 'default' }}/images/edit.gif"
 						 alt="{{ _lang.orm_avisota_message.edit[0]|format(message.id) }}"/>
