@@ -142,14 +142,12 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 			'copy'   => array
 			(
 				'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['copy'],
-				'href'       => 'act=paste&amp;mode=copy',
 				'icon'       => 'copy.gif',
 				'attributes' => 'onclick="Backend.getScrollOffset();"'
 			),
 			'cut'    => array
 			(
 				'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['cut'],
-				'href'       => 'act=paste&amp;mode=cut',
 				'icon'       => 'cut.gif',
 				'attributes' => 'onclick="Backend.getScrollOffset();"'
 			),
