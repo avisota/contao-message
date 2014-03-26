@@ -17,6 +17,7 @@ use Avisota\Contao\Entity\Message;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
+use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
 
 $dir = dirname(isset($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : __FILE__);
 
@@ -61,11 +62,26 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 		$renderer        = $container['avisota.message.renderer'];
 		$messageTemplate = $renderer->renderMessage($message);
 
+		$event = new LoadLanguageFileEvent('avisota_message');
+		$eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
+
+		$idSerializer = new IdSerializer();
+		$idSerializer->setDataProviderName('orm_avisota_message');
+		$idSerializer->setId($message->getId());
+
+		$pidSerializer = new IdSerializer();
+		$pidSerializer->setDataProviderName('orm_avisota_message_category');
+		$pidSerializer->setId($message->getCategory()->getId());
+
 		$environment = Environment::getInstance();
 		$url         = sprintf(
-			'%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&key=send&id=%s',
-			$environment->base,
-			$message->getId()
+			$GLOBALS['TL_LANG']['avisota_message']['viewOnline'],
+			sprintf(
+				'%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s&pid=%s',
+				$environment->base,
+				$idSerializer->getSerialized(),
+				$pidSerializer->getSerialized()
+			)
 		);
 
 		// TODO fix view online link

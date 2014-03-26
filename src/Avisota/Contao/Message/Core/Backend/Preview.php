@@ -67,14 +67,14 @@ class Preview implements EventSubscriberInterface
 		$input             = \Input::getInstance();
 		$messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');
 
-		$messageId = IdSerializer::fromSerialized($input->get('id'));
+		$messageId = IdSerializer::fromSerialized($input->get('id') ? $input->get('id') : $input->get('pid'));
 		$message   = $messageRepository->find($messageId->getId());
 
 		if (!$message) {
 			$environment = \Environment::getInstance();
 			$this->redirect(
 				preg_replace(
-					'#&(key=send|id=[a-f0-9\-]+)#',
+					'#&(act=preview|id=[a-f0-9\-]+)#',
 					'',
 					$environment->request
 				)

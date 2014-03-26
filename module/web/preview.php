@@ -31,6 +31,9 @@ if (!is_file($dir . '/system/initialize.php')) {
 define('TL_MODE', 'FE');
 require($dir . '/system/initialize.php');
 
+use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
+use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
+
 class preview
 {
 	public function run()
@@ -66,8 +69,23 @@ class preview
 
 		$recipient = new \Avisota\Recipient\MutableRecipient($user->email, $data);
 
+		/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
+		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+
+		$event = new LoadLanguageFileEvent('avisota_message');
+		$eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
+
+		$environment = \Environment::getInstance();
+
 		$additionalData = array(
-			'view_online_link' => 'system/modules/avisota-message/web/preview.php?id=' . $message->getId(),
+			'view_online_link' => sprintf(
+				$GLOBALS['TL_LANG']['avisota_message']['viewOnline'],
+				sprintf(
+					'%ssystem/modules/avisota-message/web/preview.php?id=%s',
+					$environment->base,
+					$message->getId()
+				)
+			),
 		);
 
 		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRendererInterface $renderer */

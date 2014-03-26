@@ -67,8 +67,9 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['expert_legend']    = 'Expert
  * Reference
  */
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['header'] = 'Header';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['left']   = 'Left column';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['main']   = 'Main column';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['left']   = 'Left column';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['center'] = 'Center column';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['right']  = 'Right column';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['footer'] = 'Footer';
 
