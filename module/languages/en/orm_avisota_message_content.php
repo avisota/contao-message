@@ -76,6 +76,10 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['footer'] = 'Footer'
 /**
  * Buttons
  */
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['send']        = array(
+	'View and send message',
+	'View and send message'
+);
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['new']         = array(
 	'New element',
 	'Add a new content element'

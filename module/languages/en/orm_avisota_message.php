@@ -123,7 +123,7 @@ $GLOBALS['TL_LANG']['orm_avisota_message']['editheader']        = array(
 	'Edit newsletter settings',
 	'Edit newsletter settings ID %s'
 );
-$GLOBALS['TL_LANG']['orm_avisota_message']['view']                = array(
+$GLOBALS['TL_LANG']['orm_avisota_message']['send']                = array(
 	'View and send',
 	'View and send message ID %s.'
 );
