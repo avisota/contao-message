@@ -40,10 +40,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 		'ctable'            => array('orm_avisota_message_content'),
 		'switchToEdit'      => true,
 		'enableVersioning'  => true,
-		'palettes_callback' => array
-		(
-			array('Avisota\Contao\Message\Core\DataContainer\Message', 'updatePalette'),
-		),
 	),
 	// DataContainer
 	'dca_config'      => array
@@ -145,7 +141,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message']['edit'],
 				'href'            => 'table=orm_avisota_message_content',
 				'icon'            => 'edit.gif',
-				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\Message', 'editMessage'),
 				'idparam'         => 'pid',
 			),
 			'editheader' => array
@@ -153,7 +148,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message']['editheader'],
 				'href'            => 'act=edit',
 				'icon'            => 'header.gif',
-				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\Message', 'editHeader')
 			),
 			'copy'       => array
 			(
@@ -161,7 +155,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'href'            => 'act=paste&amp;mode=copy',
 				'icon'            => 'copy.gif',
 				'attributes'      => 'onclick="Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\Message', 'copyMessage')
 			),
 			'delete'     => array
 			(
@@ -169,7 +162,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'href'            => 'act=delete',
 				'icon'            => 'delete.gif',
 				'attributes'      => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\Message', 'deleteMessage')
 			),
 			'show'       => array
 			(
@@ -182,7 +174,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message']['send'],
 				'href'            => 'act=preview',
 				'icon'            => 'assets/avisota/message/images/send.png',
-				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\Message', 'sendMessage')
 			)
 		),
 	),
