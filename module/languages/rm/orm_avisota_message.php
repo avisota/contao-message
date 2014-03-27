@@ -8,7 +8,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-03-11T14:17:15+01:00
+ * last-updated: 2014-03-25T14:14:50+01:00
  */
 
 $GLOBALS['TL_LANG']['orm_avisota_message']['addFile']['0']           = 'Agiuntar datotecas';
@@ -47,6 +47,8 @@ $GLOBALS['TL_LANG']['orm_avisota_message']['queue_legend']           = 'Configur
 $GLOBALS['TL_LANG']['orm_avisota_message']['recipient_legend']       = 'Destinatur';
 $GLOBALS['TL_LANG']['orm_avisota_message']['recipients']['0']        = 'Destinaturs';
 $GLOBALS['TL_LANG']['orm_avisota_message']['recipients']['1']        = 'Tscherna ils destinaturs per quest newsletter.';
+$GLOBALS['TL_LANG']['orm_avisota_message']['send']['0']              = 'Contemplar e trametter';
+$GLOBALS['TL_LANG']['orm_avisota_message']['send']['1']              = 'Contemplar e trametter il messadi cun l\'ID %s';
 $GLOBALS['TL_LANG']['orm_avisota_message']['setLayout']['0']         = 'Tscherna il layout';
 $GLOBALS['TL_LANG']['orm_avisota_message']['setLayout']['1']         = 'Tscherna il layout per quest newsletter.';
 $GLOBALS['TL_LANG']['orm_avisota_message']['setQueue']['0']          = 'Tscherna la colonna da spetga';
