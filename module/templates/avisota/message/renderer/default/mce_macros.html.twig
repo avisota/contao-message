@@ -22,3 +22,9 @@
 		</figure>
 	{% endspaceless %}
 {% endmacro %}
+
+{% macro icon(src, attributes) %}
+	{% spaceless %}
+		{{ image(src, attributes.size[0], attributes.size[1], attributes.size[2], attributes.alt) }}
+	{% endspaceless %}
+{% endmacro %}
