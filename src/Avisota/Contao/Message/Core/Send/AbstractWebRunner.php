@@ -21,6 +21,10 @@ abstract class AbstractWebRunner extends \Backend
 {
 	function __construct()
 	{
+		// preserve object initialisation order
+		\BackendUser::getInstance();
+		\Database::getInstance();
+
 		parent::__construct();
 	}
 
