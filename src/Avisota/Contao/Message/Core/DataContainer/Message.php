@@ -22,6 +22,7 @@ use Contao\Doctrine\ORM\EntityHelper;
 use Contao\Doctrine\ORM\EntityInterface;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Backend\GetThemeEvent;
+use ContaoCommunityAlliance\Contao\Bindings\Events\Date\ParseDateEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
 use Doctrine\Common\Persistence\Mapping\MappingException;
@@ -117,8 +118,14 @@ class Message implements EventSubscriberInterface
 
 			$event->setValue($language);
 		}
-		else if ($model->getProperty('sendOn') > 0) {
-			$event->setValue($this->parseDate('F Y', $model->getProperty('sendOn')));
+		else if ($model->getProperty('sendOn')) {
+			$parseDateEvent = new ParseDateEvent($message->getSendOn()->getTimestamp(), 'F Y');
+
+			/** @var EventDispatcher $eventDispatcher */
+			$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+			$eventDispatcher->dispatch(ContaoEvents::DATE_PARSE, $parseDateEvent);
+
+			$event->setValue($parseDateEvent->getResult());
 		}
 		else {
 			$event->setValue($GLOBALS['TL_LANG']['orm_avisota_message']['notSend']);
@@ -157,10 +164,19 @@ class Message implements EventSubscriberInterface
 
 			$label = $model->getProperty('subject');
 
-			if ($model->getProperty('sendOn')) {
+			if ($message->getSendOn()) {
+				$parseDateEvent = new ParseDateEvent(
+					$message->getSendOn()->getTimestamp(),
+					$GLOBALS['TL_CONFIG']['datimFormat']
+				);
+
+				/** @var EventDispatcher $eventDispatcher */
+				$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+				$eventDispatcher->dispatch(ContaoEvents::DATE_PARSE, $parseDateEvent);
+
 				$label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . sprintf(
-						$GLOBALS['TL_LANG']['orm_avisota_recipient']['sended'],
-						$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $model->getProperty('sendOn'))
+						$GLOBALS['TL_LANG']['orm_avisota_message']['sended'],
+						$parseDateEvent->getResult()
 					) . ')</span>';
 			}
 

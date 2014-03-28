@@ -90,6 +90,7 @@ $GLOBALS['TL_LANG']['orm_avisota_message']['attachment_legend'] = 'Attachments';
  * Reference
  */
 $GLOBALS['TL_LANG']['orm_avisota_message']['notSend'] = 'Not send yet';
+$GLOBALS['TL_LANG']['orm_avisota_message']['sended'] = 'Send on %s';
 
 
 /**
