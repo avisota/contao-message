@@ -49,6 +49,7 @@ $GLOBALS['TL_LANG']['orm_avisota_message']['recipients']['0']        = 'Destinat
 $GLOBALS['TL_LANG']['orm_avisota_message']['recipients']['1']        = 'Tscherna ils destinaturs per quest newsletter.';
 $GLOBALS['TL_LANG']['orm_avisota_message']['send']['0']              = 'Contemplar e trametter';
 $GLOBALS['TL_LANG']['orm_avisota_message']['send']['1']              = 'Contemplar e trametter il messadi cun l\'ID %s';
+$GLOBALS['TL_LANG']['orm_avisota_message']['sended']                 = 'Trametter ils %s';
 $GLOBALS['TL_LANG']['orm_avisota_message']['setLayout']['0']         = 'Tscherna il layout';
 $GLOBALS['TL_LANG']['orm_avisota_message']['setLayout']['1']         = 'Tscherna il layout per quest newsletter.';
 $GLOBALS['TL_LANG']['orm_avisota_message']['setQueue']['0']          = 'Tscherna la colonna da spetga';
