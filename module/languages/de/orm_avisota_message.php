@@ -8,9 +8,8 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-03-11T14:17:10+01:00
+ * last-updated: 2014-03-25T14:14:50+01:00
  */
-
 
 $GLOBALS['TL_LANG']['orm_avisota_message']['addFile']['0']           = 'Dateien anfügen';
 $GLOBALS['TL_LANG']['orm_avisota_message']['addFile']['1']           = 'Fügen Sie dem Newsletter zusätzliche Dateien bei.';
@@ -41,12 +40,16 @@ $GLOBALS['TL_LANG']['orm_avisota_message']['meta_legend']            = 'Details'
 $GLOBALS['TL_LANG']['orm_avisota_message']['new']['0']               = 'Neuer Newsletter';
 $GLOBALS['TL_LANG']['orm_avisota_message']['new']['1']               = 'Einen neuen Newsletter hinzufügen';
 $GLOBALS['TL_LANG']['orm_avisota_message']['newsletter_legend']      = 'Nachricht';
+$GLOBALS['TL_LANG']['orm_avisota_message']['notSend']                = 'Noch nicht senden';
 $GLOBALS['TL_LANG']['orm_avisota_message']['queue']['0']             = 'Warteschlange';
 $GLOBALS['TL_LANG']['orm_avisota_message']['queue']['1']             = 'Bitte wählen Sie die Warteschlange für diesen Newsletter aus.';
 $GLOBALS['TL_LANG']['orm_avisota_message']['queue_legend']           = 'Warteschlangen-Einstellungen';
 $GLOBALS['TL_LANG']['orm_avisota_message']['recipient_legend']       = 'Empfänger';
 $GLOBALS['TL_LANG']['orm_avisota_message']['recipients']['0']        = 'Empfänger';
 $GLOBALS['TL_LANG']['orm_avisota_message']['recipients']['1']        = 'Bitte wählen Sie die Empfänger für diesen Newsletter aus.';
+$GLOBALS['TL_LANG']['orm_avisota_message']['send']['0']              = 'Anzeigen und senden';
+$GLOBALS['TL_LANG']['orm_avisota_message']['send']['1']              = 'Mitteilungs ID %s anzeigen und senden';
+$GLOBALS['TL_LANG']['orm_avisota_message']['sended']                 = 'Weiterleiten %s';
 $GLOBALS['TL_LANG']['orm_avisota_message']['setLayout']['0']         = 'Layout auswählen';
 $GLOBALS['TL_LANG']['orm_avisota_message']['setLayout']['1']         = 'Wählen Sie das Layout für diesen Newsletter aus.';
 $GLOBALS['TL_LANG']['orm_avisota_message']['setQueue']['0']          = 'Warteschlange wählen';

@@ -8,13 +8,13 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-03-11T14:17:12+01:00
+ * last-updated: 2014-03-25T14:14:51+01:00
  */
-
 
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['alias']['0']             = 'Alias';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['alias']['1']             = 'Der Alias ist eine eindeutige Referenz zur Newsletter-Kategorie und kann anstelle der ID benutzt werden.';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['boilerplates']['0']      = 'Beinhaltet Boilerplate';
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['boilerplates']['1']      = 'Diese Kategorie enthält Text Mailings';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['byCategory']             = 'Nur in Kategorie';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['byMessage']              = 'Nur in Newsletter';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['byMessageOrCategory']    = 'Vorausgewählt in der kategorie, überschreibbar im Newsletter';
@@ -38,6 +38,7 @@ $GLOBALS['TL_LANG']['orm_avisota_message_category']['menuIcon']['1']          = 
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['new']['0']               = 'Neue Kategorie';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['new']['1']               = 'Erstellen Sie eine neue Kategorie.';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['queue']['0']             = 'Warteschlange';
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['queue']['1']             = 'Bitte wählen Sie die vorausgewählte Warteschlange';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['queueMode']['0']         = 'Wartenschlangen-Auswahlmodus';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['queueMode']['1']         = 'Bitte wählen Sie den Auswahlmodus für Warteschlangen.';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['queue_legend']           = 'Warteschlangeneinstellungen';
@@ -49,6 +50,7 @@ $GLOBALS['TL_LANG']['orm_avisota_message_category']['recipients_legend']      = 
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['show']['0']              = 'Kategoriedetails';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['show']['1']              = 'Lassen Sie die Details der Kategorie ID %s anzeigen.';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['showInMenu']['0']        = 'Im Menü zeigen';
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['showInMenu']['1']        = 'Bitte wählen Sie diese Kategorie im Backend-Menü';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['title']['0']             = 'Titel';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['title']['1']             = 'Bitte geben Sie den Titel der Newsletter-Kategorie ein.';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['tstamp']['0']            = 'Bearbeitungsdatum';

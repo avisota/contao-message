@@ -8,10 +8,17 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-03-11T14:17:13+01:00
+ * last-updated: 2014-03-25T14:14:52+01:00
  */
 
-
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']['0']        = 'Zelle';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']['1']        = 'Bitte wählen Sie den Typ des Inhaltselementes aus.';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['center']  = 'Zentrierte Splate';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['footer']  = 'Fuss';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['header']  = 'Kopf';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['left']    = 'Linke Spalte';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['main']    = 'Hauptspalte';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['right']   = 'Rechte Spalte';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['copy']['0']        = 'Element duplizieren';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['copy']['1']        = 'Inhaltselement ID %s duplizieren';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cssID']['0']       = 'CSS-ID / CSS-Klasse';
@@ -27,7 +34,9 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['editalias']['1']   = 'Bearbe
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['editarticle']['0'] = 'Artikel bearbeiten';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['editarticle']['1'] = 'Bearbeiten Sie den Artikel ID %s.';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['expert_legend']    = 'Experteneinstellungen';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['groups']['0']      = 'Erlaubte Mitgliedergruppen  <strong style="color:red">ENTFERNEN</strong>';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['groups']['1']      = 'Diese Gruppen können das Inhaltselement sehen.';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['guests']['0']      = 'Nur Gästen anzeigen <strong style="color:red">ENTFERNEN</strong>';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['guests']['1']      = 'Das Inhaltselement verstecken sobald ein Mitglied angemeldet ist.';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['include_legend']   = 'Include-Einstellungen';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['invisible']['0']   = 'Unsichtbar';
@@ -42,6 +51,8 @@ $GLOBALS['TL_LANG']['orm_avisota_message_content']['pastenew']['1']    = 'Fügen
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['protected']['0']   = 'Elementschutz <strong style="color:red">entfernen</strong>';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['protected']['1']   = 'Das Inhaltselement nur bestimmten Gruppen anzeigen.';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['protected_legend'] = 'Zugriffssschutz';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['send']['0']        = 'Nachricht anzeigen und senden';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['send']['1']        = 'Nachricht anzeigen und senden';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['show']['0']        = 'Element-Details';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['show']['1']        = 'Zeigen Sie die Details des Inhaltselementes ID %s an.';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['sortable_legend']  = 'Sortierungsoptionen';
