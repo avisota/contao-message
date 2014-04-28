@@ -70,6 +70,10 @@ class EventsSubscriber implements EventSubscriberInterface
 
 	public function getMessageOptions($options = array())
 	{
+		if (!is_array($options) && !$options instanceof \ArrayAccess) {
+			$options = array();
+		}
+
 		$repository   = EntityHelper::getRepository('Avisota\Contao:Message');
 		$queryBuilder = $repository->createQueryBuilder('m');
 		$queryBuilder
@@ -92,6 +96,10 @@ class EventsSubscriber implements EventSubscriberInterface
 
 	public function getBoilerplateMessageOptions($options = array())
 	{
+		if (!is_array($options) && !$options instanceof \ArrayAccess) {
+			$options = array();
+		}
+
 		$repository   = EntityHelper::getRepository('Avisota\Contao:Message');
 		$queryBuilder = $repository->createQueryBuilder('m');
 		$expr         = $queryBuilder->expr();
@@ -117,6 +125,10 @@ class EventsSubscriber implements EventSubscriberInterface
 
 	public function getNonBoilerplateMessageOptions($options = array())
 	{
+		if (!is_array($options) && !$options instanceof \ArrayAccess) {
+			$options = array();
+		}
+
 		$repository   = EntityHelper::getRepository('Avisota\Contao:Message');
 		$queryBuilder = $repository->createQueryBuilder('m');
 		$expr         = $queryBuilder->expr();
