@@ -79,3 +79,9 @@ $GLOBALS['TL_LANG']['orm_avisota_layout']['delete'] = array(
 	'Delete layout',
 	'Delete layout ID %s'
 );
+
+
+/**
+ * Reference
+ */
+$GLOBALS['TL_LANG']['orm_avisota_layout']['default'] = 'Default generic rendering';
