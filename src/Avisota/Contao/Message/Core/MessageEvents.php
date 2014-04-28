@@ -66,6 +66,17 @@ class MessageEvents
 	const CREATE_NON_BOILERPLATE_MESSAGE_OPTIONS = 'avisota.message.create-non-boilerplate-message-options';
 
 	/**
+	 * The CREATE_MESSAGE_LAYOUT_OPTIONS event occurs when an options list of message layouts will be created.
+	 *
+	 * The event listener method receives a ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent instance.
+	 *
+	 * @var string
+	 *
+	 * @api
+	 */
+	const CREATE_MESSAGE_LAYOUT_OPTIONS = 'avisota.message.create-message-layout-options';
+
+	/**
 	 * The CREATE_MESSAGE_CONTENT_CELL_OPTIONS event occurs when an options list of message content cells will be created.
 	 *
 	 * The event listener method receives a ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent instance.
