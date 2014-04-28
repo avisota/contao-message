@@ -248,7 +248,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 			'flag'             => 1,
 			'inputType'        => 'select',
 			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-					'avisota.create-message-content-cell-options'
+					\Avisota\Contao\Message\Core\MessageEvents::CREATE_MESSAGE_CONTENT_CELL_OPTIONS
 				),
 			'reference'        => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells'],
 			'eval'             => array(
@@ -265,7 +265,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 			'filter'           => true,
 			'inputType'        => 'select',
 			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-					'avisota.create-message-content-type-options'
+					\Avisota\Contao\Message\Core\MessageEvents::CREATE_MESSAGE_CONTENT_TYPE_OPTIONS
 				),
 			'reference'        => &$GLOBALS['TL_LANG']['MCE'],
 			'eval'             => array(
