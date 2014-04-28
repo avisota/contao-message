@@ -22,6 +22,17 @@ use Contao\Doctrine\ORM\EntityHelper;
 class MessageEvents
 {
 	/**
+	 * The CREATE_MESSAGE_CATEGORY_OPTIONS event occurs when an options list of message categories will be created.
+	 *
+	 * The event listener method receives a ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent instance.
+	 *
+	 * @var string
+	 *
+	 * @api
+	 */
+	const CREATE_MESSAGE_CATEGORY_OPTIONS = 'avisota.message.create-message-category-options';
+
+	/**
 	 * The CREATE_MESSAGE_OPTIONS event occurs when an options list of messages will be created.
 	 *
 	 * The event listener method receives a ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent instance.

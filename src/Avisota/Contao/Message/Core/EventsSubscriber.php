@@ -16,6 +16,7 @@
 namespace Avisota\Contao\Message\Core;
 
 use Avisota\Contao\Entity\Message;
+use Avisota\Contao\Entity\MessageCategory;
 use BackendTemplate;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent;
@@ -26,10 +27,38 @@ class EventsSubscriber implements EventSubscriberInterface
 	public static function getSubscribedEvents()
 	{
 		return array(
+			MessageEvents::CREATE_MESSAGE_CATEGORY_OPTIONS        => 'createMessageCategoryOptions',
 			MessageEvents::CREATE_MESSAGE_OPTIONS                 => 'createMessageOptions',
 			MessageEvents::CREATE_BOILERPLATE_MESSAGE_OPTIONS     => 'createBoilerplateMessageOptions',
 			MessageEvents::CREATE_NON_BOILERPLATE_MESSAGE_OPTIONS => 'createNonBoilerplateMessageOptions',
 		);
+	}
+
+	public function createMessageCategoryOptions(CreateOptionsEvent $event)
+	{
+		$this->getMessageCategoryOptions($event->getOptions());
+	}
+
+	public function getMessageCategoryOptions($options = array())
+	{
+		if (!is_array($options) && !$options instanceof \ArrayAccess) {
+			$options = array();
+		}
+
+		$repository   = EntityHelper::getRepository('Avisota\Contao:MessageCategory');
+		$queryBuilder = $repository->createQueryBuilder('mc');
+		$queryBuilder
+			->select('mc')
+			->orderBy('mc.title');
+		$query    = $queryBuilder->getQuery();
+		/** @var MessageCategory[] $messageCategories */
+		$messageCategories = $query->getResult();
+
+		foreach ($messageCategories as $messageCategory) {
+			$options[$messageCategory->getId()] = $messageCategory->getTitle();
+		}
+
+		return $options;
 	}
 
 	public function createMessageOptions(CreateOptionsEvent $event)
