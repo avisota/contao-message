@@ -22,6 +22,17 @@ use Contao\Doctrine\ORM\EntityHelper;
 class MessageEvents
 {
 	/**
+	 * The CREATE_MESSAGE_CATEGORY_OPTIONS event occurs when an options list of message categories will be created.
+	 *
+	 * The event listener method receives a ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent instance.
+	 *
+	 * @var string
+	 *
+	 * @api
+	 */
+	const CREATE_MESSAGE_CATEGORY_OPTIONS = 'avisota.message.create-message-category-options';
+
+	/**
 	 * The CREATE_MESSAGE_OPTIONS event occurs when an options list of messages will be created.
 	 *
 	 * The event listener method receives a ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent instance.
@@ -53,4 +64,37 @@ class MessageEvents
 	 * @api
 	 */
 	const CREATE_NON_BOILERPLATE_MESSAGE_OPTIONS = 'avisota.message.create-non-boilerplate-message-options';
+
+	/**
+	 * The CREATE_MESSAGE_LAYOUT_OPTIONS event occurs when an options list of message layouts will be created.
+	 *
+	 * The event listener method receives a ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent instance.
+	 *
+	 * @var string
+	 *
+	 * @api
+	 */
+	const CREATE_MESSAGE_LAYOUT_OPTIONS = 'avisota.message.create-message-layout-options';
+
+	/**
+	 * The CREATE_MESSAGE_CONTENT_CELL_OPTIONS event occurs when an options list of message content cells will be created.
+	 *
+	 * The event listener method receives a ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent instance.
+	 *
+	 * @var string
+	 *
+	 * @api
+	 */
+	const CREATE_MESSAGE_CONTENT_CELL_OPTIONS = 'avisota.create-message-content-cell-options';
+
+	/**
+	 * The CREATE_MESSAGE_CONTENT_TYPE_OPTIONS event occurs when an options list of message content types will be created.
+	 *
+	 * The event listener method receives a ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent instance.
+	 *
+	 * @var string
+	 *
+	 * @api
+	 */
+	const CREATE_MESSAGE_CONTENT_TYPE_OPTIONS = 'avisota.create-message-content-type-options';
 }

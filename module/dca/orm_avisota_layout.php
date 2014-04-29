@@ -13,7 +13,6 @@
  * @filesource
  */
 
-use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory;
 
 /**
  * Table orm_avisota_layout
@@ -189,7 +188,7 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_layout']['type'],
 			'exclude'          => true,
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-layout-type-options'),
+			'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback('avisota.create-layout-type-options'),
 			'reference'        => &$GLOBALS['TL_LANG']['orm_avisota_layout'],
 			'eval'             => array(
 				'mandatory'          => true,
@@ -244,7 +243,7 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_layout']['stylesheets'],
 			'inputType'        => 'checkboxWizard',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-layout-stylesheet-options'),
+			'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback('avisota.create-layout-stylesheet-options'),
 			'eval'             => array(
 				'tl_class' => 'clr',
 				'multiple' => true,
@@ -256,7 +255,7 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_layout']['allowedCellContents'],
 			'exclude'          => true,
 			'inputType'        => 'checkbox',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-content-type-options'),
+			'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback('avisota.create-content-type-options'),
 			'eval'             => array(
 				'multiple' => true,
 			),

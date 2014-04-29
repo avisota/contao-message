@@ -60,8 +60,8 @@ $GLOBALS['BE_MOD']['avisota'] = array_merge(
 /**
  * Front end modules
  */
-$GLOBALS['FE_MOD']['avisota']['avisota_list']   = 'Avisota\Contao\Core\Message\List';
-$GLOBALS['FE_MOD']['avisota']['avisota_reader'] = 'Avisota\Contao\Core\Message\Reader';
+$GLOBALS['FE_MOD']['avisota']['avisota_message_list']   = 'Avisota\Contao\Message\Core\Module\Listing';
+$GLOBALS['FE_MOD']['avisota']['avisota_message_reader'] = 'Avisota\Contao\Message\Core\Module\Reader';
 
 /**
  * Events
@@ -106,3 +106,4 @@ if (!isset($GLOBALS['TL_MCE'])) {
 if (!isset($GLOBALS['AVISOTA_MESSAGE_RENDERER'])) {
 	$GLOBALS['AVISOTA_MESSAGE_RENDERER'] = array();
 }
+$GLOBALS['AVISOTA_MESSAGE_RENDERER'][] = 'default';

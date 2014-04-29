@@ -21,3 +21,15 @@ $GLOBALS['TL_LANG']['MOD']['avisota-message'] = array(
 	'Avisota - Message',
 	'Message management and editing for Avisota.'
 );
+
+/**
+ * Frontend modules
+ */
+$GLOBALS['TL_LANG']['FMD']['avisota_message_list'] = array(
+	'Message list',
+	'Adds a list of newsletters to the page.'
+);
+$GLOBALS['TL_LANG']['FMD']['avisota_message_reader'] = array(
+	'Message reader',
+	'Shows the details of a newsletter.'
+);
