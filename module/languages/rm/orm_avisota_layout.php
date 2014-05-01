@@ -8,9 +8,8 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-03-11T14:17:09+01:00
+ * last-updated: 2014-03-25T14:14:50+01:00
  */
-
 
 $GLOBALS['TL_LANG']['orm_avisota_layout']['alias']['0']               = 'Alias';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['alias']['1']               = 'L\'alias dal layout è ina referenza unica al layout che po vegnir inditgada empè da la ID.';
@@ -20,6 +19,7 @@ $GLOBALS['TL_LANG']['orm_avisota_layout']['clearStyles']['0']         = 'Allonta
 $GLOBALS['TL_LANG']['orm_avisota_layout']['clearStyles']['1']         = 'Allontanar ils stils globals dal template.';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['copy']['0']                = 'Duplitgar il layout';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['copy']['1']                = 'Duplitgar il layout cun l\'ID %s';
+$GLOBALS['TL_LANG']['orm_avisota_layout']['default']                  = 'Rendering generic da standard';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['delete']['0']              = 'Stizzar il layout';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['delete']['1']              = 'Stizzar il layout cun l\'ID %s';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['edit']['0']                = 'Modifitgar il layout';
