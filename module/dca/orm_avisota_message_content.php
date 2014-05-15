@@ -160,10 +160,10 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 			),
 			'toggle' => array
 			(
-				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['toggle'],
-				'icon'            => 'visible.gif',
-				'attributes'      => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
-				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\MessageContent', 'toggleIcon')
+				'label'          => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['toggle'],
+				'icon'           => 'visible.gif',
+				'attributes'     => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'toggleProperty' => 'invisible',
 			),
 			'show'   => array
 			(
