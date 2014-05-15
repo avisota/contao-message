@@ -55,9 +55,9 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 		),
 		'childCondition' => array(
 			array(
-				'from'   => 'orm_avisota_message_category',
-				'to'     => 'orm_avisota_message',
-				'setOn'  => array
+				'from'    => 'orm_avisota_message_category',
+				'to'      => 'orm_avisota_message',
+				'setOn'   => array
 				(
 					array(
 						'to_field'   => 'category',
@@ -101,10 +101,10 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 	(
 		'sorting'           => array
 		(
-			'mode'                  => 4,
-			'fields'                => array('cell', 'sorting'),
-			'panelLayout'           => 'filter;search,limit',
-			'headerFields'          => array('subject'),
+			'mode'         => 4,
+			'fields'       => array('cell', 'sorting'),
+			'panelLayout'  => 'filter;search,limit',
+			'headerFields' => array('subject'),
 		),
 		'label'             => array
 		(
@@ -182,7 +182,8 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 	(
 		'default' => array
 		(
-			'type' => array('cell', 'type')
+			'type'      => array('cell', 'type'),
+			'published' => array('invisible'),
 		),
 	),
 	// Subpalettes
@@ -248,8 +249,8 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 			'flag'             => 1,
 			'inputType'        => 'select',
 			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-					\Avisota\Contao\Message\Core\MessageEvents::CREATE_MESSAGE_CONTENT_CELL_OPTIONS
-				),
+				\Avisota\Contao\Message\Core\MessageEvents::CREATE_MESSAGE_CONTENT_CELL_OPTIONS
+			),
 			'reference'        => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells'],
 			'eval'             => array(
 				'mandatory'          => true,
@@ -265,8 +266,8 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 			'filter'           => true,
 			'inputType'        => 'select',
 			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-					\Avisota\Contao\Message\Core\MessageEvents::CREATE_MESSAGE_CONTENT_TYPE_OPTIONS
-				),
+				\Avisota\Contao\Message\Core\MessageEvents::CREATE_MESSAGE_CONTENT_TYPE_OPTIONS
+			),
 			'reference'        => &$GLOBALS['TL_LANG']['MCE'],
 			'eval'             => array(
 				'includeBlankOption' => true,
@@ -314,9 +315,10 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 		),
 		'invisible'    => array
 		(
-			'label'   => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['invisible'],
-			'default' => false,
-			'field'   => array(
+			'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['invisible'],
+			'default'   => false,
+			'inputType' => 'checkbox',
+			'field'     => array(
 				'type' => 'boolean'
 			)
 		),
