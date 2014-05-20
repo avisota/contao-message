@@ -18,6 +18,7 @@ namespace Avisota\Contao\Message\Core\Backend;
 use Avisota\Contao\Core\Message\Renderer;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
+use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\RedirectEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
 use ContaoCommunityAlliance\DcGeneral\DC_General;
@@ -72,11 +73,15 @@ class Preview implements EventSubscriberInterface
 
 		if (!$message) {
 			$environment = \Environment::getInstance();
-			$this->redirect(
-				preg_replace(
-					'#&(act=preview|id=[a-f0-9\-]+)#',
-					'',
-					$environment->request
+
+			$eventDispatcher->dispatch(
+				ContaoEvents::CONTROLLER_REDIRECT,
+				new RedirectEvent(
+					preg_replace(
+						'#&(act=preview|id=[a-f0-9\-]+)#',
+						'',
+						$environment->request
+					)
 				)
 			);
 		}
