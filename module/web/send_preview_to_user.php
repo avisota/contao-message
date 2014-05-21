@@ -34,6 +34,8 @@ if (!is_file($dir . '/system/initialize.php')) {
 define('TL_MODE', 'FE');
 require($dir . '/system/initialize.php');
 
+BackendUser::getInstance();
+
 class send_preview_to_user extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 {
 	protected function execute(Message $message, \BackendUser $user)

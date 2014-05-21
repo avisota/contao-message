@@ -18,6 +18,9 @@ namespace Avisota\Contao\Message\Core;
 use Avisota\Contao\Entity\Layout;
 use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Entity\MessageCategory;
+use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
+use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
+use Avisota\Contao\Message\Core\Template\MutablePreRenderedMessageTemplate;
 use BackendTemplate;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent;
@@ -33,6 +36,7 @@ class EventsSubscriber implements EventSubscriberInterface
 			MessageEvents::CREATE_BOILERPLATE_MESSAGE_OPTIONS     => 'createBoilerplateMessageOptions',
 			MessageEvents::CREATE_NON_BOILERPLATE_MESSAGE_OPTIONS => 'createNonBoilerplateMessageOptions',
 			MessageEvents::CREATE_MESSAGE_LAYOUT_OPTIONS          => 'creatMessageLayoutOptions',
+			AvisotaMessageEvents::RENDER_MESSAGE                  => 'renderMessage',
 		);
 	}
 
@@ -187,5 +191,26 @@ class EventsSubscriber implements EventSubscriberInterface
 		}
 
 		return $options;
+	}
+
+	public function renderMessage(RenderMessageEvent $event)
+	{
+		if ($event->getPreRenderedMessageTemplate()) {
+			return;
+		}
+
+		global $container;
+
+		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRendererInterface $renderer */
+		$renderer = $container['avisota.message.renderer'];
+
+		$content = $renderer->renderCell($event->getMessage(), 'center', $event->getLayout());
+
+		$preRenderedMessageTemplate = new MutablePreRenderedMessageTemplate(
+			$event->getMessage(),
+			implode(PHP_EOL, $content)
+		);
+
+		$event->setPreRenderedMessageTemplate($preRenderedMessageTemplate);
 	}
 }

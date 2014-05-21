@@ -105,7 +105,6 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 				'href'            => 'act=copy',
 				'icon'            => 'copy.gif',
 				'attributes'      => 'onclick="Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\Theme', 'copyCategory')
 			),
 			'delete'  => array
 			(
@@ -113,7 +112,6 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 				'href'            => 'act=delete',
 				'icon'            => 'delete.gif',
 				'attributes'      => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
-				'button_callback' => array('Avisota\Contao\Message\Core\DataContainer\Theme', 'deleteCategory')
 			),
 			'show'    => array
 			(

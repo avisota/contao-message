@@ -279,25 +279,27 @@ class OptionsBuilder implements EventSubscriberInterface
 	 */
 	public function getMessageContentTypeOptions($dc, $options = array())
 	{
-		foreach ($GLOBALS['TL_MCE'] as $elementGroup => $elements) {
-			if (isset($GLOBALS['TL_LANG']['MCE'][$elementGroup])) {
-				$elementGroup = $GLOBALS['TL_LANG']['MCE'][$elementGroup];
-			}
-
-			if (!isset($options[$elementGroup])) {
-				$options[$elementGroup] = array();
-			}
-
-			foreach ($elements as $elementType) {
-				$label = isset($GLOBALS['TL_LANG']['MCE'][$elementType])
-					? $GLOBALS['TL_LANG']['MCE'][$elementType]
-					: $elementType;
-
-				if (is_array($label)) {
-					$label = $label[0];
+		if (!count($options)) {
+			foreach ($GLOBALS['TL_MCE'] as $elementGroup => $elements) {
+				if (isset($GLOBALS['TL_LANG']['MCE'][$elementGroup])) {
+					$elementGroup = $GLOBALS['TL_LANG']['MCE'][$elementGroup];
 				}
 
-				$options[$elementGroup][$elementType] = $label;
+				if (!isset($options[$elementGroup])) {
+					$options[$elementGroup] = array();
+				}
+
+				foreach ($elements as $elementType) {
+					$label = isset($GLOBALS['TL_LANG']['MCE'][$elementType])
+						? $GLOBALS['TL_LANG']['MCE'][$elementType]
+						: $elementType;
+
+					if (is_array($label)) {
+						$label = $label[0];
+					}
+
+					$options[$elementGroup][$elementType] = $label;
+				}
 			}
 		}
 
@@ -321,6 +323,10 @@ class OptionsBuilder implements EventSubscriberInterface
 	 */
 	public function getMessageContentCellOptions($options = array())
 	{
+		if (!count($options)) {
+			$options[] = 'center';
+		}
+
 		return $options;
 	}
 

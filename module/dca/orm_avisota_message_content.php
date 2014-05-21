@@ -164,6 +164,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				'icon'           => 'visible.gif',
 				'attributes'     => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
 				'toggleProperty' => 'invisible',
+				'toggleInverse'  => true,
 			),
 			'show'   => array
 			(
