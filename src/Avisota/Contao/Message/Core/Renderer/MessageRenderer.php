@@ -53,6 +53,13 @@ class MessageRenderer implements MessageRendererInterface
 			->andWhere('mc.cell=:cell')
 			->setParameter('message', $message->getId())
 			->setParameter('cell', $cell);
+
+		if (TL_MODE != 'BE' && (!defined('BE_USER_LOGGED_IN') || !BE_USER_LOGGED_IN)) {
+			$queryBuilder
+				->andWhere('mc.invisible=:invisible')
+				->setParameter('invisible', false);
+		}
+
 		$query = $queryBuilder->getQuery();
 		$contents = $query->getResult();
 
@@ -69,6 +76,10 @@ class MessageRenderer implements MessageRendererInterface
 	 */
 	public function renderContent(MessageContent $messageContent, Layout $layout = null)
 	{
+		if ($messageContent->getInvisible() && TL_MODE != 'BE' && !BE_USER_LOGGED_IN) {
+			return '';
+		}
+
 		$event = new RenderMessageContentEvent($messageContent, $layout ?: $messageContent->getMessage()->getLayout());
 
 		/** @var EventDispatcher $eventDispatcher */
