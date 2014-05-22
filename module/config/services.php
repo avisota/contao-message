@@ -14,6 +14,8 @@
  */
 
 
+/** @var \Pimple $container */
+
 /**
  * Define message renderer
  */
