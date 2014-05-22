@@ -44,7 +44,7 @@ interface MessageRendererInterface
 	 * @param Message $message
 	 * @param string  $cell
 	 *
-	 * @return string
+	 * @return string[]
 	 */
 	public function renderCell(Message $message, $cell, Layout $layout = null);
 }
