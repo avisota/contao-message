@@ -103,23 +103,23 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 			),
 			'editheader' => array
 			(
-				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['editheader'],
-				'href'            => 'act=edit',
-				'icon'            => 'header.gif',
+				'label' => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['editheader'],
+				'href'  => 'act=edit',
+				'icon'  => 'header.gif',
 			),
 			'copy'       => array
 			(
-				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['copy'],
-				'href'            => 'act=copy',
-				'icon'            => 'copy.gif',
-				'attributes'      => 'onclick="Backend.getScrollOffset();"',
+				'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['copy'],
+				'href'       => 'act=copy',
+				'icon'       => 'copy.gif',
+				'attributes' => 'onclick="Backend.getScrollOffset();"',
 			),
 			'delete'     => array
 			(
-				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['delete'],
-				'href'            => 'act=delete',
-				'icon'            => 'delete.gif',
-				'attributes'      => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['delete'],
+				'href'       => 'act=delete',
+				'icon'       => 'delete.gif',
+				'attributes' => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
 			),
 			'show'       => array
 			(
@@ -263,8 +263,8 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['recipients'],
 			'inputType'        => 'select',
 			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-					'avisota.create-recipient-source-options'
-				),
+				'avisota.create-recipient-source-options'
+			),
 			'eval'             => array(
 				'mandatory'          => true,
 				'includeBlankOption' => true,

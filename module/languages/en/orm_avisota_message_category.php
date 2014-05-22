@@ -33,11 +33,11 @@ $GLOBALS['TL_LANG']['orm_avisota_message_category']['recipients']        = array
 	'Recipients',
 	'Please chose the preselected recipients.'
 );
-$GLOBALS['TL_LANG']['orm_avisota_message_category']['layoutMode']         = array(
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['layoutMode']        = array(
 	'Layout selection mode',
 	'Please chose the layout selection mode.'
 );
-$GLOBALS['TL_LANG']['orm_avisota_message_category']['layout']             = array(
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['layout']            = array(
 	'Layout',
 	'Please chose the preselected layout.'
 );
