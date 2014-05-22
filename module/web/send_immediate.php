@@ -16,6 +16,8 @@
 use Avisota\Contao\Entity\Message;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
+use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GetPageDetailsEvent;
+use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GenerateFrontendUrlEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
 
@@ -75,16 +77,30 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 		$pidSerializer->setDataProviderName('orm_avisota_message_category');
 		$pidSerializer->setId($message->getCategory()->getId());
 
-		$environment = Environment::getInstance();
-		$url         = sprintf(
-			$GLOBALS['TL_LANG']['avisota_message']['viewOnline'],
-			sprintf(
-				'%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s&pid=%s',
-				$environment->base,
-				$idSerializer->getSerialized(),
-				$pidSerializer->getSerialized()
-			)
-		);
+		$viewOnlinePage = $message->getCategory()->getViewOnlinePage();
+
+		if ($viewOnlinePage) {
+			$getPageDetailsEvent = new GetPageDetailsEvent($viewOnlinePage);
+			$eventDispatcher->dispatch(ContaoEvents::CONTROLLER_GET_PAGE_DETAILS, $getPageDetailsEvent);
+
+			$generateUrlEvent = new GenerateFrontendUrlEvent($getPageDetailsEvent->getPageDetails(), '/' . $message->getAlias());
+			$eventDispatcher->dispatch(ContaoEvents::CONTROLLER_GENERATE_FRONTEND_URL, $generateUrlEvent);
+
+			$url = $generateUrlEvent->getUrl();
+
+			if (!preg_match('~^\w+:~', $url)) {
+				$environment = Environment::getInstance();
+				$url = $environment->base . $url;
+			}
+
+			$url         = sprintf(
+				$GLOBALS['TL_LANG']['avisota_message']['viewOnline'],
+				$url
+			);
+		}
+		else {
+			$url = false;
+		}
 
 		// TODO fix view online link
 		$additionalData = array('view_online_link' => $url);

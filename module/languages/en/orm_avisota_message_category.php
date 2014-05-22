@@ -49,6 +49,10 @@ $GLOBALS['TL_LANG']['orm_avisota_message_category']['queue']             = array
 	'Queue',
 	'Please chose the preselected queue.'
 );
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['viewOnlinePage']    = array(
+	'View online page',
+	'Please chose the page to display the message online.'
+);
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['boilerplates']      = array(
 	'Contains boilerplates',
 	'This category contain boilerplate mailings.'
@@ -78,6 +82,7 @@ $GLOBALS['TL_LANG']['orm_avisota_message_category']['category_legend']   = 'Cate
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['recipients_legend'] = 'Recipients settings';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['layout_legend']     = 'Layout settings';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['queue_legend']      = 'Queue settings';
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['online_legend']     = 'Online settings';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['expert_legend']     = 'Experts settings';
 
 

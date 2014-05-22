@@ -141,6 +141,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 			'recipients' => array('recipientsMode'),
 			'layout'     => array('layoutMode'),
 			'queue'      => array('queueMode'),
+			'online'     => array('viewOnlinePage'),
 			'expert'     => array(':hide', 'boilerplates', 'showInMenu'),
 		),
 		'boilerplates' => array
@@ -346,6 +347,14 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 						'referencedColumnName' => 'id',
 					),
 				),
+			),
+		),
+		'viewOnlinePage'    => array
+		(
+			'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['viewOnlinePage'],
+			'inputType' => 'pageTree',
+			'field'     => array(
+				'type' => 'integer',
 			),
 		),
 		'boilerplates'      => array
