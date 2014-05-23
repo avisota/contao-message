@@ -154,10 +154,6 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 			);
 
 			$entityManager->flush();
-
-			//ToDo: this is just a hotfix to replace the browser redirect which will break after 10-20 redirects
-			//I know this is ugly but works until we find a better solution
-			echo '<html><head><meta http-equiv="refresh" content="2; URL=' . $url . '"></head><body>Still generating...</body></html>';
 		}
 		else {
 			$parameters = array(
@@ -165,7 +161,7 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 				'execute' => $queueData->getId(),
 			);
 			$url        = sprintf(
-				'Location: %scontao/main.php?%s',
+				'%scontao/main.php?%s',
 				$environment->base,
 				http_build_query($parameters)
 			);
@@ -175,7 +171,7 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 			$entityManager->flush();
 		}
 
-		header($url);
+		echo '<html><head><meta http-equiv="refresh" content="0; URL=' . $url . '"></head><body>Still generating...</body></html>';
 		exit;
 	}
 
