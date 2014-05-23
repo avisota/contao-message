@@ -33,6 +33,10 @@ class Reader extends \TwigModule
 	 */
 	protected function compile()
 	{
+		if (TL_MODE == 'BE') {
+			return;
+		}
+
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item'])) {
 			$messageAlias = \Input::getInstance()->get('auto_item');
 		}
