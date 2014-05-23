@@ -51,6 +51,7 @@ class MessageRenderer implements MessageRendererInterface
 			->select('mc')
 			->where('mc.message=:message')
 			->andWhere('mc.cell=:cell')
+			->orderBy('mc.sorting')
 			->setParameter('message', $message->getId())
 			->setParameter('cell', $cell);
 
