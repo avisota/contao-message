@@ -100,12 +100,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['avisota_message_cell']       = array
 (
 	'exclude'          => true,
 	'label'            => &$GLOBALS['TL_LANG']['tl_module']['avisota_message_cell'],
-	'inputType'        => 'select',
+	'inputType'        => 'checkboxWizard',
 	'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback(
 			\Avisota\Contao\Message\Core\MessageEvents::CREATE_MESSAGE_CONTENT_CELL_OPTIONS
 		),
 	'eval'             => array(
 		'mandatory' => true,
-		'tl_class'  => 'w50',
+		'multiple'  => true,
+		'tl_class'  => 'clr',
 	),
 );

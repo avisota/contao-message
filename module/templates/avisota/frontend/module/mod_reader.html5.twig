@@ -3,5 +3,7 @@
 {% block content %}
 	<h2>{{ message.subject }}</h2>
 	<p class="info"><time datetime="{{ message.sendOn|date('c') }}">{{ message.sendOn|datimFormat }}</time></p>
-	{{ content }}
+	{% for cell, content in contents %}
+		<div class="cell_{{ cell }}">{{ content|join('') }}</div>
+	{% endfor %}
 {% endblock %}
