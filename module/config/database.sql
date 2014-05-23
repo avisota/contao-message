@@ -14,5 +14,5 @@
 CREATE TABLE `tl_module` (
   `avisota_message_categories` text NULL,
   `avisota_message_layout` char(36) NOT NULL default '',
-  `avisota_message_cell` varchar(32) NOT NULL default '',
+  `avisota_message_cell` text NULL,
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

@@ -63,12 +63,17 @@ class Reader extends \TwigModule
 			$repository = EntityHelper::getRepository('Avisota\Contao:Layout');
 			$layout     = $repository->find($this->avisota_message_layout);
 
-			/** @var MessageRenderer $renderer */
-			$renderer = $GLOBALS['container']['avisota.message.renderer'];
-			$content  = $renderer->renderCell($message, $this->avisota_message_cell, $layout);
+			$cells    = deserialize($this->avisota_message_cell, true);
+			$contents = array();
 
-			$this->Template->message = $message;
-			$this->Template->content = implode(PHP_EOL, $content);
+			foreach ($cells as $cell) {
+				/** @var MessageRenderer $renderer */
+				$renderer = $GLOBALS['container']['avisota.message.renderer'];
+				$contents[$cell]  = $renderer->renderCell($message, $cell, $layout);
+			}
+
+			$this->Template->message  = $message;
+			$this->Template->contents = $contents;
 		}
 		catch (NoResultException $e) {
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
