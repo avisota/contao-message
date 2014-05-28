@@ -64,9 +64,11 @@ class OptionsBuilder implements EventSubscriberInterface
 
 		$iterator = new \RecursiveDirectoryIterator($basePath);
 		$iterator = new \RecursiveIteratorIterator($iterator);
-		$iterator = new \CallbackFilterIterator($iterator, function (\SplFileInfo $file) {
-			return $file->isDir() && $file->getBasename() != '..';
-		});
+		$iterator = new \CallbackFilterIterator(
+			$iterator, function (\SplFileInfo $file) {
+				return $file->isDir() && $file->getBasename() != '..';
+			}
+		);
 
 		$directories = array();
 
