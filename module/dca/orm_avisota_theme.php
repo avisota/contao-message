@@ -213,8 +213,11 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
 			'label'     => &$GLOBALS['TL_LANG']['orm_avisota_theme']['templateDirectory'],
 			'exclude'   => true,
 			'inputType' => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-template-directory-options'),
-			'eval'      => array(
+			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
+				'avisota.create-template-directory-options',
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
+			),
+			'eval'             => array(
 				'tl_class'           => 'clr',
 				'includeBlankOption' => true,
 			),

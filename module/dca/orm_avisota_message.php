@@ -14,7 +14,6 @@
  */
 
 use Avisota\Contao\Entity\Message;
-use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory;
 use ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\NotCondition;
 use ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition;
 use ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain;
@@ -527,8 +526,9 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message']['recipients'],
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-				'avisota.create-recipient-source-options'
+			'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback(
+				'avisota.create-recipient-source-options',
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
 			),
 			'eval'             => array(
 				'mandatory' => true,
@@ -555,7 +555,10 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message']['layout'],
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-layout-options'),
+			'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback(
+				'avisota.create-layout-options',
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
+			),
 			'eval'             => array(
 				'mandatory' => true,
 				'tl_class'  => 'w50'
@@ -581,7 +584,10 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message']['queue'],
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-queue-options'),
+			'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback(
+				'avisota.create-queue-options',
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
+			),
 			'eval'             => array(
 				'mandatory'          => true,
 				'includeBlankOption' => true,

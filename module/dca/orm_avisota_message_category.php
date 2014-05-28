@@ -263,7 +263,8 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['recipients'],
 			'inputType'        => 'select',
 			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-				'avisota.create-recipient-source-options'
+				'avisota.create-recipient-source-options',
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
 			),
 			'eval'             => array(
 				'mandatory'          => true,
@@ -298,7 +299,10 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['layout'],
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-layout-options'),
+			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
+				'avisota.create-layout-options',
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
+			),
 			'eval'             => array(
 				'mandatory'          => true,
 				'includeBlankOption' => true,
@@ -332,7 +336,10 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['queue'],
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-queue-options'),
+			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
+				'avisota.create-queue-options',
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
+			),
 			'eval'             => array(
 				'mandatory'          => true,
 				'includeBlankOption' => true,
