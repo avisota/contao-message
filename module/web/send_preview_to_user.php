@@ -36,6 +36,9 @@ require($dir . '/system/initialize.php');
 
 BackendUser::getInstance();
 
+use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
+use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
+
 class send_preview_to_user extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 {
 	protected function execute(Message $message, \BackendUser $user)
@@ -66,12 +69,26 @@ class send_preview_to_user extends \Avisota\Contao\Message\Core\Send\AbstractWeb
 		$pidSerializer->setId($message->getCategory()->getId());
 
 		$environment = Environment::getInstance();
-		$url         = sprintf(
-			'%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s',
+
+		$url = sprintf(
+			'%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s&pid=%s',
 			$environment->base,
 			$idSerializer->getSerialized(),
 			$pidSerializer->getSerialized()
 		);
+
+		if ($message->getCategory()->getViewOnlinePage()) {
+			/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
+			$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+
+			$event = new LoadLanguageFileEvent('avisota_message');
+			$eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
+
+			$viewOnlineLink = sprintf($GLOBALS['TL_LANG']['avisota_message']['viewOnline'], $url);
+		}
+		else {
+			$viewOnlineLink = false;
+		}
 
 		if (!$data) {
 			$_SESSION['AVISOTA_SEND_PREVIEW_TO_USER_EMPTY'] = true;
@@ -82,7 +99,7 @@ class send_preview_to_user extends \Avisota\Contao\Message\Core\Send\AbstractWeb
 
 		$recipient = new \Avisota\Recipient\MutableRecipient($data['email'], $data);
 
-		$additionalData = array('view_online_link' => $url);
+		$additionalData = array('view_online_link' => $viewOnlineLink);
 
 		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRendererInterface $renderer */
 		$renderer        = $container['avisota.message.renderer'];
@@ -97,13 +114,21 @@ class send_preview_to_user extends \Avisota\Contao\Message\Core\Send\AbstractWeb
 
 		$transport->send($messageMail);
 
-		$event = new \ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent('avisota_message_preview');
+		$event = new \ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent(
+			'avisota_message_preview'
+		);
 
 		/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
 		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
-		$eventDispatcher->dispatch(\ContaoCommunityAlliance\Contao\Bindings\ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
+		$eventDispatcher->dispatch(
+			\ContaoCommunityAlliance\Contao\Bindings\ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE,
+			$event
+		);
 
-		$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['avisota_message_preview']['previewSend'], $data['email']);
+		$_SESSION['TL_CONFIRM'][] = sprintf(
+			$GLOBALS['TL_LANG']['avisota_message_preview']['previewSend'],
+			$data['email']
+		);
 
 		header('Location: ' . $url);
 		exit;

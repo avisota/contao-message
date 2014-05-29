@@ -15,6 +15,7 @@
 
 namespace Avisota\Contao\Message\Core\DataContainer;
 
+use Avisota\Contao\Core\Event\CreateOptionsEvent;
 use Avisota\Contao\Entity\Layout;
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\CollectStylesheetsEvent;
@@ -23,7 +24,6 @@ use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
-use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\Compatibility\DcCompat;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetPropertyOptionsEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -64,9 +64,11 @@ class OptionsBuilder implements EventSubscriberInterface
 
 		$iterator = new \RecursiveDirectoryIterator($basePath);
 		$iterator = new \RecursiveIteratorIterator($iterator);
-		$iterator = new \CallbackFilterIterator($iterator, function (\SplFileInfo $file) {
-			return $file->isDir() && $file->getBasename() != '..';
-		});
+		$iterator = new \CallbackFilterIterator(
+			$iterator, function (\SplFileInfo $file) {
+				return $file->isDir() && $file->getBasename() != '..';
+			}
+		);
 
 		$directories = array();
 
@@ -245,7 +247,9 @@ class OptionsBuilder implements EventSubscriberInterface
 
 	public function createMessageOptions(CreateOptionsEvent $event)
 	{
-		$this->getMessageOptions($event->getOptions());
+		if (!$event->isDefaultPrevented()) {
+			$this->getMessageOptions($event->getOptions());
+		}
 	}
 
 	public function getMessageOptions($options = array())
@@ -269,7 +273,9 @@ class OptionsBuilder implements EventSubscriberInterface
 
 	public function createMessageContentTypeOptions(CreateOptionsEvent $event)
 	{
-		$this->getMessageContentTypeOptions($event->getDataContainer(), $event->getOptions());
+		if (!$event->isDefaultPrevented()) {
+			$this->getMessageContentTypeOptions($event->getDataContainer(), $event->getOptions());
+		}
 	}
 
 	/**

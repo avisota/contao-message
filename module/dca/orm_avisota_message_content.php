@@ -123,6 +123,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 					'sendMessageButton'
 				)
 			),
+			/*
 			'all'  => array
 			(
 				'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -130,6 +131,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 				'class'      => 'header_edit_all',
 				'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="e"'
 			)
+			*/
 		),
 		'operations'        => array
 		(
@@ -250,7 +252,8 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 			'flag'             => 1,
 			'inputType'        => 'select',
 			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-				\Avisota\Contao\Message\Core\MessageEvents::CREATE_MESSAGE_CONTENT_CELL_OPTIONS
+				\Avisota\Contao\Message\Core\MessageEvents::CREATE_MESSAGE_CONTENT_CELL_OPTIONS,
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
 			),
 			'reference'        => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells'],
 			'eval'             => array(
@@ -267,7 +270,8 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 			'filter'           => true,
 			'inputType'        => 'select',
 			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-				\Avisota\Contao\Message\Core\MessageEvents::CREATE_MESSAGE_CONTENT_TYPE_OPTIONS
+				\Avisota\Contao\Message\Core\MessageEvents::CREATE_MESSAGE_CONTENT_TYPE_OPTIONS,
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
 			),
 			'reference'        => &$GLOBALS['TL_LANG']['MCE'],
 			'eval'             => array(

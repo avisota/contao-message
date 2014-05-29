@@ -24,7 +24,7 @@
 	"require":{
 		"php":">=5.3",
 		"contao-community-alliance/composer-installer": "~1.6",
-		"avisota/contao-core": "~2.0"
+		"avisota/contao-core": "~2.0-RC9"
 	},
 	"require-dev":{
 		"phpunit/phpunit":"3.7.*",

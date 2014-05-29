@@ -19,8 +19,11 @@ use Avisota\Contao\Core\Message\ContaoAwareNativeMessage;
 use Avisota\Contao\Core\Message\PreRenderedMessageTemplateInterface;
 use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Core\ReplaceInsertTagsHook;
+use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
+use Avisota\Contao\Message\Core\Event\PostRenderMessageContentEvent;
 use Avisota\Contao\Message\Core\Event\PostRenderMessageTemplateEvent;
 use Avisota\Contao\Message\Core\Event\PostRenderMessageTemplatePreviewEvent;
+use Avisota\Contao\Message\Core\Event\PreRenderMessageContentEvent;
 use Avisota\Contao\Message\Core\Event\PreRenderMessageTemplateEvent;
 use Avisota\Contao\Message\Core\Event\PreRenderMessageTemplatePreviewEvent;
 use Avisota\Contao\Message\Core\Renderer\TagReplacementService;
@@ -29,6 +32,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessageTemplateInterface
 {
+
 	/**
 	 * @var Message
 	 */
@@ -44,7 +48,16 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
 	 */
 	protected function parseContent(RecipientInterface $recipient, array $additionalData = array())
 	{
+		/** @var EventDispatcher $eventDispatcher */
+		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+
 		$content = $this->getContent();
+
+		// dispatch a pre render event
+		$event = new PreRenderMessageContentEvent($this->message, $this, $recipient, $additionalData, $content);
+		$eventDispatcher->dispatch(AvisotaMessageEvents::PRE_RENDER_MESSAGE_CONTENT, $event);
+
+		$content = $event->getContent();
 
 		if (is_string($content)) {
 			if (!isset($additionalData['_recipient'])) {
@@ -60,7 +73,11 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
 			);
 		}
 
-		return $content;
+		// dispatch a post render event
+		$event = new PostRenderMessageContentEvent($this->message, $this, $recipient, $additionalData, $content);
+		$eventDispatcher->dispatch(AvisotaMessageEvents::POST_RENDER_MESSAGE_CONTENT, $event);
+
+		return $event->getContent();
 	}
 
 	/**

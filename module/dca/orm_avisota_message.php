@@ -13,15 +13,6 @@
  * @filesource
  */
 
-use Avisota\Contao\Entity\Message;
-use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory;
-use ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\NotCondition;
-use ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition;
-use ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain;
-use ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Palette;
-use ContaoCommunityAlliance\DcGeneral\Data\ModelInterface;
-use ContaoCommunityAlliance\DcGeneral\Data\PropertyValueBag;
-
 /**
  * Table orm_avisota_message
  * Entity Avisota\Contao:Message
@@ -128,6 +119,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="d"'
 			),
 			*/
+			/*
 			'all'             => array
 			(
 				'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -135,6 +127,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'class'      => 'header_edit_all',
 				'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="e"'
 			)
+			*/
 		),
 		'operations'        => array
 		(
@@ -154,7 +147,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 			'copy'       => array
 			(
 				'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message']['copy'],
-				'href'            => 'act=paste&amp;mode=copy',
 				'icon'            => 'copy.gif',
 				'attributes'      => 'onclick="Backend.getScrollOffset();"',
 			),
@@ -190,12 +182,12 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 			'layout'     => array('setLayout', 'layout'),
 			'queue'      => array('setQueue', 'queue'),
 			'attachment' => array('addFile'),
-			function (Palette $palette) {
+			function (\ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Palette $palette) {
 				$properties = $palette->getProperties();
 
-				$boilerplateCondition = new PropertyCallbackCondition(
-					function (ModelInterface $model = null, PropertyValueBag $input = null) {
-						/** @var Message $message */
+				$boilerplateCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition(
+					function (\Contao\Doctrine\ORM\DataContainer\General\EntityModel $model = null) {
+						/** @var \Avisota\Contao\Entity\Message $message */
 						$message = $model->getEntity();
 
 						return $message->getCategory()->getBoilerplates();
@@ -209,20 +201,20 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 							$visibleCondition = $property->getVisibleCondition();
 
 							if (!$visibleCondition) {
-								$visibleCondition = new PropertyConditionChain();
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain();
 							}
 							else if (
-								!$visibleCondition instanceof PropertyConditionChain ||
-								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+								!$visibleCondition instanceof \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain ||
+								$visibleCondition->getConjunction() != \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain::AND_CONJUNCTION
 							) {
-								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain(array($visibleCondition));
 							}
 
-							$visibleCondition->addCondition(new NotCondition($boilerplateCondition));
+							$visibleCondition->addCondition(new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\NotCondition($boilerplateCondition));
 							$visibleCondition->addCondition(
-								new PropertyCallbackCondition(
-									function (ModelInterface $model = null, PropertyValueBag $input = null) {
-										/** @var Message $message */
+								new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition(
+									function (\Contao\Doctrine\ORM\DataContainer\General\EntityModel $model = null) {
+										/** @var \Avisota\Contao\Entity\Message $message */
 										$message = $model->getEntity();
 
 										return $message->getCategory()->getRecipientsMode() == 'byMessageOrCategory';
@@ -237,20 +229,20 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 							$visibleCondition = $property->getVisibleCondition();
 
 							if (!$visibleCondition) {
-								$visibleCondition = new PropertyConditionChain();
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain();
 							}
 							else if (
-								!$visibleCondition instanceof PropertyConditionChain ||
-								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+								!$visibleCondition instanceof \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain ||
+								$visibleCondition->getConjunction() != \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain::AND_CONJUNCTION
 							) {
-								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain(array($visibleCondition));
 							}
 
-							$visibleCondition->addCondition(new NotCondition($boilerplateCondition));
+							$visibleCondition->addCondition(new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\NotCondition($boilerplateCondition));
 							$visibleCondition->addCondition(
-								new PropertyCallbackCondition(
-									function (ModelInterface $model = null, PropertyValueBag $input = null) {
-										/** @var Message $message */
+								new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition(
+									function (\Contao\Doctrine\ORM\DataContainer\General\EntityModel $model = null) {
+										/** @var \Avisota\Contao\Entity\Message $message */
 										$message = $model->getEntity();
 
 										return $message->getCategory()->getRecipientsMode() == 'byMessage';
@@ -265,20 +257,20 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 							$visibleCondition = $property->getVisibleCondition();
 
 							if (!$visibleCondition) {
-								$visibleCondition = new PropertyConditionChain();
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain();
 							}
 							else if (
-								!$visibleCondition instanceof PropertyConditionChain ||
-								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+								!$visibleCondition instanceof \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain ||
+								$visibleCondition->getConjunction() != \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain::AND_CONJUNCTION
 							) {
-								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain(array($visibleCondition));
 							}
 
-							$visibleCondition->addCondition(new NotCondition($boilerplateCondition));
+							$visibleCondition->addCondition(new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\NotCondition($boilerplateCondition));
 							$visibleCondition->addCondition(
-								new PropertyCallbackCondition(
-									function (ModelInterface $model = null, PropertyValueBag $input = null) {
-										/** @var Message $message */
+								new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition(
+									function (\Contao\Doctrine\ORM\DataContainer\General\EntityModel $model = null) {
+										/** @var \Avisota\Contao\Entity\Message $message */
 										$message = $model->getEntity();
 
 										return $message->getCategory()->getLayoutMode() == 'byMessageOrCategory';
@@ -293,21 +285,21 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 							$visibleCondition = $property->getVisibleCondition();
 
 							if (!$visibleCondition) {
-								$visibleCondition = new PropertyConditionChain();
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain();
 							}
 							else if (
-								!$visibleCondition instanceof PropertyConditionChain ||
-								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+								!$visibleCondition instanceof \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain ||
+								$visibleCondition->getConjunction() != \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain::AND_CONJUNCTION
 							) {
-								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain(array($visibleCondition));
 							}
 
-							$or = new PropertyConditionChain(array(), PropertyConditionChain::OR_CONJUNCTION);
+							$or = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain(array(), \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain::OR_CONJUNCTION);
 							$or->addCondition($boilerplateCondition);
 							$or->addCondition(
-								new PropertyCallbackCondition(
-									function (ModelInterface $model = null, PropertyValueBag $input = null) {
-										/** @var Message $message */
+								new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition(
+									function (\Contao\Doctrine\ORM\DataContainer\General\EntityModel $model = null) {
+										/** @var \Avisota\Contao\Entity\Message $message */
 										$message = $model->getEntity();
 
 										return $message->getCategory()->getLayoutMode() == 'byMessage';
@@ -324,20 +316,20 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 							$visibleCondition = $property->getVisibleCondition();
 
 							if (!$visibleCondition) {
-								$visibleCondition = new PropertyConditionChain();
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain();
 							}
 							else if (
-								!$visibleCondition instanceof PropertyConditionChain ||
-								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+								!$visibleCondition instanceof \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain ||
+								$visibleCondition->getConjunction() != \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain::AND_CONJUNCTION
 							) {
-								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain(array($visibleCondition));
 							}
 
-							$visibleCondition->addCondition(new NotCondition($boilerplateCondition));
+							$visibleCondition->addCondition(new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\NotCondition($boilerplateCondition));
 							$visibleCondition->addCondition(
-								new PropertyCallbackCondition(
-									function (ModelInterface $model = null, PropertyValueBag $input = null) {
-										/** @var Message $message */
+								new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition(
+									function (\Contao\Doctrine\ORM\DataContainer\General\EntityModel $model = null) {
+										/** @var \Avisota\Contao\Entity\Message $message */
 										$message = $model->getEntity();
 
 										return $message->getCategory()->getQueueMode() == 'byMessageOrCategory';
@@ -352,19 +344,19 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 							$visibleCondition = $property->getVisibleCondition();
 
 							if (!$visibleCondition) {
-								$visibleCondition = new PropertyConditionChain();
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain();
 							}
 							else if (
-								!$visibleCondition instanceof PropertyConditionChain ||
-								$visibleCondition->getConjunction() != PropertyConditionChain::AND_CONJUNCTION
+								!$visibleCondition instanceof \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain ||
+								$visibleCondition->getConjunction() != \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain::AND_CONJUNCTION
 							) {
-								$visibleCondition = new PropertyConditionChain(array($visibleCondition));
+								$visibleCondition = new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyConditionChain(array($visibleCondition));
 							}
 
 							$visibleCondition->addCondition(
-								new PropertyCallbackCondition(
-									function (ModelInterface $model = null, PropertyValueBag $input = null) {
-										/** @var Message $message */
+								new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition(
+									function (\Contao\Doctrine\ORM\DataContainer\General\EntityModel $model = null) {
+										/** @var \Avisota\Contao\Entity\Message $message */
 										$message = $model->getEntity();
 
 										return $message->getCategory()->getQueueMode() == 'byMessage';
@@ -527,8 +519,9 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message']['recipients'],
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback(
-				'avisota.create-recipient-source-options'
+			'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback(
+				'avisota.create-recipient-source-options',
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
 			),
 			'eval'             => array(
 				'mandatory' => true,
@@ -555,7 +548,10 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message']['layout'],
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-layout-options'),
+			'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback(
+				'avisota.create-layout-options',
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
+			),
 			'eval'             => array(
 				'mandatory' => true,
 				'tl_class'  => 'w50'
@@ -581,7 +577,10 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['orm_avisota_message']['queue'],
 			'inputType'        => 'select',
-			'options_callback' => CreateOptionsEventCallbackFactory::createCallback('avisota.create-queue-options'),
+			'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback(
+				'avisota.create-queue-options',
+				'Avisota\Contao\Core\Event\CreateOptionsEvent'
+			),
 			'eval'             => array(
 				'mandatory'          => true,
 				'includeBlankOption' => true,
