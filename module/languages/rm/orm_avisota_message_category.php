@@ -8,9 +8,8 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-03-11T14:17:13+01:00
+ * last-updated: 2014-03-25T14:14:52+01:00
  */
-
 
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['alias']['0']             = 'Alias';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['alias']['1']             = 'L\'alias da la categoria è ina referenza unica a la categoria che po vegnida inditgada empè da la ID.';
@@ -38,6 +37,7 @@ $GLOBALS['TL_LANG']['orm_avisota_message_category']['menuIcon']['0']          = 
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['menuIcon']['1']          = 'Tscherna in element dal menu dal back-end persunalisà.';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['new']['0']               = 'Nova categoria';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['new']['1']               = 'Crear ina nova categoria';
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['online_legend']          = 'Configuraziun online';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['queue']['0']             = 'Colonna da spetga';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['queue']['1']             = 'Tscherna la colonna da spetga preselecziunada.';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['queueMode']['0']         = 'Modus da tscherner la colonna da spetga';
@@ -58,4 +58,6 @@ $GLOBALS['TL_LANG']['orm_avisota_message_category']['tstamp']['0']            = 
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['tstamp']['1']            = 'Data e temp da l\'ultima versiun';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['useCustomMenuIcon']['0'] = 'Utilisar ina icona persunalisada';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['useCustomMenuIcon']['1'] = 'Tscherna sche ti vuls utilisar ina icona persunalisada en il menu dal back-end.';
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['viewOnlinePage']['0']    = 'Vesair la pagina online';
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['viewOnlinePage']['1']    = 'Tscherna la pagina per mussar il messadi online.';
 
