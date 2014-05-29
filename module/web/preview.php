@@ -46,6 +46,7 @@ class preview
 		$messageRepository = \Contao\Doctrine\ORM\EntityHelper::getRepository('Avisota\Contao:Message');
 
 		$messageId = $input->get('id');
+		/** @var \Avisota\Contao\Entity\Message $message */
 		$message = $messageRepository->find($messageId);
 
 		if (!$message) {
@@ -71,23 +72,29 @@ class preview
 
 		$recipient = new \Avisota\Recipient\MutableRecipient($user->email, $data);
 
-		/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
-		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+		if ($message->getCategory()->getViewOnlinePage()) {
+			/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
+			$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 
-		$event = new LoadLanguageFileEvent('avisota_message');
-		$eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
+			$event = new LoadLanguageFileEvent('avisota_message');
+			$eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
 
-		$environment = \Environment::getInstance();
-
-		$additionalData = array(
-			'view_online_link' => sprintf(
+			$environment = \Environment::getInstance();
+			$url = sprintf(
 				$GLOBALS['TL_LANG']['avisota_message']['viewOnline'],
 				sprintf(
 					'%ssystem/modules/avisota-message/web/preview.php?id=%s',
 					$environment->base,
 					$message->getId()
 				)
-			),
+			);
+		}
+		else {
+			$url = false;
+		}
+
+		$additionalData = array(
+			'view_online_link' => $url,
 		);
 
 		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRendererInterface $renderer */
