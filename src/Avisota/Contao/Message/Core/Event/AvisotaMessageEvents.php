@@ -32,6 +32,10 @@ class AvisotaMessageEvents
 
 	const INITIALIZE_MESSAGE_RENDERER = 'Avisota\Contao\Message\Core\Event\InitializeMessageRenderer';
 
+	const PRE_RENDER_MESSAGE_CONTENT = 'avisota.contao.pre-render-message-content';
+
+	const POST_RENDER_MESSAGE_CONTENT = 'avisota.contao.post-render-message-content';
+
 	const PRE_RENDER_MESSAGE_TEMPLATE = 'avisota.contao.pre-render-message-template';
 
 	const POST_RENDER_MESSAGE_TEMPLATE = 'avisota.contao.post-render-message-template';
