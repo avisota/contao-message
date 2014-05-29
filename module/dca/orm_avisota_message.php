@@ -119,6 +119,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="d"'
 			),
 			*/
+			/*
 			'all'             => array
 			(
 				'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -126,6 +127,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'class'      => 'header_edit_all',
 				'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="e"'
 			)
+			*/
 		),
 		'operations'        => array
 		(
