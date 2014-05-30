@@ -45,8 +45,25 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
 	{
 		global $container;
 
+		/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
+		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+
 		$input = \Input::getInstance();
 		$email = $input->get('recipient_email');
+
+		if (!$email) {
+			$_SESSION['AVISOTA_SEND_PREVIEW_TO_EMAIL_EMPTY'] = true;
+
+			header(
+				'Location: ' . sprintf(
+					'%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s&pid=%s',
+					$environment->base,
+					$idSerializer->getSerialized(),
+					$pidSerializer->getSerialized()
+				)
+			);
+			exit;
+		}
 
 		$idSerializer = new IdSerializer();
 		$idSerializer->setDataProviderName('orm_avisota_message');
@@ -66,9 +83,6 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
 		);
 
 		if ($message->getCategory()->getViewOnlinePage()) {
-			/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
-			$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
-
 			$event = new LoadLanguageFileEvent('avisota_message');
 			$eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
 
@@ -78,21 +92,11 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
 			$viewOnlineLink = false;
 		}
 
-		if (!$email) {
-			$_SESSION['AVISOTA_SEND_PREVIEW_TO_EMAIL_EMPTY'] = true;
+		$event = new \Avisota\Contao\Core\Event\CreateFakeRecipientEvent($message);
+		$eventDispatcher->dispatch(\Avisota\Contao\Core\CoreEvents::CREATE_FAKE_RECIPIENT, $event);
 
-			header(
-				'Location: ' . sprintf(
-					'%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s&pid=%s',
-					$environment->base,
-					$idSerializer->getSerialized(),
-					$pidSerializer->getSerialized()
-				)
-			);
-			exit;
-		}
-
-		$recipient = new \Avisota\Recipient\MutableRecipient($email);
+		$recipient = $event->getRecipient();
+		$recipient->setEmail($email);
 
 		$additionalData = array('view_online_link' => $viewOnlineLink);
 
@@ -113,8 +117,6 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
 			'avisota_message_preview'
 		);
 
-		/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
-		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 		$eventDispatcher->dispatch(
 			\ContaoCommunityAlliance\Contao\Bindings\ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE,
 			$event

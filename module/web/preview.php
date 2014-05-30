@@ -42,6 +42,9 @@ class preview
 	{
 		global $container;
 
+		/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
+		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+
 		$input = \Input::getInstance();
 		$messageRepository = \Contao\Doctrine\ORM\EntityHelper::getRepository('Avisota\Contao:Message');
 
@@ -58,24 +61,12 @@ class preview
 		$user = BackendUser::getInstance();
 		$user->authenticate();
 
-		// TODO HACK
-		// see https://github.com/contao/core/pull/6146
-		if (version_compare(VERSION, '3', '>=')) {
-			$class = new ReflectionClass($user);
-			$property = $class->getProperty('arrData');
-			$property->setAccessible(true);
-			$data = $property->getValue($user);
-		}
-		else {
-			$data = $user->getData();
-		}
+		$event = new \Avisota\Contao\Core\Event\CreateFakeRecipientEvent($message);
+		$eventDispatcher->dispatch(\Avisota\Contao\Core\CoreEvents::CREATE_FAKE_RECIPIENT, $event);
 
-		$recipient = new \Avisota\Recipient\MutableRecipient($user->email, $data);
+		$recipient = $event->getRecipient();
 
 		if ($message->getCategory()->getViewOnlinePage()) {
-			/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
-			$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
-
 			$event = new LoadLanguageFileEvent('avisota_message');
 			$eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
 
