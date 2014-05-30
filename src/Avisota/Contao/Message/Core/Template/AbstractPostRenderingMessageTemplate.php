@@ -60,9 +60,10 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
 		$content = $event->getContent();
 
 		if (is_string($content)) {
-			if (!isset($additionalData['_recipient'])) {
-				$additionalData['_recipient'] = $recipient;
+			if (!isset($additionalData['recipient'])) {
+				$additionalData['recipient'] = $recipient->getDetails();
 			}
+			$additionalData['_recipient'] = $recipient;
 
 			/** @var TagReplacementService $tagReplacementService */
 			$tagReplacementService = $GLOBALS['container']['avisota.message.tagReplacementEngine'];
