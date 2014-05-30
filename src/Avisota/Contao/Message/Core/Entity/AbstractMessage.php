@@ -15,7 +15,6 @@
 
 namespace Avisota\Contao\Message\Core\Entity;
 
-use Avisota\Contao\Core\Event\ResolveStylesheetEvent;
 use Avisota\Contao\Entity\Layout;
 use Avisota\Contao\Entity\MessageCategory;
 use Avisota\Contao\Entity\Queue;
@@ -25,6 +24,7 @@ use Contao\Doctrine\ORM\Entity;
 use Contao\Doctrine\ORM\EntityHelper;
 use Contao\Doctrine\ORM\EntityInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Contao\Doctrine\ORM\Annotation\Accessor;
 
 abstract class AbstractMessage implements EntityInterface, AliasableInterface
 {
@@ -127,6 +127,8 @@ abstract class AbstractMessage implements EntityInterface, AliasableInterface
 
 	/**
 	 * {@inheritdoc}
+	 *
+	 * @Accessor(ignore=true)
 	 */
 	public function getAliasParentValue()
 	{
