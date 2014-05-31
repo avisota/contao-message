@@ -82,7 +82,8 @@ class CustomMenu extends \BackendModule
 				$queryBuilder
 					->select('mc')
 					->where('mc.showInMenu=:showInMenu')
-					->setParameter('showInMenu', true);
+					->setParameter('showInMenu', true)
+					->orderBy('mc.title');
 				$query = $queryBuilder->getQuery();
 				/** @var MessageCategory[] $messageCategories */
 				$messageCategories = $query->getResult();
