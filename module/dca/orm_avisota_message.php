@@ -530,8 +530,9 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'Avisota\Contao\Core\Event\CreateOptionsEvent'
 			),
 			'eval'             => array(
-				'mandatory' => true,
-				'tl_class'  => 'w50'
+				'mandatory'          => true,
+				'includeBlankOption' => true,
+				'tl_class'           => 'w50'
 			),
 			'manyToOne'        => array(
 				'targetEntity' => 'Avisota\Contao\Entity\RecipientSource',
@@ -559,8 +560,9 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'Avisota\Contao\Core\Event\CreateOptionsEvent'
 			),
 			'eval'             => array(
-				'mandatory' => true,
-				'tl_class'  => 'w50'
+				'mandatory'          => true,
+				'includeBlankOption' => true,
+				'tl_class'           => 'w50'
 			),
 			'manyToOne'        => array(
 				'targetEntity' => 'Avisota\Contao\Entity\Layout',
