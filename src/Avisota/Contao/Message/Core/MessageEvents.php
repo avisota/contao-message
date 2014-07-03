@@ -97,4 +97,15 @@ class MessageEvents
 	 * @api
 	 */
 	const CREATE_MESSAGE_CONTENT_TYPE_OPTIONS = 'avisota.create-message-content-type-options';
+
+	/**
+	 * The GENERATE_VIEW_ONLINE_URL event occurs when the "view online" url is generated for a message.
+	 *
+	 * The event listener method receives a ContaoCommunityAlliance\Contao\Events\CreateOptions\GenerateViewOnlineUrlEvent instance.
+	 *
+	 * @var string
+	 *
+	 * @api
+	 */
+	const GENERATE_VIEW_ONLINE_URL = 'avisota.generate-view-online-url';
 }

@@ -14,6 +14,8 @@
  */
 
 use Avisota\Contao\Entity\Message;
+use Avisota\Contao\Message\Core\Event\GenerateViewOnlineUrlEvent;
+use Avisota\Contao\Message\Core\MessageEvents;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GetPageDetailsEvent;
@@ -47,7 +49,8 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 	{
 		global $container;
 
-		$input = \Input::getInstance();
+		$input       = \Input::getInstance();
+		$environment = Environment::getInstance();
 
 		$eventDispatcher = $this->getEventDispatcher();
 		$entityManager   = EntityHelper::getEntityManager();
@@ -89,13 +92,15 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 			$url = $generateUrlEvent->getUrl();
 
 			if (!preg_match('~^\w+:~', $url)) {
-				$environment = Environment::getInstance();
 				$url = $environment->base . $url;
 			}
 
+			$generateViewOnlineUrlEvent = new GenerateViewOnlineUrlEvent($message, $url);
+			$eventDispatcher->dispatch(MessageEvents::GENERATE_VIEW_ONLINE_URL, $generateViewOnlineUrlEvent);
+
 			$url         = sprintf(
 				$GLOBALS['TL_LANG']['avisota_message']['viewOnline'],
-				$url
+				$generateViewOnlineUrlEvent->getUrl()
 			);
 		}
 		else {
