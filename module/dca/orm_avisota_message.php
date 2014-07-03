@@ -243,9 +243,12 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 								new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition(
 									function (\Contao\Doctrine\ORM\DataContainer\General\EntityModel $model = null) {
 										/** @var \Avisota\Contao\Entity\Message $message */
-										$message = $model->getEntity();
+										$message  = $model->getEntity();
+										$category = $message->getCategory();
 
-										return $message->getCategory()->getRecipientsMode() == 'byMessage';
+										return $category->getRecipientsMode() == 'byMessage'
+											|| $category->getRecipientsMode() == 'byMessageOrCategory'
+											&& $message->getSetRecipients();
 									}
 								)
 							);
@@ -271,7 +274,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 								new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition(
 									function (\Contao\Doctrine\ORM\DataContainer\General\EntityModel $model = null) {
 										/** @var \Avisota\Contao\Entity\Message $message */
-										$message = $model->getEntity();
+										$message  = $model->getEntity();
 
 										return $message->getCategory()->getLayoutMode() == 'byMessageOrCategory';
 									}
@@ -300,9 +303,12 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 								new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition(
 									function (\Contao\Doctrine\ORM\DataContainer\General\EntityModel $model = null) {
 										/** @var \Avisota\Contao\Entity\Message $message */
-										$message = $model->getEntity();
+										$message  = $model->getEntity();
+										$category = $message->getCategory();
 
-										return $message->getCategory()->getLayoutMode() == 'byMessage';
+										return $category->getLayoutMode() == 'byMessage'
+											|| $category->getLayoutMode() == 'byMessageOrCategory'
+											&& $message->getSetLayout();
 									}
 								)
 							);
@@ -357,9 +363,12 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 								new \ContaoCommunityAlliance\DcGeneral\DataDefinition\Palette\Condition\Property\PropertyCallbackCondition(
 									function (\Contao\Doctrine\ORM\DataContainer\General\EntityModel $model = null) {
 										/** @var \Avisota\Contao\Entity\Message $message */
-										$message = $model->getEntity();
+										$message  = $model->getEntity();
+										$category = $message->getCategory();
 
-										return $message->getCategory()->getQueueMode() == 'byMessage';
+										return $category->getQueueMode() == 'byMessage'
+											|| $category->getQueueMode() == 'byMessageOrCategory'
+											&& $message->getSetQueue();
 									}
 								)
 							);
@@ -374,10 +383,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 	// Subpalettes
 	'metasubpalettes' => array
 	(
-		'setRecipients' => array('recipients'),
-		'setLayout'     => array('layout'),
-		'setQueue'      => array('queue'),
-		'addFile'       => array('files')
+		'addFile' => array('files')
 	),
 	// Fields
 	'fields'          => array
@@ -524,8 +530,9 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'Avisota\Contao\Core\Event\CreateOptionsEvent'
 			),
 			'eval'             => array(
-				'mandatory' => true,
-				'tl_class'  => 'w50'
+				'mandatory'          => true,
+				'includeBlankOption' => true,
+				'tl_class'           => 'w50'
 			),
 			'manyToOne'        => array(
 				'targetEntity' => 'Avisota\Contao\Entity\RecipientSource',
@@ -553,8 +560,9 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'Avisota\Contao\Core\Event\CreateOptionsEvent'
 			),
 			'eval'             => array(
-				'mandatory' => true,
-				'tl_class'  => 'w50'
+				'mandatory'          => true,
+				'includeBlankOption' => true,
+				'tl_class'           => 'w50'
 			),
 			'manyToOne'        => array(
 				'targetEntity' => 'Avisota\Contao\Entity\Layout',

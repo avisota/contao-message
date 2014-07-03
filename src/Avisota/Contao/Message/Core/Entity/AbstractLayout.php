@@ -19,9 +19,15 @@ use Avisota\Contao\Message\Core\Event\ResolveStylesheetEvent;
 use Contao\Doctrine\ORM\Entity;
 use Contao\Doctrine\ORM\EntityInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Contao\Doctrine\ORM\Annotation\Accessor;
 
 abstract class AbstractLayout implements EntityInterface
 {
+	/**
+	 * @Accessor(ignore=true)
+	 *
+	 * @return array
+	 */
 	public function getStylesheetPaths()
 	{
 		/** @var EventDispatcher $eventDispatcher */
