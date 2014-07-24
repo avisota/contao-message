@@ -133,6 +133,19 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
 		$swiftMessage->setBody($content, $this->getContentType(), $this->getContentEncoding());
 		$swiftMessage->setDescription($this->message->getDescription());
 
+		if ($this->message->getAddFile()) {
+			$files = deserialize($this->message->getFiles(), true);
+
+			foreach ($files as $file) {
+				$file = \Compat::resolveFile($file);
+
+				if ($file) {
+					$attachment = \Swift_Attachment::fromPath(TL_ROOT . '/' . $file);
+					$swiftMessage->attach($attachment);
+				}
+			}
+		}
+
 		$message = new ContaoAwareNativeMessage($swiftMessage, $this->message, array($recipient));
 
 		// dispatch a post render event
