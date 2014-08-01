@@ -1,7 +1,7 @@
 {% spaceless %}
 	<div id="tl_buttons">
-		<a href="{{ referer }}" class="header_back" title="{{ _lang.MSC.backBT }}"
-		   accesskey="b">{{ _lang.MSC.backBT }}</a>
+		<a href="contao/main.php?do=avisota_newsletter&amp;table=orm_avisota_message_content&amp;pid={{ message|serializeEntityId }}"
+		   class="header_back" title="{{ _lang.MSC.backBT }}" accesskey="b">{{ _lang.MSC.backBT }}</a>
 	</div>
 
 	<h2 class="sub_headline">{{ _lang.avisota_message_preview.headline }}</h2>

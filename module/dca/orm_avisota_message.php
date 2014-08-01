@@ -622,6 +622,8 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 				'fieldType' => 'checkbox',
 				'files'     => true,
 				'filesOnly' => true,
+				'inputType' => 'checkbox',
+				'multiple'  => true,
 				'mandatory' => true
 			),
 			'field'     => array(),
