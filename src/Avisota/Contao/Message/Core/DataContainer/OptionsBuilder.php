@@ -62,11 +62,17 @@ class OptionsBuilder implements EventSubscriberInterface
 	{
 		$basePath = TL_ROOT . '/templates/';
 
-		$iterator = new \RecursiveDirectoryIterator($basePath, \RecursiveDirectoryIterator::SKIP_DOTS);
+		$iterator = new \RecursiveDirectoryIterator(
+			$basePath,
+			\FilesystemIterator::KEY_AS_PATHNAME |
+			\FilesystemIterator::CURRENT_AS_FILEINFO |
+			\RecursiveDirectoryIterator::FOLLOW_SYMLINKS
+		);
 		$iterator = new \RecursiveIteratorIterator($iterator);
 		$iterator = new \CallbackFilterIterator(
-			$iterator, function (\SplFileInfo $file) {
-				return $file->isDir() && $file->getBasename() != '..';
+			$iterator,
+			function (\SplFileInfo $file) {
+				return $file->getBasename() != '..' && $file->isDir();
 			}
 		);
 
@@ -75,6 +81,8 @@ class OptionsBuilder implements EventSubscriberInterface
 		/** @var \SplFileInfo $directory */
 		foreach ($iterator as $directory) {
 			$path = str_replace($basePath, '', $directory->getPathname());
+			$path = rtrim($path, '.');
+			$path = rtrim($path, '/');
 
 			if ($path) {
 				$directories[] = $path;
