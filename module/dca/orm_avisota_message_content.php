@@ -102,7 +102,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
 		'sorting'           => array
 		(
 			'mode'         => 4,
-			'fields'       => array('cell', 'sorting'),
+			'fields'       => array('cell => FIELD(e.cell, \'header\', \'main\', \'left\', \'center\', \'right\', \'footer\')', 'sorting'),
 			'panelLayout'  => 'filter;search,limit',
 			'headerFields' => array('subject'),
 		),
