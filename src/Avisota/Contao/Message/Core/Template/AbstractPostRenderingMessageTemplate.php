@@ -60,6 +60,8 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
 		$content = $event->getContent();
 
 		if (is_string($content)) {
+			$additionalData['message'] = $this->message;
+
 			if (!isset($additionalData['recipient'])) {
 				$additionalData['recipient'] = $recipient->getDetails();
 			}
