@@ -13,7 +13,7 @@
 
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']['0']        = 'Zelle';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cell']['1']        = 'Bitte wählen Sie den Typ des Inhaltselementes aus.';
-$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['center']  = 'Zentrierte Splate';
+$GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['center']  = 'Zentrierte Spalte';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['footer']  = 'Fuss';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['header']  = 'Kopf';
 $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells']['left']    = 'Linke Spalte';
