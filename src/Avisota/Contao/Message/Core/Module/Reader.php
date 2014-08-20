@@ -17,6 +17,7 @@ namespace Avisota\Contao\Message\Core\Module;
 
 use Avisota\Contao\Core\CoreEvents;
 use Avisota\Contao\Core\Event\CreatePublicEmptyRecipientEvent;
+use Avisota\Contao\Core\Recipient\SynonymizerService;
 use Avisota\Contao\Message\Core\Event\RenderMessageContentEvent;
 use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
 use Avisota\Contao\Message\Core\Renderer\MessageRenderer;
@@ -79,7 +80,10 @@ class Reader extends \TwigModule
 			$recipient = $event->getRecipient();
 
 			if (!isset($additionalData['recipient'])) {
-				$additionalData['recipient'] = $recipient->getDetails();
+				/** @var SynonymizerService $synonymizer */
+				$synonymizer = $GLOBALS['container']['avisota.recipient.synonymizer'];
+
+				$additionalData['recipient'] = $synonymizer->expandDetailsWithSynonyms($recipient);
 			}
 			$additionalData['_recipient'] = $recipient;
 

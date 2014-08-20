@@ -17,6 +17,7 @@ namespace Avisota\Contao\Message\Core\Template;
 
 use Avisota\Contao\Core\Message\ContaoAwareNativeMessage;
 use Avisota\Contao\Core\Message\PreRenderedMessageTemplateInterface;
+use Avisota\Contao\Core\Recipient\SynonymizerService;
 use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Core\ReplaceInsertTagsHook;
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
@@ -63,7 +64,10 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
 			$additionalData['message'] = $this->message;
 
 			if (!isset($additionalData['recipient'])) {
-				$additionalData['recipient'] = $recipient->getDetails();
+				/** @var SynonymizerService $synonymizer */
+				$synonymizer = $GLOBALS['container']['avisota.recipient.synonymizer'];
+
+				$additionalData['recipient'] = $synonymizer->expandDetailsWithSynonyms($recipient);
 			}
 			$additionalData['_recipient'] = $recipient;
 
