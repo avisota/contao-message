@@ -37,6 +37,7 @@ $GLOBALS['TL_LANG']['orm_avisota_message_category']['menuIcon']['0']          = 
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['menuIcon']['1']          = 'Bitte wählen Sie ein eigenes Menü-Item für das Backend.';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['new']['0']               = 'Neue Kategorie';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['new']['1']               = 'Erstellen Sie eine neue Kategorie.';
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['online_legend']          = 'Ansichtseinstellungen';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['queue']['0']             = 'Warteschlange';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['queue']['1']             = 'Bitte wählen Sie die vorausgewählte Warteschlange';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['queueMode']['0']         = 'Wartenschlangen-Auswahlmodus';
@@ -57,4 +58,6 @@ $GLOBALS['TL_LANG']['orm_avisota_message_category']['tstamp']['0']            = 
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['tstamp']['1']            = 'Datum und Zeit der letzten Bearbeitung.';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['useCustomMenuIcon']['0'] = 'Eigenes Icon benutzen';
 $GLOBALS['TL_LANG']['orm_avisota_message_category']['useCustomMenuIcon']['1'] = 'Bitte auswählen, falls Sie ein eigenen Icon im Backend-Menü verwenden möchten.';
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['viewOnlinePage']['0']    = 'Ansichtsseite';
+$GLOBALS['TL_LANG']['orm_avisota_message_category']['viewOnlinePage']['1']    = 'Bitte wählen Sie aus, auf welcher Seite Onlineansicht der Nachricht angezeigt werden soll-';
 
