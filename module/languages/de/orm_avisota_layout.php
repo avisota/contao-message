@@ -8,9 +8,8 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-03-11T14:17:09+01:00
+ * last-updated: 2014-03-25T14:14:49+01:00
  */
-
 
 $GLOBALS['TL_LANG']['orm_avisota_layout']['alias']['0']               = 'Alias';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['alias']['1']               = 'Der Alias ist eine eindeutige Referenz zum Layout und kann anstelle der ID benutzt werden.';
@@ -20,6 +19,7 @@ $GLOBALS['TL_LANG']['orm_avisota_layout']['clearStyles']['0']         = 'Globale
 $GLOBALS['TL_LANG']['orm_avisota_layout']['clearStyles']['1']         = 'Entfernen Sie die globalen CSS-Stile aus dem Template.';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['copy']['0']                = 'Layout duplizieren';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['copy']['1']                = 'Duplizieren Sie das Layout %s.';
+$GLOBALS['TL_LANG']['orm_avisota_layout']['default']                  = 'Standardrendering';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['delete']['0']              = 'Layout löschen';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['delete']['1']              = 'Löschen Sie das Layout ID s%.';
 $GLOBALS['TL_LANG']['orm_avisota_layout']['edit']['0']                = 'Layout bearbeiten';
