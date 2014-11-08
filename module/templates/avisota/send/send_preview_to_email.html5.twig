@@ -33,3 +33,13 @@
 		</div>
 	</fieldset>
 </form>
+
+<script>
+    $('btn-preview-to-email').addEvent('click', function () {
+        var element = this;
+        setTimeout(function() {
+            element.getElement('img').setStyle('display', '');
+            element.disabled = true;
+        }, 1);
+    });
+</script>

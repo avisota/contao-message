@@ -49,30 +49,3 @@
 
 	{{ modules }}
 {% endspaceless %}
-
-<script>
-	// add listener to email input field, that disable the user select field
-	$('ctrl_recipient_email').addEvent('keyup', function () {
-		$('ctrl_recipient_user').disabled = this.value.length > 0;
-	});
-	// submit listener to form
-	$('avisota_message_schedule').addEvent('submit', function () {
-		$('avisota_message_schedule').removeEvents('submit').addEvent('submit', function () {
-			return false;
-		});
-	});
-	// show the indicator gif of a button
-	function indicate(e) {
-		e.getElement('img').setStyle('display', '');
-	}
-	// add listener to preview button
-	$('btnPreview').addEvent('click', function () {
-		indicate(this);
-	});
-	{% if _user.isAdmin or _user.hasAccess('send', 'avisota_newsletter_permissions') %}
-	// add listener to schedule button
-	$('btnSchedule').addEvent('click', function () {
-		indicate(this);
-	});
-	{% endif %}
-</script>
