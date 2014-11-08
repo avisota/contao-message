@@ -78,6 +78,8 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
 				$content,
 				$additionalData
 			);
+
+            $content = \String::restoreBasicEntities($content);
 		}
 
 		// dispatch a post render event
