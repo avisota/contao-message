@@ -21,8 +21,7 @@
 			<div class="tl_submit_container">
 				<button id="btn-send" name="action" class="tl_submit" accesskey="s"
 						type="submit"
-						value="schedule"
-						onclick="return confirm(confirmationMessage);">
+						value="schedule">
 					<img style="display: none;" src="assets/avisota/core/images/loading.gif"
 						 alt=""/> {{ _lang.avisota_send_immediate.action }}
 				</button>
@@ -30,3 +29,17 @@
 		</div>
 	</fieldset>
 </form>
+
+<script>
+    $('btn-send').addEvent('click', function () {
+        if (!confirm(confirmationMessage)) {
+            return false;
+        }
+
+        var element = this;
+        setTimeout(function() {
+            element.getElement('img').setStyle('display', '');
+            element.disabled = true;
+        }, 1);
+    });
+</script>
