@@ -85,8 +85,13 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 		if ($viewOnlinePage) {
 			$getPageDetailsEvent = new GetPageDetailsEvent($viewOnlinePage);
 			$eventDispatcher->dispatch(ContaoEvents::CONTROLLER_GET_PAGE_DETAILS, $getPageDetailsEvent);
+            $pageDetails = $getPageDetailsEvent->getPageDetails();
 
-			$generateUrlEvent = new GenerateFrontendUrlEvent($getPageDetailsEvent->getPageDetails(), '/' . $message->getAlias());
+			$generateUrlEvent = new GenerateFrontendUrlEvent(
+                $pageDetails,
+                '/' . $message->getAlias(),
+                $pageDetails['language']
+            );
 			$eventDispatcher->dispatch(ContaoEvents::CONTROLLER_GENERATE_FRONTEND_URL, $generateUrlEvent);
 
 			$url = $generateUrlEvent->getUrl();
