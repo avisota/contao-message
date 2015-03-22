@@ -23,9 +23,9 @@
 	},
 	"require":{
 		"php":">=5.3",
-		"contao-community-alliance/composer-installer": "~1.6",
-		"contao/core": ">=2.11.11,<3.4",
 		"avisota/contao-core": ">=2.0.7,<3-dev",
+        "contao-community-alliance/composer-plugin": "~2.0",
+		"contao/core": ">=2.11.11,<3.5",
 		"avisota/recipient-fake": "~1.0",
 		"bit3/php-callback-filter-iterator-polyfill": "~1.0"
 	},
