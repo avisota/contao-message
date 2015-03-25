@@ -27,7 +27,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
 	'config'          => array
 	(
 		'dataContainer'     => 'General',
-		'ptable'            => 'orm_avisota_message_category',
 		'ctable'            => array('orm_avisota_message_content'),
 		'switchToEdit'      => true,
 		'enableVersioning'  => true,
