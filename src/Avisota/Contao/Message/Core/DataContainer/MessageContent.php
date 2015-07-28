@@ -19,8 +19,10 @@ namespace Avisota\Contao\Message\Core\DataContainer;
 use Avisota\Contao\Core\Message\Renderer\MessagePreRendererInterface;
 use Avisota\Contao\Message\Core\Renderer\MessageRenderer;
 use Avisota\Contao\Message\Core\Renderer\MessageRendererInterface;
+use Contao\Controller;
 use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
 use Contao\Doctrine\ORM\EntityAccessor;
+use Contao\Input;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -52,14 +54,19 @@ class MessageContent implements EventSubscriberInterface
      */
     public function sendMessageButton($href, $label, $title, $icon, $attributes)
     {
+        global $container;
+
+        /** @var Input $input */
+        $input = $container['input'];
+
         $user = \BackendUser::getInstance();
 
         if (!($user->isAdmin || $user->hasAccess('send', 'avisota_newsletter_permissions'))) {
             $label = $GLOBALS['TL_LANG']['orm_avisota_message']['view_only'][0];
             $title = $GLOBALS['TL_LANG']['orm_avisota_message']['view_only'][1];
         }
-        return ' &#160; :: &#160; <a href="' . $this->addToUrl(
-            $href . '&amp;id=' . $this->Input->get('id')
+        return ' &#160; :: &#160; <a href="' . Controller::addToUrl(
+            $href . '&amp;id=' . $input->get('id')
         ) . '" title="' . specialchars($title) . '"' . $attributes . ' class="header_send">' . $label . '</a> ';
     }
 
