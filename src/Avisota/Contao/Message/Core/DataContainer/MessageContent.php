@@ -35,7 +35,7 @@ class MessageContent implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            GetGroupHeaderEvent::NAME . '[orm_avisota_message_content]' => 'getGroupHeader',
+            GetGroupHeaderEvent::NAME /*. '[orm_avisota_message_content]'*/ => 'getGroupHeader',
             ParentViewChildRecordEvent::NAME                            => 'parentViewChildRecord',
         );
     }
