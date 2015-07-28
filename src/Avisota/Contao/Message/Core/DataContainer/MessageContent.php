@@ -32,8 +32,8 @@ class MessageContent implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            GetGroupHeaderEvent::NAME . '[orm_avisota_message_content]'        => 'getGroupHeader',
-            ParentViewChildRecordEvent::NAME . '[orm_avisota_message_content]' => 'parentViewChildRecord',
+            GetGroupHeaderEvent::NAME . '[orm_avisota_message_content]' => 'getGroupHeader',
+            ParentViewChildRecordEvent::NAME                            => 'parentViewChildRecord',
         );
     }
 
@@ -81,6 +81,10 @@ class MessageContent implements EventSubscriberInterface
      */
     public function parentViewChildRecord(ParentViewChildRecordEvent $event)
     {
+        if ($event->getModel()->getProviderName() != 'orm_avisota_message_content') {
+            return;
+        }
+
         /** @var MessageRendererInterface $renderer */
         $renderer = $GLOBALS['container']['avisota.message.renderer'];
 

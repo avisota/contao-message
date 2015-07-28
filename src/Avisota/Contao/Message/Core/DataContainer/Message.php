@@ -37,8 +37,8 @@ class Message implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            GetGroupHeaderEvent::NAME . '[orm_avisota_message]'        => 'getGroupHeader',
-            ParentViewChildRecordEvent::NAME . '[orm_avisota_message]' => 'parentViewChildRecord',
+            GetGroupHeaderEvent::NAME . '[orm_avisota_message]' => 'getGroupHeader',
+            ParentViewChildRecordEvent::NAME                    => 'parentViewChildRecord',
         );
     }
 
@@ -135,6 +135,10 @@ class Message implements EventSubscriberInterface
      */
     public function parentViewChildRecord(ParentViewChildRecordEvent $event)
     {
+        if ($event->getModel()->getProviderName() != 'orm_avisota_message') {
+            return;
+        }
+
         /** @var EntityModel $model */
         $model = $event->getModel();
         /** @var \Avisota\Contao\Entity\Message $message */
