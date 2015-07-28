@@ -8,6 +8,7 @@
  *
  * @copyright  bit3 UG 2013
  * @author     Tristan Lins <tristan.lins@bit3.de>
+ * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-core
  * @license    LGPL-3.0+
  * @filesource
