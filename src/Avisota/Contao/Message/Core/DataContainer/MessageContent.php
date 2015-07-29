@@ -72,6 +72,10 @@ class MessageContent implements EventSubscriberInterface
 
     public function getGroupHeader(GetGroupHeaderEvent $event)
     {
+        if ($event->getModel()->getProviderName() != 'orm_avisota_message_content') {
+            return;
+        }
+
         $model = $event->getModel();
         $cell  = $model->getProperty('cell');
 
