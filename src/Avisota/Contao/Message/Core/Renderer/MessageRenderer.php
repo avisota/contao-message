@@ -26,67 +26,67 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class MessageRenderer implements MessageRendererInterface
 {
-	/**
-	 * {@inheritdoc}
-	 */
-	public function renderMessage(Message $message, Layout $layout = null)
-	{
-		$event = new RenderMessageEvent($message, $layout ?: $message->getLayout());
+    /**
+     * {@inheritdoc}
+     */
+    public function renderMessage(Message $message, Layout $layout = null)
+    {
+        $event = new RenderMessageEvent($message, $layout ?: $message->getLayout());
 
-		/** @var EventDispatcher $eventDispatcher */
-		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
-		$eventDispatcher->dispatch(AvisotaMessageEvents::RENDER_MESSAGE, $event);
+        /** @var EventDispatcher $eventDispatcher */
+        $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+        $eventDispatcher->dispatch(AvisotaMessageEvents::RENDER_MESSAGE, $event);
 
-		return $event->getPreRenderedMessageTemplate();
-	}
+        return $event->getPreRenderedMessageTemplate();
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function renderCell(Message $message, $cell, Layout $layout = null)
-	{
-		$messageContentRepository = EntityHelper::getRepository('Avisota\Contao:MessageContent');
-		$queryBuilder = $messageContentRepository->createQueryBuilder('mc');
-		$queryBuilder
-			->select('mc')
-			->where('mc.message=:message')
-			->andWhere('mc.cell=:cell')
-			->orderBy('mc.sorting')
-			->setParameter('message', $message->getId())
-			->setParameter('cell', $cell);
+    /**
+     * {@inheritdoc}
+     */
+    public function renderCell(Message $message, $cell, Layout $layout = null)
+    {
+        $messageContentRepository = EntityHelper::getRepository('Avisota\Contao:MessageContent');
+        $queryBuilder             = $messageContentRepository->createQueryBuilder('mc');
+        $queryBuilder
+            ->select('mc')
+            ->where('mc.message=:message')
+            ->andWhere('mc.cell=:cell')
+            ->orderBy('mc.sorting')
+            ->setParameter('message', $message->getId())
+            ->setParameter('cell', $cell);
 
-		if (TL_MODE != 'BE' && (!defined('BE_USER_LOGGED_IN') || !BE_USER_LOGGED_IN)) {
-			$queryBuilder
-				->andWhere('mc.invisible=:invisible')
-				->setParameter('invisible', false);
-		}
+        if (TL_MODE != 'BE' && (!defined('BE_USER_LOGGED_IN') || !BE_USER_LOGGED_IN)) {
+            $queryBuilder
+                ->andWhere('mc.invisible=:invisible')
+                ->setParameter('invisible', false);
+        }
 
-		$query = $queryBuilder->getQuery();
-		$contents = $query->getResult();
+        $query    = $queryBuilder->getQuery();
+        $contents = $query->getResult();
 
-		$elements = array();
-		foreach ($contents as $content) {
-			$elements[] = $this->renderContent($content, $layout ?: $message->getLayout());
-		}
+        $elements = array();
+        foreach ($contents as $content) {
+            $elements[] = $this->renderContent($content, $layout ?: $message->getLayout());
+        }
 
-		return $elements;
-	}
+        return $elements;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function renderContent(MessageContent $messageContent, Layout $layout = null)
-	{
-		if ($messageContent->getInvisible() && TL_MODE != 'BE' && !BE_USER_LOGGED_IN) {
-			return '';
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function renderContent(MessageContent $messageContent, Layout $layout = null)
+    {
+        if ($messageContent->getInvisible() && TL_MODE != 'BE' && !BE_USER_LOGGED_IN) {
+            return '';
+        }
 
-		$event = new RenderMessageContentEvent($messageContent, $layout ?: $messageContent->getMessage()->getLayout());
+        $event = new RenderMessageContentEvent($messageContent, $layout ?: $messageContent->getMessage()->getLayout());
 
-		/** @var EventDispatcher $eventDispatcher */
-		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
-		$eventDispatcher->dispatch(AvisotaMessageEvents::RENDER_MESSAGE_CONTENT, $event);
+        /** @var EventDispatcher $eventDispatcher */
+        $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+        $eventDispatcher->dispatch(AvisotaMessageEvents::RENDER_MESSAGE_CONTENT, $event);
 
-		return $event->getRenderedContent();
-	}
+        return $event->getRenderedContent();
+    }
 }

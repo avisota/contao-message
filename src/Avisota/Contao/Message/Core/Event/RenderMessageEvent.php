@@ -22,71 +22,71 @@ use Symfony\Component\EventDispatcher\Event;
 
 class RenderMessageEvent extends Event
 {
-	/**
-	 * @var Message
-	 */
-	protected $message;
+    /**
+     * @var Message
+     */
+    protected $message;
 
-	/**
-	 * @var Layout
-	 */
-	protected $layout;
+    /**
+     * @var Layout
+     */
+    protected $layout;
 
-	/**
-	 * @var PreRenderMessageTemplateEvent
-	 */
-	protected $preRenderedMessageTemplate;
+    /**
+     * @var PreRenderMessageTemplateEvent
+     */
+    protected $preRenderedMessageTemplate;
 
-	public function __construct(Message $message, Layout $layout = null)
-	{
-		$this->message = $message;
-		$this->layout  = $layout;
-	}
+    public function __construct(Message $message, Layout $layout = null)
+    {
+        $this->message = $message;
+        $this->layout  = $layout;
+    }
 
-	/**
-	 * @return Message
-	 */
-	public function getMessage()
-	{
-		return $this->message;
-	}
+    /**
+     * @return Message
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
 
-	/**
-	 * @param Layout $layout
-	 */
-	public function setLayout(Layout $layout = null)
-	{
-		$this->layout = $layout;
-		return $this;
-	}
+    /**
+     * @param Layout $layout
+     */
+    public function setLayout(Layout $layout = null)
+    {
+        $this->layout = $layout;
+        return $this;
+    }
 
-	/**
-	 * @return Layout
-	 */
-	public function getLayout()
-	{
-		if ($this->layout) {
-			return $this->layout;
-		}
+    /**
+     * @return Layout
+     */
+    public function getLayout()
+    {
+        if ($this->layout) {
+            return $this->layout;
+        }
 
-		return $this->message
-			->getLayout();
-	}
+        return $this->message
+            ->getLayout();
+    }
 
-	/**
-	 * @param PreRenderMessageTemplateEvent $preRenderedMessageTemplate
-	 */
-	public function setPreRenderedMessageTemplate($preRenderedMessageTemplate)
-	{
-		$this->preRenderedMessageTemplate = $preRenderedMessageTemplate;
-		return $this;
-	}
+    /**
+     * @param PreRenderMessageTemplateEvent $preRenderedMessageTemplate
+     */
+    public function setPreRenderedMessageTemplate($preRenderedMessageTemplate)
+    {
+        $this->preRenderedMessageTemplate = $preRenderedMessageTemplate;
+        return $this;
+    }
 
-	/**
-	 * @return PreRenderMessageTemplateEvent
-	 */
-	public function getPreRenderedMessageTemplate()
-	{
-		return $this->preRenderedMessageTemplate;
-	}
+    /**
+     * @return PreRenderMessageTemplateEvent
+     */
+    public function getPreRenderedMessageTemplate()
+    {
+        return $this->preRenderedMessageTemplate;
+    }
 }

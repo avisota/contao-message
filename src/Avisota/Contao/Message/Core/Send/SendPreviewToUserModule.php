@@ -20,29 +20,29 @@ use Doctrine\DBAL\Connection;
 
 class SendPreviewToUserModule implements SendModuleInterface
 {
-	public function run(Message $message)
-	{
-		global $container;
+    public function run(Message $message)
+    {
+        global $container;
 
-		$userMissing = isset($_SESSION['AVISOTA_SEND_PREVIEW_TO_USER_EMPTY'])
-			? $_SESSION['AVISOTA_SEND_PREVIEW_TO_USER_EMPTY']
-			: false;
-		unset($_SESSION['AVISOTA_SEND_PREVIEW_TO_USER_EMPTY']);
+        $userMissing = isset($_SESSION['AVISOTA_SEND_PREVIEW_TO_USER_EMPTY'])
+            ? $_SESSION['AVISOTA_SEND_PREVIEW_TO_USER_EMPTY']
+            : false;
+        unset($_SESSION['AVISOTA_SEND_PREVIEW_TO_USER_EMPTY']);
 
-		/** @var Connection $connection */
-		$connection = $container['doctrine.connection.default'];
+        /** @var Connection $connection */
+        $connection = $container['doctrine.connection.default'];
 
-		$users = $connection
-			->executeQuery('SELECT * FROM tl_user ORDER BY name')
-			->fetchAll();
+        $users = $connection
+            ->executeQuery('SELECT * FROM tl_user ORDER BY name')
+            ->fetchAll();
 
-		$template = new \TwigTemplate('avisota/send/send_preview_to_user', 'html5');
-		return $template->parse(
-			array(
-				 'message'     => $message,
-				 'users'       => $users,
-				 'userMissing' => $userMissing,
-			)
-		);
-	}
+        $template = new \TwigTemplate('avisota/send/send_preview_to_user', 'html5');
+        return $template->parse(
+            array(
+                'message'     => $message,
+                'users'       => $users,
+                'userMissing' => $userMissing,
+            )
+        );
+    }
 }

@@ -20,31 +20,31 @@ use Avisota\Contao\Entity\MessageContent;
 
 interface MessageRendererInterface
 {
-	/**
-	 * Render a complete message.
-	 *
-	 * @param Message $message
-	 *
-	 * @return PreRenderedMessageTemplateInterface
-	 */
-	public function renderMessage(Message $message, Layout $layout = null);
+    /**
+     * Render a complete message.
+     *
+     * @param Message $message
+     *
+     * @return PreRenderedMessageTemplateInterface
+     */
+    public function renderMessage(Message $message, Layout $layout = null);
 
-	/**
-	 * Render a single message content element.
-	 *
-	 * @param MessageContent $messageContent
-	 *
-	 * @return string
-	 */
-	public function renderContent(MessageContent $messageContent, Layout $layout = null);
+    /**
+     * Render a single message content element.
+     *
+     * @param MessageContent $messageContent
+     *
+     * @return string
+     */
+    public function renderContent(MessageContent $messageContent, Layout $layout = null);
 
-	/**
-	 * Render content from a cell.
-	 *
-	 * @param Message $message
-	 * @param string  $cell
-	 *
-	 * @return string[]
-	 */
-	public function renderCell(Message $message, $cell, Layout $layout = null);
+    /**
+     * Render content from a cell.
+     *
+     * @param Message $message
+     * @param string  $cell
+     *
+     * @return string[]
+     */
+    public function renderCell(Message $message, $cell, Layout $layout = null);
 }

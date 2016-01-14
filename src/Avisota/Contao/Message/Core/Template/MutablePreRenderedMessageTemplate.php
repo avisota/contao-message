@@ -19,100 +19,100 @@ use Avisota\Contao\Entity\Message;
 
 class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemplate
 {
-	/**
-	 * @var string
-	 */
-	protected $contentType;
+    /**
+     * @var string
+     */
+    protected $contentType;
 
-	/**
-	 * @var string
-	 */
-	protected $contentEncoding;
+    /**
+     * @var string
+     */
+    protected $contentEncoding;
 
-	/**
-	 * @var string
-	 */
-	protected $contentName;
+    /**
+     * @var string
+     */
+    protected $contentName;
 
-	/**
-	 * @var string
-	 */
-	protected $content;
+    /**
+     * @var string
+     */
+    protected $content;
 
-	function __construct(Message $message, $content = '', $contentName = 'message.html', $contentType = 'text/html', $contentEncoding = 'utf-8')
-	{
-		parent::__construct($message);
-		$this->content         = (string) $content;
-		$this->contentName     = (string) $contentName;
-		$this->contentType     = (string) $contentType;
-		$this->contentEncoding = (string) $contentEncoding;
-	}
+    function __construct(Message $message, $content = '', $contentName = 'message.html', $contentType = 'text/html', $contentEncoding = 'utf-8')
+    {
+        parent::__construct($message);
+        $this->content         = (string) $content;
+        $this->contentName     = (string) $contentName;
+        $this->contentType     = (string) $contentType;
+        $this->contentEncoding = (string) $contentEncoding;
+    }
 
-	/**
-	 * @param string $contentType
-	 */
-	public function setContentType($contentType)
-	{
-		$this->contentType = $contentType;
-		return $this;
-	}
+    /**
+     * @param string $contentType
+     */
+    public function setContentType($contentType)
+    {
+        $this->contentType = $contentType;
+        return $this;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getContentType()
-	{
-		return $this->contentType;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getContentType()
+    {
+        return $this->contentType;
+    }
 
-	/**
-	 * @param string $contentEncoding
-	 */
-	public function setContentEncoding($contentEncoding)
-	{
-		$this->contentEncoding = $contentEncoding;
-		return $this;
-	}
+    /**
+     * @param string $contentEncoding
+     */
+    public function setContentEncoding($contentEncoding)
+    {
+        $this->contentEncoding = $contentEncoding;
+        return $this;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getContentEncoding()
-	{
-		return $this->contentEncoding;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getContentEncoding()
+    {
+        return $this->contentEncoding;
+    }
 
-	/**
-	 * @param string $contentName
-	 */
-	public function setContentName($contentName)
-	{
-		$this->contentName = $contentName;
-		return $this;
-	}
+    /**
+     * @param string $contentName
+     */
+    public function setContentName($contentName)
+    {
+        $this->contentName = $contentName;
+        return $this;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getContentName()
-	{
-		return $this->contentName;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getContentName()
+    {
+        return $this->contentName;
+    }
 
-	/**
-	 * @param string $content
-	 */
-	public function setContent($content)
-	{
-		$this->content = $content;
-		return $this;
-	}
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+        return $this;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getContent()
-	{
-		return $this->content;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
 }

@@ -20,39 +20,39 @@ use Avisota\Contao\Entity\MessageContent;
 
 class TagReplacementService
 {
-	/**
-	 * @var \Twig_Environment
-	 */
-	protected $twigEnvironment;
+    /**
+     * @var \Twig_Environment
+     */
+    protected $twigEnvironment;
 
-	function __construct(\Twig_Environment $twigEnvironment = null)
-	{
-		$this->twigEnvironment = $twigEnvironment;
-	}
+    function __construct(\Twig_Environment $twigEnvironment = null)
+    {
+        $this->twigEnvironment = $twigEnvironment;
+    }
 
-	/**
-	 * @param \Twig_Environment $twigEnvironment
-	 */
-	public function setTwigEnvironment($twigEnvironment)
-	{
-		$this->twigEnvironment = $twigEnvironment;
-		return $this;
-	}
+    /**
+     * @param \Twig_Environment $twigEnvironment
+     */
+    public function setTwigEnvironment($twigEnvironment)
+    {
+        $this->twigEnvironment = $twigEnvironment;
+        return $this;
+    }
 
-	/**
-	 * @return \Twig_Environment
-	 */
-	public function getTwigEnvironment()
-	{
-		return $this->twigEnvironment;
-	}
+    /**
+     * @return \Twig_Environment
+     */
+    public function getTwigEnvironment()
+    {
+        return $this->twigEnvironment;
+    }
 
-	public function parse($buffer, $context = array())
-	{
-		/** @var \Twig_Loader_Array $loader */
-		$loader = $this->twigEnvironment->getLoader();
-		$loader->setTemplate('__TEMPLATE__', $buffer);
+    public function parse($buffer, $context = array())
+    {
+        /** @var \Twig_Loader_Array $loader */
+        $loader = $this->twigEnvironment->getLoader();
+        $loader->setTemplate('__TEMPLATE__', $buffer);
 
-		return $this->twigEnvironment->render('__TEMPLATE__', $context);
-	}
+        return $this->twigEnvironment->render('__TEMPLATE__', $context);
+    }
 }

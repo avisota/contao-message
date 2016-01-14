@@ -22,93 +22,93 @@ use Symfony\Component\EventDispatcher\Event;
 
 class PostRenderMessageTemplatePreviewEvent extends Event
 {
-	const NAME = 'avisota.contao.post-render-message-template-preview';
+    const NAME = 'avisota.contao.post-render-message-template-preview';
 
-	/**
-	 * @var Message
-	 */
-	protected $contaoMessage;
+    /**
+     * @var Message
+     */
+    protected $contaoMessage;
 
-	/**
-	 * @var PreRenderedMessageTemplateInterface
-	 */
-	protected $messageTemplate;
+    /**
+     * @var PreRenderedMessageTemplateInterface
+     */
+    protected $messageTemplate;
 
-	/**
-	 * @var RecipientInterface
-	 */
-	protected $recipient;
+    /**
+     * @var RecipientInterface
+     */
+    protected $recipient;
 
-	/**
-	 * @var array
-	 */
-	protected $additionalData;
+    /**
+     * @var array
+     */
+    protected $additionalData;
 
-	/**
-	 * @var string
-	 */
-	protected $preview;
+    /**
+     * @var string
+     */
+    protected $preview;
 
-	function __construct(
-		Message $contaoMessage,
-		PreRenderedMessageTemplateInterface $messageTemplate,
-		RecipientInterface $recipient = null,
-		array $additionalData = array(),
-		$preview
-	) {
-		$this->contaoMessage   = $contaoMessage;
-		$this->messageTemplate = $messageTemplate;
-		$this->recipient       = $recipient;
-		$this->additionalData  = $additionalData;
-		$this->preview         = $preview;
-	}
+    function __construct(
+        Message $contaoMessage,
+        PreRenderedMessageTemplateInterface $messageTemplate,
+        RecipientInterface $recipient = null,
+        array $additionalData = array(),
+        $preview
+    ) {
+        $this->contaoMessage   = $contaoMessage;
+        $this->messageTemplate = $messageTemplate;
+        $this->recipient       = $recipient;
+        $this->additionalData  = $additionalData;
+        $this->preview         = $preview;
+    }
 
-	/**
-	 * @return Message
-	 */
-	public function getContaoMessage()
-	{
-		return $this->contaoMessage;
-	}
+    /**
+     * @return Message
+     */
+    public function getContaoMessage()
+    {
+        return $this->contaoMessage;
+    }
 
-	/**
-	 * @return PreRenderedMessageTemplateInterface
-	 */
-	public function getMessageTemplate()
-	{
-		return $this->messageTemplate;
-	}
+    /**
+     * @return PreRenderedMessageTemplateInterface
+     */
+    public function getMessageTemplate()
+    {
+        return $this->messageTemplate;
+    }
 
-	/**
-	 * @return RecipientInterface
-	 */
-	public function getRecipient()
-	{
-		return $this->recipient;
-	}
+    /**
+     * @return RecipientInterface
+     */
+    public function getRecipient()
+    {
+        return $this->recipient;
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getAdditionalData()
-	{
-		return $this->additionalData;
-	}
+    /**
+     * @return array
+     */
+    public function getAdditionalData()
+    {
+        return $this->additionalData;
+    }
 
-	/**
-	 * @param string $preview
-	 */
-	public function setPreview($preview)
-	{
-		$this->preview = $preview;
-		return $this;
-	}
+    /**
+     * @param string $preview
+     */
+    public function setPreview($preview)
+    {
+        $this->preview = $preview;
+        return $this;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getPreview()
-	{
-		return $this->preview;
-	}
+    /**
+     * @return string
+     */
+    public function getPreview()
+    {
+        return $this->preview;
+    }
 }

@@ -21,51 +21,51 @@ use Symfony\Component\EventDispatcher\Event;
 
 class RenderMessageHeadersEvent extends Event
 {
-	const NAME = 'Avisota\Contao\Message\Core\Event\RenderMessageHeaders';
+    const NAME = 'Avisota\Contao\Message\Core\Event\RenderMessageHeaders';
 
-	/**
-	 * @var MessageRendererInterface
-	 */
-	protected $renderer;
+    /**
+     * @var MessageRendererInterface
+     */
+    protected $renderer;
 
-	/**
-	 * @var Message
-	 */
-	protected $message;
+    /**
+     * @var Message
+     */
+    protected $message;
 
-	/**
-	 * @var \ArrayObject
-	 */
-	protected $headers;
+    /**
+     * @var \ArrayObject
+     */
+    protected $headers;
 
-	function __construct(MessageRendererInterface $renderer, $message, $headers)
-	{
-		$this->renderer = $renderer;
-		$this->message  = $message;
-		$this->headers  = $headers;
-	}
+    function __construct(MessageRendererInterface $renderer, $message, $headers)
+    {
+        $this->renderer = $renderer;
+        $this->message  = $message;
+        $this->headers  = $headers;
+    }
 
-	/**
-	 * @return MessageRendererInterface
-	 */
-	public function getRenderer()
-	{
-		return $this->renderer;
-	}
+    /**
+     * @return MessageRendererInterface
+     */
+    public function getRenderer()
+    {
+        return $this->renderer;
+    }
 
-	/**
-	 * @return \Avisota\Contao\Entity\Message
-	 */
-	public function getMessage()
-	{
-		return $this->message;
-	}
+    /**
+     * @return \Avisota\Contao\Entity\Message
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
 
-	/**
-	 * @return \ArrayObject
-	 */
-	public function getHeaders()
-	{
-		return $this->headers;
-	}
+    /**
+     * @return \ArrayObject
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
 }

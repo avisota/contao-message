@@ -20,24 +20,24 @@ use Symfony\Component\EventDispatcher\Event;
 
 class CollectThemeStylesheetsEvent extends CollectStylesheetsEvent
 {
-	const NAME = 'Avisota\Contao\Message\Core\Event\CollectThemeStylesheets';
+    const NAME = 'Avisota\Contao\Message\Core\Event\CollectThemeStylesheets';
 
-	/**
-	 * @var array
-	 */
-	protected $theme;
+    /**
+     * @var array
+     */
+    protected $theme;
 
-	function __construct(array $theme, \ArrayObject $stylesheets)
-	{
-		$this->theme = $theme;
-		parent::__construct($stylesheets);
-	}
+    function __construct(array $theme, \ArrayObject $stylesheets)
+    {
+        $this->theme = $theme;
+        parent::__construct($stylesheets);
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getTheme()
-	{
-		return $this->theme;
-	}
+    /**
+     * @return array
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
 }

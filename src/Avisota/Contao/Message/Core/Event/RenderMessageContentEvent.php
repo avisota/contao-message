@@ -23,72 +23,72 @@ use Symfony\Component\EventDispatcher\Event;
 
 class RenderMessageContentEvent extends Event
 {
-	/**
-	 * @var MessageContent
-	 */
-	protected $messageContent;
+    /**
+     * @var MessageContent
+     */
+    protected $messageContent;
 
-	/**
-	 * @var Layout
-	 */
-	protected $layout;
+    /**
+     * @var Layout
+     */
+    protected $layout;
 
-	/**
-	 * @var string
-	 */
-	protected $renderedContent;
+    /**
+     * @var string
+     */
+    protected $renderedContent;
 
-	public function __construct(MessageContent $messageContent, Layout $layout = null)
-	{
-		$this->messageContent = $messageContent;
-		$this->layout         = $layout;
-	}
+    public function __construct(MessageContent $messageContent, Layout $layout = null)
+    {
+        $this->messageContent = $messageContent;
+        $this->layout         = $layout;
+    }
 
-	/**
-	 * @return MessageContent
-	 */
-	public function getMessageContent()
-	{
-		return $this->messageContent;
-	}
+    /**
+     * @return MessageContent
+     */
+    public function getMessageContent()
+    {
+        return $this->messageContent;
+    }
 
-	/**
-	 * @param Layout $layout
-	 */
-	public function setLayout(Layout $layout = null)
-	{
-		$this->layout = $layout;
-		return $this;
-	}
+    /**
+     * @param Layout $layout
+     */
+    public function setLayout(Layout $layout = null)
+    {
+        $this->layout = $layout;
+        return $this;
+    }
 
-	/**
-	 * @return Layout
-	 */
-	public function getLayout()
-	{
-		if ($this->layout) {
-			return $this->layout;
-		}
+    /**
+     * @return Layout
+     */
+    public function getLayout()
+    {
+        if ($this->layout) {
+            return $this->layout;
+        }
 
-		return $this->messageContent
-			->getMessage()
-			->getLayout();
-	}
+        return $this->messageContent
+            ->getMessage()
+            ->getLayout();
+    }
 
-	/**
-	 * @param string $renderedContent
-	 */
-	public function setRenderedContent($renderedContent)
-	{
-		$this->renderedContent = (string) $renderedContent;
-		return $this;
-	}
+    /**
+     * @param string $renderedContent
+     */
+    public function setRenderedContent($renderedContent)
+    {
+        $this->renderedContent = (string) $renderedContent;
+        return $this;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getRenderedContent()
-	{
-		return $this->renderedContent;
-	}
+    /**
+     * @return string
+     */
+    public function getRenderedContent()
+    {
+        return $this->renderedContent;
+    }
 }

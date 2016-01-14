@@ -19,9 +19,9 @@ use Avisota\Contao\Entity\Message;
 
 class PreviewModule implements SendModuleInterface
 {
-	public function run(Message $message)
-	{
-		$template = new \TwigTemplate('avisota/send/preview', 'html5');
-		return $template->parse(array('message' => $message));
-	}
+    public function run(Message $message)
+    {
+        $template = new \TwigTemplate('avisota/send/preview', 'html5');
+        return $template->parse(array('message' => $message));
+    }
 }

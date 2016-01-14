@@ -19,35 +19,35 @@ use Avisota\Contao\Entity\Message;
 
 abstract class AbstractWebRunner extends \Backend
 {
-	function __construct()
-	{
-		// preserve object initialisation order
-		\BackendUser::getInstance();
-		\Database::getInstance();
+    function __construct()
+    {
+        // preserve object initialisation order
+        \BackendUser::getInstance();
+        \Database::getInstance();
 
-		parent::__construct();
-	}
+        parent::__construct();
+    }
 
-	public function run()
-	{
-		$input = \Input::getInstance();
-		$messageRepository = \Contao\Doctrine\ORM\EntityHelper::getRepository('Avisota\Contao:Message');
+    public function run()
+    {
+        $input             = \Input::getInstance();
+        $messageRepository = \Contao\Doctrine\ORM\EntityHelper::getRepository('Avisota\Contao:Message');
 
-		$messageId = $input->get('id');
-		$message = $messageRepository->find($messageId);
-		/** @var \Avisota\Contao\Entity\Message $message */
+        $messageId = $input->get('id');
+        $message   = $messageRepository->find($messageId);
+        /** @var \Avisota\Contao\Entity\Message $message */
 
-		if (!$message) {
-			header("HTTP/1.0 404 Not Found");
-			echo '<h1>404 Not Found</h1>';
-			exit;
-		}
+        if (!$message) {
+            header("HTTP/1.0 404 Not Found");
+            echo '<h1>404 Not Found</h1>';
+            exit;
+        }
 
-		$user = \BackendUser::getInstance();
-		$user->authenticate();
+        $user = \BackendUser::getInstance();
+        $user->authenticate();
 
-		$this->execute($message, $user);
-	}
+        $this->execute($message, $user);
+    }
 
-	abstract protected function execute(Message $message, \BackendUser $user);
+    abstract protected function execute(Message $message, \BackendUser $user);
 }

@@ -20,32 +20,32 @@ use Symfony\Component\EventDispatcher\Event;
 
 class ResolveStylesheetEvent extends Event
 {
-	const NAME = 'Avisota\Contao\Message\Core\Event\ResolveStylesheet';
+    const NAME = 'Avisota\Contao\Message\Core\Event\ResolveStylesheet';
 
-	/**
-	 * @var string
-	 */
-	protected $stylesheet;
+    /**
+     * @var string
+     */
+    protected $stylesheet;
 
-	function __construct($stylesheet)
-	{
-		$this->stylesheet = $stylesheet;
-	}
+    function __construct($stylesheet)
+    {
+        $this->stylesheet = $stylesheet;
+    }
 
-	/**
-	 * @param string $stylesheet
-	 */
-	public function setStylesheet($stylesheet)
-	{
-		$this->stylesheet = $stylesheet;
-		return $this;
-	}
+    /**
+     * @param string $stylesheet
+     */
+    public function setStylesheet($stylesheet)
+    {
+        $this->stylesheet = $stylesheet;
+        return $this;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getStylesheet()
-	{
-		return $this->stylesheet;
-	}
+    /**
+     * @return string
+     */
+    public function getStylesheet()
+    {
+        return $this->stylesheet;
+    }
 }

@@ -20,23 +20,23 @@ use Symfony\Component\EventDispatcher\Event;
 
 class CollectStylesheetsEvent extends Event
 {
-	const NAME = 'Avisota\Contao\Message\Core\Event\CollectStylesheets';
+    const NAME = 'Avisota\Contao\Message\Core\Event\CollectStylesheets';
 
-	/**
-	 * @var \ArrayObject
-	 */
-	protected $stylesheets;
+    /**
+     * @var \ArrayObject
+     */
+    protected $stylesheets;
 
-	function __construct(\ArrayObject $stylesheets)
-	{
-		$this->stylesheets = $stylesheets;
-	}
+    function __construct(\ArrayObject $stylesheets)
+    {
+        $this->stylesheets = $stylesheets;
+    }
 
-	/**
-	 * @return \ArrayObject
-	 */
-	public function getStylesheets()
-	{
-		return $this->stylesheets;
-	}
+    /**
+     * @return \ArrayObject
+     */
+    public function getStylesheets()
+    {
+        return $this->stylesheets;
+    }
 }

@@ -23,84 +23,84 @@ use Symfony\Component\EventDispatcher\Event;
 
 class PostRenderMessageTemplateEvent extends Event
 {
-	const NAME = 'avisota.contao.post-render-message-template';
+    const NAME = 'avisota.contao.post-render-message-template';
 
-	/**
-	 * @var Message
-	 */
-	protected $contaoMessage;
+    /**
+     * @var Message
+     */
+    protected $contaoMessage;
 
-	/**
-	 * @var PreRenderedMessageTemplateInterface
-	 */
-	protected $messageTemplate;
+    /**
+     * @var PreRenderedMessageTemplateInterface
+     */
+    protected $messageTemplate;
 
-	/**
-	 * @var RecipientInterface
-	 */
-	protected $recipient;
+    /**
+     * @var RecipientInterface
+     */
+    protected $recipient;
 
-	/**
-	 * @var array
-	 */
-	protected $additionalData;
+    /**
+     * @var array
+     */
+    protected $additionalData;
 
-	/**
-	 * @var ContaoAwareNativeMessage
-	 */
-	protected $message;
+    /**
+     * @var ContaoAwareNativeMessage
+     */
+    protected $message;
 
-	function __construct(
-		Message $contaoMessage,
-		PreRenderedMessageTemplateInterface $messageTemplate,
-		RecipientInterface $recipient = null,
-		array $additionalData = array(),
-		ContaoAwareNativeMessage $message
-	) {
-		$this->contaoMessage   = $contaoMessage;
-		$this->messageTemplate = $messageTemplate;
-		$this->recipient       = $recipient;
-		$this->additionalData  = $additionalData;
-		$this->message         = $message;
-	}
+    function __construct(
+        Message $contaoMessage,
+        PreRenderedMessageTemplateInterface $messageTemplate,
+        RecipientInterface $recipient = null,
+        array $additionalData = array(),
+        ContaoAwareNativeMessage $message
+    ) {
+        $this->contaoMessage   = $contaoMessage;
+        $this->messageTemplate = $messageTemplate;
+        $this->recipient       = $recipient;
+        $this->additionalData  = $additionalData;
+        $this->message         = $message;
+    }
 
-	/**
-	 * @return Message
-	 */
-	public function getContaoMessage()
-	{
-		return $this->contaoMessage;
-	}
+    /**
+     * @return Message
+     */
+    public function getContaoMessage()
+    {
+        return $this->contaoMessage;
+    }
 
-	/**
-	 * @return PreRenderedMessageTemplateInterface
-	 */
-	public function getMessageTemplate()
-	{
-		return $this->messageTemplate;
-	}
+    /**
+     * @return PreRenderedMessageTemplateInterface
+     */
+    public function getMessageTemplate()
+    {
+        return $this->messageTemplate;
+    }
 
-	/**
-	 * @return RecipientInterface
-	 */
-	public function getRecipient()
-	{
-		return $this->recipient;
-	}
+    /**
+     * @return RecipientInterface
+     */
+    public function getRecipient()
+    {
+        return $this->recipient;
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getAdditionalData()
-	{
-		return $this->additionalData;
-	}
+    /**
+     * @return array
+     */
+    public function getAdditionalData()
+    {
+        return $this->additionalData;
+    }
 
-	/**
-	 * @return ContaoAwareNativeMessage
-	 */
-	public function getMessage()
-	{
-		return $this->message;
-	}
+    /**
+     * @return ContaoAwareNativeMessage
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
 }

@@ -1,9 +1,11 @@
 {% extends 'mod_container.html5.twig' %}
 
 {% block content %}
-	<h2>{{ message.subject }}</h2>
-	<p class="info"><time datetime="{{ message.sendOn|date('c') }}">{{ message.sendOn|datimFormat }}</time></p>
-	{% for cell, content in contents %}
-		<div class="cell_{{ cell }}">{{ content|join('') }}</div>
-	{% endfor %}
+    <h2>{{ message.subject }}</h2>
+    <p class="info">
+        <time datetime="{{ message.sendOn|date('c') }}">{{ message.sendOn|datimFormat }}</time>
+    </p>
+    {% for cell, content in contents %}
+        <div class="cell_{{ cell }}">{{ content|join('') }}</div>
+    {% endfor %}
 {% endblock %}

@@ -19,5 +19,5 @@ use Avisota\Contao\Entity\Message;
 
 interface SendModuleInterface
 {
-	public function run(Message $message);
+    public function run(Message $message);
 }

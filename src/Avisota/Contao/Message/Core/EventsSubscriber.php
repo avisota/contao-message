@@ -28,189 +28,189 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EventsSubscriber implements EventSubscriberInterface
 {
-	public static function getSubscribedEvents()
-	{
-		return array(
-			MessageEvents::CREATE_MESSAGE_CATEGORY_OPTIONS        => 'createMessageCategoryOptions',
-			MessageEvents::CREATE_MESSAGE_OPTIONS                 => 'createMessageOptions',
-			MessageEvents::CREATE_BOILERPLATE_MESSAGE_OPTIONS     => 'createBoilerplateMessageOptions',
-			MessageEvents::CREATE_NON_BOILERPLATE_MESSAGE_OPTIONS => 'createNonBoilerplateMessageOptions',
-			MessageEvents::CREATE_MESSAGE_LAYOUT_OPTIONS          => 'creatMessageLayoutOptions',
-			AvisotaMessageEvents::RENDER_MESSAGE                  => 'renderMessage',
-		);
-	}
+    public static function getSubscribedEvents()
+    {
+        return array(
+            MessageEvents::CREATE_MESSAGE_CATEGORY_OPTIONS        => 'createMessageCategoryOptions',
+            MessageEvents::CREATE_MESSAGE_OPTIONS                 => 'createMessageOptions',
+            MessageEvents::CREATE_BOILERPLATE_MESSAGE_OPTIONS     => 'createBoilerplateMessageOptions',
+            MessageEvents::CREATE_NON_BOILERPLATE_MESSAGE_OPTIONS => 'createNonBoilerplateMessageOptions',
+            MessageEvents::CREATE_MESSAGE_LAYOUT_OPTIONS          => 'creatMessageLayoutOptions',
+            AvisotaMessageEvents::RENDER_MESSAGE                  => 'renderMessage',
+        );
+    }
 
-	public function createMessageCategoryOptions(CreateOptionsEvent $event)
-	{
-		$this->getMessageCategoryOptions($event->getOptions());
-	}
+    public function createMessageCategoryOptions(CreateOptionsEvent $event)
+    {
+        $this->getMessageCategoryOptions($event->getOptions());
+    }
 
-	public function getMessageCategoryOptions($options = array())
-	{
-		if (!is_array($options) && !$options instanceof \ArrayAccess) {
-			$options = array();
-		}
+    public function getMessageCategoryOptions($options = array())
+    {
+        if (!is_array($options) && !$options instanceof \ArrayAccess) {
+            $options = array();
+        }
 
-		$repository   = EntityHelper::getRepository('Avisota\Contao:MessageCategory');
-		$queryBuilder = $repository->createQueryBuilder('mc');
-		$queryBuilder
-			->select('mc')
-			->orderBy('mc.title');
-		$query    = $queryBuilder->getQuery();
-		/** @var MessageCategory[] $messageCategories */
-		$messageCategories = $query->getResult();
+        $repository   = EntityHelper::getRepository('Avisota\Contao:MessageCategory');
+        $queryBuilder = $repository->createQueryBuilder('mc');
+        $queryBuilder
+            ->select('mc')
+            ->orderBy('mc.title');
+        $query = $queryBuilder->getQuery();
+        /** @var MessageCategory[] $messageCategories */
+        $messageCategories = $query->getResult();
 
-		foreach ($messageCategories as $messageCategory) {
-			$options[$messageCategory->getId()] = $messageCategory->getTitle();
-		}
+        foreach ($messageCategories as $messageCategory) {
+            $options[$messageCategory->getId()] = $messageCategory->getTitle();
+        }
 
-		return $options;
-	}
+        return $options;
+    }
 
-	public function createMessageOptions(CreateOptionsEvent $event)
-	{
-		$this->getMessageOptions($event->getOptions());
-	}
+    public function createMessageOptions(CreateOptionsEvent $event)
+    {
+        $this->getMessageOptions($event->getOptions());
+    }
 
-	public function getMessageOptions($options = array())
-	{
-		if (!is_array($options) && !$options instanceof \ArrayAccess) {
-			$options = array();
-		}
+    public function getMessageOptions($options = array())
+    {
+        if (!is_array($options) && !$options instanceof \ArrayAccess) {
+            $options = array();
+        }
 
-		$repository   = EntityHelper::getRepository('Avisota\Contao:Message');
-		$queryBuilder = $repository->createQueryBuilder('m');
-		$queryBuilder
-			->select('m')
-			->innerJoin('m.category', 'c')
-			->orderBy('c.title')
-			->addOrderBy('m.subject');
-		$query    = $queryBuilder->getQuery();
-		$messages = $query->getResult();
+        $repository   = EntityHelper::getRepository('Avisota\Contao:Message');
+        $queryBuilder = $repository->createQueryBuilder('m');
+        $queryBuilder
+            ->select('m')
+            ->innerJoin('m.category', 'c')
+            ->orderBy('c.title')
+            ->addOrderBy('m.subject');
+        $query    = $queryBuilder->getQuery();
+        $messages = $query->getResult();
 
-		$this->fillOptions($options, $messages);
+        $this->fillOptions($options, $messages);
 
-		return $options;
-	}
+        return $options;
+    }
 
-	public function createBoilerplateMessageOptions(CreateOptionsEvent $event)
-	{
-		$this->getBoilerplateMessageOptions($event->getOptions());
-	}
+    public function createBoilerplateMessageOptions(CreateOptionsEvent $event)
+    {
+        $this->getBoilerplateMessageOptions($event->getOptions());
+    }
 
-	public function getBoilerplateMessageOptions($options = array())
-	{
-		if (!is_array($options) && !$options instanceof \ArrayAccess) {
-			$options = array();
-		}
+    public function getBoilerplateMessageOptions($options = array())
+    {
+        if (!is_array($options) && !$options instanceof \ArrayAccess) {
+            $options = array();
+        }
 
-		$repository   = EntityHelper::getRepository('Avisota\Contao:Message');
-		$queryBuilder = $repository->createQueryBuilder('m');
-		$expr         = $queryBuilder->expr();
-		$queryBuilder
-			->select('m')
-			->innerJoin('m.category', 'c')
-			->where($expr->eq('c.boilerplates', ':boilerplates'))
-			->setParameter('boilerplates', true)
-			->orderBy('c.title')
-			->addOrderBy('m.subject');
-		$query    = $queryBuilder->getQuery();
-		$messages = $query->getResult();
+        $repository   = EntityHelper::getRepository('Avisota\Contao:Message');
+        $queryBuilder = $repository->createQueryBuilder('m');
+        $expr         = $queryBuilder->expr();
+        $queryBuilder
+            ->select('m')
+            ->innerJoin('m.category', 'c')
+            ->where($expr->eq('c.boilerplates', ':boilerplates'))
+            ->setParameter('boilerplates', true)
+            ->orderBy('c.title')
+            ->addOrderBy('m.subject');
+        $query    = $queryBuilder->getQuery();
+        $messages = $query->getResult();
 
-		$this->fillOptions($options, $messages);
+        $this->fillOptions($options, $messages);
 
-		return $options;
-	}
+        return $options;
+    }
 
-	public function createNonBoilerplateMessageOptions(CreateOptionsEvent $event)
-	{
-		$this->getNonBoilerplateMessageOptions($event->getOptions());
-	}
+    public function createNonBoilerplateMessageOptions(CreateOptionsEvent $event)
+    {
+        $this->getNonBoilerplateMessageOptions($event->getOptions());
+    }
 
-	public function getNonBoilerplateMessageOptions($options = array())
-	{
-		if (!is_array($options) && !$options instanceof \ArrayAccess) {
-			$options = array();
-		}
+    public function getNonBoilerplateMessageOptions($options = array())
+    {
+        if (!is_array($options) && !$options instanceof \ArrayAccess) {
+            $options = array();
+        }
 
-		$repository   = EntityHelper::getRepository('Avisota\Contao:Message');
-		$queryBuilder = $repository->createQueryBuilder('m');
-		$expr         = $queryBuilder->expr();
-		$queryBuilder
-			->select('m')
-			->innerJoin('m.category', 'c')
-			->where($expr->eq('c.boilerplates', ':boilerplates'))
-			->setParameter('boilerplates', false)
-			->orderBy('c.title')
-			->addOrderBy('m.subject');
-		$query    = $queryBuilder->getQuery();
-		$messages = $query->getResult();
+        $repository   = EntityHelper::getRepository('Avisota\Contao:Message');
+        $queryBuilder = $repository->createQueryBuilder('m');
+        $expr         = $queryBuilder->expr();
+        $queryBuilder
+            ->select('m')
+            ->innerJoin('m.category', 'c')
+            ->where($expr->eq('c.boilerplates', ':boilerplates'))
+            ->setParameter('boilerplates', false)
+            ->orderBy('c.title')
+            ->addOrderBy('m.subject');
+        $query    = $queryBuilder->getQuery();
+        $messages = $query->getResult();
 
-		$this->fillOptions($options, $messages);
+        $this->fillOptions($options, $messages);
 
-		return $options;
-	}
+        return $options;
+    }
 
-	/**
-	 * Fill the options array with the messages.
-	 *
-	 * @param array|\ArrayAccess $options
-	 * @param array|Message[]    $messages
-	 */
-	protected function fillOptions($options, array $messages)
-	{
-		foreach ($messages as $message) {
-			$category = $message->getCategory();
+    /**
+     * Fill the options array with the messages.
+     *
+     * @param array|\ArrayAccess $options
+     * @param array|Message[]    $messages
+     */
+    protected function fillOptions($options, array $messages)
+    {
+        foreach ($messages as $message) {
+            $category = $message->getCategory();
 
-			$options[$category->getTitle()][$message->getId()] = $message->getSubject();
-		}
-	}
+            $options[$category->getTitle()][$message->getId()] = $message->getSubject();
+        }
+    }
 
-	public function creatMessageLayoutOptions(CreateOptionsEvent $event)
-	{
-		$this->getMessageLayoutOptions($event->getOptions());
-	}
+    public function creatMessageLayoutOptions(CreateOptionsEvent $event)
+    {
+        $this->getMessageLayoutOptions($event->getOptions());
+    }
 
-	public function getMessageLayoutOptions($options = array())
-	{
-		if (!is_array($options) && !$options instanceof \ArrayAccess) {
-			$options = array();
-		}
+    public function getMessageLayoutOptions($options = array())
+    {
+        if (!is_array($options) && !$options instanceof \ArrayAccess) {
+            $options = array();
+        }
 
-		$repository   = EntityHelper::getRepository('Avisota\Contao:Layout');
-		$queryBuilder = $repository->createQueryBuilder('l');
-		$queryBuilder
-			->select('l')
-			->orderBy('l.title');
-		$query    = $queryBuilder->getQuery();
-		/** @var Layout[] $layouts */
-		$layouts = $query->getResult();
+        $repository   = EntityHelper::getRepository('Avisota\Contao:Layout');
+        $queryBuilder = $repository->createQueryBuilder('l');
+        $queryBuilder
+            ->select('l')
+            ->orderBy('l.title');
+        $query = $queryBuilder->getQuery();
+        /** @var Layout[] $layouts */
+        $layouts = $query->getResult();
 
-		foreach ($layouts as $layout) {
-			$options[$layout->getId()] = $layout->getTitle();
-		}
+        foreach ($layouts as $layout) {
+            $options[$layout->getId()] = $layout->getTitle();
+        }
 
-		return $options;
-	}
+        return $options;
+    }
 
-	public function renderMessage(RenderMessageEvent $event)
-	{
-		if ($event->getPreRenderedMessageTemplate()) {
-			return;
-		}
+    public function renderMessage(RenderMessageEvent $event)
+    {
+        if ($event->getPreRenderedMessageTemplate()) {
+            return;
+        }
 
-		global $container;
+        global $container;
 
-		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRendererInterface $renderer */
-		$renderer = $container['avisota.message.renderer'];
+        /** @var \Avisota\Contao\Message\Core\Renderer\MessageRendererInterface $renderer */
+        $renderer = $container['avisota.message.renderer'];
 
-		$content = $renderer->renderCell($event->getMessage(), 'center', $event->getLayout());
+        $content = $renderer->renderCell($event->getMessage(), 'center', $event->getLayout());
 
-		$preRenderedMessageTemplate = new MutablePreRenderedMessageTemplate(
-			$event->getMessage(),
-			implode(PHP_EOL, $content)
-		);
+        $preRenderedMessageTemplate = new MutablePreRenderedMessageTemplate(
+            $event->getMessage(),
+            implode(PHP_EOL, $content)
+        );
 
-		$event->setPreRenderedMessageTemplate($preRenderedMessageTemplate);
-	}
+        $event->setPreRenderedMessageTemplate($preRenderedMessageTemplate);
+    }
 }
