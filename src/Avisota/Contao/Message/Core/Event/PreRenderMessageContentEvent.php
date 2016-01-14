@@ -20,6 +20,11 @@ use Avisota\Contao\Entity\Message;
 use Avisota\Recipient\RecipientInterface;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class PreRenderMessageContentEvent
+ *
+ * @package Avisota\Contao\Message\Core\Event
+ */
 class PreRenderMessageContentEvent extends Event
 {
 
@@ -45,6 +50,15 @@ class PreRenderMessageContentEvent extends Event
 
     protected $content;
 
+    /**
+     * PreRenderMessageContentEvent constructor.
+     *
+     * @param Message                             $message
+     * @param PreRenderedMessageTemplateInterface $messageTemplate
+     * @param RecipientInterface|null             $recipient
+     * @param array                               $additionalData
+     * @param                                     $content
+     */
     function __construct(
         Message $message,
         PreRenderedMessageTemplateInterface $messageTemplate,
@@ -85,6 +99,8 @@ class PreRenderMessageContentEvent extends Event
 
     /**
      * @param array $additionalData
+     *
+     * @return $this
      */
     public function setAdditionalData($additionalData)
     {
@@ -110,6 +126,8 @@ class PreRenderMessageContentEvent extends Event
 
     /**
      * @param mixed $content
+     *
+     * @return $this
      */
     public function setContent($content)
     {

@@ -20,6 +20,11 @@ use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Message\Core\Message\Renderer;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class GenerateViewOnlineUrlEvent
+ *
+ * @package Avisota\Contao\Message\Core\Event
+ */
 class GenerateViewOnlineUrlEvent extends Event
 {
     /**
@@ -32,6 +37,12 @@ class GenerateViewOnlineUrlEvent extends Event
      */
     protected $url;
 
+    /**
+     * GenerateViewOnlineUrlEvent constructor.
+     *
+     * @param Message $message
+     * @param         $url
+     */
     public function __construct(Message $message, $url)
     {
         $this->message = $message;

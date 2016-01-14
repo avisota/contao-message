@@ -28,8 +28,16 @@ use ContaoCommunityAlliance\DcGeneral\Event\ActionEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * Class Preview
+ *
+ * @package Avisota\Contao\Message\Core\Backend
+ */
 class Preview implements EventSubscriberInterface
 {
+	/**
+	 * @return array
+     */
 	public static function getSubscribedEvents()
 	{
 		return array(
@@ -37,6 +45,9 @@ class Preview implements EventSubscriberInterface
 		);
 	}
 
+	/**
+	 * @param ActionEvent $event
+     */
 	public function handleAction(ActionEvent $event)
 	{
 		if (
@@ -49,7 +60,10 @@ class Preview implements EventSubscriberInterface
 	}
 
 	/**
-	 * @param DC_General $dc
+	 * @param EnvironmentInterface $environment
+	 *
+	 * @return string
+	 * @internal param DC_General $dc
 	 */
 	public function renderPreviewView(EnvironmentInterface $environment)
 	{

@@ -39,8 +39,15 @@ BackendUser::getInstance();
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 
+/**
+ * Class send_preview_to_user
+ */
 class send_preview_to_user extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 {
+    /**
+     * @param Message     $message
+     * @param BackendUser $user
+     */
     protected function execute(Message $message, \BackendUser $user)
     {
         global $container;

@@ -18,8 +18,19 @@ namespace Avisota\Contao\Message\Core\Send;
 use Avisota\Contao\Entity\Message;
 use Doctrine\DBAL\Connection;
 
+/**
+ * Class SendPreviewToUserModule
+ *
+ * @package Avisota\Contao\Message\Core\Send
+ */
 class SendPreviewToUserModule implements SendModuleInterface
 {
+    /**
+     * @param Message $message
+     *
+     * @return string
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function run(Message $message)
     {
         global $container;

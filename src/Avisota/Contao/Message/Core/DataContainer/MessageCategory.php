@@ -18,6 +18,11 @@ namespace Avisota\Contao\Message\Core\DataContainer;
 use Avisota\Contao\Entity\RecipientSource;
 use Contao\Doctrine\ORM\EntityHelper;
 
+/**
+ * Class MessageCategory
+ *
+ * @package Avisota\Contao\Message\Core\DataContainer
+ */
 class MessageCategory extends \Backend
 {
 	/**

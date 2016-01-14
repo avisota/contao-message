@@ -18,12 +18,19 @@ use Avisota\Contao\Entity\Layout;
 use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Entity\MessageContent;
 
+/**
+ * Interface MessageRendererInterface
+ *
+ * @package Avisota\Contao\Message\Core\Renderer
+ */
 interface MessageRendererInterface
 {
     /**
      * Render a complete message.
      *
      * @param Message $message
+     *
+     * @param Layout  $layout
      *
      * @return PreRenderedMessageTemplateInterface
      */
@@ -33,6 +40,8 @@ interface MessageRendererInterface
      * Render a single message content element.
      *
      * @param MessageContent $messageContent
+     *
+     * @param Layout         $layout
      *
      * @return string
      */
@@ -44,7 +53,9 @@ interface MessageRendererInterface
      * @param Message $message
      * @param string  $cell
      *
-     * @return string[]
+     * @param Layout  $layout
+     *
+     * @return \string[]
      */
     public function renderCell(Message $message, $cell, Layout $layout = null);
 }

@@ -26,8 +26,16 @@ use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * Class EventsSubscriber
+ *
+ * @package Avisota\Contao\Message\Core
+ */
 class EventsSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return array(
@@ -40,11 +48,19 @@ class EventsSubscriber implements EventSubscriberInterface
         );
     }
 
+    /**
+     * @param CreateOptionsEvent $event
+     */
     public function createMessageCategoryOptions(CreateOptionsEvent $event)
     {
         $this->getMessageCategoryOptions($event->getOptions());
     }
 
+    /**
+     * @param array $options
+     *
+     * @return array|\ArrayAccess
+     */
     public function getMessageCategoryOptions($options = array())
     {
         if (!is_array($options) && !$options instanceof \ArrayAccess) {
@@ -67,11 +83,19 @@ class EventsSubscriber implements EventSubscriberInterface
         return $options;
     }
 
+    /**
+     * @param CreateOptionsEvent $event
+     */
     public function createMessageOptions(CreateOptionsEvent $event)
     {
         $this->getMessageOptions($event->getOptions());
     }
 
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
     public function getMessageOptions($options = array())
     {
         if (!is_array($options) && !$options instanceof \ArrayAccess) {
@@ -93,11 +117,19 @@ class EventsSubscriber implements EventSubscriberInterface
         return $options;
     }
 
+    /**
+     * @param CreateOptionsEvent $event
+     */
     public function createBoilerplateMessageOptions(CreateOptionsEvent $event)
     {
         $this->getBoilerplateMessageOptions($event->getOptions());
     }
 
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
     public function getBoilerplateMessageOptions($options = array())
     {
         if (!is_array($options) && !$options instanceof \ArrayAccess) {
@@ -122,11 +154,19 @@ class EventsSubscriber implements EventSubscriberInterface
         return $options;
     }
 
+    /**
+     * @param CreateOptionsEvent $event
+     */
     public function createNonBoilerplateMessageOptions(CreateOptionsEvent $event)
     {
         $this->getNonBoilerplateMessageOptions($event->getOptions());
     }
 
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
     public function getNonBoilerplateMessageOptions($options = array())
     {
         if (!is_array($options) && !$options instanceof \ArrayAccess) {
@@ -166,11 +206,19 @@ class EventsSubscriber implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @param CreateOptionsEvent $event
+     */
     public function creatMessageLayoutOptions(CreateOptionsEvent $event)
     {
         $this->getMessageLayoutOptions($event->getOptions());
     }
 
+    /**
+     * @param array $options
+     *
+     * @return array|\ArrayAccess
+     */
     public function getMessageLayoutOptions($options = array())
     {
         if (!is_array($options) && !$options instanceof \ArrayAccess) {
@@ -193,6 +241,9 @@ class EventsSubscriber implements EventSubscriberInterface
         return $options;
     }
 
+    /**
+     * @param RenderMessageEvent $event
+     */
     public function renderMessage(RenderMessageEvent $event)
     {
         if ($event->getPreRenderedMessageTemplate()) {

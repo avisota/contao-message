@@ -21,13 +21,26 @@ use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
+/**
+ * Class SendImmediateModule
+ *
+ * @package Avisota\Contao\Message\Core\Send
+ */
 class SendImmediateModule extends \Controller implements SendModuleInterface
 {
+    /**
+     * SendImmediateModule constructor.
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
+    /**
+     * @param Message $message
+     *
+     * @return string
+     */
     public function run(Message $message)
     {
         global $container;

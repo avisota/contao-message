@@ -17,8 +17,18 @@ namespace Avisota\Contao\Message\Core\Send;
 
 use Avisota\Contao\Entity\Message;
 
+/**
+ * Class PreviewModule
+ *
+ * @package Avisota\Contao\Message\Core\Send
+ */
 class PreviewModule implements SendModuleInterface
 {
+    /**
+     * @param Message $message
+     *
+     * @return string
+     */
     public function run(Message $message)
     {
         $template = new \TwigTemplate('avisota/send/preview', 'html5');

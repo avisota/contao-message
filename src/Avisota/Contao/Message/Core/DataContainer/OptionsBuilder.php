@@ -29,11 +29,31 @@ use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetPr
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * Class OptionsBuilder
+ *
+ * @package Avisota\Contao\Message\Core\DataContainer
+ */
 class OptionsBuilder implements EventSubscriberInterface
 {
 	/**
-	 * {@inheritdoc}
-	 */
+	 * Returns an array of event names this subscriber wants to listen to.
+	 *
+	 * The array keys are event names and the value can be:
+	 *
+	 *  * The method name to call (priority defaults to 0)
+	 *  * An array composed of the method name to call and the priority
+	 *  * An array of arrays composed of the method names to call and respective
+	 *    priorities, or 0 if unset
+	 *
+	 * For instance:
+	 *
+	 *  * array('eventName' => 'methodName')
+	 *  * array('eventName' => array('methodName', $priority))
+	 *  * array('eventName' => array(array('methodName1', $priority), array('methodName2'))
+	 *
+	 * @return array The event names to listen to
+     */
 	static public function getSubscribedEvents()
 	{
 		return array(
@@ -58,6 +78,9 @@ class OptionsBuilder implements EventSubscriberInterface
 		);
 	}
 
+	/**
+	 * @param CreateOptionsEvent $event
+     */
 	public function createTemplateDirectoryOptions(CreateOptionsEvent $event)
 	{
 		$basePath = TL_ROOT . '/templates/';
@@ -98,12 +121,20 @@ class OptionsBuilder implements EventSubscriberInterface
 		}
 	}
 
+	/**
+	 * @param CreateOptionsEvent $event
+     */
 	public function createThemeOptions(CreateOptionsEvent $event)
 	{
 		$this->getThemeOptions($event->getOptions());
 	}
 
-	public function getThemeOptions($options = array())
+	/**
+	 * @param array $options
+	 *
+	 * @return array
+     */
+    public function getThemeOptions($options = array())
 	{
 		$themeRepository = EntityHelper::getRepository('Avisota\Contao:Theme');
 		$themes          = $themeRepository->findBy(array(), array('title' => 'ASC'));
@@ -114,12 +145,20 @@ class OptionsBuilder implements EventSubscriberInterface
 		return $options;
 	}
 
+	/**
+	 * @param CreateOptionsEvent $event
+     */
 	public function createLayoutTypeOptions(CreateOptionsEvent $event)
 	{
 		static::getLayoutTypeOptions($event->getOptions());
 	}
 
-	public function getLayoutTypeOptions($options = array())
+	/**
+	 * @param array $options
+	 *
+	 * @return array
+     */
+    public function getLayoutTypeOptions($options = array())
 	{
 		foreach ($GLOBALS['AVISOTA_MESSAGE_RENDERER'] as $rendererKey) {
 			$label = isset($GLOBALS['TL_LANG']['orm_avisota_layout'][$rendererKey])
@@ -132,12 +171,20 @@ class OptionsBuilder implements EventSubscriberInterface
 		return $options;
 	}
 
+	/**
+	 * @param CreateOptionsEvent $event
+     */
 	public function crateLayoutStylesheetOptions(CreateOptionsEvent $event)
 	{
 		$this->getLayoutStylesheetOptions($event->getOptions());
 	}
 
-	public function getLayoutStylesheetOptions($options = array())
+	/**
+	 * @param array $options
+	 *
+	 * @return array
+     */
+    public function getLayoutStylesheetOptions($options = array())
 	{
 		/** @var EventDispatcher $eventDispatcher */
 		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
@@ -154,12 +201,20 @@ class OptionsBuilder implements EventSubscriberInterface
 		return $stylesheets->getArrayCopy();
 	}
 
+	/**
+	 * @param CreateOptionsEvent $event
+     */
 	public function createLayoutOptions(CreateOptionsEvent $event)
 	{
 		$this->getLayoutOptions($event->getOptions());
 	}
 
-	public function getLayoutOptions($options = array())
+	/**
+	 * @param array $options
+	 *
+	 * @return array
+     */
+    public function getLayoutOptions($options = array())
 	{
 		$layoutRepository = EntityHelper::getRepository('Avisota\Contao:Layout');
 		$layouts          = $layoutRepository->findBy(array(), array('title' => 'ASC'));
@@ -172,12 +227,20 @@ class OptionsBuilder implements EventSubscriberInterface
 		return $options;
 	}
 
+	/**
+	 * @param CreateOptionsEvent $event
+     */
 	public function createMessageCategoryOptions(CreateOptionsEvent $event)
 	{
 		$this->getMessageCategoryOptions($event->getOptions());
 	}
 
-	public function getMessageCategoryOptions($options = array())
+	/**
+	 * @param array $options
+	 *
+	 * @return array
+     */
+    public function getMessageCategoryOptions($options = array())
 	{
 		$messageCategoryRepository = EntityHelper::getRepository('Avisota\Contao:MessageCategory');
 		$messageCategories         = $messageCategoryRepository->findBy(array(), array('title' => 'ASC'));
@@ -188,12 +251,17 @@ class OptionsBuilder implements EventSubscriberInterface
 		return $options;
 	}
 
+	/**
+	 * @param CreateOptionsEvent $event
+     */
 	public function createBoilerplateMessages(CreateOptionsEvent $event)
 	{
 		$this->getBoilerplateMessages($event->getOptions());
 	}
 
 	/**
+	 * @param array $options
+	 *
 	 * @return array
 	 */
 	public function getBoilerplateMessages($options = array())
@@ -221,12 +289,17 @@ class OptionsBuilder implements EventSubscriberInterface
 		return $options;
 	}
 
+	/**
+	 * @param CreateOptionsEvent $event
+     */
 	public function createNonBoilerplateMessages(CreateOptionsEvent $event)
 	{
 		$this->getNonBoilerplateMessages($event->getOptions());
 	}
 
 	/**
+	 * @param array $options
+	 *
 	 * @return array
 	 */
 	public function getNonBoilerplateMessages($options = array())
@@ -254,6 +327,9 @@ class OptionsBuilder implements EventSubscriberInterface
 		return $options;
 	}
 
+	/**
+	 * @param CreateOptionsEvent $event
+     */
 	public function createMessageOptions(CreateOptionsEvent $event)
 	{
 		if (!$event->isDefaultPrevented()) {
@@ -261,7 +337,12 @@ class OptionsBuilder implements EventSubscriberInterface
 		}
 	}
 
-	public function getMessageOptions($options = array())
+	/**
+	 * @param array $options
+	 *
+	 * @return array
+     */
+    public function getMessageOptions($options = array())
 	{
 		$messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');
 		$messages          = $messageRepository->findBy(array(), array('sendOn' => 'DESC'));
@@ -280,6 +361,9 @@ class OptionsBuilder implements EventSubscriberInterface
 		return $options;
 	}
 
+	/**
+	 * @param CreateOptionsEvent $event
+     */
 	public function createMessageContentTypeOptions(CreateOptionsEvent $event)
 	{
 		if (!$event->isDefaultPrevented()) {
@@ -289,6 +373,9 @@ class OptionsBuilder implements EventSubscriberInterface
 
 	/**
 	 * Return all newsletter elements as array
+	 *
+	 * @param       $dc
+	 * @param array $options
 	 *
 	 * @return array
 	 */
@@ -324,7 +411,9 @@ class OptionsBuilder implements EventSubscriberInterface
 	/**
 	 * Get a list of areas from the parent category.
 	 *
-	 * @param DC_General $dc
+	 * @param CreateOptionsEvent $event
+	 *
+	 * @internal param DC_General $dc
 	 */
 	public function createMessageContentCellOptions(CreateOptionsEvent $event)
 	{
@@ -334,7 +423,10 @@ class OptionsBuilder implements EventSubscriberInterface
 	/**
 	 * Get a list of areas from the parent category.
 	 *
-	 * @param DC_General $dc
+	 * @param array $options
+	 *
+	 * @return array
+	 * @internal param DC_General $dc
 	 */
 	public function getMessageContentCellOptions($options = array())
 	{
@@ -348,9 +440,11 @@ class OptionsBuilder implements EventSubscriberInterface
 	/**
 	 * Get all articles and return them as array (article alias)
 	 *
-	 * @param object
+	 * @param CreateOptionsEvent $event
 	 *
 	 * @return array
+	 * @internal param $object
+	 *
 	 */
 	public function createArticleAliasOptions(CreateOptionsEvent $event)
 	{
@@ -360,9 +454,11 @@ class OptionsBuilder implements EventSubscriberInterface
 	/**
 	 * Get all articles and return them as array (article alias)
 	 *
-	 * @param object
+	 * @param array $options
 	 *
 	 * @return array
+	 * @internal param $object
+	 *
 	 */
 	public function getArticleAliasOptions($options = array())
 	{
@@ -413,12 +509,20 @@ class OptionsBuilder implements EventSubscriberInterface
 		return $options;
 	}
 
+	/**
+	 * @param CreateOptionsEvent $event
+     */
 	public function createContentTypeOptions(CreateOptionsEvent $event)
 	{
 		$this->getContentTypeOptions($event->getOptions());
 	}
 
-	public function getContentTypeOptions($options = array())
+	/**
+	 * @param array $options
+	 *
+	 * @return array
+     */
+    public function getContentTypeOptions($options = array())
 	{
 		foreach ($GLOBALS['TL_MCE'] as $elementGroup => $elements) {
 			if (isset($GLOBALS['TL_LANG']['MCE'][$elementGroup])) {

@@ -24,10 +24,21 @@ use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
 use Contao\Doctrine\ORM\EntityHelper;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
+/**
+ * Class MessageRenderer
+ *
+ * @package Avisota\Contao\Message\Core\Renderer
+ */
 class MessageRenderer implements MessageRendererInterface
 {
     /**
-     * {@inheritdoc}
+     * Render a complete message.
+     *
+     * @param Message $message
+     *
+     * @param Layout  $layout
+     *
+     * @return PreRenderedMessageTemplateInterface
      */
     public function renderMessage(Message $message, Layout $layout = null)
     {
@@ -41,7 +52,14 @@ class MessageRenderer implements MessageRendererInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Render content from a cell.
+     *
+     * @param Message $message
+     * @param string  $cell
+     *
+     * @param Layout  $layout
+     *
+     * @return \string[]
      */
     public function renderCell(Message $message, $cell, Layout $layout = null)
     {
@@ -73,7 +91,13 @@ class MessageRenderer implements MessageRendererInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Render a single message content element.
+     *
+     * @param MessageContent $messageContent
+     *
+     * @param Layout         $layout
+     *
+     * @return string
      */
     public function renderContent(MessageContent $messageContent, Layout $layout = null)
     {

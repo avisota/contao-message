@@ -20,6 +20,11 @@ use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Message\Core\Message\Renderer;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class RenderMessageEvent
+ *
+ * @package Avisota\Contao\Message\Core\Event
+ */
 class RenderMessageEvent extends Event
 {
     /**
@@ -37,6 +42,12 @@ class RenderMessageEvent extends Event
      */
     protected $preRenderedMessageTemplate;
 
+    /**
+     * RenderMessageEvent constructor.
+     *
+     * @param Message     $message
+     * @param Layout|null $layout
+     */
     public function __construct(Message $message, Layout $layout = null)
     {
         $this->message = $message;
@@ -53,6 +64,8 @@ class RenderMessageEvent extends Event
 
     /**
      * @param Layout $layout
+     *
+     * @return $this
      */
     public function setLayout(Layout $layout = null)
     {
@@ -75,6 +88,8 @@ class RenderMessageEvent extends Event
 
     /**
      * @param PreRenderMessageTemplateEvent $preRenderedMessageTemplate
+     *
+     * @return $this
      */
     public function setPreRenderedMessageTemplate($preRenderedMessageTemplate)
     {

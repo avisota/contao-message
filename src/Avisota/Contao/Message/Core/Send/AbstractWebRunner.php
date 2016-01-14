@@ -17,8 +17,16 @@ namespace Avisota\Contao\Message\Core\Send;
 
 use Avisota\Contao\Entity\Message;
 
+/**
+ * Class AbstractWebRunner
+ *
+ * @package Avisota\Contao\Message\Core\Send
+ */
 abstract class AbstractWebRunner extends \Backend
 {
+    /**
+     * AbstractWebRunner constructor.
+     */
     function __construct()
     {
         // preserve object initialisation order
@@ -49,5 +57,11 @@ abstract class AbstractWebRunner extends \Backend
         $this->execute($message, $user);
     }
 
+    /**
+     * @param Message      $message
+     * @param \BackendUser $user
+     *
+     * @return mixed
+     */
     abstract protected function execute(Message $message, \BackendUser $user);
 }

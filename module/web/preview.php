@@ -36,6 +36,9 @@ BackendUser::getInstance();
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 
+/**
+ * Class preview
+ */
 class preview
 {
     public function run()

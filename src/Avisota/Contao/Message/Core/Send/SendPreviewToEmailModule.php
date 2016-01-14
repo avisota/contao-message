@@ -18,8 +18,18 @@ namespace Avisota\Contao\Message\Core\Send;
 use Avisota\Contao\Entity\Message;
 use Doctrine\DBAL\Connection;
 
+/**
+ * Class SendPreviewToEmailModule
+ *
+ * @package Avisota\Contao\Message\Core\Send
+ */
 class SendPreviewToEmailModule implements SendModuleInterface
 {
+    /**
+     * @param Message $message
+     *
+     * @return string
+     */
     public function run(Message $message)
     {
         $emailMissing = isset($_SESSION['AVISOTA_SEND_PREVIEW_TO_EMAIL_EMPTY'])

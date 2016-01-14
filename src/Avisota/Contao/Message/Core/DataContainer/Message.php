@@ -30,10 +30,30 @@ use Doctrine\Common\Persistence\Mapping\MappingException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * Class Message
+ *
+ * @package Avisota\Contao\Message\Core\DataContainer
+ */
 class Message implements EventSubscriberInterface
 {
     /**
-     * {@inheritdoc}
+     * Returns an array of event names this subscriber wants to listen to.
+     *
+     * The array keys are event names and the value can be:
+     *
+     *  * The method name to call (priority defaults to 0)
+     *  * An array composed of the method name to call and the priority
+     *  * An array of arrays composed of the method names to call and respective
+     *    priorities, or 0 if unset
+     *
+     * For instance:
+     *
+     *  * array('eventName' => 'methodName')
+     *  * array('eventName' => array('methodName', $priority))
+     *  * array('eventName' => array(array('methodName1', $priority), array('methodName2'))
+     *
+     * @return array The event names to listen to
      */
     public static function getSubscribedEvents()
     {
@@ -43,6 +63,10 @@ class Message implements EventSubscriberInterface
         );
     }
 
+    /**
+     * @param $add
+     * @param $dc
+     */
     public function addHeader($add, $dc)
     {
         // TODO refactore for DCG
@@ -99,6 +123,9 @@ class Message implements EventSubscriberInterface
         return $add;
     }
 
+    /**
+     * @param GetGroupHeaderEvent $event
+     */
     public function getGroupHeader(GetGroupHeaderEvent $event)
     {
         /** @var EntityModel $model */
@@ -132,7 +159,9 @@ class Message implements EventSubscriberInterface
     /**
      * Add the recipient row.
      *
-     * @param array
+     * @param ParentViewChildRecordEvent $event
+     *
+     * @internal param $array
      */
     public function parentViewChildRecord(ParentViewChildRecordEvent $event)
     {

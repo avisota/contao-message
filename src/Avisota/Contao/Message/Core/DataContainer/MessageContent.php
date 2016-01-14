@@ -27,10 +27,30 @@ use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGr
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * Class MessageContent
+ *
+ * @package Avisota\Contao\Message\Core\DataContainer
+ */
 class MessageContent implements EventSubscriberInterface
 {
     /**
-     * {@inheritdoc}
+     * Returns an array of event names this subscriber wants to listen to.
+     *
+     * The array keys are event names and the value can be:
+     *
+     *  * The method name to call (priority defaults to 0)
+     *  * An array composed of the method name to call and the priority
+     *  * An array of arrays composed of the method names to call and respective
+     *    priorities, or 0 if unset
+     *
+     * For instance:
+     *
+     *  * array('eventName' => 'methodName')
+     *  * array('eventName' => array('methodName', $priority))
+     *  * array('eventName' => array(array('methodName1', $priority), array('methodName2'))
+     *
+     * @return array The event names to listen to
      */
     public static function getSubscribedEvents()
     {
@@ -70,6 +90,9 @@ class MessageContent implements EventSubscriberInterface
         ) . '" title="' . specialchars($title) . '"' . $attributes . ' class="header_send">' . $label . '</a> ';
     }
 
+    /**
+     * @param GetGroupHeaderEvent $event
+     */
     public function getGroupHeader(GetGroupHeaderEvent $event)
     {
         if ($event->getModel()->getProviderName() != 'orm_avisota_message_content') {
@@ -89,7 +112,9 @@ class MessageContent implements EventSubscriberInterface
     /**
      * Add the recipient row.
      *
-     * @param array
+     * @param ParentViewChildRecordEvent $event
+     *
+     * @internal param $array
      */
     public function parentViewChildRecord(ParentViewChildRecordEvent $event)
     {

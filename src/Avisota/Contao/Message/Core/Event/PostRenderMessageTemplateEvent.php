@@ -21,6 +21,11 @@ use Avisota\Contao\Entity\Message;
 use Avisota\Recipient\RecipientInterface;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class PostRenderMessageTemplateEvent
+ *
+ * @package Avisota\Contao\Message\Core\Event
+ */
 class PostRenderMessageTemplateEvent extends Event
 {
     const NAME = 'avisota.contao.post-render-message-template';
@@ -50,6 +55,15 @@ class PostRenderMessageTemplateEvent extends Event
      */
     protected $message;
 
+    /**
+     * PostRenderMessageTemplateEvent constructor.
+     *
+     * @param Message                             $contaoMessage
+     * @param PreRenderedMessageTemplateInterface $messageTemplate
+     * @param RecipientInterface|null             $recipient
+     * @param array                               $additionalData
+     * @param ContaoAwareNativeMessage            $message
+     */
     function __construct(
         Message $contaoMessage,
         PreRenderedMessageTemplateInterface $messageTemplate,

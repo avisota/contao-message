@@ -18,6 +18,11 @@ namespace Avisota\Contao\Message\Core\Event;
 use Avisota\Contao\Message\Core\Message\Renderer;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class ResolveStylesheetEvent
+ *
+ * @package Avisota\Contao\Message\Core\Event
+ */
 class ResolveStylesheetEvent extends Event
 {
     const NAME = 'Avisota\Contao\Message\Core\Event\ResolveStylesheet';
@@ -27,6 +32,11 @@ class ResolveStylesheetEvent extends Event
      */
     protected $stylesheet;
 
+    /**
+     * ResolveStylesheetEvent constructor.
+     *
+     * @param $stylesheet
+     */
     function __construct($stylesheet)
     {
         $this->stylesheet = $stylesheet;
@@ -34,6 +44,8 @@ class ResolveStylesheetEvent extends Event
 
     /**
      * @param string $stylesheet
+     *
+     * @return $this
      */
     public function setStylesheet($stylesheet)
     {

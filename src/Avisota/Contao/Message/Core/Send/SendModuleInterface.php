@@ -17,7 +17,17 @@ namespace Avisota\Contao\Message\Core\Send;
 
 use Avisota\Contao\Entity\Message;
 
+/**
+ * Interface SendModuleInterface
+ *
+ * @package Avisota\Contao\Message\Core\Send
+ */
 interface SendModuleInterface
 {
+    /**
+     * @param Message $message
+     *
+     * @return mixed
+     */
     public function run(Message $message);
 }

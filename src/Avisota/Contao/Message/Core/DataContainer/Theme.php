@@ -15,6 +15,11 @@
 
 namespace Avisota\Contao\Message\Core\DataContainer;
 
+/**
+ * Class Theme
+ *
+ * @package Avisota\Contao\Message\Core\DataContainer
+ */
 class Theme extends \Backend
 {
 	/**

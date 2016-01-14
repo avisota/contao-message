@@ -26,6 +26,11 @@ use Contao\Doctrine\ORM\EntityHelper;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * Class Reader
+ *
+ * @package Avisota\Contao\Message\Core\Module
+ */
 class Reader extends \TwigModule
 {
     /**
@@ -34,7 +39,7 @@ class Reader extends \TwigModule
     protected $strTemplate = 'avisota/frontend/module/mod_reader';
 
     /**
-     * {@inheritdoc}
+     * Compile the current element
      */
     protected function compile()
     {

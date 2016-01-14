@@ -17,6 +17,11 @@ namespace Avisota\Contao\Message\Core\Template;
 
 use Avisota\Contao\Entity\Message;
 
+/**
+ * Class MutablePreRenderedMessageTemplate
+ *
+ * @package Avisota\Contao\Message\Core\Template
+ */
 class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemplate
 {
     /**
@@ -39,6 +44,15 @@ class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemp
      */
     protected $content;
 
+    /**
+     * MutablePreRenderedMessageTemplate constructor.
+     *
+     * @param Message $message
+     * @param string  $content
+     * @param string  $contentName
+     * @param string  $contentType
+     * @param string  $contentEncoding
+     */
     function __construct(Message $message, $content = '', $contentName = 'message.html', $contentType = 'text/html', $contentEncoding = 'utf-8')
     {
         parent::__construct($message);
@@ -50,6 +64,8 @@ class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemp
 
     /**
      * @param string $contentType
+     *
+     * @return $this
      */
     public function setContentType($contentType)
     {
@@ -58,7 +74,9 @@ class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemp
     }
 
     /**
-     * {@inheritdoc}
+     * Return the content type.
+     *
+     * @return string
      */
     public function getContentType()
     {
@@ -67,6 +85,8 @@ class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemp
 
     /**
      * @param string $contentEncoding
+     *
+     * @return $this
      */
     public function setContentEncoding($contentEncoding)
     {
@@ -75,7 +95,9 @@ class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemp
     }
 
     /**
-     * {@inheritdoc}
+     * Return the content encoding.
+     *
+     * @return string
      */
     public function getContentEncoding()
     {
@@ -84,6 +106,8 @@ class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemp
 
     /**
      * @param string $contentName
+     *
+     * @return $this
      */
     public function setContentName($contentName)
     {
@@ -92,7 +116,10 @@ class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemp
     }
 
     /**
-     * {@inheritdoc}
+     * Get a name descriptor (file name) for this content,
+     * e.g. "newsletter-hello-world.html".
+     *
+     * @return string
      */
     public function getContentName()
     {
@@ -101,6 +128,8 @@ class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemp
 
     /**
      * @param string $content
+     *
+     * @return $this
      */
     public function setContent($content)
     {
@@ -109,7 +138,9 @@ class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemp
     }
 
     /**
-     * {@inheritdoc}
+     * Get the (binary) content.
+     *
+     * @return string
      */
     public function getContent()
     {

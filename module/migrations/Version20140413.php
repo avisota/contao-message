@@ -18,8 +18,18 @@ namespace DoctrineMigrations\AvisotaMessage;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
+/**
+ * Class Version20140413
+ *
+ * @package DoctrineMigrations\AvisotaMessage
+ */
 class Version20140413 extends AbstractMigration
 {
+    /**
+     * @param Schema $schema
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function up(Schema $schema)
     {
         if (!$schema->hasTable('orm_avisota_message_content')) {
@@ -40,6 +50,9 @@ class Version20140413 extends AbstractMigration
         }
     }
 
+    /**
+     * @param Schema $schema
+     */
     public function down(Schema $schema)
     {
     }

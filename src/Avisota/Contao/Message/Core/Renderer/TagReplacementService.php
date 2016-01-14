@@ -18,6 +18,11 @@ namespace Avisota\Contao\Message\Core\Renderer;
 use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Entity\MessageContent;
 
+/**
+ * Class TagReplacementService
+ *
+ * @package Avisota\Contao\Message\Core\Renderer
+ */
 class TagReplacementService
 {
     /**
@@ -25,6 +30,11 @@ class TagReplacementService
      */
     protected $twigEnvironment;
 
+    /**
+     * TagReplacementService constructor.
+     *
+     * @param \Twig_Environment|null $twigEnvironment
+     */
     function __construct(\Twig_Environment $twigEnvironment = null)
     {
         $this->twigEnvironment = $twigEnvironment;
@@ -32,6 +42,8 @@ class TagReplacementService
 
     /**
      * @param \Twig_Environment $twigEnvironment
+     *
+     * @return $this
      */
     public function setTwigEnvironment($twigEnvironment)
     {
@@ -47,6 +59,12 @@ class TagReplacementService
         return $this->twigEnvironment;
     }
 
+    /**
+     * @param       $buffer
+     * @param array $context
+     *
+     * @return string
+     */
     public function parse($buffer, $context = array())
     {
         /** @var \Twig_Loader_Array $loader */

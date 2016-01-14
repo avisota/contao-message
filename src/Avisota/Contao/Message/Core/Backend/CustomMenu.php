@@ -22,9 +22,20 @@ use BackendTemplate;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
 
+/**
+ * Class CustomMenu
+ *
+ * @package Avisota\Contao\Message\Core\Backend
+ */
 class CustomMenu extends \BackendModule
 {
-	static public function hookGetUserNavigation(array $navigation, $showAll)
+	/**
+	 * @param array $navigation
+	 * @param       $showAll
+	 *
+	 * @return array
+     */
+    static public function hookGetUserNavigation(array $navigation, $showAll)
 	{
 		if (TL_MODE == 'BE') {
 			try {
@@ -116,6 +127,9 @@ class CustomMenu extends \BackendModule
 		}
 	}
 
+	/**
+	 *
+     */
 	public function generate()
 	{
 		$do = \Input::getInstance()

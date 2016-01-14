@@ -18,6 +18,11 @@ namespace Avisota\Contao\Message\Core\Event;
 use Avisota\Contao\Message\Core\Message\Renderer;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class CollectThemeStylesheetsEvent
+ *
+ * @package Avisota\Contao\Message\Core\Event
+ */
 class CollectThemeStylesheetsEvent extends CollectStylesheetsEvent
 {
     const NAME = 'Avisota\Contao\Message\Core\Event\CollectThemeStylesheets';
@@ -27,6 +32,12 @@ class CollectThemeStylesheetsEvent extends CollectStylesheetsEvent
      */
     protected $theme;
 
+    /**
+     * CollectThemeStylesheetsEvent constructor.
+     *
+     * @param array        $theme
+     * @param \ArrayObject $stylesheets
+     */
     function __construct(array $theme, \ArrayObject $stylesheets)
     {
         $this->theme = $theme;

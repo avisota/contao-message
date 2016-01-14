@@ -22,6 +22,11 @@ use BackendTemplate;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
 
+/**
+ * Class Helper
+ *
+ * @package Avisota\Contao\Message\Core\Backend
+ */
 class Helper
 {
 	/**

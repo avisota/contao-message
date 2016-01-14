@@ -17,6 +17,11 @@ namespace Avisota\Contao\Message\Core\DataContainer;
 
 use ContaoCommunityAlliance\DcGeneral\DC_General;
 
+/**
+ * Class Layout
+ *
+ * @package Avisota\Contao\Message\Core\DataContainer
+ */
 class Layout
 {
 	/**
@@ -68,7 +73,13 @@ class Layout
 		return $value;
 	}
 
-	static public function getterCallbackAllowedCellContents($value, \Avisota\Contao\Entity\Layout $layout)
+	/**
+	 * @param                               $value
+	 * @param \Avisota\Contao\Entity\Layout $layout
+	 *
+	 * @return array
+     */
+    static public function getterCallbackAllowedCellContents($value, \Avisota\Contao\Entity\Layout $layout)
 	{
 		if ($value === null) {
 			return static::getDefaultSelectedCellContentElements($layout);
@@ -77,7 +88,13 @@ class Layout
 		return $value;
 	}
 
-	static public function setterCallbackAllowedCellContents($value, \Avisota\Contao\Entity\Layout $layout)
+	/**
+	 * @param                               $value
+	 * @param \Avisota\Contao\Entity\Layout $layout
+	 *
+	 * @return null
+     */
+    static public function setterCallbackAllowedCellContents($value, \Avisota\Contao\Entity\Layout $layout)
 	{
 		if (!is_array($value)) {
 			$value = null;

@@ -31,6 +31,11 @@ use Avisota\Contao\Message\Core\Renderer\TagReplacementService;
 use Avisota\Recipient\RecipientInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
+/**
+ * Class AbstractPostRenderingMessageTemplate
+ *
+ * @package Avisota\Contao\Message\Core\Template
+ */
 abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessageTemplateInterface
 {
 
@@ -39,12 +44,20 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
      */
     protected $message;
 
+    /**
+     * AbstractPostRenderingMessageTemplate constructor.
+     *
+     * @param Message $message
+     */
     protected function __construct(Message $message)
     {
         $this->message = $message;
     }
 
     /**
+     * @param RecipientInterface $recipient
+     * @param array              $additionalData
+     *
      * @return string
      */
     protected function parseContent(RecipientInterface $recipient, array $additionalData = array())
@@ -90,7 +103,13 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
     }
 
     /**
-     * {@inheritdoc}
+     * Render a preview.
+     *
+     * @param RecipientInterface $recipient
+     *
+     * @param array              $additionalData
+     *
+     * @return mixed The content only, not a message.
      */
     public function renderPreview(RecipientInterface $recipient, array $additionalData = array())
     {
@@ -116,7 +135,15 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
     }
 
     /**
-     * {@inheritdoc}
+     * Render a message for the given recipient.
+     *
+     * @param RecipientInterface $recipient
+     * @param array              $additionalData
+     *
+     * @return \Avisota\Message\MessageInterface
+     * @internal param array $newsletterData Additional newsletter data.
+     *
+     * @internal param RecipientInterface $recipientEmail The main recipient.
      */
     public function render(RecipientInterface $recipient = null, array $additionalData = array())
     {

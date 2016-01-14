@@ -17,6 +17,11 @@ namespace Avisota\Contao\Message\Core\Module;
 
 use Contao\Doctrine\ORM\EntityHelper;
 
+/**
+ * Class Listing
+ *
+ * @package Avisota\Contao\Message\Core\Module
+ */
 class Listing extends \TwigModule
 {
     /**
@@ -25,7 +30,7 @@ class Listing extends \TwigModule
     protected $strTemplate = 'avisota/frontend/module/mod_listing';
 
     /**
-     * {@inheritdoc}
+     * Compile the current element
      */
     protected function compile()
     {

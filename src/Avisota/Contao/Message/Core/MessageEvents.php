@@ -19,6 +19,11 @@ use Avisota\Contao\Entity\MessageCategory;
 use BackendTemplate;
 use Contao\Doctrine\ORM\EntityHelper;
 
+/**
+ * Class MessageEvents
+ *
+ * @package Avisota\Contao\Message\Core
+ */
 class MessageEvents
 {
     /**

@@ -26,8 +26,16 @@ use Contao\Doctrine\ORM\EntityInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Contao\Doctrine\ORM\Annotation\Accessor;
 
+/**
+ * Class AbstractMessage
+ *
+ * @package Avisota\Contao\Message\Core\Entity
+ */
 abstract class AbstractMessage implements EntityInterface, AliasableInterface
 {
+	/**
+	 * AbstractMessage constructor.
+     */
 	public function __construct()
 	{
 		if (isset($GLOBALS['TL_LANGUAGE'])) {
@@ -126,10 +134,10 @@ abstract class AbstractMessage implements EntityInterface, AliasableInterface
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * Return the alias parent field value, to generate the alias from.
 	 *
-	 * @Accessor(ignore=true)
-	 */
+	 * @return string
+     */
 	public function getAliasParentValue()
 	{
 		return $this->getSubject();

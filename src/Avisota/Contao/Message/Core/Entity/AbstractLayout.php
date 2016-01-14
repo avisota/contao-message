@@ -21,6 +21,11 @@ use Contao\Doctrine\ORM\EntityInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Contao\Doctrine\ORM\Annotation\Accessor;
 
+/**
+ * Class AbstractLayout
+ *
+ * @package Avisota\Contao\Message\Core\Entity
+ */
 abstract class AbstractLayout implements EntityInterface
 {
 	/**

@@ -43,8 +43,15 @@ require($dir . '/system/initialize.php');
 
 BackendUser::getInstance();
 
+/**
+ * Class send_immediate
+ */
 class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 {
+    /**
+     * @param Message     $message
+     * @param BackendUser $user
+     */
     protected function execute(Message $message, \BackendUser $user)
     {
         global $container;
@@ -183,6 +190,9 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
         exit;
     }
 
+    /**
+     * @return string
+     */
     function createUUID()
     {
         return sprintf(

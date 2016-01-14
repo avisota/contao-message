@@ -19,6 +19,11 @@ use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Message\Core\Renderer\MessageRendererInterface;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class RenderMessageHeadersEvent
+ *
+ * @package Avisota\Contao\Message\Core\Event
+ */
 class RenderMessageHeadersEvent extends Event
 {
     const NAME = 'Avisota\Contao\Message\Core\Event\RenderMessageHeaders';
@@ -38,6 +43,13 @@ class RenderMessageHeadersEvent extends Event
      */
     protected $headers;
 
+    /**
+     * RenderMessageHeadersEvent constructor.
+     *
+     * @param MessageRendererInterface $renderer
+     * @param                          $message
+     * @param                          $headers
+     */
     function __construct(MessageRendererInterface $renderer, $message, $headers)
     {
         $this->renderer = $renderer;
