@@ -15,6 +15,7 @@
 
 namespace Avisota\Contao\Message\Core\Renderer;
 
+use Avisota\Contao\Core\Message\PreRenderedMessageTemplateInterface;
 use Avisota\Contao\Entity\Layout;
 use Avisota\Contao\Entity\Message;
 use Avisota\Contao\Entity\MessageContent;

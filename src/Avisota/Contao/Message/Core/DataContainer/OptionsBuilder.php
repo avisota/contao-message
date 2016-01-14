@@ -16,16 +16,16 @@
 namespace Avisota\Contao\Message\Core\DataContainer;
 
 use Avisota\Contao\Core\Event\CreateOptionsEvent;
-use Avisota\Contao\Entity\Layout;
+
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\CollectStylesheetsEvent;
 use Avisota\Contao\Message\Core\MessageEvents;
-use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
+
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
-use ContaoCommunityAlliance\DcGeneral\Contao\Compatibility\DcCompat;
-use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetPropertyOptionsEvent;
+
+
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

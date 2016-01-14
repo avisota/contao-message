@@ -15,7 +15,6 @@
 
 namespace Avisota\Contao\Message\Core\Event;
 
-use Avisota\Contao\Message\Core\Message\Renderer;
 use Symfony\Component\EventDispatcher\Event;
 
 /**

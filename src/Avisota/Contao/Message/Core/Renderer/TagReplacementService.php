@@ -15,8 +15,6 @@
 
 namespace Avisota\Contao\Message\Core\Renderer;
 
-use Avisota\Contao\Entity\Message;
-use Avisota\Contao\Entity\MessageContent;
 
 /**
  * Class TagReplacementService

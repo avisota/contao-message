@@ -21,7 +21,7 @@ use Avisota\Contao\Entity\MessageCategory;
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
 use Avisota\Contao\Message\Core\Template\MutablePreRenderedMessageTemplate;
-use BackendTemplate;
+
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

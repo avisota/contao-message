@@ -16,8 +16,7 @@
 
 namespace Avisota\Contao\Message\Core\DataContainer;
 
-use Avisota\Contao\Core\Message\Renderer\MessagePreRendererInterface;
-use Avisota\Contao\Message\Core\Renderer\MessageRenderer;
+
 use Avisota\Contao\Message\Core\Renderer\MessageRendererInterface;
 use Contao\Controller;
 use Contao\Doctrine\ORM\DataContainer\General\EntityModel;

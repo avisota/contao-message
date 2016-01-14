@@ -19,7 +19,7 @@ use Avisota\Contao\Core\Message\ContaoAwareNativeMessage;
 use Avisota\Contao\Core\Message\PreRenderedMessageTemplateInterface;
 use Avisota\Contao\Core\Recipient\SynonymizerService;
 use Avisota\Contao\Entity\Message;
-use Avisota\Contao\Core\ReplaceInsertTagsHook;
+
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\PostRenderMessageContentEvent;
 use Avisota\Contao\Message\Core\Event\PostRenderMessageTemplateEvent;

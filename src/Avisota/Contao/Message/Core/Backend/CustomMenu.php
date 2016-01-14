@@ -15,10 +15,10 @@
 
 namespace Avisota\Contao\Message\Core\Backend;
 
-use Avisota\Contao\Entity\Message;
+
 use Avisota\Contao\Entity\MessageCategory;
-use Avisota\Contao\Entity\MessageContent;
-use BackendTemplate;
+
+
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 

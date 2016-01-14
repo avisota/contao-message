@@ -17,16 +17,16 @@
 namespace Avisota\Contao\Message\Core\DataContainer;
 
 use Avisota\Contao\Entity\RecipientSource;
-use Avisota\Contao\Message\Core\Backend\Helper;
+
 use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
 use Contao\Doctrine\ORM\EntityHelper;
-use Contao\Doctrine\ORM\EntityInterface;
+
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Backend\GetThemeEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Date\ParseDateEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
-use Doctrine\Common\Persistence\Mapping\MappingException;
+
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

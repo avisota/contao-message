@@ -16,7 +16,7 @@
 namespace Avisota\Contao\Message\Core\Send;
 
 use Avisota\Contao\Entity\Message;
-use Doctrine\DBAL\Connection;
+
 
 /**
  * Class SendPreviewToEmailModule

@@ -18,8 +18,8 @@ namespace Avisota\Contao\Message\Core\Module;
 use Avisota\Contao\Core\CoreEvents;
 use Avisota\Contao\Core\Event\CreatePublicEmptyRecipientEvent;
 use Avisota\Contao\Core\Recipient\SynonymizerService;
-use Avisota\Contao\Message\Core\Event\RenderMessageContentEvent;
-use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
+
+
 use Avisota\Contao\Message\Core\Renderer\MessageRenderer;
 use Avisota\Contao\Message\Core\Renderer\TagReplacementService;
 use Contao\Doctrine\ORM\EntityHelper;
