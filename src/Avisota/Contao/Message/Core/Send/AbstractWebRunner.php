@@ -39,10 +39,9 @@ abstract class AbstractWebRunner extends \Backend
 
     public function run()
     {
-        $input             = \Input::getInstance();
         $messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');
 
-        $messageId = $input->get('id');
+        $messageId = \Input::get('id');
         $message   = $messageRepository->find($messageId);
         /** @var \Avisota\Contao\Entity\Message $message */
 

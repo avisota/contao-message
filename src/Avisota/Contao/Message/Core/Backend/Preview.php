@@ -20,7 +20,7 @@ use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\RedirectEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
-use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
+use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 use ContaoCommunityAlliance\DcGeneral\DC_General;
 use ContaoCommunityAlliance\DcGeneral\DcGeneralEvents;
 use ContaoCommunityAlliance\DcGeneral\EnvironmentInterface;
@@ -79,22 +79,19 @@ class Preview implements EventSubscriberInterface
 			new LoadLanguageFileEvent('orm_avisota_message')
 		);
 
-		$input             = \Input::getInstance();
 		$messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');
 
-		$messageId = IdSerializer::fromSerialized($input->get('id') ? $input->get('id') : $input->get('pid'));
+		$messageId = ModelId::fromSerialized(\Input::get('id') ? \Input::get('id') : \Input::get('pid'));
 		$message   = $messageRepository->find($messageId->getId());
 
 		if (!$message) {
-			$environment = \Environment::getInstance();
-
 			$eventDispatcher->dispatch(
 				ContaoEvents::CONTROLLER_REDIRECT,
 				new RedirectEvent(
 					preg_replace(
 						'#&(act=preview|id=[a-f0-9\-]+)#',
 						'',
-						$environment->request
+						\Environment::get('request')
 					)
 				)
 			);

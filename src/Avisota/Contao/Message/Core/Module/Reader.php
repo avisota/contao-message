@@ -48,9 +48,9 @@ class Reader extends \TwigModule
         }
 
         if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item'])) {
-            $messageAlias = \Input::getInstance()->get('auto_item');
+            $messageAlias = \Input::get('auto_item');
         } else {
-            $messageAlias = \Input::getInstance()->get('items');
+            $messageAlias = \Input::get('items');
         }
 
         $repository   = EntityHelper::getRepository('Avisota\Contao:Message');

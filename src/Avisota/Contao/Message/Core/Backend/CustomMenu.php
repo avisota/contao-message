@@ -20,7 +20,7 @@ use Avisota\Contao\Entity\MessageCategory;
 use Avisota\Contao\Entity\MessageContent;
 use BackendTemplate;
 use Contao\Doctrine\ORM\EntityHelper;
-use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
+use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 
 /**
  * Class CustomMenu
@@ -132,13 +132,10 @@ class CustomMenu extends \BackendModule
      */
 	public function generate()
 	{
-		$do = \Input::getInstance()
-			->get('do');
+		$do = \Input::get('do');
 		$id = preg_replace('#^avisota_category_(.*)$#', '$1', $do);
 
-		$serializer = new IdSerializer();
-		$serializer->setDataProviderName('orm_avisota_message_category');
-		$serializer->setId($id);
+		$serializer = new ModelId('orm_avisota_message_category', $id);
 
 		$this->redirect('contao/main.php?do=avisota_newsletter&table=orm_avisota_message&pid=' . $serializer->getSerialized());
 	}

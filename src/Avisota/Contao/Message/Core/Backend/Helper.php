@@ -20,7 +20,7 @@ use Avisota\Contao\Entity\MessageCategory;
 use Avisota\Contao\Entity\MessageContent;
 use BackendTemplate;
 use Contao\Doctrine\ORM\EntityHelper;
-use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
+use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 
 /**
  * Class Helper
@@ -34,9 +34,8 @@ class Helper
 	 */
 	static public function resolveCategoryFromInput()
 	{
-		$input         = \Input::getInstance();
-		$id            = $input->get('id');
-		$pid           = $input->get('pid');
+		$id            = \Input::get('id');
+		$pid           = \Input::get('pid');
 		$modelId       = null;
 		$parentModelId = null;
 		/** @var MessageCategory $category */
@@ -47,10 +46,10 @@ class Helper
 		$content = null;
 
 		if ($id) {
-			$modelId = IdSerializer::fromSerialized($id);
+			$modelId = ModelId::fromSerialized($id);
 		}
 		if ($pid) {
-			$parentModelId = IdSerializer::fromSerialized($pid);
+			$parentModelId = ModelId::fromSerialized($pid);
 		}
 
 		// $id or $pid is a category ID
