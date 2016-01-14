@@ -16,6 +16,7 @@
 namespace Avisota\Contao\Message\Core\Send;
 
 use Avisota\Contao\Entity\Message;
+use Contao\Doctrine\ORM\EntityHelper;
 
 /**
  * Class AbstractWebRunner
@@ -39,7 +40,7 @@ abstract class AbstractWebRunner extends \Backend
     public function run()
     {
         $input             = \Input::getInstance();
-        $messageRepository = \Contao\Doctrine\ORM\EntityHelper::getRepository('Avisota\Contao:Message');
+        $messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');
 
         $messageId = $input->get('id');
         $message   = $messageRepository->find($messageId);
