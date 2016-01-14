@@ -54,23 +54,61 @@ class OptionsBuilder implements EventSubscriberInterface
     {
         return array(
             // Theme related options
-            'avisota.create-template-directory-options'        => 'createTemplateDirectoryOptions',
-            'avisota.create-theme-options'                     => 'createThemeOptions',
+            'avisota.create-template-directory-options' => array(
+                array('createTemplateDirectoryOptions'),
+            ),
+
+            'avisota.create-theme-options'       => array(
+                array('createThemeOptions'),
+            ),
+
             // Layout related options
-            'avisota.create-layout-type-options'               => 'createLayoutTypeOptions',
-            'avisota.create-layout-stylesheet-options'         => 'crateLayoutStylesheetOptions',
-            'avisota.create-layout-options'                    => 'createLayoutOptions',
+            'avisota.create-layout-type-options' => array(
+                array('createLayoutTypeOptions'),
+            ),
+
+            'avisota.create-layout-stylesheet-options' => array(
+                array('crateLayoutStylesheetOptions'),
+            ),
+
+            'avisota.create-layout-options'              => array(
+                array('createLayoutOptions'),
+            ),
+
             // Message category related options
-            'avisota.create-message-category-options'          => 'createMessageCategoryOptions',
+            'avisota.create-message-category-options'    => array(
+                array('createMessageCategoryOptions'),
+            ),
+
             // Message related options
-            'avisota.create-boilerplate-message-options'       => 'createBoilerplateMessages',
-            'avisota.create-non-boilerplate-message-options'   => 'createNonBoilerplateMessages',
-            'avisota.create-message-options'                   => 'createMessageOptions',
+            'avisota.create-boilerplate-message-options' => array(
+                array('createBoilerplateMessages'),
+            ),
+
+            'avisota.create-non-boilerplate-message-options' => array(
+                array('createNonBoilerplateMessages'),
+            ),
+
+            'avisota.create-message-options'                   => array(
+                array('createMessageOptions'),
+            ),
+
             // Message content related options
-            MessageEvents::CREATE_MESSAGE_CONTENT_TYPE_OPTIONS => 'createMessageContentTypeOptions',
-            MessageEvents::CREATE_MESSAGE_CONTENT_CELL_OPTIONS => 'createMessageContentCellOptions',
-            'avisota.create-article-options'                   => 'createArticleAliasOptions',
-            'avisota.create-content-type-options'              => 'createContentTypeOptions',
+            MessageEvents::CREATE_MESSAGE_CONTENT_TYPE_OPTIONS => array(
+                array('createMessageContentTypeOptions'),
+            ),
+
+            MessageEvents::CREATE_MESSAGE_CONTENT_CELL_OPTIONS => array(
+                array('createMessageContentCellOptions'),
+            ),
+
+            'avisota.create-article-options' => array(
+                array('createArticleAliasOptions'),
+            ),
+
+            'avisota.create-content-type-options' => array(
+                array('createContentTypeOptions'),
+            ),
         );
     }
 
