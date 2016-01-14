@@ -51,6 +51,8 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
     /**
      * @param Message     $message
      * @param BackendUser $user
+     *
+     * @return mixed|void
      */
     protected function execute(Message $message, \BackendUser $user)
     {

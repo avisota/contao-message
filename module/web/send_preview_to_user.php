@@ -47,6 +47,8 @@ class send_preview_to_user extends \Avisota\Contao\Message\Core\Send\AbstractWeb
     /**
      * @param Message     $message
      * @param BackendUser $user
+     *
+     * @return mixed|void
      */
     protected function execute(Message $message, \BackendUser $user)
     {
