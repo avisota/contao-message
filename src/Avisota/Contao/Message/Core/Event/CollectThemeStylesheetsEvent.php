@@ -15,8 +15,6 @@
 
 namespace Avisota\Contao\Message\Core\Event;
 
-
-
 /**
  * Class CollectThemeStylesheetsEvent
  *

@@ -15,7 +15,6 @@
 
 namespace Avisota\Contao\Message\Core;
 
-
 /**
  * Class MessageEvents
  *

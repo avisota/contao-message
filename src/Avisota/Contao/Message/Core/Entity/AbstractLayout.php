@@ -28,32 +28,32 @@ use Contao\Doctrine\ORM\Annotation\Accessor;
  */
 abstract class AbstractLayout implements EntityInterface
 {
-	/**
-	 * @Accessor(ignore=true)
-	 *
-	 * @return array
-	 */
-	public function getStylesheetPaths()
-	{
-		/** @var EventDispatcher $eventDispatcher */
-		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+    /**
+     * @Accessor(ignore=true)
+     *
+     * @return array
+     */
+    public function getStylesheetPaths()
+    {
+        /** @var EventDispatcher $eventDispatcher */
+        $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 
-		$paths = array();
-		$stylesheets = $this->getStylesheets();
-		if ($stylesheets) {
-			foreach ($stylesheets as $stylesheet) {
-				$event = new ResolveStylesheetEvent($stylesheet);
-				$eventDispatcher->dispatch(ResolveStylesheetEvent::NAME, $event);
-				$stylesheet = $event->getStylesheet();
+        $paths       = array();
+        $stylesheets = $this->getStylesheets();
+        if ($stylesheets) {
+            foreach ($stylesheets as $stylesheet) {
+                $event = new ResolveStylesheetEvent($stylesheet);
+                $eventDispatcher->dispatch(ResolveStylesheetEvent::NAME, $event);
+                $stylesheet = $event->getStylesheet();
 
-				if (!file_exists(TL_ROOT . '/' . $stylesheet)) {
-					throw new \RuntimeException('Missing stylesheet ' . $stylesheet);
-				}
+                if (!file_exists(TL_ROOT . '/' . $stylesheet)) {
+                    throw new \RuntimeException('Missing stylesheet ' . $stylesheet);
+                }
 
-				$paths[] = $stylesheet;
-			}
-		}
+                $paths[] = $stylesheet;
+            }
+        }
 
-		return $paths;
-	}
+        return $paths;
+    }
 }
