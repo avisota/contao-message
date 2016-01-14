@@ -56,7 +56,10 @@ class Message implements EventSubscriberInterface
     {
         return array(
             GetGroupHeaderEvent::NAME . '[orm_avisota_message]' => 'getGroupHeader',
-            ParentViewChildRecordEvent::NAME                    => 'parentViewChildRecord',
+
+            ParentViewChildRecordEvent::NAME => array(
+                array('parentViewChildRecord'),
+            ),
         );
     }
 

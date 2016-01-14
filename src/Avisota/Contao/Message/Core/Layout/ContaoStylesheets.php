@@ -50,8 +50,13 @@ class ContaoStylesheets implements EventSubscriberInterface
     static public function getSubscribedEvents()
     {
         return array(
-            AvisotaMessageEvents::COLLECT_STYLESHEETS => 'collectStylesheets',
-            AvisotaMessageEvents::RESOLVE_STYLESHEET  => 'resolveStylesheet',
+            AvisotaMessageEvents::COLLECT_STYLESHEETS => array(
+                array('collectStylesheets'),
+            ),
+
+            AvisotaMessageEvents::RESOLVE_STYLESHEET => array(
+                array('resolveStylesheet'),
+            ),
         );
     }
 

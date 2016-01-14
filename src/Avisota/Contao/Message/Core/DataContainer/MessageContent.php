@@ -53,8 +53,13 @@ class MessageContent implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            GetGroupHeaderEvent::NAME        => 'getGroupHeader',
-            ParentViewChildRecordEvent::NAME => 'parentViewChildRecord',
+            GetGroupHeaderEvent::NAME        => array(
+                array('getGroupHeader'),
+            ),
+
+            ParentViewChildRecordEvent::NAME => array(
+                array('parentViewChildRecord'),
+            ),
         );
     }
 

@@ -40,7 +40,9 @@ class Preview implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            DcGeneralEvents::ACTION => 'handleAction',
+            DcGeneralEvents::ACTION => array(
+                array('handleAction'),
+            ),
         );
     }
 
