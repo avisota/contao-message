@@ -48,10 +48,9 @@ class preview
         /** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
         $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 
-        $input             = \Input::getInstance();
         $messageRepository = \Contao\Doctrine\ORM\EntityHelper::getRepository('Avisota\Contao:Message');
 
-        $messageId = $input->get('id');
+        $messageId = \Input::get('id');
         /** @var \Avisota\Contao\Entity\Message $message */
         $message = $messageRepository->find($messageId);
 
@@ -73,12 +72,11 @@ class preview
             $event = new LoadLanguageFileEvent('avisota_message');
             $eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
 
-            $environment = \Environment::getInstance();
             $url         = sprintf(
                 $GLOBALS['TL_LANG']['avisota_message']['viewOnline'],
                 sprintf(
                     '%ssystem/modules/avisota-message/web/preview.php?id=%s',
-                    $environment->base,
+                    \Environment::get('base'),
                     $message->getId()
                 )
             );

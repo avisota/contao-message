@@ -21,7 +21,7 @@ use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GetPageDetailsEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GenerateFrontendUrlEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
-use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
+use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 
 $dir = dirname(isset($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : __FILE__);
 
@@ -58,9 +58,6 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
     {
         global $container;
 
-        $input       = \Input::getInstance();
-        $environment = Environment::getInstance();
-
         $eventDispatcher = $this->getEventDispatcher();
         $entityManager   = EntityHelper::getEntityManager();
 
@@ -81,13 +78,9 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
         $event = new LoadLanguageFileEvent('avisota_message');
         $eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
 
-        $idSerializer = new IdSerializer();
-        $idSerializer->setDataProviderName('orm_avisota_message');
-        $idSerializer->setId($message->getId());
+        $idSerializer = new ModelId('orm_avisota_message', $message->getId());
 
-        $pidSerializer = new IdSerializer();
-        $pidSerializer->setDataProviderName('orm_avisota_message_category');
-        $pidSerializer->setId($message->getCategory()->getId());
+        $pidSerializer = new ModelId('orm_avisota_message_category', $message->getCategory()->getId());
 
         $viewOnlinePage = $message->getCategory()->getViewOnlinePage();
 
@@ -106,7 +99,7 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
             $url = $generateUrlEvent->getUrl();
 
             if (!preg_match('~^\w+:~', $url)) {
-                $url = $environment->base . $url;
+                $url = \Environment::get('base') . $url;
             }
 
             $generateViewOnlineUrlEvent = new GenerateViewOnlineUrlEvent($message, $url);
@@ -123,12 +116,12 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
         // TODO fix view online link
         $additionalData = array('view_online_link' => $url);
 
-        $turn = $input->get('turn');
+        $turn = \Input::get('turn');
         if (!$turn) {
             $turn = 0;
         }
 
-        $loop = $input->get('loop');
+        $loop = \Input::get('loop');
         if (!$loop) {
             $loop = uniqid();
         }
@@ -167,7 +160,7 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
             );
             $url        = sprintf(
                 '%ssystem/modules/avisota-message/web/send_immediate.php?%s',
-                $environment->base,
+                \Environment::get('base'),
                 http_build_query($parameters)
             );
 
@@ -179,7 +172,7 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
             );
             $url        = sprintf(
                 '%scontao/main.php?%s',
-                $environment->base,
+                \Environment::get('base'),
                 http_build_query($parameters)
             );
 

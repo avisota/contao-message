@@ -14,7 +14,6 @@
  */
 
 use Avisota\Contao\Entity\Message;
-use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
 
 $dir = dirname(isset($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : __FILE__);
 
@@ -38,6 +37,7 @@ BackendUser::getInstance();
 
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
+use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 
 /**
  * Class send_preview_to_email
@@ -57,8 +57,10 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
         /** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
         $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 
-        $input = \Input::getInstance();
-        $email = $input->get('recipient_email');
+        $email = \Input::get('recipient_email');
+
+        $idSerializer = new ModelId('orm_avisota_message', $message->getId());
+        $pidSerializer = new ModelId('orm_avisota_message_category', $message->getCategory()->getId());
 
         if (!$email) {
             $_SESSION['AVISOTA_SEND_PREVIEW_TO_EMAIL_EMPTY'] = true;
@@ -66,7 +68,7 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
             header(
                 'Location: ' . sprintf(
                     '%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s&pid=%s',
-                    $environment->base,
+                    \Environment::get('base'),
                     $idSerializer->getSerialized(),
                     $pidSerializer->getSerialized()
                 )
@@ -74,19 +76,9 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
             exit;
         }
 
-        $idSerializer = new IdSerializer();
-        $idSerializer->setDataProviderName('orm_avisota_message');
-        $idSerializer->setId($message->getId());
-
-        $pidSerializer = new IdSerializer();
-        $pidSerializer->setDataProviderName('orm_avisota_message_category');
-        $pidSerializer->setId($message->getCategory()->getId());
-
-        $environment = Environment::getInstance();
-
         $url = sprintf(
             '%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s&pid=%s',
-            $environment->base,
+            \Environment::get('base'),
             $idSerializer->getSerialized(),
             $pidSerializer->getSerialized()
         );
