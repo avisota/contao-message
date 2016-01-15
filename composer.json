@@ -43,8 +43,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
-        "psr-0": {
-            "Avisota\\Contao\\Message": "src/"
+        "psr-4": {
+            "Avisota\\Contao\\Message\\Core": "src/"
         }
     },
     "extra": {
