@@ -2,12 +2,12 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright (C) 2013 Tristan Lins
+ * Copyright © 2016 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  bit3 UG 2013
- * @author     Tristan Lins <tristan.lins@bit3.de>
+ * @copyright  way.vision 2016
+ * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-message
  * @license    LGPL-3.0+
  * @filesource
@@ -21,34 +21,39 @@ use Contao\Doctrine\ORM\EntityInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Contao\Doctrine\ORM\Annotation\Accessor;
 
+/**
+ * Class AbstractLayout
+ *
+ * @package Avisota\Contao\Message\Core\Entity
+ */
 abstract class AbstractLayout implements EntityInterface
 {
-	/**
-	 * @Accessor(ignore=true)
-	 *
-	 * @return array
-	 */
-	public function getStylesheetPaths()
-	{
-		/** @var EventDispatcher $eventDispatcher */
-		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+    /**
+     * @Accessor(ignore=true)
+     *
+     * @return array
+     */
+    public function getStylesheetPaths()
+    {
+        /** @var EventDispatcher $eventDispatcher */
+        $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 
-		$paths = array();
-		$stylesheets = $this->getStylesheets();
-		if ($stylesheets) {
-			foreach ($stylesheets as $stylesheet) {
-				$event = new ResolveStylesheetEvent($stylesheet);
-				$eventDispatcher->dispatch(ResolveStylesheetEvent::NAME, $event);
-				$stylesheet = $event->getStylesheet();
+        $paths       = array();
+        $stylesheets = $this->getStylesheets();
+        if ($stylesheets) {
+            foreach ($stylesheets as $stylesheet) {
+                $event = new ResolveStylesheetEvent($stylesheet);
+                $eventDispatcher->dispatch(ResolveStylesheetEvent::NAME, $event);
+                $stylesheet = $event->getStylesheet();
 
-				if (!file_exists(TL_ROOT . '/' . $stylesheet)) {
-					throw new \RuntimeException('Missing stylesheet ' . $stylesheet);
-				}
+                if (!file_exists(TL_ROOT . '/' . $stylesheet)) {
+                    throw new \RuntimeException('Missing stylesheet ' . $stylesheet);
+                }
 
-				$paths[] = $stylesheet;
-			}
-		}
-		
-		return $paths;
-	}
+                $paths[] = $stylesheet;
+            }
+        }
+
+        return $paths;
+    }
 }

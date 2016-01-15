@@ -1,13 +1,16 @@
 {% extends 'mod_container.html5.twig' %}
 
 {% block content %}
-	<ul>
-		{% for message in messages %}
-			<li>
-				<div class="subject"><a href="{{ jumpTo|url('/' ~ message.alias) }}">{{ message.subject }}</a></div>
-				<p class="info"><time datetime="{{ message.sendOn|date('c') }}">{{ message.sendOn|datimFormat }}</time></p>
-				{% if message.description is not empty %}<div class="description">{{ message.description }}</div>{% endif %}
-			</li>
-		{% endfor %}
-	</ul>
+    <ul>
+        {% for message in messages %}
+            <li>
+                <div class="subject"><a href="{{ jumpTo|url('/' ~ message.alias) }}">{{ message.subject }}</a></div>
+                <p class="info">
+                    <time datetime="{{ message.sendOn|date('c') }}">{{ message.sendOn|datimFormat }}</time>
+                </p>
+                {% if message.description is not empty %}
+                    <div class="description">{{ message.description }}</div>{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
