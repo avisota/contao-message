@@ -44,7 +44,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Avisota\\Contao\\Message\\Core": "src/"
+            "Avisota\\Contao\\Message\\Core\\": "src/"
         }
     },
     "extra": {
