@@ -1,0 +1,31 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-06T04:00:55+02:00" original="default" source-language="en" target-language="pl">
+    <body>
+      <trans-unit id="MCE.texts">
+        <source>Text elements</source>
+        <target>Elementy tekstowe</target>
+        
+      </trans-unit>
+      <trans-unit id="MCE.links">
+        <source>Link elements</source>
+        <target>Elementy odnośników</target>
+        
+      </trans-unit>
+      <trans-unit id="MCE.images">
+        <source>Image elements</source>
+        <target>Elementy media</target>
+        
+      </trans-unit>
+      <trans-unit id="MCE.files">
+        <source>File elements</source>
+        <target>Elementy plików</target>
+        
+      </trans-unit>
+      <trans-unit id="MCE.includes">
+        <source>Include elements</source>
+        <target>Elementy załączane</target>
+        
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

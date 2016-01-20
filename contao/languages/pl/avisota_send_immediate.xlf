@@ -1,0 +1,31 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-06T04:00:55+02:00" original="avisota_send_immediate" source-language="en" target-language="pl">
+    <body>
+      <trans-unit id="avisota_send_immediate.headline">
+        <source>Send message now</source>
+        <target>Wyślij wiadomość</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_send_immediate.help">
+        <source>Send this message to %d recipients immediately.</source>
+        <target>Wyślij wiadomość do %d odbiorców.</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_send_immediate.confirmation">
+        <source>Are you sure you wan't to send this newsletter now? The sending process will start immediately!</source>
+        <target>Czy jesteś pewny, że chcesz wysłać newsletter? Proces wysyłania rozpocznie się natychmiastowo!</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_send_immediate.action">
+        <source>Send message to recipients now</source>
+        <target>Wyślij wiadomość do odbiorców</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_send_immediate.message">
+        <source>Enqueued %d messages int turn %d.</source>
+        <target>%d wiadomości w kolejce w turze %d.</target>
+        
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

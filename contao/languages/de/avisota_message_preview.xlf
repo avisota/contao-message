@@ -1,0 +1,81 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-06T04:00:55+02:00" original="avisota_message_preview" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="avisota_message_preview.sendPreviewToUser.0">
+        <source>Send to user</source>
+        <target>An Benutzer senden</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendPreviewToUser.1">
+        <source>Send an example to a user.</source>
+        <target>Ein Beispiel an einen Benutzer senden.</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendPreviewToEmail.0">
+        <source>Send to email</source>
+        <target>An Mailadresse senden</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendPreviewToEmail.1">
+        <source>Send an example to an email.</source>
+        <target>Eine Beispiel an eine Mailadresse senden.</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.headline">
+        <source>View and send message</source>
+        <target>Nachricht ansehen und senden</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.previewToUser">
+        <source>Send preview to user</source>
+        <target>Vorschau an Benutzer senden</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.previewToEmail">
+        <source>Send preview to email</source>
+        <target>Vorschau an Mailadresse senden</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendNow">
+        <source>Send message now</source>
+        <target>Newsletter jetzt senden</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.previewInNewWindow">
+        <source>View in new window</source>
+        <target>In neuem Fenster ansehen</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendPreview">
+        <source>Send preview</source>
+        <target>Vorschau senden</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendMessage">
+        <source>Send message to recipients now</source>
+        <target>Senden Sie den Newsletter jetzt an die Empfänger.</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.helpSendNow">
+        <source>Send this message to %d recipients immediately.</source>
+        <target>Versenden Sie diese Nachricht sofort an %d Empfänger.</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.previewSend">
+        <source>Preview send to %s</source>
+        <target>Vorschau wurde an %s gesendet.</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.confirmSend">
+        <source>Are you sure you wan't to send this newsletter now? The sending process will start immediately!</source>
+        <target>Sind Sie sicher, dass Sie den Newsletter jetzt senden möchten? Die Aussendung wird unverzüglich beginnen.</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.messagesEnqueued">
+        <source>(turn %2$d) %1$d messages enqueued.</source>
+        <target>(Zyklus %2$d) %1$d Nachrichten eingereiht.</target>
+        
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
