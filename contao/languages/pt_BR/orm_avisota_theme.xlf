@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-06T04:00:55+02:00" original="orm_avisota_theme" source-language="en" target-language="pt-BR">
+    <body>
+      <trans-unit id="orm_avisota_theme.title.0">
+        <source>Title</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.title.1">
+        <source>Please enter the theme title.</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.alias.0">
+        <source>Alias</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.alias.1">
+        <source>The theme alias is a unique reference to the theme which can be used instead of its ID.</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.templateDirectory.0">
+        <source>Templates folder</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.templateDirectory.1">
+        <source>Here you can select a templates folder that will be exported with the theme.</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.theme_legend">
+        <source>Theme</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.expert_legend">
+        <source>Experts settings</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.new.0">
+        <source>New theme</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.new.1">
+        <source>Create a new theme</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.show.0">
+        <source>Theme details</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.show.1">
+        <source>Show the details of theme ID %s</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.edit.0">
+        <source>Edit theme</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.edit.1">
+        <source>Edit theme ID %s</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.copy.0">
+        <source>Duplicate theme</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.copy.1">
+        <source>Duplicate theme %s</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.delete.0">
+        <source>Delete theme</source>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.delete.1">
+        <source>Delete theme ID %s</source>
+        
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

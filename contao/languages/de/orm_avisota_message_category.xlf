@@ -1,0 +1,251 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-23T04:02:31+02:00" original="orm_avisota_message_category" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="orm_avisota_message_category.title.0">
+        <source>Title</source>
+        <target>Titel</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.title.1">
+        <source>Please enter the newsletter category title.</source>
+        <target>Bitte geben Sie den Titel der Newsletter-Kategorie ein.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.alias.0">
+        <source>Alias</source>
+        <target>Alias</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.alias.1">
+        <source>The category alias is a unique reference to the category which can be called instead of its ID.</source>
+        <target>Der Alias ist eine eindeutige Referenz zur Newsletter-Kategorie und kann anstelle der ID benutzt werden.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.recipientsMode.0">
+        <source>Recipients selection mode</source>
+        <target>Empfänger-Auswahlmodus</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.recipientsMode.1">
+        <source>Please chose the recipients selection mode.</source>
+        <target>Bitte wählen Sie den Auswahlmodus für die Empfänger.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.recipients.0">
+        <source>Recipients</source>
+        <target>Empfänger</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.recipients.1">
+        <source>Please chose the preselected recipients.</source>
+        <target>Bitte wählen Sie vorselektierte Empfänger aus.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.layoutMode.0">
+        <source>Layout selection mode</source>
+        <target>Layout-Auswahlmodus</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.layoutMode.1">
+        <source>Please chose the layout selection mode.</source>
+        <target>Bitte wählen Sie den Layout-Auswahlmodus aus.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.layout.0">
+        <source>Layout</source>
+        <target>Layout</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.layout.1">
+        <source>Please chose the preselected layout.</source>
+        <target>Bitte wählen Sie aus, welches Layout als Standard vorselektiert ist.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.queueMode.0">
+        <source>Queue selection mode</source>
+        <target>Wartenschlangen-Auswahlmodus</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.queueMode.1">
+        <source>Please chose the queue selection mode.</source>
+        <target>Bitte wählen Sie den Auswahlmodus für Warteschlangen.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.queue.0">
+        <source>Queue</source>
+        <target>Warteschlange</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.queue.1">
+        <source>Please chose the preselected queue.</source>
+        <target>Bitte wählen Sie die vorausgewählte Warteschlange</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.boilerplates.0">
+        <source>Contains boilerplates</source>
+        <target>Beinhaltet Boilerplate</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.boilerplates.1">
+        <source>This category contain boilerplate mailings.</source>
+        <target>Diese Kategorie enthält Text Mailings</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.showInMenu.0">
+        <source>Show in menu</source>
+        <target>Im Menü zeigen</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.showInMenu.1">
+        <source>Please chose to show this category in the backend menu.</source>
+        <target>Bitte wählen Sie diese Kategorie im Backend-Menü</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.useCustomMenuIcon.0">
+        <source>Use custom icon</source>
+        <target>Eigenes Icon benutzen</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.useCustomMenuIcon.1">
+        <source>Please chose if you want to use a custom icon in the menu.</source>
+        <target>Bitte auswählen, falls Sie ein eigenen Icon im Backend-Menü verwenden möchten.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.menuIcon.0">
+        <source>Custom icon</source>
+        <target>Eigenes Icon</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.menuIcon.1">
+        <source>Please chose a custom backend menu item.</source>
+        <target>Bitte wählen Sie ein eigenes Menü-Item für das Backend.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.tstamp.0">
+        <source>Revision date</source>
+        <target>Bearbeitungsdatum</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Datum und Zeit der letzten Bearbeitung.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.category_legend">
+        <source>Category</source>
+        <target>Kategorie</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.recipients_legend">
+        <source>Recipients settings</source>
+        <target>Empfängereinstellungen</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.layout_legend">
+        <source>Layout settings</source>
+        <target>Layouteinstellungen</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.queue_legend">
+        <source>Queue settings</source>
+        <target>Warteschlangeneinstellungen</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.expert_legend">
+        <source>Experts settings</source>
+        <target>Experteneinstellungen</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.byCategory">
+        <source>only in category</source>
+        <target>Nur in Kategorie</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.byMessageOrCategory">
+        <source>preselected in category, overwriteable in newsletter</source>
+        <target>Vorausgewählt in der kategorie, überschreibbar im Newsletter</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.byMessage">
+        <source>only in newsletter</source>
+        <target>Nur in Newsletter</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.new.0">
+        <source>New category</source>
+        <target>Neue Kategorie</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.new.1">
+        <source>Create a new category</source>
+        <target>Erstellen Sie eine neue Kategorie.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.show.0">
+        <source>Category details</source>
+        <target>Kategoriedetails</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.show.1">
+        <source>Show the details of category ID %s</source>
+        <target>Lassen Sie die Details der Kategorie ID %s anzeigen.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.edit.0">
+        <source>Edit category</source>
+        <target>Kategorie bearbeiten</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.edit.1">
+        <source>Edit category ID %s</source>
+        <target>Bearbeiten Sie die Kategorie ID %s.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.editheader.0">
+        <source>Edit category settings</source>
+        <target>Kategorieneinstellungen bearbeiten</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.editheader.1">
+        <source>Edit category settings ID %s</source>
+        <target>Bearbeiten Sie die Kategorieneinstellungen ID %s.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.copy.0">
+        <source>Duplicate category</source>
+        <target>Kategorie duplizieren</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.copy.1">
+        <source>Duplicate category ID %s</source>
+        <target>Duplizieren Sie die Kategorie ID %s.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.delete.0">
+        <source>Delete category</source>
+        <target>Kategorie löschen</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.delete.1">
+        <source>Delete category ID %s</source>
+        <target>Löschen Sie die Kategorie ID %s.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.viewOnlinePage.0">
+        <source>View online page</source>
+        <target>Ansichtsseite</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.viewOnlinePage.1">
+        <source>Please chose the page to display the message online.</source>
+        <target>Bitte wählen Sie aus, auf welcher Seite Onlineansicht der Nachricht angezeigt werden soll-</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.online_legend">
+        <source>Online settings</source>
+        <target>Ansichtseinstellungen</target>
+        
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
