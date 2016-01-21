@@ -114,6 +114,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
                 'icon'       => 'copy.gif',
                 'attributes' => 'onclick="Backend.getScrollOffset();"',
             ),
+            // Todo add alert box description
             'delete'     => array
             (
                 'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message_category']['delete'],
