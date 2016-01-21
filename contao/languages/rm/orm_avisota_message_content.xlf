@@ -1,0 +1,279 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-06T04:00:55+02:00" original="orm_avisota_message_content" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="orm_avisota_message_content.invisible.0">
+        <source>Invisible</source>
+        <target>Invisibel</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.invisible.1">
+        <source>Invisible</source>
+        <target>Invisibel</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.invisible.2">
+        <source>Hide the element on the email.</source>
+        <target>Zuppentar l'element en l'e-mail.</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.type.0">
+        <source>Element type</source>
+        <target>Tip dad element</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.type.1">
+        <source>Please choose the type of content element.</source>
+        <target>Tscherna il tip da l'element da cuntegn.</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cell.0">
+        <source>Cell</source>
+        <target>Cella</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cell.1">
+        <source>Please choose the cell the content element should be showed in.</source>
+        <target>Tscherna la cella en la quala l'element da cuntegn duai vegnir mussada.</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.protected.0">
+        <source>Element schützen &lt;strong style=&quot;color:red&quot;&gt;REMOVE&lt;/strong&gt;</source>
+        <target>Proteger l'element &lt;strong style=&quot;color:red&quot;&gt;ALLONTANAR&lt;/strong&gt;</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.protected.1">
+        <source>Das Inhaltselement nur bestimmten Gruppen anzeigen.</source>
+        <target>Be mussar l'element a tschertas gruppas</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.groups.0">
+        <source>Erlaubte Mitgliedergruppen &lt;strong style=&quot;color:red&quot;&gt;REMOVE&lt;/strong&gt;</source>
+        <target>Gruppas da commembers lubidas  &lt;strong style=&quot;color:red&quot;&gt;ALLONTANAR&lt;/strong&gt;</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.groups.1">
+        <source>Diese Gruppen können das Inhaltselement sehen.</source>
+        <target>Questas gruppas pon vesesir l'element da cuntegn.</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.guests.0">
+        <source>Nur Gästen anzeigen &lt;strong style=&quot;color:red&quot;&gt;REMOVE&lt;/strong&gt;</source>
+        <target>Be mussar a giasts  &lt;strong style=&quot;color:red&quot;&gt;ALLONTANAR&lt;/strong&gt;</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.guests.1">
+        <source>Das Inhaltselement verstecken sobald ein Mitglied angemeldet ist.</source>
+        <target>Zuppentar l'element da cuntegn uschèprest ch'in commember è s'annunzià.</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cssID.0">
+        <source>CSS ID/class</source>
+        <target>ID/class da CSS</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Qua pos ti definir ina ID ed ina u pliras classas</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.space.0">
+        <source>Space in front and after</source>
+        <target>Distanza avant e suenter</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.space.1">
+        <source>Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>Qua pos ti definir la distanza avant e suenter l'element da cuntegn en pixels. Ti duessas dentant empruvar dae evitar stils integrads e definir la distanza en in stylesheet. </target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.type_legend">
+        <source>Element type</source>
+        <target>Tip da l'element</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.sortable_legend">
+        <source>Sorting options</source>
+        <target>Opziuns da zavrar</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.template_legend">
+        <source>Template settings</source>
+        <target>Configuraziun dal template</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.include_legend">
+        <source>Include settings</source>
+        <target>Configuraziun dad includer</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.protected_legend">
+        <source>Access protection</source>
+        <target>Protecziun da l'access</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.expert_legend">
+        <source>Expert settings</source>
+        <target>Configuraziun avanzada</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.published_legend">
+        <source>Published settings</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.source_legend">
+        <source>Source settings</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cells.header">
+        <source>Header</source>
+        <target>Chau</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cells.left">
+        <source>Left column</source>
+        <target>Colonna sanestra</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cells.main">
+        <source>Main column</source>
+        <target>Colonna principala</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cells.right">
+        <source>Right column</source>
+        <target>Colonna dretga</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cells.footer">
+        <source>Footer</source>
+        <target>Pè</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.new.0">
+        <source>New element</source>
+        <target>Nov element</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.new.1">
+        <source>Add a new content element</source>
+        <target>Agiuntar in nov element da cuntegn</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.show.0">
+        <source>Element details</source>
+        <target>Detagls da l'element</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.show.1">
+        <source>Show the details of content element ID %s</source>
+        <target>Mussar ils detagls da l'element da cuntegn cun l'ID %s</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cut.0">
+        <source>Move element</source>
+        <target>Spuster l'element</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cut.1">
+        <source>Move content element ID %s</source>
+        <target>Spustar l'element da cuntegn cun l'ID %s</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.copy.0">
+        <source>Duplicate element</source>
+        <target>Duplitgar l'element</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.copy.1">
+        <source>Duplicate content element ID %s</source>
+        <target>Duplitgar l'element da cuntegn cun l'ID %s</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.delete.0">
+        <source>Delete element</source>
+        <target>Stizzar l'element</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.delete.1">
+        <source>Delete content element ID %s</source>
+        <target>Stizzar l'element da cuntegn cun l'ID %s</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.edit.0">
+        <source>Edit element</source>
+        <target>Modifitgar l'element</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.edit.1">
+        <source>Edit content element ID %s</source>
+        <target>Modifitgar l'element da cuntegn cun l'ID %s</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Encollar sissum</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.pasteafter.1">
+        <source>Paste after content element ID %s</source>
+        <target>Encollar suenter l'element da cuntegn cun l'ID %s</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Agiuntar in nov sissium</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.pastenew.1">
+        <source>Add new after content element ID %s</source>
+        <target>Agiuntar in nov suenter l'element da cuntegn cun l'ID %s</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Mussar/zuppentar</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.toggle.1">
+        <source>Toggle the visibility of element ID %s</source>
+        <target>Mussar/zuppentar l'element cun l'ID %s</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.editalias.0">
+        <source>Edit source element</source>
+        <target>Modifitgar l'element da funtauna</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.editalias.1">
+        <source>Edit the source element ID %s</source>
+        <target>Modifitgar l'element da funtauna cun l'ID %s</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.editarticle.0">
+        <source>Edit article</source>
+        <target>Modifitgar l'aritgel</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.editarticle.1">
+        <source>Edit article ID %s</source>
+        <target>Modifitgar l'aritgel cun l'ID %s</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.cells.center">
+        <source>Center column</source>
+        <target>Colonna da mez</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.send.0">
+        <source>View and send message</source>
+        <target>Mussar e trametter il messadi</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_content.send.1">
+        <source>View and send message</source>
+        <target>Mussar e trametter il messadi</target>
+
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

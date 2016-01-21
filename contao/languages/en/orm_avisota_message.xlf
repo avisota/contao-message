@@ -1,0 +1,238 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-06T04:00:55+02:00" original="orm_avisota_message" source-language="en" target-language="en">
+    <body>
+      <trans-unit id="orm_avisota_message.subject.0">
+        <source>Subject</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.subject.1">
+        <source>Please enter the subject of this newsletter.</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.alias.0">
+        <source>Alias</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.alias.1">
+        <source>The newsletter alias is a unique reference to the newsletter which can be called instead of its ID.</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.language.0">
+        <source>Language</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.language.1">
+        <source>Please select the newsletter language.</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.description.0">
+        <source>Description</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.description.1">
+        <source>Please enter a short description for this newsletter.</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.keywords.0">
+        <source>Keywords</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.keywords.1">
+        <source>Please enter the keywords for this newsletter.</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.addFile.0">
+        <source>Attach files</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.addFile.1">
+        <source>Attach additional files to the newsletter.</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.files.0">
+        <source>Attachments</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.files.1">
+        <source>Please chose the attachments.</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.setRecipients.0">
+        <source>Select recipients</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.setRecipients.1">
+        <source>Select the recipients for this newsletter.</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.recipients.0">
+        <source>Recipients</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.recipients.1">
+        <source>Please chose the recipients for this newsletter.</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.setLayout.0">
+        <source>Select layout</source>
+
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.setLayout.1">
+        <source>Select the layout for this newsletter.</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.layout.0">
+        <source>Layout</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.layout.1">
+        <source>Please chose the layout for this newsletter.</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.setQueue.0">
+        <source>Select queue</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.setQueue.1">
+        <source>Select the queue for this newsletter.</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.queue.0">
+        <source>Queue</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.queue.1">
+        <source>Please chose the queue for this newsletter.</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.tstamp.0">
+        <source>Revision date</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.tstamp.1">
+        <source>Date and time of the latest revision</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.newsletter_legend">
+        <source>Message</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.meta_legend">
+        <source>Details</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.recipient_legend">
+        <source>Recipient</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.theme_legend">
+        <source>Theme settings</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.queue_legend">
+        <source>Queue settings</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.attachment_legend">
+        <source>Attachments</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.notSend">
+        <source>Not send yet</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.new.0">
+        <source>New newsletter</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.new.1">
+        <source>Add a new newsletter</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.create_from_draft.0">
+        <source>New newsletter from boilerplate</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.create_from_draft.1">
+        <source>Add a new newsletter from boilerplate</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.show.0">
+        <source>Message details</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.show.1">
+        <source>Show the details of newsletter ID %s</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.copy.0">
+        <source>Duplicate newsletter</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.copy.1">
+        <source>Duplicate newsletter ID %s</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.delete.0">
+        <source>Delete newsletter</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.delete.1">
+        <source>Delete newsletter ID %s</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.edit.0">
+        <source>Edit newsletter</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.edit.1">
+        <source>Edit newsletter ID %s</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.editheader.0">
+        <source>Edit newsletter settings</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.editheader.1">
+        <source>Edit newsletter settings ID %s</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.pastenew.0">
+        <source>Add new at the top</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.pastenew.1">
+        <source>Add new after newsletter ID %s</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.send.0">
+        <source>View and send</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.send.1">
+        <source>View and send message ID %s.</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.sended">
+        <source>Send on %s</source>
+
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

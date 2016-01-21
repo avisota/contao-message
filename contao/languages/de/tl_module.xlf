@@ -1,0 +1,46 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-06T04:00:55+02:00" original="tl_module" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_module.avisota_message_categories.0">
+        <source>Categories</source>
+        <target>Kategorien</target>
+        
+      </trans-unit>
+      <trans-unit id="tl_module.avisota_message_categories.1">
+        <source>Please select one or more categories.</source>
+        <target>Bitte wählen Sie eine oder mehrere Kategorien aus.</target>
+        
+      </trans-unit>
+      <trans-unit id="tl_module.avisota_message_layout.0">
+        <source>Layout</source>
+        <target>Layout</target>
+        
+      </trans-unit>
+      <trans-unit id="tl_module.avisota_message_layout.1">
+        <source>Please choose the layout to render the message.</source>
+        <target>Bitte wählen Sie ein Layout für die Nachrichten-Darstellung aus.</target>
+        
+      </trans-unit>
+      <trans-unit id="tl_module.avisota_message_cell.0">
+        <source>Cell</source>
+        <target>Zelle</target>
+        
+      </trans-unit>
+      <trans-unit id="tl_module.avisota_message_cell.1">
+        <source>Please choose the cell to render.</source>
+        <target>Bitte wählen Sie aus in welcher Zelle der Inhalt dargestellt werden soll.</target>
+        
+      </trans-unit>
+      <trans-unit id="tl_module.avisota_message_list_legend">
+        <source>List settings</source>
+        <target>Auflistungseinstellungen</target>
+        
+      </trans-unit>
+      <trans-unit id="tl_module.avisota_message_reader_legend">
+        <source>Reader settings</source>
+        <target>Lesemodul-Einstellungen</target>
+        
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

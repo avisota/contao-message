@@ -1,0 +1,251 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-23T04:02:31+02:00" original="orm_avisota_message_category" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="orm_avisota_message_category.title.0">
+        <source>Title</source>
+        <target>Titel</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.title.1">
+        <source>Please enter the newsletter category title.</source>
+        <target>Endatescha il titel da la categoria da newsletters.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.alias.0">
+        <source>Alias</source>
+        <target>Alias</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.alias.1">
+        <source>The category alias is a unique reference to the category which can be called instead of its ID.</source>
+        <target>L'alias da la categoria è ina referenza unica a la categoria che po vegnida inditgada empè da la ID.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.recipientsMode.0">
+        <source>Recipients selection mode</source>
+        <target>Modus da selecziun dals destinaturs</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.recipientsMode.1">
+        <source>Please chose the recipients selection mode.</source>
+        <target>Tscherna il modus da selecziun dals destinaturs.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.recipients.0">
+        <source>Recipients</source>
+        <target>Destinaturs</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.recipients.1">
+        <source>Please chose the preselected recipients.</source>
+        <target>Tscherna ils destinaturs preselecziunads.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.layoutMode.0">
+        <source>Layout selection mode</source>
+        <target>Modus da tscherner il layout</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.layoutMode.1">
+        <source>Please chose the layout selection mode.</source>
+        <target>Tscherna il Modus da tscherner il layout</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.layout.0">
+        <source>Layout</source>
+        <target>Layout</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.layout.1">
+        <source>Please chose the preselected layout.</source>
+        <target>Tscherna il layout preselecziunà.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.queueMode.0">
+        <source>Queue selection mode</source>
+        <target>Modus da tscherner la colonna da spetga</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.queueMode.1">
+        <source>Please chose the queue selection mode.</source>
+        <target>Tscherna il modus da tscherner la colonna da spetga.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.queue.0">
+        <source>Queue</source>
+        <target>Colonna da spetga</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.queue.1">
+        <source>Please chose the preselected queue.</source>
+        <target>Tscherna la colonna da spetga preselecziunada.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.boilerplates.0">
+        <source>Contains boilerplates</source>
+        <target>Cuntegna boilerplates</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.boilerplates.1">
+        <source>This category contain boilerplate mailings.</source>
+        <target>Questa categoria cuntegna mailing da boilerplate.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.showInMenu.0">
+        <source>Show in menu</source>
+        <target>Mussar en il menu</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.showInMenu.1">
+        <source>Please chose to show this category in the backend menu.</source>
+        <target>Tscherner per mussar questa categoria en il menu dal back-end.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.useCustomMenuIcon.0">
+        <source>Use custom icon</source>
+        <target>Utilisar ina icona persunalisada</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.useCustomMenuIcon.1">
+        <source>Please chose if you want to use a custom icon in the menu.</source>
+        <target>Tscherna sche ti vuls utilisar ina icona persunalisada en il menu dal back-end.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.menuIcon.0">
+        <source>Custom icon</source>
+        <target>Icona persunalisada</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.menuIcon.1">
+        <source>Please chose a custom backend menu item.</source>
+        <target>Tscherna in element dal menu dal back-end persunalisà.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.tstamp.0">
+        <source>Revision date</source>
+        <target>Data da la versiun</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Data e temp da l'ultima versiun</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.category_legend">
+        <source>Category</source>
+        <target>Categoria</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.recipients_legend">
+        <source>Recipients settings</source>
+        <target>Configuraziun dals destinaturs</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.layout_legend">
+        <source>Layout settings</source>
+        <target>Configuraziun dal layout</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.queue_legend">
+        <source>Queue settings</source>
+        <target>Configuraziun da la colonna da spetga.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.expert_legend">
+        <source>Experts settings</source>
+        <target>Configuraziun avanzada</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.byCategory">
+        <source>only in category</source>
+        <target>ben en la categoria</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.byMessageOrCategory">
+        <source>preselected in category, overwriteable in newsletter</source>
+        <target>preselecziunà en la categoria, pussaivel da surscriver en il newsletter</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.byMessage">
+        <source>only in newsletter</source>
+        <target>be en il newsletter</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.new.0">
+        <source>New category</source>
+        <target>Nova categoria</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.new.1">
+        <source>Create a new category</source>
+        <target>Crear ina nova categoria</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.show.0">
+        <source>Category details</source>
+        <target>Detagls da la categoria</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.show.1">
+        <source>Show the details of category ID %s</source>
+        <target>Detagls da la categoria cun l'ID %s</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.edit.0">
+        <source>Edit category</source>
+        <target>Modifitgar la categoria</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.edit.1">
+        <source>Edit category ID %s</source>
+        <target>Modifitgar la categoria cun l'ID %s</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.editheader.0">
+        <source>Edit category settings</source>
+        <target>Modifitgar la configuraziun da la categoria</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.editheader.1">
+        <source>Edit category settings ID %s</source>
+        <target>Modifitgar la configuraziun da la categoria cun l'ID %s</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.copy.0">
+        <source>Duplicate category</source>
+        <target>Duplitgar la categoria</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.copy.1">
+        <source>Duplicate category ID %s</source>
+        <target>Duplitgar la categoria cun l'ID %s</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.delete.0">
+        <source>Delete category</source>
+        <target>Stizzar la categoria</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.delete.1">
+        <source>Delete category ID %s</source>
+        <target>Stizzar la categoria cun l'ID %s</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.viewOnlinePage.0">
+        <source>View online page</source>
+        <target>Vesair la pagina online</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.viewOnlinePage.1">
+        <source>Please chose the page to display the message online.</source>
+        <target>Tscherna la pagina per mussar il messadi online.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_message_category.online_legend">
+        <source>Online settings</source>
+        <target>Configuraziun online</target>
+        
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
