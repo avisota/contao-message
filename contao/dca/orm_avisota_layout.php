@@ -210,7 +210,7 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
         ),
         'alias'               => array
         (
-            'label'           => &$GLOBALS['TL_LANG']['orm_avisota_mailing_list']['alias'],
+            'label'           => &$GLOBALS['TL_LANG']['orm_avisota_layout']['alias'],
             'exclude'         => true,
             'search'          => true,
             'inputType'       => 'text',
