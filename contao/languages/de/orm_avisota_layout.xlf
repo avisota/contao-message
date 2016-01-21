@@ -1,151 +1,161 @@
 <?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file datatype="php" date="2014-05-06T04:00:55+02:00" original="orm_avisota_layout" source-language="en" target-language="de">
-    <body>
-      <trans-unit id="orm_avisota_layout.type.0">
-        <source>Type</source>
-        <target>Typ</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.type.1">
-        <source>Please choose the layout type.</source>
-        <target>Bitte wählen Sie den Layout-Typ aus.</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.title.0">
-        <source>Title</source>
-        <target>Titel</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.title.1">
-        <source>Please enter the layout title.</source>
-        <target>Bitte geben Sie den Layout-Titel ein.</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.alias.0">
-        <source>Alias</source>
-        <target>Alias</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.alias.1">
-        <source>The layout alias is a unique reference to the layout which can be used instead of its ID.</source>
-        <target>Der Alias ist eine eindeutige Referenz zum Layout und kann anstelle der ID benutzt werden.</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.preview.0">
-        <source>Preview image</source>
-        <target>Vorschaubild</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.preview.1">
-        <source>Please chose a preview image.</source>
-        <target>Bitte wählen Sie ein Vorschaubild aus.</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.stylesheets.0">
-        <source>Stylesheets</source>
-        <target>Stylesheets</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.stylesheets.1">
-        <source>Please chose the stylesheets to used in this layout.</source>
-        <target>Bitte wählen Sie die Stylesheets aus, die in diesem Layout verwendet werden sollen.</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.allowedCellContents.0">
-        <source>Allowed contents</source>
-        <target>Erlaubte Inhalte</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.allowedCellContents.1">
-        <source>Choose the allowed contents for each cell (empty to reset to defaults).</source>
-        <target>Wählen Sie für jeden Bereich aus, welche Inhalte dort eingebnden werden können (leeren Sie die Auswahl, um die Standardeinstellungen anzuwenden).</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.clearStyles.0">
-        <source>Remove global styles</source>
-        <target>Globales Stylesheet entfernen</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.clearStyles.1">
-        <source>Remove the global styles from the template.</source>
-        <target>Entfernen Sie die globalen CSS-Stile aus dem Template.</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.layout_legend">
-        <source>Layout</source>
-        <target>Layout</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.structure_legend">
-        <source>Structure and content</source>
-        <target>Struktur und Inhalt</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.template_legend">
-        <source>Template settings</source>
-        <target>Template-Einstellungen</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.expert_legend">
-        <source>Experts settings</source>
-        <target>Experteneinstellungen</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.new.0">
-        <source>New layout</source>
-        <target>Neues Layout</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.new.1">
-        <source>Create a new layout</source>
-        <target>Erstellen Sie ein neues Layout.</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.show.0">
-        <source>Layout details</source>
-        <target>Layout-Details</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.show.1">
-        <source>Show the details of layout ID %s</source>
-        <target>Zeigen Sie die Details des Layouts ID %s an.</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.edit.0">
-        <source>Edit layout</source>
-        <target>Layout bearbeiten</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.edit.1">
-        <source>Edit layout ID %s</source>
-        <target>bearbeiten Sie das Layout ID %s.</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.copy.0">
-        <source>Duplicate layout</source>
-        <target>Layout duplizieren</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.copy.1">
-        <source>Duplicate layout %s</source>
-        <target>Duplizieren Sie das Layout %s.</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.delete.0">
-        <source>Delete layout</source>
-        <target>Layout löschen</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.delete.1">
-        <source>Delete layout ID %s</source>
-        <target>Löschen Sie das Layout ID s%.</target>
-        
-      </trans-unit>
-      <trans-unit id="orm_avisota_layout.default">
-        <source>Default generic rendering</source>
-        <target>Standardrendering</target>
-        
-      </trans-unit>
-    </body>
-  </file>
+    <file datatype="php" date="2014-05-06T04:00:55+02:00" original="orm_avisota_layout" source-language="en" target-language="de">
+        <body>
+            <trans-unit id="orm_avisota_layout.type.0">
+                <source>Type</source>
+                <target>Typ</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.type.1">
+                <source>Please choose the layout type.</source>
+                <target>Bitte wählen Sie den Layout-Typ aus.</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.title.0">
+                <source>Title</source>
+                <target>Titel</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.title.1">
+                <source>Please enter the layout title.</source>
+                <target>Bitte geben Sie den Layout-Titel ein.</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.alias.0">
+                <source>Alias</source>
+                <target>Alias</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.alias.1">
+                <source>The layout alias is a unique reference to the layout which can be used instead of its ID.</source>
+                <target>Der Alias ist eine eindeutige Referenz zum Layout und kann anstelle der ID benutzt werden.</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.preview.0">
+                <source>Preview image</source>
+                <target>Vorschaubild</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.preview.1">
+                <source>Please chose a preview image.</source>
+                <target>Bitte wählen Sie ein Vorschaubild aus.</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.stylesheets.0">
+                <source>Stylesheets</source>
+                <target>Stylesheets</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.stylesheets.1">
+                <source>Please chose the stylesheets to used in this layout.</source>
+                <target>Bitte wählen Sie die Stylesheets aus, die in diesem Layout verwendet werden sollen.</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.allowedCellContents.0">
+                <source>Allowed contents</source>
+                <target>Erlaubte Inhalte</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.allowedCellContents.1">
+                <source>Choose the allowed contents for each cell (empty to reset to defaults).</source>
+                <target>Wählen Sie für jeden Bereich aus, welche Inhalte dort eingebnden werden können (leeren Sie die Auswahl, um die Standardeinstellungen anzuwenden).</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.clearStyles.0">
+                <source>Remove global styles</source>
+                <target>Globales Stylesheet entfernen</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.clearStyles.1">
+                <source>Remove the global styles from the template.</source>
+                <target>Entfernen Sie die globalen CSS-Stile aus dem Template.</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.layout_legend">
+                <source>Layout</source>
+                <target>Layout</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.structure_legend">
+                <source>Structure and content</source>
+                <target>Struktur und Inhalt</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.template_legend">
+                <source>Template settings</source>
+                <target>Template-Einstellungen</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.expert_legend">
+                <source>Experts settings</source>
+                <target>Experteneinstellungen</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.new.0">
+                <source>New layout</source>
+                <target>Neues Layout</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.new.1">
+                <source>Create a new layout</source>
+                <target>Erstellen Sie ein neues Layout.</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.show.0">
+                <source>Layout details</source>
+                <target>Layout-Details</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.show.1">
+                <source>Show the details of layout ID %s</source>
+                <target>Zeigen Sie die Details des Layouts ID %s an.</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.edit.0">
+                <source>Edit layout</source>
+                <target>Layout bearbeiten</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.edit.1">
+                <source>Edit layout ID %s</source>
+                <target>Bearbeiten Sie das Layout ID %s.</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.copy.0">
+                <source>Duplicate layout</source>
+                <target>Layout duplizieren</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.copy.1">
+                <source>Duplicate layout %s</source>
+                <target>Duplizieren Sie das Layout %s.</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.delete.0">
+                <source>Delete layout</source>
+                <target>Layout löschen</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.delete.1">
+                <source>Delete layout ID %s</source>
+                <target>Löschen Sie das Layout ID s%.</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.pastenew.0">
+                <source>Add new at the top</source>
+                <target>Neuer Eintrag oben erstellen</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.pastenew.1">
+                <source>Add new after layout definition ID %s</source>
+                <target>Neuer Eintrag nach Layout-Definition mit der ID %s</target>
+
+            </trans-unit>
+            <trans-unit id="orm_avisota_layout.default">
+                <source>Default generic rendering</source>
+                <target>Standardrendering</target>
+
+            </trans-unit>
+        </body>
+    </file>
 </xliff>
