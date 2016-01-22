@@ -47,7 +47,7 @@ class Reader extends \TwigModule
             return;
         }
 
-        if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item'])) {
+        if (\Config::get('useAutoItem') && \Input::get('auto_item')) {
             $messageAlias = \Input::get('auto_item');
         } else {
             $messageAlias = \Input::get('items');

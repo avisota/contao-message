@@ -34,6 +34,8 @@ class Listing extends \TwigModule
      */
     protected function compile()
     {
+        global $objPage;
+
         $repository   = EntityHelper::getRepository('Avisota\Contao:Message');
         $queryBuilder = $repository->createQueryBuilder('m');
         $expr         = $queryBuilder->expr();
@@ -48,7 +50,7 @@ class Listing extends \TwigModule
 
         $jumpTo = \PageModel::findByPk($this->jumpTo);
         if (!$jumpTo) {
-            $jumpTo = $GLOBALS['objPage'];
+            $jumpTo = $objPage;
         }
 
         $this->Template->messages = $messages;

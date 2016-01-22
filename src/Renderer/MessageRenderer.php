@@ -43,10 +43,12 @@ class MessageRenderer implements MessageRendererInterface
      */
     public function renderMessage(Message $message, Layout $layout = null)
     {
+        global $container;
+
         $event = new RenderMessageEvent($message, $layout ?: $message->getLayout());
 
         /** @var EventDispatcher $eventDispatcher */
-        $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+        $eventDispatcher = $container['event-dispatcher'];
         $eventDispatcher->dispatch(AvisotaMessageEvents::RENDER_MESSAGE, $event);
 
         return $event->getPreRenderedMessageTemplate();
