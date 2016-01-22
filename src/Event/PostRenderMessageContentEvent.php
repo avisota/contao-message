@@ -58,13 +58,14 @@ class PostRenderMessageContentEvent extends Event
      * @param RecipientInterface|null             $recipient
      * @param array                               $additionalData
      * @param                                     $content
+     * TODO is content an sting?
      */
     public function __construct(
         Message $message,
         PreRenderedMessageTemplateInterface $messageTemplate,
         RecipientInterface $recipient = null,
         array $additionalData = array(),
-        $content
+        $content = ''
     ) {
         $this->message         = $message;
         $this->messageTemplate = $messageTemplate;

@@ -62,13 +62,14 @@ class PostRenderMessageTemplatePreviewEvent extends Event
      * @param RecipientInterface|null             $recipient
      * @param array                               $additionalData
      * @param                                     $preview
+     * TODO is preview an sting?
      */
     public function __construct(
         Message $contaoMessage,
         PreRenderedMessageTemplateInterface $messageTemplate,
         RecipientInterface $recipient = null,
         array $additionalData = array(),
-        $preview
+        $preview = ''
     ) {
         $this->contaoMessage   = $contaoMessage;
         $this->messageTemplate = $messageTemplate;

@@ -63,13 +63,14 @@ class PostRenderMessageTemplateEvent extends Event
      * @param RecipientInterface|null             $recipient
      * @param array                               $additionalData
      * @param ContaoAwareNativeMessage            $message
+     * TODO is message an sting?
      */
     public function __construct(
         Message $contaoMessage,
         PreRenderedMessageTemplateInterface $messageTemplate,
         RecipientInterface $recipient = null,
         array $additionalData = array(),
-        ContaoAwareNativeMessage $message
+        ContaoAwareNativeMessage $message = ''
     ) {
         $this->contaoMessage   = $contaoMessage;
         $this->messageTemplate = $messageTemplate;
