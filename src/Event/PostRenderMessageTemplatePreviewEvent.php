@@ -62,7 +62,7 @@ class PostRenderMessageTemplatePreviewEvent extends Event
      * @param RecipientInterface|null             $recipient
      * @param array                               $additionalData
      * @param                                     $preview
-     * TODO is preview an sting?
+     * TODO is recipient standard value?
      */
     public function __construct(
         Message $contaoMessage,
