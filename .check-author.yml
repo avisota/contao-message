@@ -1,2 +1,5 @@
 exclude:
   languages
+
+ignore:
+  - Tristan Lins <tristan.lins@bit3.de>
