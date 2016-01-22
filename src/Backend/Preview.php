@@ -31,6 +31,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * Class Preview
  *
  * @package Avisota\Contao\Message\Core\Backend
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class Preview implements EventSubscriberInterface
 {
@@ -64,6 +65,8 @@ class Preview implements EventSubscriberInterface
      *
      * @return string
      * @internal param DC_General $dc
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function renderPreviewView(EnvironmentInterface $environment)
     {

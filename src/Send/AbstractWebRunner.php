@@ -37,6 +37,9 @@ abstract class AbstractWebRunner extends \Backend
         parent::__construct();
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ExitExpression)
+     */
     public function run()
     {
         $messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');

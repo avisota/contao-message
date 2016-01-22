@@ -32,6 +32,7 @@ abstract class AbstractMessage implements EntityInterface, AliasableInterface
 {
     /**
      * AbstractMessage constructor.
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function __construct()
     {

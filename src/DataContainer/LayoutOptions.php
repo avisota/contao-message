@@ -76,6 +76,7 @@ class LayoutOptions implements EventSubscriberInterface
      * @param array $options
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getLayoutTypeOptions($options = array())
     {
@@ -102,6 +103,7 @@ class LayoutOptions implements EventSubscriberInterface
      * @param array $options
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getLayoutStylesheetOptions($options = array())
     {

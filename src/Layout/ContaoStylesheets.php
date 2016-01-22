@@ -62,6 +62,7 @@ class ContaoStylesheets implements EventSubscriberInterface
 
     /**
      * @param CollectStylesheetsEvent $event
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function collectStylesheets(CollectStylesheetsEvent $event)
     {

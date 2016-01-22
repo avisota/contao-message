@@ -40,6 +40,8 @@ class Reader extends \TwigModule
 
     /**
      * Compile the current element
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.LongVariable)
      */
     protected function compile()
     {

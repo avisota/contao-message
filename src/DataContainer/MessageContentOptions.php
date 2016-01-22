@@ -85,6 +85,9 @@ class MessageContentOptions implements EventSubscriberInterface
      * @param array $options
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public function getMessageContentTypeOptions($dc, $options = array())
     {
@@ -165,7 +168,7 @@ class MessageContentOptions implements EventSubscriberInterface
      *
      * @return array
      * @internal param $object
-     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getArticleAliasOptions($options = array())
     {
@@ -218,6 +221,7 @@ class MessageContentOptions implements EventSubscriberInterface
 
     /**
      * @param CreateOptionsEvent $event
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function createContentTypeOptions(CreateOptionsEvent $event)
     {
@@ -228,6 +232,7 @@ class MessageContentOptions implements EventSubscriberInterface
      * @param array $options
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getContentTypeOptions($options = array())
     {

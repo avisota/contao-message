@@ -30,6 +30,8 @@ class Helper
 {
     /**
      * @return MessageCategory|null
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public static function resolveCategoryFromInput()
     {

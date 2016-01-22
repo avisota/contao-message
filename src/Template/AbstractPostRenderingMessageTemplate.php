@@ -35,6 +35,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * Class AbstractPostRenderingMessageTemplate
  *
  * @package Avisota\Contao\Message\Core\Template
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessageTemplateInterface
 {
@@ -59,6 +60,8 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
      * @param array              $additionalData
      *
      * @return string
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.LongVariable)
      */
     protected function parseContent(RecipientInterface $recipient, array $additionalData = array())
     {
@@ -110,6 +113,7 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
      * @param array              $additionalData
      *
      * @return mixed The content only, not a message.
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function renderPreview(RecipientInterface $recipient, array $additionalData = array())
     {
@@ -150,6 +154,7 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
      * @internal param array $newsletterData Additional newsletter data.
      *
      * @internal param RecipientInterface $recipientEmail The main recipient.
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function render(RecipientInterface $recipient = null, array $additionalData = array())
     {

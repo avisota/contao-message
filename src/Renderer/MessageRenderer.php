@@ -63,6 +63,7 @@ class MessageRenderer implements MessageRendererInterface
      * @param Layout  $layout
      *
      * @return \string[]
+     * @SuppressWarnings(PHPMD.LongVariable)
      */
     public function renderCell(Message $message, $cell, Layout $layout = null)
     {
@@ -101,6 +102,7 @@ class MessageRenderer implements MessageRendererInterface
      * @param Layout         $layout
      *
      * @return string
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function renderContent(MessageContent $messageContent, Layout $layout = null)
     {

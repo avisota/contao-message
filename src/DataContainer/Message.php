@@ -68,6 +68,11 @@ class Message implements EventSubscriberInterface
     /**
      * @param $add
      * @param $dc
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.LongVariable)
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function addHeader($add, $dc)
     {
@@ -127,6 +132,7 @@ class Message implements EventSubscriberInterface
 
     /**
      * @param GetGroupHeaderEvent $event
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getGroupHeader(GetGroupHeaderEvent $event)
     {
@@ -168,6 +174,7 @@ class Message implements EventSubscriberInterface
      * @param ParentViewChildRecordEvent $event
      *
      * @internal param $array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function parentViewChildRecord(ParentViewChildRecordEvent $event)
     {

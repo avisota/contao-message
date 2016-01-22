@@ -74,6 +74,8 @@ class MessageContent implements EventSubscriberInterface
      * @param string
      *
      * @return string
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function sendMessageButton($href, $label, $title, $icon, $attributes)
     {
@@ -95,6 +97,7 @@ class MessageContent implements EventSubscriberInterface
 
     /**
      * @param GetGroupHeaderEvent $event
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getGroupHeader(GetGroupHeaderEvent $event)
     {
@@ -118,6 +121,7 @@ class MessageContent implements EventSubscriberInterface
      * @param ParentViewChildRecordEvent $event
      *
      * @internal param $array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function parentViewChildRecord(ParentViewChildRecordEvent $event)
     {

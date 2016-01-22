@@ -151,6 +151,7 @@ class MessageOptions implements EventSubscriberInterface
      * @param array $options
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getMessageOptions($options = array())
     {

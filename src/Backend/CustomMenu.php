@@ -31,6 +31,7 @@ class CustomMenu extends \BackendModule
      * @param       $showAll
      *
      * @return array
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public static function hookGetUserNavigation(array $navigation, $showAll)
     {
@@ -73,6 +74,10 @@ class CustomMenu extends \BackendModule
         return $navigation;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.LongVariable)
+     */
     public function injectMenu()
     {
         global $container;
@@ -123,7 +128,7 @@ class CustomMenu extends \BackendModule
     }
 
     /**
-     *
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public function generate()
     {

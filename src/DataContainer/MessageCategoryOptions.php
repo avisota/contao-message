@@ -65,6 +65,7 @@ class MessageCategoryOptions implements EventSubscriberInterface
      * @param array $options
      *
      * @return array
+     * @SuppressWarnings(PHPMD.LongVariable)
      */
     public function getMessageCategoryOptions($options = array())
     {

@@ -43,6 +43,7 @@ class Layout
      * @param DC_General|\Avisota\Contao\Entity\Layout $layout
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public static function getDefaultSelectedCellContentElements($layout)
     {
