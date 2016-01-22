@@ -31,7 +31,7 @@ class Helper
     /**
      * @return MessageCategory|null
      */
-    static public function resolveCategoryFromInput()
+    public static function resolveCategoryFromInput()
     {
         $id            = \Input::get('id');
         $pid           = \Input::get('pid');
@@ -78,7 +78,9 @@ class Helper
                             $message    = $content->getMessage();
                             $category   = $message->getCategory();
                         } else {
-                            if ($parentModelId && $parentModelId->getDataProviderName() == 'orm_avisota_message_content') {
+                            if ($parentModelId
+                                && $parentModelId->getDataProviderName() == 'orm_avisota_message_content'
+                            ) {
                                 $repository = EntityHelper::getRepository('Avisota\Contao:MessageContent');
                                 $content    = $repository->find($parentModelId->getId());
                                 $message    = $content->getMessage();

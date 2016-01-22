@@ -205,10 +205,11 @@ class MessageContentOptions implements EventSubscriberInterface
             );
 
             while ($alias->next()) {
-                $options[$alias->parent][$alias->id] = $alias->title . ' (' . (strlen(
-                        $GLOBALS['TL_LANG']['tl_article'][$alias->inColumn]
-                    ) ? $GLOBALS['TL_LANG']['tl_article'][$alias->inColumn]
-                        : $alias->inColumn) . ', ID ' . $alias->id . ')';
+                $buffer = (strlen($GLOBALS['TL_LANG']['tl_article'][$alias->inColumn])
+                        ? $GLOBALS['TL_LANG']['tl_article'][$alias->inColumn]
+                        : $alias->inColumn) . ', ID ' . $alias->id;
+
+                $options[$alias->parent][$alias->id] = $alias->title . ' (' . $buffer . ')';
             }
         }
 

@@ -32,7 +32,7 @@ class CustomMenu extends \BackendModule
      *
      * @return array
      */
-    static public function hookGetUserNavigation(array $navigation, $showAll)
+    public static function hookGetUserNavigation(array $navigation, $showAll)
     {
         if (TL_MODE == 'BE') {
             try {
@@ -132,7 +132,10 @@ class CustomMenu extends \BackendModule
 
         $serializer = new ModelId('orm_avisota_message_category', $id);
 
-        $this->redirect('contao/main.php?do=avisota_newsletter&table=orm_avisota_message&pid=' . $serializer->getSerialized());
+        $this->redirect(
+            'contao/main.php?do=avisota_newsletter&table=orm_avisota_message&pid=' .
+            $serializer->getSerialized()
+        );
     }
 
     /**

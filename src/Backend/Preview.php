@@ -51,8 +51,7 @@ class Preview implements EventSubscriberInterface
      */
     public function handleAction(ActionEvent $event)
     {
-        if (
-            !$event->getResponse()
+        if (!$event->getResponse()
             && $event->getEnvironment()->getDataDefinition()->getName() == 'orm_avisota_message'
             && $event->getAction()->getName() == 'preview'
         ) {

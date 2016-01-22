@@ -64,7 +64,7 @@ class PostRenderMessageTemplateEvent extends Event
      * @param array                               $additionalData
      * @param ContaoAwareNativeMessage            $message
      */
-    function __construct(
+    public function __construct(
         Message $contaoMessage,
         PreRenderedMessageTemplateInterface $messageTemplate,
         RecipientInterface $recipient = null,

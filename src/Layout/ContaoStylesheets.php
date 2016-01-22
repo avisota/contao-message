@@ -47,7 +47,7 @@ class ContaoStylesheets implements EventSubscriberInterface
      *
      * @return array The event names to listen to
      */
-    static public function getSubscribedEvents()
+    public static function getSubscribedEvents()
     {
         return array(
             AvisotaMessageEvents::COLLECT_STYLESHEETS => array(
@@ -78,10 +78,15 @@ class ContaoStylesheets implements EventSubscriberInterface
                 ->prepare("SELECT * FROM tl_style_sheet WHERE pid=?")
                 ->execute($theme->id);
             while ($stylesheet->next()) {
-                $stylesheets['contao:' . $stylesheet->name] = '<span style="color:#A6A6A6;display:inline">' . $theme->name . ': </span>' . $stylesheet->name . '<span style="color:#A6A6A6;display:inline">.css</span>';
+                $stylesheets['contao:' . $stylesheet->name] =
+                    '<span style="color:#A6A6A6;display:inline">' . $theme->name . ': </span>'
+                    . $stylesheet->name . '<span style="color:#A6A6A6;display:inline">.css</span>';
             }
 
-            $eventDispatcher->dispatch(AvisotaMessageEvents::COLLECT_THEME_STYLESHEETS, new CollectThemeStylesheetsEvent($theme->row(), $stylesheets));
+            $eventDispatcher->dispatch(
+                AvisotaMessageEvents::COLLECT_THEME_STYLESHEETS,
+                new CollectThemeStylesheetsEvent($theme->row(), $stylesheets)
+            );
         }
     }
 

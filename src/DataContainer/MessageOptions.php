@@ -55,7 +55,7 @@ class MessageOptions implements EventSubscriberInterface
                 array('createNonBoilerplateMessages'),
             ),
 
-            'avisota.create-message-options'                   => array(
+            'avisota.create-message-options' => array(
                 array('createMessageOptions'),
             ),
         );
@@ -156,18 +156,22 @@ class MessageOptions implements EventSubscriberInterface
     {
         $messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');
         $messages          = $messageRepository->findBy(array(), array('sendOn' => 'DESC'));
+
         /** @var \Avisota\Contao\Entity\Message $message */
         foreach ($messages as $message) {
-            $options[$message
-                ->getCategory()
-                ->getTitle()][$message->getId()] = sprintf(
+            $buffer = sprintf(
                 '[%s] %s',
                 $message->getSendOn() ? $message
                     ->getSendOn()
                     ->format($GLOBALS['TL_CONFIG']['datimFormat']) : '-',
                 $message->getSubject()
             );
+
+            $options[$message
+                ->getCategory()
+                ->getTitle()][$message->getId()] = $buffer;
         }
+
         return $options;
     }
 }

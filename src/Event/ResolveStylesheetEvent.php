@@ -36,7 +36,7 @@ class ResolveStylesheetEvent extends Event
      *
      * @param $stylesheet
      */
-    function __construct($stylesheet)
+    public function __construct($stylesheet)
     {
         $this->stylesheet = $stylesheet;
     }

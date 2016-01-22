@@ -36,7 +36,7 @@ class CollectStylesheetsEvent extends Event
      *
      * @param \ArrayObject $stylesheets
      */
-    function __construct(\ArrayObject $stylesheets)
+    public function __construct(\ArrayObject $stylesheets)
     {
         $this->stylesheets = $stylesheets;
     }

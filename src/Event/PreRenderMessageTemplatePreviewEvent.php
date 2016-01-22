@@ -57,7 +57,7 @@ class PreRenderMessageTemplatePreviewEvent extends Event
      * @param RecipientInterface|null             $recipient
      * @param array                               $additionalData
      */
-    function __construct(
+    public function __construct(
         Message $contaoMessage,
         PreRenderedMessageTemplateInterface $messageTemplate,
         RecipientInterface $recipient = null,

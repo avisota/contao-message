@@ -209,10 +209,11 @@ class Message implements EventSubscriberInterface
                 $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
                 $eventDispatcher->dispatch(ContaoEvents::DATE_PARSE, $parseDateEvent);
 
-                $label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . sprintf(
-                        $GLOBALS['TL_LANG']['orm_avisota_message']['sended'],
-                        $parseDateEvent->getResult()
-                    ) . ')</span>';
+                $sended = sprintf(
+                    $GLOBALS['TL_LANG']['orm_avisota_message']['sended'],
+                    $parseDateEvent->getResult()
+                );
+                $label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . $sended . ')</span>';
             }
 
             /** @var EventDispatcher $eventDispatcher */

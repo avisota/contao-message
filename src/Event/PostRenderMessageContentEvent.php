@@ -59,7 +59,7 @@ class PostRenderMessageContentEvent extends Event
      * @param array                               $additionalData
      * @param                                     $content
      */
-    function __construct(
+    public function __construct(
         Message $message,
         PreRenderedMessageTemplateInterface $messageTemplate,
         RecipientInterface $recipient = null,

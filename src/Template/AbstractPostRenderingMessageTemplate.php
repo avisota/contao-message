@@ -126,7 +126,13 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
         $content = $this->parseContent($recipient, $additionalData);
 
         // dispatch a post render event
-        $event = new PostRenderMessageTemplatePreviewEvent($this->message, $this, $recipient, $additionalData, $content);
+        $event = new PostRenderMessageTemplatePreviewEvent(
+            $this->message,
+            $this,
+            $recipient,
+            $additionalData,
+            $content
+        );
         $eventDispatcher->dispatch($event::NAME, $event);
 
         $content = $event->getPreview();
