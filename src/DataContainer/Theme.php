@@ -20,14 +20,6 @@ namespace Avisota\Contao\Message\Core\DataContainer;
  *
  * @package Avisota\Contao\Message\Core\DataContainer
  */
-class Theme extends \Backend
+class Theme extends BaseBackend
 {
-    /**
-     * Import the back end user object
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->import('BackendUser', 'User');
-    }
 }
