@@ -3,10 +3,12 @@
     <body>
       <trans-unit id="MOD.avisota-message.0">
         <source>Avisota - Message</source>
+        <target>Avisota - Mensagem</target>
         
       </trans-unit>
       <trans-unit id="MOD.avisota-message.1">
         <source>Message management and editing for Avisota.</source>
+        <target>Gestão de mensagens e edição para Avisota.</target>
         
       </trans-unit>
       <trans-unit id="FMD.avisota_message_list.0">

@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_module.avisota_message_categories.0">
         <source>Categories</source>
+        <target>Categorias</target>
         
       </trans-unit>
       <trans-unit id="tl_module.avisota_message_categories.1">

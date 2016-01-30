@@ -3,10 +3,12 @@
     <body>
       <trans-unit id="orm_avisota_theme.title.0">
         <source>Title</source>
+        <target>Título</target>
         
       </trans-unit>
       <trans-unit id="orm_avisota_theme.title.1">
         <source>Please enter the theme title.</source>
+        <target>Por favor entre com o nome do tema.</target>
         
       </trans-unit>
       <trans-unit id="orm_avisota_theme.alias.0">

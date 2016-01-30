@@ -3,10 +3,12 @@
     <body>
       <trans-unit id="orm_avisota_message_category.title.0">
         <source>Title</source>
+        <target>Título</target>
         
       </trans-unit>
       <trans-unit id="orm_avisota_message_category.title.1">
         <source>Please enter the newsletter category title.</source>
+        <target>Por favor entre com o título da categoria de notícias.</target>
         
       </trans-unit>
       <trans-unit id="orm_avisota_message_category.alias.0">
