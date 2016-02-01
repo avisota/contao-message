@@ -31,6 +31,7 @@ if (!is_file($dir . '/system/initialize.php')) {
 }
 
 define('TL_MODE', 'FE');
+define('BE_USER_LOGGED_IN', false);
 require($dir . '/system/initialize.php');
 
 BackendUser::getInstance();
