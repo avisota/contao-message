@@ -16,6 +16,7 @@
 namespace Avisota\Contao\Message\Core\Backend;
 
 use Avisota\Contao\Core\Message\Renderer;
+use Bit3\StringBuilder\StringBuilder;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\RedirectEvent;
@@ -100,7 +101,7 @@ class Preview implements EventSubscriberInterface
             );
         }
 
-        $modules = new \StringBuilder();
+        $modules = new StringBuilder();
         /** @var \Avisota\Contao\Message\Core\Send\SendModuleInterface $module */
         foreach ($GLOBALS['AVISOTA_SEND_MODULE'] as $className) {
             $class  = new \ReflectionClass($className);
