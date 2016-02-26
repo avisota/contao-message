@@ -36,9 +36,7 @@
         "bit3/php-callback-filter-iterator-polyfill": "~1.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*",
-        "squizlabs/php_codesniffer": "1.*",
-        "bit3/php-coding-standard": "~2.2"
+        "phpcq/all-tasks": "~1.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
