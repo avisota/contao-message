@@ -21,18 +21,16 @@ use Avisota\Recipient\RecipientInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class PostRenderMessageTemplatePreviewEvent
+ * Class BaseRenderMessageContentEvent
  *
  * @package Avisota\Contao\Message\Core\Event
  */
-class PostRenderMessageTemplatePreviewEvent extends Event
+class BaseRenderMessageContentEvent extends Event
 {
-    const NAME = 'avisota.contao.post-render-message-template-preview';
-
     /**
      * @var Message
      */
-    protected $contaoMessage;
+    protected $message;
 
     /**
      * @var PreRenderedMessageTemplateInterface
@@ -49,41 +47,38 @@ class PostRenderMessageTemplatePreviewEvent extends Event
      */
     protected $additionalData;
 
-    /**
-     * @var string
-     */
-    protected $preview;
+    protected $content;
 
     /**
-     * PostRenderMessageTemplatePreviewEvent constructor.
+     * PostRenderMessageContentEvent constructor.
      *
-     * @param Message                             $contaoMessage
+     * @param Message                             $message
      * @param PreRenderedMessageTemplateInterface $messageTemplate
      * @param RecipientInterface|null             $recipient
      * @param array                               $additionalData
-     * @param                                     $preview
-     * TODO is recipient standard value?
+     * @param                                     $content
+     * TODO is content an sting?
      */
     public function __construct(
-        Message $contaoMessage,
+        Message $message,
         PreRenderedMessageTemplateInterface $messageTemplate,
         RecipientInterface $recipient = null,
         array $additionalData = array(),
-        $preview = ''
+        $content = ''
     ) {
-        $this->contaoMessage   = $contaoMessage;
+        $this->message         = $message;
         $this->messageTemplate = $messageTemplate;
         $this->recipient       = $recipient;
         $this->additionalData  = $additionalData;
-        $this->preview         = $preview;
+        $this->content         = $content;
     }
 
     /**
      * @return Message
      */
-    public function getContaoMessage()
+    public function getMessage()
     {
-        return $this->contaoMessage;
+        return $this->message;
     }
 
     /**
@@ -103,6 +98,17 @@ class PostRenderMessageTemplatePreviewEvent extends Event
     }
 
     /**
+     * @param array $additionalData
+     *
+     * @return $this
+     */
+    public function setAdditionalData($additionalData)
+    {
+        $this->additionalData = $additionalData;
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getAdditionalData()
@@ -111,21 +117,21 @@ class PostRenderMessageTemplatePreviewEvent extends Event
     }
 
     /**
-     * @param string $preview
-     *
-     * @return $this
+     * @return mixed
      */
-    public function setPreview($preview)
+    public function getContent()
     {
-        $this->preview = $preview;
-        return $this;
+        return $this->content;
     }
 
     /**
-     * @return string
+     * @param mixed $content
+     *
+     * @return $this
      */
-    public function getPreview()
+    public function setContent($content)
     {
-        return $this->preview;
+        $this->content = $content;
+        return $this;
     }
 }

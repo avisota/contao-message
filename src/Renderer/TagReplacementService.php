@@ -32,7 +32,7 @@ class TagReplacementService
      *
      * @param \Twig_Environment|null $twigEnvironment
      */
-    function __construct(\Twig_Environment $twigEnvironment = null)
+    public function __construct(\Twig_Environment $twigEnvironment = null)
     {
         $this->twigEnvironment = $twigEnvironment;
     }

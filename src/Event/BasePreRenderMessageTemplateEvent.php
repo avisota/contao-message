@@ -21,14 +21,12 @@ use Avisota\Recipient\RecipientInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class PostRenderMessageTemplatePreviewEvent
+ * Class BasePreRenderMessageTemplateEvent
  *
  * @package Avisota\Contao\Message\Core\Event
  */
-class PostRenderMessageTemplatePreviewEvent extends Event
+class BasePreRenderMessageTemplateEvent extends Event
 {
-    const NAME = 'avisota.contao.post-render-message-template-preview';
-
     /**
      * @var Message
      */
@@ -50,32 +48,23 @@ class PostRenderMessageTemplatePreviewEvent extends Event
     protected $additionalData;
 
     /**
-     * @var string
-     */
-    protected $preview;
-
-    /**
-     * PostRenderMessageTemplatePreviewEvent constructor.
+     * PreRenderMessageTemplateEvent constructor.
      *
      * @param Message                             $contaoMessage
      * @param PreRenderedMessageTemplateInterface $messageTemplate
      * @param RecipientInterface|null             $recipient
      * @param array                               $additionalData
-     * @param                                     $preview
-     * TODO is recipient standard value?
      */
     public function __construct(
         Message $contaoMessage,
         PreRenderedMessageTemplateInterface $messageTemplate,
         RecipientInterface $recipient = null,
-        array $additionalData = array(),
-        $preview = ''
+        array $additionalData = array()
     ) {
         $this->contaoMessage   = $contaoMessage;
         $this->messageTemplate = $messageTemplate;
         $this->recipient       = $recipient;
         $this->additionalData  = $additionalData;
-        $this->preview         = $preview;
     }
 
     /**
@@ -103,29 +92,21 @@ class PostRenderMessageTemplatePreviewEvent extends Event
     }
 
     /**
+     * @param array $additionalData
+     *
+     * @return $this
+     */
+    public function setAdditionalData($additionalData)
+    {
+        $this->additionalData = $additionalData;
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getAdditionalData()
     {
         return $this->additionalData;
-    }
-
-    /**
-     * @param string $preview
-     *
-     * @return $this
-     */
-    public function setPreview($preview)
-    {
-        $this->preview = $preview;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPreview()
-    {
-        return $this->preview;
     }
 }

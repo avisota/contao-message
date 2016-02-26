@@ -28,7 +28,7 @@ abstract class AbstractWebRunner extends \Backend
     /**
      * AbstractWebRunner constructor.
      */
-    function __construct()
+    public function __construct()
     {
         // preserve object initialisation order
         \BackendUser::getInstance();
@@ -37,6 +37,9 @@ abstract class AbstractWebRunner extends \Backend
         parent::__construct();
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ExitExpression)
+     */
     public function run()
     {
         $messageRepository = EntityHelper::getRepository('Avisota\Contao:Message');

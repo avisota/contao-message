@@ -35,7 +35,7 @@ class CollectThemeStylesheetsEvent extends CollectStylesheetsEvent
      * @param array        $theme
      * @param \ArrayObject $stylesheets
      */
-    function __construct(array $theme, \ArrayObject $stylesheets)
+    public function __construct(array $theme, \ArrayObject $stylesheets)
     {
         $this->theme = $theme;
         parent::__construct($stylesheets);

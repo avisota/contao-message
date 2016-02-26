@@ -50,7 +50,7 @@ class RenderMessageHeadersEvent extends Event
      * @param                          $message
      * @param                          $headers
      */
-    function __construct(MessageRendererInterface $renderer, $message, $headers)
+    public function __construct(MessageRendererInterface $renderer, $message, $headers)
     {
         $this->renderer = $renderer;
         $this->message  = $message;

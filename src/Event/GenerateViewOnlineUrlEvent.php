@@ -15,7 +15,6 @@
 
 namespace Avisota\Contao\Message\Core\Event;
 
-
 use Avisota\Contao\Entity\Message;
 use Symfony\Component\EventDispatcher\Event;
 
@@ -45,7 +44,7 @@ class GenerateViewOnlineUrlEvent extends Event
     public function __construct(Message $message, $url)
     {
         $this->message = $message;
-        $this->url     = $url;;
+        $this->url     = $url;
     }
 
     /**

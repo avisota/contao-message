@@ -68,6 +68,11 @@ class Message implements EventSubscriberInterface
     /**
      * @param $add
      * @param $dc
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.LongVariable)
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function addHeader($add, $dc)
     {
@@ -127,6 +132,7 @@ class Message implements EventSubscriberInterface
 
     /**
      * @param GetGroupHeaderEvent $event
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getGroupHeader(GetGroupHeaderEvent $event)
     {
@@ -168,6 +174,7 @@ class Message implements EventSubscriberInterface
      * @param ParentViewChildRecordEvent $event
      *
      * @internal param $array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function parentViewChildRecord(ParentViewChildRecordEvent $event)
     {
@@ -209,10 +216,11 @@ class Message implements EventSubscriberInterface
                 $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
                 $eventDispatcher->dispatch(ContaoEvents::DATE_PARSE, $parseDateEvent);
 
-                $label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . sprintf(
-                        $GLOBALS['TL_LANG']['orm_avisota_message']['sended'],
-                        $parseDateEvent->getResult()
-                    ) . ')</span>';
+                $sended = sprintf(
+                    $GLOBALS['TL_LANG']['orm_avisota_message']['sended'],
+                    $parseDateEvent->getResult()
+                );
+                $label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . $sended . ')</span>';
             }
 
             /** @var EventDispatcher $eventDispatcher */

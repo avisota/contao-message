@@ -58,7 +58,7 @@ class LayoutOptions implements EventSubscriberInterface
                 array('crateLayoutStylesheetOptions'),
             ),
 
-            'avisota.create-layout-options'              => array(
+            'avisota.create-layout-options' => array(
                 array('createLayoutOptions'),
             ),
         );
@@ -76,6 +76,7 @@ class LayoutOptions implements EventSubscriberInterface
      * @param array $options
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getLayoutTypeOptions($options = array())
     {
@@ -102,6 +103,7 @@ class LayoutOptions implements EventSubscriberInterface
      * @param array $options
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getLayoutStylesheetOptions($options = array())
     {
@@ -114,7 +116,10 @@ class LayoutOptions implements EventSubscriberInterface
             $stylesheets = new \ArrayObject();
         }
 
-        $eventDispatcher->dispatch(AvisotaMessageEvents::COLLECT_STYLESHEETS, new CollectStylesheetsEvent($stylesheets));
+        $eventDispatcher->dispatch(
+            AvisotaMessageEvents::COLLECT_STYLESHEETS,
+            new CollectStylesheetsEvent($stylesheets)
+        );
 
         return $stylesheets->getArrayCopy();
     }

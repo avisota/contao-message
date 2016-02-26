@@ -85,6 +85,9 @@ class MessageContentOptions implements EventSubscriberInterface
      * @param array $options
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public function getMessageContentTypeOptions($dc, $options = array())
     {
@@ -165,7 +168,7 @@ class MessageContentOptions implements EventSubscriberInterface
      *
      * @return array
      * @internal param $object
-     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getArticleAliasOptions($options = array())
     {
@@ -184,14 +187,17 @@ class MessageContentOptions implements EventSubscriberInterface
             }
 
             $alias = \Database::getInstance()->execute(
-                "SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(" . implode(
+                "SELECT a.id, a.title, a.i" .
+                "nColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(" .
+                implode(
                     ',',
                     array_map('intval', array_unique($pids))
                 ) . ") ORDER BY parent, a.sorting"
             );
         } else {
             $alias = \Database::getInstance()->execute(
-                "SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid ORDER BY parent, a.sorting"
+                "SELECT a.id, a.title, a.inColumn, p.title AS parent " .
+                "FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid ORDER BY parent, a.sorting"
             );
         }
 
@@ -205,10 +211,11 @@ class MessageContentOptions implements EventSubscriberInterface
             );
 
             while ($alias->next()) {
-                $options[$alias->parent][$alias->id] = $alias->title . ' (' . (strlen(
-                        $GLOBALS['TL_LANG']['tl_article'][$alias->inColumn]
-                    ) ? $GLOBALS['TL_LANG']['tl_article'][$alias->inColumn]
-                        : $alias->inColumn) . ', ID ' . $alias->id . ')';
+                $buffer = (strlen($GLOBALS['TL_LANG']['tl_article'][$alias->inColumn])
+                        ? $GLOBALS['TL_LANG']['tl_article'][$alias->inColumn]
+                        : $alias->inColumn) . ', ID ' . $alias->id;
+
+                $options[$alias->parent][$alias->id] = $alias->title . ' (' . $buffer . ')';
             }
         }
 
@@ -217,6 +224,7 @@ class MessageContentOptions implements EventSubscriberInterface
 
     /**
      * @param CreateOptionsEvent $event
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function createContentTypeOptions(CreateOptionsEvent $event)
     {
@@ -227,6 +235,7 @@ class MessageContentOptions implements EventSubscriberInterface
      * @param array $options
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getContentTypeOptions($options = array())
     {

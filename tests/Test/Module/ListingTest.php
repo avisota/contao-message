@@ -13,13 +13,17 @@
  * @filesource
  */
 
-namespace Avisota\Contao\Message\Core\DataContainer;
+namespace Avisota\Test\Contao\Message\Core\Module;
 
 /**
- * Class MessageCategory
+ * Class ListingTest
  *
- * @package Avisota\Contao\Message\Core\DataContainer
+ * @package Avisota\Test\Contao\Message\Core\Module
  */
-class MessageCategory extends BaseBackend
+class ListingTest extends \PHPUnit_Framework_TestCase
 {
+
+    public function testCompile()
+    {
+    }
 }

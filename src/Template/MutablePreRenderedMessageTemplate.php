@@ -53,8 +53,13 @@ class MutablePreRenderedMessageTemplate extends AbstractPostRenderingMessageTemp
      * @param string  $contentType
      * @param string  $contentEncoding
      */
-    function __construct(Message $message, $content = '', $contentName = 'message.html', $contentType = 'text/html', $contentEncoding = 'utf-8')
-    {
+    public function __construct(
+        Message $message,
+        $content = '',
+        $contentName = 'message.html',
+        $contentType = 'text/html',
+        $contentEncoding = 'utf-8'
+    ) {
         parent::__construct($message);
         $this->content         = (string) $content;
         $this->contentName     = (string) $contentName;

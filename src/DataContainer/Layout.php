@@ -31,7 +31,7 @@ class Layout
      *
      * @return string
      */
-    static public function addElement($contentData)
+    public static function addElement($contentData)
     {
         return sprintf(
             '<div>%s</div>' . "\n",
@@ -43,8 +43,9 @@ class Layout
      * @param DC_General|\Avisota\Contao\Entity\Layout $layout
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
-    static public function getDefaultSelectedCellContentElements($layout)
+    public static function getDefaultSelectedCellContentElements($layout)
     {
         $value = array();
 
@@ -78,7 +79,7 @@ class Layout
      *
      * @return array
      */
-    static public function getterCallbackAllowedCellContents($value, \Avisota\Contao\Entity\Layout $layout)
+    public static function getterCallbackAllowedCellContents($value, \Avisota\Contao\Entity\Layout $layout)
     {
         if ($value === null) {
             return static::getDefaultSelectedCellContentElements($layout);
@@ -93,7 +94,7 @@ class Layout
      *
      * @return null
      */
-    static public function setterCallbackAllowedCellContents($value, \Avisota\Contao\Entity\Layout $layout)
+    public static function setterCallbackAllowedCellContents($value, \Avisota\Contao\Entity\Layout $layout)
     {
         if (!is_array($value)) {
             $value = null;

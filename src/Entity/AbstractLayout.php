@@ -35,8 +35,9 @@ abstract class AbstractLayout implements EntityInterface
      */
     public function getStylesheetPaths()
     {
+        global $container;
         /** @var EventDispatcher $eventDispatcher */
-        $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+        $eventDispatcher = $container['event-dispatcher'];
 
         $paths       = array();
         $stylesheets = $this->getStylesheets();

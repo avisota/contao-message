@@ -23,6 +23,7 @@ use Symfony\Component\EventDispatcher\Event;
  * Class RenderMessageEvent
  *
  * @package Avisota\Contao\Message\Core\Event
+ * @SuppressWarnings(PHPMD.LongVariable)
  */
 class RenderMessageEvent extends Event
 {

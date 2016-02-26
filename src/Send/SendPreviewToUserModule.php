@@ -35,10 +35,12 @@ class SendPreviewToUserModule implements SendModuleInterface
     {
         global $container;
 
-        $userMissing = isset($_SESSION['AVISOTA_SEND_PREVIEW_TO_USER_EMPTY'])
-            ? $_SESSION['AVISOTA_SEND_PREVIEW_TO_USER_EMPTY']
+        $sendPreviewToUser = \Session::getInstance()
+            ->get('AVISOTA_SEND_PREVIEW_TO_USER_EMPTY');
+        $userMissing = isset($sendPreviewToUser)
+            ? $sendPreviewToUser
             : false;
-        unset($_SESSION['AVISOTA_SEND_PREVIEW_TO_USER_EMPTY']);
+        unset($sendPreviewToUser);
 
         /** @var Connection $connection */
         $connection = $container['doctrine.connection.default'];

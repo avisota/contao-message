@@ -43,10 +43,12 @@ class MessageRenderer implements MessageRendererInterface
      */
     public function renderMessage(Message $message, Layout $layout = null)
     {
+        global $container;
+
         $event = new RenderMessageEvent($message, $layout ?: $message->getLayout());
 
         /** @var EventDispatcher $eventDispatcher */
-        $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+        $eventDispatcher = $container['event-dispatcher'];
         $eventDispatcher->dispatch(AvisotaMessageEvents::RENDER_MESSAGE, $event);
 
         return $event->getPreRenderedMessageTemplate();
@@ -61,6 +63,7 @@ class MessageRenderer implements MessageRendererInterface
      * @param Layout  $layout
      *
      * @return \string[]
+     * @SuppressWarnings(PHPMD.LongVariable)
      */
     public function renderCell(Message $message, $cell, Layout $layout = null)
     {
@@ -99,6 +102,7 @@ class MessageRenderer implements MessageRendererInterface
      * @param Layout         $layout
      *
      * @return string
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function renderContent(MessageContent $messageContent, Layout $layout = null)
     {

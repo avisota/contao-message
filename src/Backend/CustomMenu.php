@@ -31,8 +31,9 @@ class CustomMenu extends \BackendModule
      * @param       $showAll
      *
      * @return array
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    static public function hookGetUserNavigation(array $navigation, $showAll)
+    public static function hookGetUserNavigation(array $navigation, $showAll)
     {
         if (TL_MODE == 'BE') {
             try {
@@ -73,6 +74,10 @@ class CustomMenu extends \BackendModule
         return $navigation;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.LongVariable)
+     */
     public function injectMenu()
     {
         global $container;
@@ -123,7 +128,7 @@ class CustomMenu extends \BackendModule
     }
 
     /**
-     *
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public function generate()
     {
@@ -132,7 +137,10 @@ class CustomMenu extends \BackendModule
 
         $serializer = new ModelId('orm_avisota_message_category', $id);
 
-        $this->redirect('contao/main.php?do=avisota_newsletter&table=orm_avisota_message&pid=' . $serializer->getSerialized());
+        $this->redirect(
+            'contao/main.php?do=avisota_newsletter&table=orm_avisota_message&pid=' .
+            $serializer->getSerialized()
+        );
     }
 
     /**

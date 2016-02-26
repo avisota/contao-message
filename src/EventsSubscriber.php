@@ -243,6 +243,7 @@ class EventsSubscriber implements EventSubscriberInterface
 
     /**
      * @param RenderMessageEvent $event
+     * @SuppressWarnings(PHPMD.LongVariable)
      */
     public function renderMessage(RenderMessageEvent $event)
     {
