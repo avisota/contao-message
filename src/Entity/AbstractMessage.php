@@ -48,6 +48,10 @@ abstract class AbstractMessage implements EntityInterface, AliasableInterface
      */
     public function getRecipients()
     {
+        if (!$this->getCategory()) {
+            return null;
+        }
+
         $category = $this->getCategory();
 
         if ($category->getBoilerplates()
@@ -79,6 +83,10 @@ abstract class AbstractMessage implements EntityInterface, AliasableInterface
      */
     public function getLayout()
     {
+        if (!$this->getCategory()) {
+            return null;
+        }
+
         $category = $this->getCategory();
 
         if ($category->getBoilerplates()
@@ -110,6 +118,10 @@ abstract class AbstractMessage implements EntityInterface, AliasableInterface
      */
     public function getQueue()
     {
+        if (!$this->getCategory()) {
+            return null;
+        }
+
         $category = $this->getCategory();
 
         if ($category->getBoilerplates()
