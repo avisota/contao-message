@@ -1,0 +1,96 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-06T04:00:55+02:00" original="orm_avisota_theme" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="orm_avisota_theme.title.0">
+        <source>Title</source>
+        <target>Titel</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.title.1">
+        <source>Please enter the theme title.</source>
+        <target>Endatescha il titel dal theme.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.alias.0">
+        <source>Alias</source>
+        <target>Alias</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.alias.1">
+        <source>The theme alias is a unique reference to the theme which can be used instead of its ID.</source>
+        <target>L'alias dal theme è ina referenza unica al theme che po vegnir inditgada empè da la ID.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.templateDirectory.0">
+        <source>Templates folder</source>
+        <target>Ordinatur da templates</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.templateDirectory.1">
+        <source>Here you can select a templates folder that will be exported with the theme.</source>
+        <target>Qua pos ti tscherner in ordinatur da templates che vegn exportà cun il theme.</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.theme_legend">
+        <source>Theme</source>
+        <target>Theme</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.expert_legend">
+        <source>Experts settings</source>
+        <target>Configuraziun avanzada</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.new.0">
+        <source>New theme</source>
+        <target>Nov theme</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.new.1">
+        <source>Create a new theme</source>
+        <target>Crear in nov theme</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.show.0">
+        <source>Theme details</source>
+        <target>Detagls dal theme</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.show.1">
+        <source>Show the details of theme ID %s</source>
+        <target>Mussar ils detagls dal theme %s</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.edit.0">
+        <source>Edit theme</source>
+        <target>Modifitgar il theme</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.edit.1">
+        <source>Edit theme ID %s</source>
+        <target>Modifitgar il theme cun l'ID %s</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.copy.0">
+        <source>Duplicate theme</source>
+        <target>Duplitgar il theme</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.copy.1">
+        <source>Duplicate theme %s</source>
+        <target>Duplitgar il theme cun l'ID %s</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.delete.0">
+        <source>Delete theme</source>
+        <target>Stizzar il theme</target>
+        
+      </trans-unit>
+      <trans-unit id="orm_avisota_theme.delete.1">
+        <source>Delete theme ID %s</source>
+        <target>Stizzar il theme cun l'ID %s</target>
+        
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

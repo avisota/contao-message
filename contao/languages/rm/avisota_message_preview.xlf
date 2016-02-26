@@ -1,0 +1,81 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="php" date="2014-05-06T04:00:55+02:00" original="avisota_message_preview" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="avisota_message_preview.sendPreviewToUser.0">
+        <source>Send to user</source>
+        <target>Trametter a l'utilisader</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendPreviewToUser.1">
+        <source>Send an example to a user.</source>
+        <target>Trametter in exempel a l'utilisader</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendPreviewToEmail.0">
+        <source>Send to email</source>
+        <target>Trametter ad in'adressa dad e-mail</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendPreviewToEmail.1">
+        <source>Send an example to an email.</source>
+        <target>Trametter in exempel ad in'adressa dad e-mail.</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.headline">
+        <source>View and send message</source>
+        <target>Mussar e trametter il messadi</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.previewToUser">
+        <source>Send preview to user</source>
+        <target>Trametter ina prevista a l'utilisader</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.previewToEmail">
+        <source>Send preview to email</source>
+        <target>Trametter ina prevista ad in'adressa dad e-mail</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendNow">
+        <source>Send message now</source>
+        <target>Trametter ussa il messadi</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.previewInNewWindow">
+        <source>View in new window</source>
+        <target>Vesair en ina nova fanestra</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendPreview">
+        <source>Send preview</source>
+        <target>Trametter la prevista</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.sendMessage">
+        <source>Send message to recipients now</source>
+        <target>Trametter ussa il messadi als destinaturs</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.helpSendNow">
+        <source>Send this message to %d recipients immediately.</source>
+        <target>Trametter ussa quest messadis a %d destinaturs.</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.previewSend">
+        <source>Preview send to %s</source>
+        <target>Tramess la prevista a %s</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.confirmSend">
+        <source>Are you sure you wan't to send this newsletter now? The sending process will start immediately!</source>
+        <target>Es ti segir che ti vuls trametter uss quest newsletter? Il process da trametter vegn a cumenzar immediatamain!</target>
+        
+      </trans-unit>
+      <trans-unit id="avisota_message_preview.messagesEnqueued">
+        <source>(turn %2$d) %1$d messages enqueued.</source>
+        <target>(gir %2$d) agiuntà %1$d a la colonna da spetga.</target>
+        
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -111,6 +111,7 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
                 'icon'       => 'copy.gif',
                 'attributes' => 'onclick="Backend.getScrollOffset();"',
             ),
+            // TODO description for alert box
             'delete' => array
             (
                 'label'      => &$GLOBALS['TL_LANG']['orm_avisota_layout']['delete'],
@@ -210,7 +211,7 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
         ),
         'alias'               => array
         (
-            'label'           => &$GLOBALS['TL_LANG']['orm_avisota_mailing_list']['alias'],
+            'label'           => &$GLOBALS['TL_LANG']['orm_avisota_layout']['alias'],
             'exclude'         => true,
             'search'          => true,
             'inputType'       => 'text',
