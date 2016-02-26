@@ -2,33 +2,32 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright (C) 2013 Tristan Lins
+ * Copyright © 2016 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  bit3 UG 2013
- * @author     Tristan Lins <tristan.lins@bit3.de>
+ * @copyright  way.vision 2016
+ * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-core
  * @license    LGPL-3.0+
  * @filesource
  */
 
 use Avisota\Contao\Entity\Message;
-use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\IdSerializer;
 
 $dir = dirname(isset($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : __FILE__);
 
 while ($dir && $dir != '.' && $dir != '/' && !is_file($dir . '/system/initialize.php')) {
-	$dir = dirname($dir);
+    $dir = dirname($dir);
 
 }
 
 if (!is_file($dir . '/system/initialize.php')) {
-	header("HTTP/1.0 500 Internal Server Error");
-	header('Content-Type: text/html; charset=utf-8');
-	echo '<h1>500 Internal Server Error</h1>';
-	echo '<p>Could not find initialize.php!</p>';
-	exit(1);
+    header("HTTP/1.0 500 Internal Server Error");
+    header('Content-Type: text/html; charset=utf-8');
+    echo '<h1>500 Internal Server Error</h1>';
+    echo '<p>Could not find initialize.php!</p>';
+    exit(1);
 }
 
 define('TL_MODE', 'FE');
@@ -38,95 +37,96 @@ BackendUser::getInstance();
 
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
+use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 
+/**
+ * Class send_preview_to_email
+ */
 class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 {
-	protected function execute(Message $message, \BackendUser $user)
-	{
-		global $container;
+    /**
+     * @param Message     $message
+     * @param BackendUser $user
+     *
+     * @return mixed|void
+     */
+    protected function execute(Message $message, \BackendUser $user)
+    {
+        global $container;
 
-		/** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
-		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+        /** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
+        $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 
-		$input = \Input::getInstance();
-		$email = $input->get('recipient_email');
+        $email = \Input::get('recipient_email');
 
-		if (!$email) {
-			$_SESSION['AVISOTA_SEND_PREVIEW_TO_EMAIL_EMPTY'] = true;
+        $idSerializer = new ModelId('orm_avisota_message', $message->getId());
+        $pidSerializer = new ModelId('orm_avisota_message_category', $message->getCategory()->getId());
 
-			header(
-				'Location: ' . sprintf(
-					'%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s&pid=%s',
-					$environment->base,
-					$idSerializer->getSerialized(),
-					$pidSerializer->getSerialized()
-				)
-			);
-			exit;
-		}
+        if (!$email) {
+            $_SESSION['AVISOTA_SEND_PREVIEW_TO_EMAIL_EMPTY'] = true;
 
-		$idSerializer = new IdSerializer();
-		$idSerializer->setDataProviderName('orm_avisota_message');
-		$idSerializer->setId($message->getId());
+            header(
+                'Location: ' . sprintf(
+                    '%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s&pid=%s',
+                    \Environment::get('base'),
+                    $idSerializer->getSerialized(),
+                    $pidSerializer->getSerialized()
+                )
+            );
+            exit;
+        }
 
-		$pidSerializer = new IdSerializer();
-		$pidSerializer->setDataProviderName('orm_avisota_message_category');
-		$pidSerializer->setId($message->getCategory()->getId());
+        $url = sprintf(
+            '%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s&pid=%s',
+            \Environment::get('base'),
+            $idSerializer->getSerialized(),
+            $pidSerializer->getSerialized()
+        );
 
-		$environment = Environment::getInstance();
+        if ($message->getCategory()->getViewOnlinePage()) {
+            $event = new LoadLanguageFileEvent('avisota_message');
+            $eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
 
-		$url = sprintf(
-			'%scontao/main.php?do=avisota_newsletter&table=orm_avisota_message&act=preview&id=%s&pid=%s',
-			$environment->base,
-			$idSerializer->getSerialized(),
-			$pidSerializer->getSerialized()
-		);
+            $viewOnlineLink = sprintf($GLOBALS['TL_LANG']['avisota_message']['viewOnline'], $url);
+        } else {
+            $viewOnlineLink = false;
+        }
 
-		if ($message->getCategory()->getViewOnlinePage()) {
-			$event = new LoadLanguageFileEvent('avisota_message');
-			$eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
+        $event = new \Avisota\Contao\Core\Event\CreateFakeRecipientEvent($message);
+        $eventDispatcher->dispatch(\Avisota\Contao\Core\CoreEvents::CREATE_FAKE_RECIPIENT, $event);
 
-			$viewOnlineLink = sprintf($GLOBALS['TL_LANG']['avisota_message']['viewOnline'], $url);
-		}
-		else {
-			$viewOnlineLink = false;
-		}
+        $recipient = $event->getRecipient();
+        $recipient->setEmail($email);
 
-		$event = new \Avisota\Contao\Core\Event\CreateFakeRecipientEvent($message);
-		$eventDispatcher->dispatch(\Avisota\Contao\Core\CoreEvents::CREATE_FAKE_RECIPIENT, $event);
+        $additionalData = array('view_online_link' => $viewOnlineLink);
 
-		$recipient = $event->getRecipient();
-		$recipient->setEmail($email);
+        /** @var \Avisota\Contao\Message\Core\Renderer\MessageRendererInterface $renderer */
+        $renderer        = $container['avisota.message.renderer'];
+        $messageTemplate = $renderer->renderMessage($message);
+        $messageMail     = $messageTemplate->render($recipient, $additionalData);
 
-		$additionalData = array('view_online_link' => $viewOnlineLink);
+        /** @var \Avisota\Transport\TransportInterface $transport */
+        $transport = $GLOBALS['container']['avisota.transport.' . $message
+            ->getQueue()
+            ->getTransport()
+            ->getId()];
 
-		/** @var \Avisota\Contao\Message\Core\Renderer\MessageRendererInterface $renderer */
-		$renderer        = $container['avisota.message.renderer'];
-		$messageTemplate = $renderer->renderMessage($message);
-		$messageMail     = $messageTemplate->render($recipient, $additionalData);
+        $transport->send($messageMail);
 
-		/** @var \Avisota\Transport\TransportInterface $transport */
-		$transport = $GLOBALS['container']['avisota.transport.' . $message
-			->getQueue()
-			->getTransport()
-			->getId()];
+        $event = new \ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent(
+            'avisota_message_preview'
+        );
 
-		$transport->send($messageMail);
+        $eventDispatcher->dispatch(
+            \ContaoCommunityAlliance\Contao\Bindings\ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE,
+            $event
+        );
 
-		$event = new \ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent(
-			'avisota_message_preview'
-		);
+        $_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['avisota_message_preview']['previewSend'], $email);
 
-		$eventDispatcher->dispatch(
-			\ContaoCommunityAlliance\Contao\Bindings\ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE,
-			$event
-		);
-
-		$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['avisota_message_preview']['previewSend'], $email);
-
-		header('Location: ' . $url);
-		exit;
-	}
+        header('Location: ' . $url);
+        exit;
+    }
 }
 
 $send_preview_to_email = new send_preview_to_email();

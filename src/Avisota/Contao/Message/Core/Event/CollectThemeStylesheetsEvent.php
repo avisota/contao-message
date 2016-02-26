@@ -2,12 +2,12 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright (C) 2013 Tristan Lins
+ * Copyright © 2016 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  bit3 UG 2013
- * @author     Tristan Lins <tristan.lins@bit3.de>
+ * @copyright  way.vision 2016
+ * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-core
  * @license    LGPL-3.0+
  * @filesource
@@ -15,29 +15,37 @@
 
 namespace Avisota\Contao\Message\Core\Event;
 
-use Avisota\Contao\Message\Core\Message\Renderer;
-use Symfony\Component\EventDispatcher\Event;
-
+/**
+ * Class CollectThemeStylesheetsEvent
+ *
+ * @package Avisota\Contao\Message\Core\Event
+ */
 class CollectThemeStylesheetsEvent extends CollectStylesheetsEvent
 {
-	const NAME = 'Avisota\Contao\Message\Core\Event\CollectThemeStylesheets';
+    const NAME = 'Avisota\Contao\Message\Core\Event\CollectThemeStylesheets';
 
-	/**
-	 * @var array
-	 */
-	protected $theme;
+    /**
+     * @var array
+     */
+    protected $theme;
 
-	function __construct(array $theme, \ArrayObject $stylesheets)
-	{
-		$this->theme = $theme;
-		parent::__construct($stylesheets);
-	}
+    /**
+     * CollectThemeStylesheetsEvent constructor.
+     *
+     * @param array        $theme
+     * @param \ArrayObject $stylesheets
+     */
+    function __construct(array $theme, \ArrayObject $stylesheets)
+    {
+        $this->theme = $theme;
+        parent::__construct($stylesheets);
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getTheme()
-	{
-		return $this->theme;
-	}
+    /**
+     * @return array
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
 }

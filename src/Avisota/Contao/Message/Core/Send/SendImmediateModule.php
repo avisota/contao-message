@@ -2,12 +2,12 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright (C) 2013 Tristan Lins
+ * Copyright © 2016 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  bit3 UG 2013
- * @author     Tristan Lins <tristan.lins@bit3.de>
+ * @copyright  way.vision 2016
+ * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-core
  * @license    LGPL-3.0+
  * @filesource
@@ -21,41 +21,54 @@ use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
+/**
+ * Class SendImmediateModule
+ *
+ * @package Avisota\Contao\Message\Core\Send
+ */
 class SendImmediateModule extends \Controller implements SendModuleInterface
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
+    /**
+     * SendImmediateModule constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	public function run(Message $message)
-	{
-		global $container;
+    /**
+     * @param Message $message
+     *
+     * @return string
+     */
+    public function run(Message $message)
+    {
+        global $container;
 
-		/** @var EventDispatcher $eventDispatcher */
-		$eventDispatcher = $GLOBALS['container']['event-dispatcher'];
+        /** @var EventDispatcher $eventDispatcher */
+        $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 
-		$eventDispatcher->dispatch(
-			ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE,
-			new LoadLanguageFileEvent('avisota_send_immediate')
-		);
+        $eventDispatcher->dispatch(
+            ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE,
+            new LoadLanguageFileEvent('avisota_send_immediate')
+        );
 
-		$recipientSourceData = $message->getRecipients();
+        $recipientSourceData = $message->getRecipients();
 
-		if ($recipientSourceData) {
-			$serviceName         = sprintf('avisota.recipientSource.%s', $recipientSourceData->getId());
-			/** @var RecipientSourceInterface $recipientSource */
-			$recipientSource     = $container[$serviceName];
+        if ($recipientSourceData) {
+            $serviceName = sprintf('avisota.recipientSource.%s', $recipientSourceData->getId());
+            /** @var RecipientSourceInterface $recipientSource */
+            $recipientSource = $container[$serviceName];
 
-			$template = new \TwigTemplate('avisota/send/send_immediate', 'html5');
-			return $template->parse(
-				array(
-					 'message' => $message,
-					 'count'   => $recipientSource->countRecipients(),
-				)
-			);
-		}
+            $template = new \TwigTemplate('avisota/send/send_immediate', 'html5');
+            return $template->parse(
+                array(
+                    'message' => $message,
+                    'count'   => $recipientSource->countRecipients(),
+                )
+            );
+        }
 
-		return '';
-	}
+        return '';
+    }
 }

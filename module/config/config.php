@@ -2,17 +2,16 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright (C) 2013 Tristan Lins
+ * Copyright © 2016 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  bit3 UG 2013
- * @author     Tristan Lins <tristan.lins@bit3.de>
+ * @copyright  way.vision 2016
+ * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-message
  * @license    LGPL-3.0+
  * @filesource
  */
-
 
 /**
  * Entities
@@ -26,35 +25,34 @@ $GLOBALS['DOCTRINE_ENTITIES'][] = 'orm_avisota_message_category';
 $GLOBALS['DOCTRINE_ENTITIES'][] = 'orm_avisota_message_content';
 $GLOBALS['DOCTRINE_ENTITIES'][] = 'orm_avisota_theme';
 
-
 /**
  * Back end modules
  */
 $settingsModuleIndex = 1 + array_search('avisota_settings', array_keys($GLOBALS['BE_MOD']['avisota']));
 
 $GLOBALS['BE_MOD']['avisota'] = array_merge(
-	array(
-		'avisota_newsletter' => array(
-			'tables'     => array(
-				'orm_avisota_message_category',
-				'orm_avisota_message',
-				'orm_avisota_message_content',
-				'orm_avisota_message_create_from_draft'
-			),
-			'icon'       => 'assets/avisota/message/images/newsletter.png',
-			'stylesheet' => 'assets/avisota/message/css/backend.css',
-		)
-	),
-	array_slice($GLOBALS['BE_MOD']['avisota'], 0, $settingsModuleIndex),
-	array(
-		'avisota_theme' => array
-		(
-			'nested' => 'avisota_config:newsletter',
-			'tables' => array('orm_avisota_theme', 'orm_avisota_layout'),
-			'icon'   => 'assets/avisota/message/images/theme.png',
-		)
-	),
-	array_slice($GLOBALS['BE_MOD']['avisota'], $settingsModuleIndex)
+    array(
+        'avisota_newsletter' => array(
+            'tables'     => array(
+                'orm_avisota_message_category',
+                'orm_avisota_message',
+                'orm_avisota_message_content',
+                'orm_avisota_message_create_from_draft'
+            ),
+            'icon'       => 'assets/avisota/message/images/newsletter.png',
+            'stylesheet' => 'assets/avisota/message/css/backend.css',
+        )
+    ),
+    array_slice($GLOBALS['BE_MOD']['avisota'], 0, $settingsModuleIndex),
+    array(
+        'avisota_theme' => array
+        (
+            'nested' => 'avisota_config:newsletter',
+            'tables' => array('orm_avisota_theme', 'orm_avisota_layout'),
+            'icon'   => 'assets/avisota/message/images/theme.png',
+        )
+    ),
+    array_slice($GLOBALS['BE_MOD']['avisota'], $settingsModuleIndex)
 );
 
 /**
@@ -69,20 +67,24 @@ $GLOBALS['FE_MOD']['avisota']['avisota_message_reader'] = 'Avisota\Contao\Messag
 $GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\Backend\Preview';
 $GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\Message';
 $GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\MessageContent';
-$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\OptionsBuilder';
 $GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\EventsSubscriber';
 $GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\Layout\ContaoStylesheets';
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\ThemeOptions';
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\LayoutOptions';
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\MessageCategoryOptions';
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\MessageOptions';
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\MessageContentOptions';
 
 /**
  * Hooks
  */
 $GLOBALS['TL_HOOKS']['initializeDependencyContainer']['avisota-custom-menu'] = array(
-	'Avisota\Contao\Message\Core\Backend\CustomMenu',
-	'injectMenu'
+    'Avisota\Contao\Message\Core\Backend\CustomMenu',
+    'injectMenu'
 );
 $GLOBALS['TL_HOOKS']['getUserNavigation']['avisota-custom-menu']             = array(
-	'Avisota\Contao\Message\Core\Backend\CustomMenu',
-	'hookGetUserNavigation'
+    'Avisota\Contao\Message\Core\Backend\CustomMenu',
+    'hookGetUserNavigation'
 );
 
 /**
@@ -97,13 +99,13 @@ $GLOBALS['AVISOTA_SEND_MODULE']['avisota_send_immediate']   = 'Avisota\Contao\Me
  * Message elements
  */
 if (!isset($GLOBALS['TL_MCE'])) {
-	$GLOBALS['TL_MCE'] = array();
+    $GLOBALS['TL_MCE'] = array();
 }
 
 /**
  * Message renderer
  */
 if (!isset($GLOBALS['AVISOTA_MESSAGE_RENDERER'])) {
-	$GLOBALS['AVISOTA_MESSAGE_RENDERER'] = array();
+    $GLOBALS['AVISOTA_MESSAGE_RENDERER'] = array();
 }
 $GLOBALS['AVISOTA_MESSAGE_RENDERER'][] = 'default';

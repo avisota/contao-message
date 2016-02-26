@@ -2,12 +2,12 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright (C) 2013 Tristan Lins
+ * Copyright © 2016 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  bit3 UG 2013
- * @author     Tristan Lins <tristan.lins@bit3.de>
+ * @copyright  way.vision 2016
+ * @author     Sven Baumann <baumann.sv@gmail.com>
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-core
  * @license    LGPL-3.0+
@@ -17,32 +17,58 @@
 namespace Avisota\Contao\Message\Core\DataContainer;
 
 use Avisota\Contao\Entity\RecipientSource;
-use Avisota\Contao\Message\Core\Backend\Helper;
 use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
 use Contao\Doctrine\ORM\EntityHelper;
-use Contao\Doctrine\ORM\EntityInterface;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Backend\GetThemeEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Date\ParseDateEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
-use Doctrine\Common\Persistence\Mapping\MappingException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * Class Message
+ *
+ * @package Avisota\Contao\Message\Core\DataContainer
+ */
 class Message implements EventSubscriberInterface
 {
     /**
-     * {@inheritdoc}
+     * Returns an array of event names this subscriber wants to listen to.
+     *
+     * The array keys are event names and the value can be:
+     *
+     *  * The method name to call (priority defaults to 0)
+     *  * An array composed of the method name to call and the priority
+     *  * An array of arrays composed of the method names to call and respective
+     *    priorities, or 0 if unset
+     *
+     * For instance:
+     *
+     *  * array('eventName' => 'methodName')
+     *  * array('eventName' => array('methodName', $priority))
+     *  * array('eventName' => array(array('methodName1', $priority), array('methodName2'))
+     *
+     * @return array The event names to listen to
      */
     public static function getSubscribedEvents()
     {
         return array(
-            GetGroupHeaderEvent::NAME . '[orm_avisota_message]' => 'getGroupHeader',
-            ParentViewChildRecordEvent::NAME                    => 'parentViewChildRecord',
+            GetGroupHeaderEvent::NAME => array(
+                array('getGroupHeader'),
+            ),
+
+            ParentViewChildRecordEvent::NAME => array(
+                array('parentViewChildRecord'),
+            ),
         );
     }
 
+    /**
+     * @param $add
+     * @param $dc
+     */
     public function addHeader($add, $dc)
     {
         // TODO refactore for DCG
@@ -99,8 +125,15 @@ class Message implements EventSubscriberInterface
         return $add;
     }
 
+    /**
+     * @param GetGroupHeaderEvent $event
+     */
     public function getGroupHeader(GetGroupHeaderEvent $event)
     {
+        if ($event->getModel()->getProviderName() != 'orm_avisota_message') {
+            return;
+        }
+
         /** @var EntityModel $model */
         $model = $event->getModel();
         /** @var \Avisota\Contao\Entity\Message $message */
@@ -132,7 +165,9 @@ class Message implements EventSubscriberInterface
     /**
      * Add the recipient row.
      *
-     * @param array
+     * @param ParentViewChildRecordEvent $event
+     *
+     * @internal param $array
      */
     public function parentViewChildRecord(ParentViewChildRecordEvent $event)
     {
