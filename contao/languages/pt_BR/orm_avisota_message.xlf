@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="orm_avisota_message.subject.0">
         <source>Subject</source>
+        <target>Assunto</target>
 
       </trans-unit>
       <trans-unit id="orm_avisota_message.subject.1">
@@ -70,11 +71,13 @@
       </trans-unit>
       <trans-unit id="orm_avisota_message.setRecipients.0">
         <source>Select recipients</source>
+        <target>Selecionar destinatários</target>
 
 
       </trans-unit>
       <trans-unit id="orm_avisota_message.setRecipients.1">
         <source>Select the recipients for this newsletter.</source>
+        <target>Selecione os destinatários deste boletim.</target>
 
 
       </trans-unit>

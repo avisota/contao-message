@@ -3,10 +3,12 @@
     <body>
       <trans-unit id="orm_avisota_message_content.invisible.0">
         <source>Invisible</source>
+        <target>invisível</target>
 
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.invisible.1">
         <source>Invisible</source>
+        <target>Invisível</target>
 
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.invisible.2">

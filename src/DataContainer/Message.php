@@ -17,13 +17,18 @@
 namespace Avisota\Contao\Message\Core\DataContainer;
 
 use Avisota\Contao\Entity\RecipientSource;
+use Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider;
 use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Backend\GetThemeEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Date\ParseDateEvent;
+use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\ContaoWidgetManager;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
+use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
+use ContaoCommunityAlliance\DcGeneral\DcGeneralEvents;
+use ContaoCommunityAlliance\DcGeneral\Event\ActionEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -61,6 +66,10 @@ class Message implements EventSubscriberInterface
 
             ParentViewChildRecordEvent::NAME => array(
                 array('parentViewChildRecord'),
+            ),
+
+            DcGeneralEvents::ACTION          => array(
+                array('handleActionForSelectri'),
             ),
         );
     }
@@ -237,5 +246,59 @@ class Message implements EventSubscriberInterface
                 )
             );
         }
+    }
+
+    /**
+     * @param ActionEvent $event
+     *
+     * @throws \Exception
+     */
+    public function handleActionForSelectri(ActionEvent $event)
+    {
+        if (!\Input::get('striAction')
+            || !\Input::get('striID')
+            || (\Input::get('striID') === ''
+                && \Input::get('striAction') != 'levels')
+        ) {
+            return;
+        }
+
+        $environment    = $event->getEnvironment();
+        $dataDefinition = $environment->getDataDefinition();
+
+        $modelId             = ModelId::fromSerialized(\Input::get('id'));
+        $providerInformation =
+            $dataDefinition->getDataProviderDefinition()->getInformation($dataDefinition->getName());
+        $dataProviderClass   = $providerInformation->getClassName();
+        /** @var EntityDataProvider $dataProvider */
+        $dataProvider = new $dataProviderClass();
+        $dataProvider->setBaseConfig(array('source' => $dataDefinition->getName()));
+        $repository     = $dataProvider->getEntityRepository();
+        $messageContent = $repository->find($modelId->getId());
+        $model          = new EntityModel($messageContent);
+
+        $selectriProperty = null;
+        foreach ($dataDefinition->getPalettesDefinition()->getPalettes() as $palette) {
+            foreach ($palette->getLegends() as $legend) {
+                foreach ($legend->getProperties() as $legendProperty) {
+                    $property = $dataDefinition->getPropertiesDefinition()->getProperty($legendProperty->getName());
+                    if ($property->getWidgetType() != 'selectri'
+                        || $legendProperty->getName() != \Input::get('striID')
+                    ) {
+                        continue;
+                    }
+
+                    $model->getEntity()->setType($palette->getName());
+                    $selectriProperty = $property;
+                }
+            }
+        }
+
+        if (!$selectriProperty) {
+            return;
+        }
+
+        $widgetManager = new ContaoWidgetManager($environment, $model);
+        $widgetManager->renderWidget($selectriProperty->getName());
     }
 }

@@ -3,18 +3,22 @@
         <body>
             <trans-unit id="orm_avisota_layout.type.0">
                 <source>Type</source>
+                <target>Tipo</target>
 
             </trans-unit>
             <trans-unit id="orm_avisota_layout.type.1">
                 <source>Please choose the layout type.</source>
+                <target>Por favor, escolha o tipo de layout.</target>
 
             </trans-unit>
             <trans-unit id="orm_avisota_layout.title.0">
                 <source>Title</source>
+                <target>Título</target>
 
             </trans-unit>
             <trans-unit id="orm_avisota_layout.title.1">
                 <source>Please enter the layout title.</source>
+                <target>Por favor entre com o nome do layout.</target>
 
             </trans-unit>
             <trans-unit id="orm_avisota_layout.alias.0">

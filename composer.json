@@ -28,11 +28,12 @@
         "source": "https://github.com/avisota/contao-message"
     },
     "require": {
-        "php": ">=5.3",
-        "avisota/contao-core": "3.0.x-dev",
-        "contao-community-alliance/composer-plugin": "~2.3",
-        "contao/core": ">=2.11.11,<3.6",
-        "avisota/recipient-fake": "~1.0",
+        "php": ">=5.4",
+        "contao/core": ">=3.5,<3.6",
+        "contao-community-alliance/composer-plugin": "~2.4",
+        "avisota/contao-core": "~3.0",
+        "avisota/contao-css-to-inline-style": "~3.0",
+        "avisota/recipient-fake": "~1.1",
         "bit3/php-callback-filter-iterator-polyfill": "~1.2"
     },
     "require-dev": {
@@ -48,7 +49,10 @@
     "autoload-dev": {
         "psr-4": {
             "Avisota\\Test\\Contao\\Message\\Core\\": "tests/Test/"
-        }
+        },
+        "files": [
+            "vendor/phpcq/autoload-validation/hacks/contao-hack.php"
+        ]
     },
     "extra": {
         "contao": {

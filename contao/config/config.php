@@ -62,20 +62,6 @@ $GLOBALS['FE_MOD']['avisota']['avisota_message_list']   = 'Avisota\Contao\Messag
 $GLOBALS['FE_MOD']['avisota']['avisota_message_reader'] = 'Avisota\Contao\Message\Core\Module\Reader';
 
 /**
- * Events
- */
-$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\Backend\Preview';
-$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\Message';
-$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\MessageContent';
-$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\EventsSubscriber';
-$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\Layout\ContaoStylesheets';
-$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\ThemeOptions';
-$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\LayoutOptions';
-$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\MessageCategoryOptions';
-$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\MessageOptions';
-$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Avisota\Contao\Message\Core\DataContainer\MessageContentOptions';
-
-/**
  * Hooks
  */
 $GLOBALS['TL_HOOKS']['initializeDependencyContainer']['avisota-custom-menu'] = array(
