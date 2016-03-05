@@ -45,7 +45,12 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
             (
                 'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider',
                 'source' => 'orm_avisota_message_category'
-            )
+            ),
+            array
+            (
+                'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider',
+                'source' => 'orm_avisota_message_content'
+            ),
         ),
         'childCondition' => array(
             array(
@@ -155,6 +160,12 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
                 'href'                => 'act=copyChilds&amp;ctable=orm_avisota_message_content',
                 'icon'                => 'copychilds.gif',
                 'attributes'          => 'onclick="Backend.getScrollOffset()"',
+            ),
+            'cut' => array
+            (
+                'label'               => &$GLOBALS['TL_LANG']['orm_avisota_message']['cut'],
+                'icon'                => 'cut.gif',
+                'attributes'          => 'onclick="Backend.getScrollOffset()"'
             ),
             // Todo add alert box description
             'delete'     => array
