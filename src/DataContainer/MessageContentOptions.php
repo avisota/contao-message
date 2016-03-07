@@ -64,7 +64,7 @@ class MessageContentOptions implements EventSubscriberInterface
             ),
 
             GetPropertyOptionsEvent::NAME => array(
-                array('createContentTypeOptions'),
+                array('createContentTypeOptions', 10),
             ),
         );
     }
