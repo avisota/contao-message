@@ -19,6 +19,7 @@ use Avisota\Contao\Core\Event\CreateOptionsEvent;
 use Avisota\Contao\Message\Core\MessageEvents;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
+use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetPropertyOptionsEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -62,7 +63,7 @@ class MessageContentOptions implements EventSubscriberInterface
                 array('createArticleAliasOptions'),
             ),
 
-            'avisota.create-content-type-options' => array(
+            GetPropertyOptionsEvent::NAME => array(
                 array('createContentTypeOptions'),
             ),
         );
@@ -226,19 +227,17 @@ class MessageContentOptions implements EventSubscriberInterface
      * @param CreateOptionsEvent $event
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function createContentTypeOptions(CreateOptionsEvent $event)
+    public function createContentTypeOptions(GetPropertyOptionsEvent $event, $name, EventDispatcher $eventDispatcher)
     {
-        $this->getContentTypeOptions($event->getOptions());
-    }
+        if ($event->getPropertyName() !== 'allowedCellContents') {
+            return;
+        }
 
-    /**
-     * @param array $options
-     *
-     * @return array
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    public function getContentTypeOptions($options = array())
-    {
+        $options = $event->getOptions();
+        if (!is_array($options)) {
+            $options = (array) $options;
+        }
+
         foreach ($GLOBALS['TL_MCE'] as $elementGroup => $elements) {
             if (isset($GLOBALS['TL_LANG']['MCE'][$elementGroup])) {
                 $elementGroupLabel = $GLOBALS['TL_LANG']['MCE'][$elementGroup];
@@ -259,6 +258,6 @@ class MessageContentOptions implements EventSubscriberInterface
             }
         }
 
-        return $options;
+        $event->setOptions($options);
     }
 }

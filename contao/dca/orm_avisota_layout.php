@@ -259,10 +259,6 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
             'label'            => &$GLOBALS['TL_LANG']['orm_avisota_layout']['allowedCellContents'],
             'exclude'          => true,
             'inputType'        => 'checkbox',
-            'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback(
-                'avisota.create-content-type-options',
-                'Avisota\Contao\Core\Event\CreateOptionsEvent'
-            ),
             'eval'             => array(
                 'multiple' => true,
             ),
