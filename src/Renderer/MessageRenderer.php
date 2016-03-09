@@ -179,7 +179,7 @@ class MessageRenderer implements MessageRendererInterface
 
     protected function findChildContainerCustomTemplates(\Model $containerModel)
     {
-        $childTable = $this->findChildTableByBackendModule($containerModel, $containerModel::getTable());
+        $childTable = $this->findChildTableByBackendModule($containerModel);
         if (!$childTable) {
             return array();
         }
@@ -210,30 +210,13 @@ class MessageRenderer implements MessageRendererInterface
         return $contents;
     }
 
-    protected function findChildTableByBackendModule(\Model $containerModel, $containerProviderName)
+    protected function findChildTableByBackendModule(\Model $containerModel)
     {
-        $backendModuleName = substr($containerModel::getTable(), strlen('tl_'));
-
-        foreach ($GLOBALS['BE_MOD'] as $group) {
-            if (!array_key_exists($backendModuleName, $group)) {
-                continue;
-            }
-
-            $backendModule       = $group[$backendModuleName];
-            $backendModuleTables = $backendModule['tables'];
-            if (!array_key_exists($containerProviderName, array_flip($backendModuleTables))) {
-                continue;
-            }
-
-            $tableIndex = array_flip($backendModuleTables)[$containerProviderName];
-            if (!array_key_exists($tableIndex++, $backendModuleTables)) {
-                continue;
-            }
-
-            return $backendModuleTables[$tableIndex];
+        if (!array_key_exists('ctable', $GLOBALS['TL_DCA'][$containerModel::getTable()]['config'])) {
+            return null;
         }
-
-        return null;
+        
+        return $GLOBALS['TL_DCA'][$containerModel::getTable()]['config']['ctable'][0];
     }
 
     protected function handleFoundedContent(MessageContent $messageContent, array $contents)
