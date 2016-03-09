@@ -150,15 +150,30 @@ class MessageRenderer implements MessageRendererInterface
 
     protected function handleMessageContent(MessageContent $messageContent)
     {
-        $elementIdMethod = 'get' . ucfirst($messageContent->getType()) . 'Id';
-        if ($messageContent->$elementIdMethod() < 1) {
+        switch ($messageContent->getType()) {
+            case 'event':
+                $elementIdMethod    = 'getEventIdWithTimestamp';
+                $containerModelName = \CalendarEventsModel::class;
+                break;
+
+            default:
+                $elementIdMethod    = 'get' . ucfirst($messageContent->getType()) . 'Id';
+                $containerModelName = ucfirst($messageContent->getType()) . 'Model';
+                break;
+        }
+
+        $elementId = explode('@', $messageContent->$elementIdMethod());
+        if (count($elementId) === 2) {
+            unset($elementId[1]);
+        }
+        $elementId = implode('', $elementId);
+
+        if ($elementId < 1) {
             return array();
         }
 
-
-        $containerModelName = ucfirst($messageContent->getType()) . 'Model';
         /** @var \Model $containerModel */
-        $containerModel = $containerModelName::findByPk($messageContent->$elementIdMethod());
+        $containerModel = $containerModelName::findByPk($elementId);
 
         $contents = array();
         $contents = array_merge($contents, $this->findContainerCustomTemplates($containerModel));
