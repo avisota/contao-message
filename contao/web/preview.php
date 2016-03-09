@@ -28,11 +28,10 @@ if (!is_file($dir . '/system/initialize.php')) {
     exit(1);
 }
 
-define('TL_MODE', 'BE');
-#define('BE_USER_LOGGED_IN', false);
-require($dir . '/system/initialize.php');
+define('TL_MODE', 'FE');
+define('BE_USER_LOGGED_IN', false);
 
-BackendUser::getInstance();
+require($dir . '/system/initialize.php');
 
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
@@ -61,9 +60,6 @@ class preview
             exit;
         }
 
-        $user = BackendUser::getInstance();
-        $user->authenticate();
-
         $event = new \Avisota\Contao\Core\Event\CreateFakeRecipientEvent($message);
         $eventDispatcher->dispatch(\Avisota\Contao\Core\CoreEvents::CREATE_FAKE_RECIPIENT, $event);
 
@@ -73,7 +69,7 @@ class preview
             $event = new LoadLanguageFileEvent('avisota_message');
             $eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
 
-            $url         = sprintf(
+            $url = sprintf(
                 $GLOBALS['TL_LANG']['avisota_message']['viewOnline'],
                 sprintf(
                     '%ssystem/modules/avisota-message/web/preview.php?id=%s',
