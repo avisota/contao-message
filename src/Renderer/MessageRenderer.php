@@ -24,6 +24,7 @@ use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\RenderMessageContentEvent;
 use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
 use Contao\Doctrine\ORM\EntityHelper;
+use Contao\Doctrine\ORM\EntityInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
@@ -252,19 +253,41 @@ class MessageRenderer implements MessageRendererInterface
                     'type',
                     'galleryTpl',
                     'customTpl',
+                    'eventTemplate',
                 ) as $propertyTemplate
             ) {
-                if (empty($content->$propertyTemplate)) {
-                    continue;
-                }
 
-                $template = $this->findTemplate($content->$propertyTemplate, $messageCategory);
-                if ($content->$propertyTemplate === $template) {
-                    continue;
-                }
+                if ($content instanceof \Model) {
+                    if (empty($content->$propertyTemplate)) {
+                        continue;
+                    }
 
-                $content->$propertyTemplate = $template;
-                $replaced[] = $template;
+                    $template = $this->findTemplate($content->$propertyTemplate, $messageCategory);
+
+                    if ($content->$propertyTemplate === $template) {
+                        continue;
+                    }
+
+                    $content->$propertyTemplate = $template;
+                    $replaced[]                 = $template;
+                }
+                if ($content instanceof EntityInterface) {
+                    $getPropertyTemplate = 'get' . ucfirst($propertyTemplate);
+                    $setPropertyTemplate = 'set' . ucfirst($propertyTemplate);
+
+                    if (!method_exists($content, $getPropertyTemplate) || empty($content->$getPropertyTemplate())) {
+                        continue;
+                    }
+
+                    $template = $this->findTemplate($content->$getPropertyTemplate(), $messageCategory);
+
+                    if ($content->$getPropertyTemplate() === $template) {
+                        continue;
+                    }
+
+                    $content->$setPropertyTemplate($template);
+                    $replaced[] = $template;
+                }
             }
         }
 
