@@ -160,6 +160,10 @@ class MessageRenderer implements MessageRendererInterface
             default:
                 $elementIdMethod    = 'get' . ucfirst($messageContent->getType()) . 'Id';
                 $containerModelName = ucfirst($messageContent->getType()) . 'Model';
+
+                if (!method_exists($messageContent, $elementIdMethod)) {
+                    return array();
+                }
                 break;
         }
 
