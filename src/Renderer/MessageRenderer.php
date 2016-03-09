@@ -235,7 +235,7 @@ class MessageRenderer implements MessageRendererInterface
         if (!array_key_exists('ctable', $GLOBALS['TL_DCA'][$containerModel::getTable()]['config'])) {
             return null;
         }
-        
+
         return $GLOBALS['TL_DCA'][$containerModel::getTable()]['config']['ctable'][0];
     }
 
@@ -301,7 +301,7 @@ class MessageRenderer implements MessageRendererInterface
 
     protected function findTemplate($searchTemplate, MessageCategory $messageCategory)
     {
-        $messageTheme    = $messageCategory->getLayout()->getTheme();
+        $messageTheme = $messageCategory->getLayout()->getTheme();
 
         $template = null;
         if ($messageTheme->getTemplateDirectory()

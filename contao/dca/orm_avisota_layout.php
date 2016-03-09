@@ -255,17 +255,17 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
         ),
         'allowedCellContents' => array
         (
-            'label'            => &$GLOBALS['TL_LANG']['orm_avisota_layout']['allowedCellContents'],
-            'exclude'          => true,
-            'inputType'        => 'checkbox',
-            'eval'             => array(
+            'label'           => &$GLOBALS['TL_LANG']['orm_avisota_layout']['allowedCellContents'],
+            'exclude'         => true,
+            'inputType'       => 'checkbox',
+            'eval'            => array(
                 'multiple' => true,
             ),
-            'field'            => array(),
-            'getter_callback'  => array(
+            'field'           => array(),
+            'getter_callback' => array(
                 array('Avisota\Contao\Message\Core\DataContainer\Layout', 'getterCallbackAllowedCellContents')
             ),
-            'setter_callback'  => array(
+            'setter_callback' => array(
                 array('Avisota\Contao\Message\Core\DataContainer\Layout', 'setterCallbackAllowedCellContents')
             ),
         ),

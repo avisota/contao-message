@@ -148,16 +148,16 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
             ),
             'copyChilds' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['orm_avisota_message']['copyChilds'],
-                'href'                => 'act=copyChilds&amp;ctable=orm_avisota_message_content',
-                'icon'                => 'copy.gif',
-                'attributes'          => 'onclick="Backend.getScrollOffset()"',
+                'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message']['copyChilds'],
+                'href'       => 'act=copyChilds&amp;ctable=orm_avisota_message_content',
+                'icon'       => 'copy.gif',
+                'attributes' => 'onclick="Backend.getScrollOffset()"',
             ),
-            'cut' => array
+            'cut'        => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['orm_avisota_message']['cut'],
-                'icon'                => 'cut.gif',
-                'attributes'          => 'onclick="Backend.getScrollOffset()"'
+                'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message']['cut'],
+                'icon'       => 'cut.gif',
+                'attributes' => 'onclick="Backend.getScrollOffset()"'
             ),
             // Todo add alert box description
             'delete'     => array
