@@ -158,7 +158,7 @@ class LayoutOptions implements EventSubscriberInterface
     public function deactivateButtonsForEditAll(GetSelectModeButtonsEvent $event)
     {
         if ($event->getEnvironment()->getInputProvider()->getParameter('act') !== 'select'
-            || $event->getEnvironment()->getDataDefinition()->getName() === 'orm_avisota_layout'
+            || $event->getEnvironment()->getDataDefinition()->getName() !== 'orm_avisota_layout'
         ) {
             return;
         }

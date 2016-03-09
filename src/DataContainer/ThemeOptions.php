@@ -134,7 +134,7 @@ class ThemeOptions implements EventSubscriberInterface
     public function deactivateButtonsForEditAll(GetSelectModeButtonsEvent $event)
     {
         if ($event->getEnvironment()->getInputProvider()->getParameter('act') !== 'select'
-            || $event->getEnvironment()->getDataDefinition()->getName() === 'orm_avisota_mailing_list'
+            || $event->getEnvironment()->getDataDefinition()->getName() !== 'orm_avisota_theme'
         ) {
             return;
         }
