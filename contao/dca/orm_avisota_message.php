@@ -148,17 +148,11 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
                 'href'  => 'act=edit',
                 'icon'  => 'header.gif',
             ),
-            'copy'       => array
-            (
-                'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message']['copy'],
-                'icon'       => 'copy.gif',
-                'attributes' => 'onclick="Backend.getScrollOffset();"',
-            ),
             'copyChilds' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['orm_avisota_message']['copyChilds'],
                 'href'                => 'act=copyChilds&amp;ctable=orm_avisota_message_content',
-                'icon'                => 'copychilds.gif',
+                'icon'                => 'copy.gif',
                 'attributes'          => 'onclick="Backend.getScrollOffset()"',
             ),
             'cut' => array
