@@ -254,6 +254,7 @@ class MessageRenderer implements MessageRendererInterface
                     'galleryTpl',
                     'customTpl',
                     'eventTemplate',
+                    'newsTemplate',
                 ) as $propertyTemplate
             ) {
 
