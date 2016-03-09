@@ -246,24 +246,9 @@ class MessageRenderer implements MessageRendererInterface
         $viewOnlinePageModel = \PageModel::findByPk($messageCategory->getViewOnlinePage());
         $viewOnlinePageModel->loadDetails();
 
-        $teaserView     = true;
-        $isTeaserMethod = 'get' . ucfirst($messageContent->getType()) . 'Full';
-        if (method_exists($messageContent, $isTeaserMethod)) {
-            $teaserView = !$messageContent->$isTeaserMethod();
-        }
-
         $replaced = array();
 
         foreach ($contents as $content) {
-            if ($teaserView && array_key_exists('showTeaser', $content->row())) {
-                $content->showTeaser = 1;
-                global $objPage;
-
-                if (!$objPage) {
-                    $objPage = $viewOnlinePageModel;
-                }
-            }
-
             foreach (
                 array(
                     'type',
