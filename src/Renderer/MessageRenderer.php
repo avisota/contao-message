@@ -181,7 +181,9 @@ class MessageRenderer implements MessageRendererInterface
         $containerModel = $containerModelName::findByPk($elementId);
 
         $contents = array($messageContent);
-        $contents = array_merge($contents, $this->findContainerCustomTemplates($containerModel));
+        if ($containerModel) {
+            $contents = array_merge($contents, $this->findContainerCustomTemplates($containerModel));
+        }
 
         return $contents;
     }
