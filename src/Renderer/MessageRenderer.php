@@ -32,6 +32,8 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * Class MessageRenderer
  *
  * @package Avisota\Contao\Message\Core\Renderer
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class MessageRenderer implements MessageRendererInterface
 {
@@ -258,6 +260,8 @@ class MessageRenderer implements MessageRendererInterface
      * @param \Model $containerModel
      *
      * @return null
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected function findChildTableByBackendModule(\Model $containerModel)
     {
@@ -273,6 +277,7 @@ class MessageRenderer implements MessageRendererInterface
      * @param array          $contents
      *
      * @return array
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected function handleFoundedContent(MessageContent $messageContent, array $contents)
     {
@@ -334,6 +339,7 @@ class MessageRenderer implements MessageRendererInterface
      *
      * @return null
      * @throws \Exception
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected function findTemplate($searchTemplate, MessageCategory $messageCategory)
     {
