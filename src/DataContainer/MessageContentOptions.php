@@ -224,7 +224,9 @@ class MessageContentOptions implements EventSubscriberInterface
     }
 
     /**
-     * @param CreateOptionsEvent $event
+     * @param CreateOptionsEvent|GetPropertyOptionsEvent $event
+     * @param                                            $name
+     * @param EventDispatcher                            $eventDispatcher
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function createContentTypeOptions(GetPropertyOptionsEvent $event, $name, EventDispatcher $eventDispatcher)

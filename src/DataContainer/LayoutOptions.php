@@ -155,6 +155,9 @@ class LayoutOptions implements EventSubscriberInterface
         return $options;
     }
 
+    /**
+     * @param GetSelectModeButtonsEvent $event
+     */
     public function deactivateButtonsForEditAll(GetSelectModeButtonsEvent $event)
     {
         if ($event->getEnvironment()->getInputProvider()->getParameter('act') !== 'select'

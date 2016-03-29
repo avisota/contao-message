@@ -127,6 +127,11 @@ class MessageRenderer implements MessageRendererInterface
         return $event->getRenderedContent();
     }
 
+    /**
+     * @param MessageContent $messageContent
+     *
+     * @return array
+     */
     protected function findMessageContentCustomTemplates(MessageContent $messageContent)
     {
         if (in_array(
@@ -151,6 +156,11 @@ class MessageRenderer implements MessageRendererInterface
         return $this->handleFoundedContent($messageContent, $contents);
     }
 
+    /**
+     * @param MessageContent $messageContent
+     *
+     * @return array
+     */
     protected function handleMessageContent(MessageContent $messageContent)
     {
         switch ($messageContent->getType()) {
@@ -190,6 +200,11 @@ class MessageRenderer implements MessageRendererInterface
         return $contents;
     }
 
+    /**
+     * @param \Model $containerModel
+     *
+     * @return array
+     */
     protected function findContainerCustomTemplates(\Model $containerModel)
     {
         $contents = array();
@@ -201,6 +216,11 @@ class MessageRenderer implements MessageRendererInterface
         return $contents;
     }
 
+    /**
+     * @param \Model $containerModel
+     *
+     * @return array
+     */
     protected function findChildContainerCustomTemplates(\Model $containerModel)
     {
         $childTable = $this->findChildTableByBackendModule($containerModel);
@@ -234,6 +254,11 @@ class MessageRenderer implements MessageRendererInterface
         return $contents;
     }
 
+    /**
+     * @param \Model $containerModel
+     *
+     * @return null
+     */
     protected function findChildTableByBackendModule(\Model $containerModel)
     {
         if (!array_key_exists('ctable', $GLOBALS['TL_DCA'][$containerModel::getTable()]['config'])) {
@@ -243,6 +268,12 @@ class MessageRenderer implements MessageRendererInterface
         return $GLOBALS['TL_DCA'][$containerModel::getTable()]['config']['ctable'][0];
     }
 
+    /**
+     * @param MessageContent $messageContent
+     * @param array          $contents
+     *
+     * @return array
+     */
     protected function handleFoundedContent(MessageContent $messageContent, array $contents)
     {
         if (count($contents) < 1) {
@@ -306,6 +337,13 @@ class MessageRenderer implements MessageRendererInterface
         return array($replaced, $replacedIn);
     }
 
+    /**
+     * @param                 $searchTemplate
+     * @param MessageCategory $messageCategory
+     *
+     * @return null
+     * @throws \Exception
+     */
     protected function findTemplate($searchTemplate, MessageCategory $messageCategory)
     {
         $messageTheme = $messageCategory->getLayout()->getTheme();
@@ -358,6 +396,12 @@ class MessageRenderer implements MessageRendererInterface
         return $template;
     }
 
+    /**
+     * @param $source
+     * @param $destination
+     *
+     * @return mixed
+     */
     protected function copyTemplateInRootTemplates($source, $destination)
     {
         $sourceFile = new \File('templates/' . $source . '.html5');
@@ -366,6 +410,9 @@ class MessageRenderer implements MessageRendererInterface
         return $destination;
     }
 
+    /**
+     * @param $removes
+     */
     protected function removeEachTemplate($removes)
     {
         if (count($removes) < 1) {
@@ -382,6 +429,9 @@ class MessageRenderer implements MessageRendererInterface
         }
     }
 
+    /**
+     * @param $contents
+     */
     protected function resetContent($contents)
     {
         if (count($contents) < 1) {
