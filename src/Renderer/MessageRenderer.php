@@ -312,7 +312,7 @@ class MessageRenderer implements MessageRendererInterface
                     $getPropertyTemplate = 'get' . ucfirst($propertyTemplate);
                     $setPropertyTemplate = 'set' . ucfirst($propertyTemplate);
 
-                    if (!method_exists($content, $getPropertyTemplate) || empty($content->$getPropertyTemplate())) {
+                    if (!method_exists($content, $getPropertyTemplate) || !$content->$getPropertyTemplate()) {
                         continue;
                     }
 
