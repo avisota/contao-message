@@ -114,13 +114,14 @@ class MessageRenderer implements MessageRendererInterface
 
         $event = new RenderMessageContentEvent($messageContent, $layout ?: $messageContent->getMessage()->getLayout());
 
-        $replacedTemplates = $this->findMessageContentCustomTemplates($messageContent);
+        $replaced = $this->findMessageContentCustomTemplates($messageContent);
 
         /** @var EventDispatcher $eventDispatcher */
         $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
         $eventDispatcher->dispatch(AvisotaMessageEvents::RENDER_MESSAGE_CONTENT, $event);
 
-        $this->removeEachTemplate($replacedTemplates);
+        $this->removeEachTemplate($replaced[0]);
+        $this->resetContent($replaced[1]);
 
         return $event->getRenderedContent();
     }
@@ -251,7 +252,8 @@ class MessageRenderer implements MessageRendererInterface
         $viewOnlinePageModel = \PageModel::findByPk($messageCategory->getViewOnlinePage());
         $viewOnlinePageModel->loadDetails();
 
-        $replaced = array();
+        $replaced   = array();
+        $replacedIn = array();
 
         foreach ($contents as $content) {
             foreach (
@@ -277,6 +279,7 @@ class MessageRenderer implements MessageRendererInterface
 
                     $content->$propertyTemplate = $template;
                     $replaced[]                 = $template;
+                    $replacedIn[]               = $content;
                 }
                 if ($content instanceof EntityInterface) {
                     $getPropertyTemplate = 'get' . ucfirst($propertyTemplate);
@@ -293,12 +296,13 @@ class MessageRenderer implements MessageRendererInterface
                     }
 
                     $content->$setPropertyTemplate($template);
-                    $replaced[] = $template;
+                    $replaced[]   = $template;
+                    $replacedIn[] = $content;
                 }
             }
         }
 
-        return $replaced;
+        return array($replaced, $replacedIn);
     }
 
     protected function findTemplate($searchTemplate, MessageCategory $messageCategory)
@@ -361,7 +365,7 @@ class MessageRenderer implements MessageRendererInterface
         return $destination;
     }
 
-    protected function removeEachTemplate(array $removes)
+    protected function removeEachTemplate($removes)
     {
         if (count($removes) < 1) {
             return;
@@ -374,6 +378,24 @@ class MessageRenderer implements MessageRendererInterface
             }
 
             $removeFile->delete();
+        }
+    }
+
+    protected function resetContent($contents)
+    {
+        if (count($contents) < 1) {
+            return;
+        }
+
+        $entityManager = EntityHelper::getEntityManager();
+        foreach ($contents as $content) {
+            if ($content instanceof EntityInterface) {
+                $entityManager->refresh($content);
+            }
+
+            if ($content instanceof \Model) {
+                $content->refresh();
+            }
         }
     }
 }
