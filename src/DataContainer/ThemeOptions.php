@@ -17,7 +17,6 @@ namespace Avisota\Contao\Message\Core\DataContainer;
 
 use Avisota\Contao\Core\Event\CreateOptionsEvent;
 use Contao\Doctrine\ORM\EntityHelper;
-use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetSelectModeButtonsEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -54,10 +53,6 @@ class ThemeOptions implements EventSubscriberInterface
 
             'avisota.create-theme-options' => array(
                 array('createThemeOptions'),
-            ),
-
-            GetSelectModeButtonsEvent::NAME => array(
-                array('deactivateButtonsForEditAll'),
             ),
         );
     }
@@ -129,25 +124,5 @@ class ThemeOptions implements EventSubscriberInterface
         }
 
         return $options;
-    }
-
-    /**
-     * @param GetSelectModeButtonsEvent $event
-     */
-    public function deactivateButtonsForEditAll(GetSelectModeButtonsEvent $event)
-    {
-        if ($event->getEnvironment()->getInputProvider()->getParameter('act') !== 'select'
-            || $event->getEnvironment()->getDataDefinition()->getName() !== 'orm_avisota_theme'
-        ) {
-            return;
-        }
-
-        $buttons = $event->getButtons();
-
-        foreach (array('cut',) as $button) {
-            unset($buttons[$button]);
-        }
-
-        $event->setButtons($buttons);
     }
 }

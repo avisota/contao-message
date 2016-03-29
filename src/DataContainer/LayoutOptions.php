@@ -19,7 +19,6 @@ use Avisota\Contao\Core\Event\CreateOptionsEvent;
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\CollectStylesheetsEvent;
 use Contao\Doctrine\ORM\EntityHelper;
-use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetSelectModeButtonsEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -61,10 +60,6 @@ class LayoutOptions implements EventSubscriberInterface
 
             'avisota.create-layout-options' => array(
                 array('createLayoutOptions'),
-            ),
-
-            GetSelectModeButtonsEvent::NAME => array(
-                array('deactivateButtonsForEditAll'),
             ),
         );
     }
@@ -153,25 +148,5 @@ class LayoutOptions implements EventSubscriberInterface
                 ->getTitle()][$layout->getId()] = $layout->getTitle();
         }
         return $options;
-    }
-
-    /**
-     * @param GetSelectModeButtonsEvent $event
-     */
-    public function deactivateButtonsForEditAll(GetSelectModeButtonsEvent $event)
-    {
-        if ($event->getEnvironment()->getInputProvider()->getParameter('act') !== 'select'
-            || $event->getEnvironment()->getDataDefinition()->getName() !== 'orm_avisota_layout'
-        ) {
-            return;
-        }
-
-        $buttons = $event->getButtons();
-
-        foreach (array('cut',) as $button) {
-            unset($buttons[$button]);
-        }
-
-        $event->setButtons($buttons);
     }
 }

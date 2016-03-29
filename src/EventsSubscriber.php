@@ -21,9 +21,9 @@ use Avisota\Contao\Entity\MessageCategory;
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
 use Avisota\Contao\Message\Core\Template\MutablePreRenderedMessageTemplate;
-
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEvent;
+use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetSelectModeButtonsEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -45,6 +45,10 @@ class EventsSubscriber implements EventSubscriberInterface
             MessageEvents::CREATE_NON_BOILERPLATE_MESSAGE_OPTIONS => 'createNonBoilerplateMessageOptions',
             MessageEvents::CREATE_MESSAGE_LAYOUT_OPTIONS          => 'creatMessageLayoutOptions',
             AvisotaMessageEvents::RENDER_MESSAGE                  => 'renderMessage',
+
+            GetSelectModeButtonsEvent::NAME => array(
+                array('deactivateButtonsForEditAll'),
+            ),
         );
     }
 
@@ -264,5 +268,32 @@ class EventsSubscriber implements EventSubscriberInterface
         );
 
         $event->setPreRenderedMessageTemplate($preRenderedMessageTemplate);
+    }
+
+    /**
+     * @param GetSelectModeButtonsEvent $event
+     */
+    public function deactivateButtonsForEditAll(GetSelectModeButtonsEvent $event)
+    {
+        if ($event->getEnvironment()->getInputProvider()->getParameter('act') !== 'select'
+            || !in_array(
+                $event->getEnvironment()->getDataDefinition()->getName(),
+                array(
+                    'orm_avisota_layout',
+                    'orm_avisota_message_category',
+                    'orm_avisota_theme',
+                )
+            )
+        ) {
+            return;
+        }
+
+        $buttons = $event->getButtons();
+
+        foreach (array('cut',) as $button) {
+            unset($buttons[$button]);
+        }
+
+        $event->setButtons($buttons);
     }
 }

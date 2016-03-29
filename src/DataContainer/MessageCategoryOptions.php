@@ -17,7 +17,6 @@ namespace Avisota\Contao\Message\Core\DataContainer;
 
 use Avisota\Contao\Core\Event\CreateOptionsEvent;
 use Contao\Doctrine\ORM\EntityHelper;
-use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetSelectModeButtonsEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -51,10 +50,6 @@ class MessageCategoryOptions implements EventSubscriberInterface
             'avisota.create-message-category-options'    => array(
                 array('createMessageCategoryOptions'),
             ),
-
-            GetSelectModeButtonsEvent::NAME => array(
-                array('deactivateButtonsForEditAll'),
-            ),
         );
     }
 
@@ -81,25 +76,5 @@ class MessageCategoryOptions implements EventSubscriberInterface
             $options[$messageCategory->getId()] = $messageCategory->getTitle();
         }
         return $options;
-    }
-
-    /**
-     * @param GetSelectModeButtonsEvent $event
-     */
-    public function deactivateButtonsForEditAll(GetSelectModeButtonsEvent $event)
-    {
-        if ($event->getEnvironment()->getInputProvider()->getParameter('act') !== 'select'
-            || $event->getEnvironment()->getDataDefinition()->getName() !== 'orm_avisota_message_category'
-        ) {
-            return;
-        }
-
-        $buttons = $event->getButtons();
-
-        foreach (array('cut',) as $button) {
-            unset($buttons[$button]);
-        }
-
-        $event->setButtons($buttons);
     }
 }
