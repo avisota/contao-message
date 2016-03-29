@@ -345,7 +345,7 @@ class MessageRenderer implements MessageRendererInterface
 
                 $template = $this->copyTemplateInRootTemplates(
                     $source . '/' . $searchTemplate,
-                    '.' . microtime(true)
+                    '.avisota-' . microtime(true)
                 );
             }
         }
