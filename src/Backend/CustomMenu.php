@@ -41,7 +41,6 @@ class CustomMenu extends \BackendModule
                     $database = \Database::getInstance();
 
                     if ($database->tableExists('orm_avisota_message_category')) {
-
                         $category = Helper::resolveCategoryFromInput();
 
                         if ($category) {

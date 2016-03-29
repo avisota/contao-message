@@ -288,16 +288,7 @@ class MessageRenderer implements MessageRendererInterface
         $replacedIn = array();
 
         foreach ($contents as $content) {
-            foreach (
-                array(
-                    'type',
-                    'galleryTpl',
-                    'customTpl',
-                    'eventTemplate',
-                    'newsTemplate',
-                ) as $propertyTemplate
-            ) {
-
+            foreach (array('type', 'galleryTpl', 'customTpl', 'eventTemplate', 'newsTemplate',) as $propertyTemplate) {
                 if ($content instanceof \Model) {
                     if (empty($content->$propertyTemplate)) {
                         continue;
@@ -350,7 +341,9 @@ class MessageRenderer implements MessageRendererInterface
 
         $template = null;
         if ($messageTheme->getTemplateDirectory()
-            && file_exists(TL_ROOT . '/templates/' . $messageTheme->getTemplateDirectory() . '/' . $searchTemplate . '.html5')
+            && file_exists(
+                TL_ROOT . '/templates/' . $messageTheme->getTemplateDirectory() . '/' . $searchTemplate . '.html5'
+            )
         ) {
             $template = $this->copyTemplateInRootTemplates(
                 $messageTheme->getTemplateDirectory() . '/' . $searchTemplate,
