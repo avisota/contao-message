@@ -23,7 +23,6 @@ use Avisota\Contao\Entity\MessageContent;
 use Avisota\Contao\Message\Core\Event\AvisotaMessageEvents;
 use Avisota\Contao\Message\Core\Event\RenderMessageContentEvent;
 use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
-use Contao\CalendarEventsModel;
 use Contao\Doctrine\ORM\EntityHelper;
 use Contao\Doctrine\ORM\EntityInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -168,7 +167,7 @@ class MessageRenderer implements MessageRendererInterface
         switch ($messageContent->getType()) {
             case 'event':
                 $elementIdMethod    = 'getEventIdWithTimestamp';
-                $containerModelName = CalendarEventsModel::class;
+                $containerModelName = 'Contao\CalendarEventsModel';
                 break;
 
             default:
