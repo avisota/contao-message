@@ -39,12 +39,30 @@ class EventsSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            MessageEvents::CREATE_MESSAGE_CATEGORY_OPTIONS        => 'createMessageCategoryOptions',
-            MessageEvents::CREATE_MESSAGE_OPTIONS                 => 'createMessageOptions',
-            MessageEvents::CREATE_BOILERPLATE_MESSAGE_OPTIONS     => 'createBoilerplateMessageOptions',
-            MessageEvents::CREATE_NON_BOILERPLATE_MESSAGE_OPTIONS => 'createNonBoilerplateMessageOptions',
-            MessageEvents::CREATE_MESSAGE_LAYOUT_OPTIONS          => 'creatMessageLayoutOptions',
-            AvisotaMessageEvents::RENDER_MESSAGE                  => 'renderMessage',
+            MessageEvents::CREATE_MESSAGE_CATEGORY_OPTIONS => array(
+                array('createMessageCategoryOptions'),
+            ),
+
+            MessageEvents::CREATE_MESSAGE_OPTIONS => array(
+                array('createMessageOptions'),
+            ),
+
+            MessageEvents::CREATE_BOILERPLATE_MESSAGE_OPTIONS => array(
+                array('createBoilerplateMessageOptions'),
+            ),
+
+            MessageEvents::CREATE_NON_BOILERPLATE_MESSAGE_OPTIONS => array(
+                array('createNonBoilerplateMessageOptions'),
+            ),
+
+            MessageEvents::CREATE_MESSAGE_LAYOUT_OPTIONS => array(
+                array('creatMessageLayoutOptions'),
+            ),
+
+            AvisotaMessageEvents::RENDER_MESSAGE => array(
+                array('renderMessage'),
+            ),
+            
 
             GetSelectModeButtonsEvent::NAME => array(
                 array('deactivateButtonsForEditAll'),
