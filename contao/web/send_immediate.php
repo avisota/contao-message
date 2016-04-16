@@ -58,6 +58,8 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
     {
         global $container;
 
+        $GLOBALS['TL_LANGUAGE'] = $message->getLanguage();
+
         $eventDispatcher = $this->getEventDispatcher();
         $entityManager   = EntityHelper::getEntityManager();
 
