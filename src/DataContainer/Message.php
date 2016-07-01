@@ -284,7 +284,7 @@ class Message implements EventSubscriberInterface
             foreach ($palette->getLegends() as $legend) {
                 foreach ($legend->getProperties() as $legendProperty) {
                     $property = $dataDefinition->getPropertiesDefinition()->getProperty($legendProperty->getName());
-                    if ($property->getWidgetType() != 'selectri'
+                    if (!in_array($property->getWidgetType(), array('selectri', 'avisotaSelectriWithItems'))
                         || $legendProperty->getName() != \Input::get('striID')
                     ) {
                         continue;
