@@ -284,7 +284,8 @@ class MessageRenderer implements MessageRendererInterface
             return array();
         }
 
-        $messageCategory     = $messageContent->getMessage()->getCategory();
+        $messageCategory = $messageContent->getMessage()->getCategory();
+        //Fixme if no online set, then search the first page (domain)
         $viewOnlinePageModel = \PageModel::findByPk($messageCategory->getViewOnlinePage());
         $viewOnlinePageModel->loadDetails();
 

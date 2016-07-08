@@ -69,7 +69,7 @@ class Message implements EventSubscriberInterface
                 array('parentViewChildRecord'),
             ),
 
-            DcGeneralEvents::ACTION          => array(
+            DcGeneralEvents::ACTION => array(
                 array('handleActionForSelectri'),
             ),
         );
