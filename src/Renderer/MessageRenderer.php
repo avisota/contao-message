@@ -191,7 +191,7 @@ class MessageRenderer implements MessageRendererInterface
                 $elements = array_merge($elements, $this->findContainerCustomTemplates($containerModel));
             }
 
-            array_push($contents, $elements);
+            $contents = array_merge($contents, $elements);
         }
 
         return $contents;
