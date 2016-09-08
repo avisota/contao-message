@@ -190,7 +190,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
     // Subpalettes
     'metasubpalettes' => array
     (
-        'protected' => array('groups')
     ),
     // Fields
     'fields'          => array
@@ -278,29 +277,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
                 'submitOnChange'     => true,
                 'tl_class'           => 'w50'
             )
-        ),
-        'protected'    => array
-        (
-            'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['protected'],
-            'exclude'   => true,
-            'filter'    => true,
-            'inputType' => 'checkbox',
-            'eval'      => array('submitOnChange' => true)
-        ),
-        'groups'       => array
-        (
-            'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['groups'],
-            'exclude'    => true,
-            'inputType'  => 'checkbox',
-            'foreignKey' => 'tl_member_group.name',
-            'eval'       => array('mandatory' => true, 'multiple' => true)
-        ),
-        'guests'       => array
-        (
-            'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['guests'],
-            'exclude'   => true,
-            'filter'    => true,
-            'inputType' => 'checkbox'
         ),
         'cssID'        => array
         (

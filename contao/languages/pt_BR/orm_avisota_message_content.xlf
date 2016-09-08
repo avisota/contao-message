@@ -31,30 +31,7 @@
         <source>Please choose the cell the content element should be showed in.</source>
 
       </trans-unit>
-      <trans-unit id="orm_avisota_message_content.protected.0">
-        <source>Element schützen &lt;strong style=&quot;color:red&quot;&gt;REMOVE&lt;/strong&gt;</source>
 
-      </trans-unit>
-      <trans-unit id="orm_avisota_message_content.protected.1">
-        <source>Das Inhaltselement nur bestimmten Gruppen anzeigen.</source>
-
-      </trans-unit>
-      <trans-unit id="orm_avisota_message_content.groups.0">
-        <source>Erlaubte Mitgliedergruppen &lt;strong style=&quot;color:red&quot;&gt;REMOVE&lt;/strong&gt;</source>
-
-      </trans-unit>
-      <trans-unit id="orm_avisota_message_content.groups.1">
-        <source>Diese Gruppen können das Inhaltselement sehen.</source>
-
-      </trans-unit>
-      <trans-unit id="orm_avisota_message_content.guests.0">
-        <source>Nur Gästen anzeigen &lt;strong style=&quot;color:red&quot;&gt;REMOVE&lt;/strong&gt;</source>
-
-      </trans-unit>
-      <trans-unit id="orm_avisota_message_content.guests.1">
-        <source>Das Inhaltselement verstecken sobald ein Mitglied angemeldet ist.</source>
-
-      </trans-unit>
       <trans-unit id="orm_avisota_message_content.cssID.0">
         <source>CSS ID/class</source>
 

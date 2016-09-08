@@ -36,36 +36,7 @@
         <target>Bitte wählen Sie den Typ des Inhaltselementes aus.</target>
 
       </trans-unit>
-      <trans-unit id="orm_avisota_message_content.protected.0">
-        <source>Element schützen &lt;strong style=&quot;color:red&quot;&gt;REMOVE&lt;/strong&gt;</source>
-        <target>Elementschutz &lt;strong style=&quot;color:red&quot;&gt;entfernen&lt;/strong&gt;</target>
 
-      </trans-unit>
-      <trans-unit id="orm_avisota_message_content.protected.1">
-        <source>Das Inhaltselement nur bestimmten Gruppen anzeigen.</source>
-        <target>Das Inhaltselement nur bestimmten Gruppen anzeigen.</target>
-
-      </trans-unit>
-      <trans-unit id="orm_avisota_message_content.groups.0">
-        <source>Erlaubte Mitgliedergruppen &lt;strong style=&quot;color:red&quot;&gt;REMOVE&lt;/strong&gt;</source>
-        <target>Erlaubte Mitgliedergruppen  &lt;strong style=&quot;color:red&quot;&gt;ENTFERNEN&lt;/strong&gt;</target>
-
-      </trans-unit>
-      <trans-unit id="orm_avisota_message_content.groups.1">
-        <source>Diese Gruppen können das Inhaltselement sehen.</source>
-        <target>Diese Gruppen können das Inhaltselement sehen.</target>
-
-      </trans-unit>
-      <trans-unit id="orm_avisota_message_content.guests.0">
-        <source>Nur Gästen anzeigen &lt;strong style=&quot;color:red&quot;&gt;REMOVE&lt;/strong&gt;</source>
-        <target>Nur Gästen anzeigen &lt;strong style=&quot;color:red&quot;&gt;ENTFERNEN&lt;/strong&gt;</target>
-
-      </trans-unit>
-      <trans-unit id="orm_avisota_message_content.guests.1">
-        <source>Das Inhaltselement verstecken sobald ein Mitglied angemeldet ist.</source>
-        <target>Das Inhaltselement verstecken sobald ein Mitglied angemeldet ist.</target>
-
-      </trans-unit>
       <trans-unit id="orm_avisota_message_content.cssID.0">
         <source>CSS ID/class</source>
         <target>CSS-ID / CSS-Klasse</target>
