@@ -14,12 +14,15 @@
  */
 
 use Avisota\Contao\Message\Core\Backend\Preview;
+use Avisota\Contao\Message\Core\DataContainer\Layout;
 use Avisota\Contao\Message\Core\DataContainer\LayoutOptions;
 use Avisota\Contao\Message\Core\DataContainer\Message;
+use Avisota\Contao\Message\Core\DataContainer\MessageCategory;
 use Avisota\Contao\Message\Core\DataContainer\MessageCategoryOptions;
 use Avisota\Contao\Message\Core\DataContainer\MessageContent;
 use Avisota\Contao\Message\Core\DataContainer\MessageContentOptions;
 use Avisota\Contao\Message\Core\DataContainer\MessageOptions;
+use Avisota\Contao\Message\Core\DataContainer\Theme;
 use Avisota\Contao\Message\Core\DataContainer\ThemeOptions;
 use Avisota\Contao\Message\Core\EventsSubscriber;
 use Avisota\Contao\Message\Core\Layout\ContaoStylesheets;
@@ -35,4 +38,7 @@ return array(
     new MessageCategoryOptions(),
     new MessageOptions(),
     new MessageContentOptions(),
+    new Theme(),
+    new Layout(),
+    new MessageCategory()
 );

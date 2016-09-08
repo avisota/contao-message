@@ -21,8 +21,11 @@ use Contao\Controller;
 use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
 use Contao\Doctrine\ORM\EntityAccessor;
 use Contao\Input;
+use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetBreadcrumbEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
+use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
+use ContaoCommunityAlliance\UrlBuilder\UrlBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -53,13 +56,17 @@ class MessageContent implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            GetGroupHeaderEvent::NAME        => array(
+            GetGroupHeaderEvent::NAME => array(
                 array('getGroupHeader'),
             ),
 
             ParentViewChildRecordEvent::NAME => array(
                 array('parentViewChildRecord'),
             ),
+
+            GetBreadcrumbEvent::NAME => array(
+                array('getBreadCrumb')
+            )
         );
     }
 
@@ -106,7 +113,7 @@ class MessageContent implements EventSubscriberInterface
         }
 
         $model = $event->getModel();
-        $cell  = $model->getProperty('cell');
+        $cell = $model->getProperty('cell');
 
         if (isset($GLOBALS['TL_LANG']['orm_avisota_message_content']['cells'][$cell])) {
             $cell = $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells'][$cell];
@@ -151,11 +158,113 @@ class MessageContent implements EventSubscriberInterface
         /** @var EntityAccessor $entityAccessor */
         $entityAccessor = $GLOBALS['container']['doctrine.orm.entityAccessor'];
 
-        $context            = $entityAccessor->getProperties($content);
-        $context['key']     = $key;
+        $context = $entityAccessor->getProperties($content);
+        $context['key'] = $key;
         $context['element'] = $element;
 
         $template = new \TwigTemplate('avisota/backend/mce_element', 'html5');
         $event->setHtml($template->parse($context));
+    }
+
+    /**
+     * Get the bread crumb elements.
+     *
+     * @param GetBreadcrumbEvent $event This event.
+     *
+     * @return void
+     */
+    public function getBreadCrumb(GetBreadcrumbEvent $event)
+    {
+        $environment = $event->getEnvironment();
+        $inputProvider = $environment->getInputProvider();
+
+        if (!$inputProvider->hasParameter('act')
+            || !$inputProvider->hasParameter('id')
+        ) {
+            return;
+        }
+
+        $messageContentModelId = ModelId::fromSerialized($inputProvider->getParameter('id'));
+        if ($messageContentModelId->getDataProviderName() !== 'orm_avisota_message_content') {
+            return;
+        }
+
+        $elements = $event->getElements();
+
+        $dataProvider = $environment->getDataProvider($messageContentModelId->getDataProviderName());
+        $model = $dataProvider->fetch($dataProvider->getEmptyConfig()->setId($messageContentModelId->getId()));
+
+        $messageContent = $model->getEntity();
+        $message = $messageContent->getMessage();
+        $messageCategory = $message->getCategory();
+
+        $urlNewsletterBuilder = new UrlBuilder();
+        $urlNewsletterBuilder->setPath('contao/main.php')
+            ->setQueryParameter('do', $inputProvider->getParameter('do'))
+            ->setQueryParameter('ref', TL_REFERER_ID);
+
+        $elements[] = array(
+            'icon' => 'assets/avisota/message/images/newsletter.png',
+            'text' => $GLOBALS['TL_LANG']['MOD']['avisota_newsletter'][0],
+            'url' => $urlNewsletterBuilder->getUrl()
+        );
+
+        global $container;
+
+        $entityManager = $container['doctrine.orm.entityManager'];
+
+        $messageMeta = $entityManager->getClassMetadata(get_class($message));
+        $messageCategoryMeta = $entityManager->getClassMetadata(get_class($messageCategory));
+        $messageContentMeta = $entityManager->getClassMetadata(get_class($messageContent));
+
+        $urlMessageCategoryBuilder = new UrlBuilder();
+        $urlMessageCategoryBuilder->setPath('contao/main.php')
+            ->setQueryParameter(
+                'do',
+                $inputProvider->getParameter('do')
+            )
+            ->setQueryParameter(
+                'table',
+                $messageMeta->getTableName()
+            )
+            ->setQueryParameter(
+                'pid',
+                ModelId::fromValues(
+                    $messageCategoryMeta->getTableName(),
+                    $messageCategory->getId()
+                )->getSerialized()
+            )
+            ->setQueryParameter('ref', TL_REFERER_ID);
+
+        $elements[] = array(
+            'text' => $messageCategory->getTitle(),
+            'url' => $urlMessageCategoryBuilder->getUrl()
+        );
+
+        $urlMessageBuilder = new UrlBuilder();
+        $urlMessageBuilder->setPath('contao/main.php')
+            ->setQueryParameter(
+                'do',
+                $inputProvider->getParameter('do')
+            )
+            ->setQueryParameter(
+                'table',
+                $messageContentMeta->getTableName()
+            )
+            ->setQueryParameter(
+                'pid',
+                ModelId::fromValues(
+                    $messageMeta->getTableName(),
+                    $message->getId()
+                )->getSerialized()
+            )
+            ->setQueryParameter('ref', TL_REFERER_ID);
+
+        $elements[] = array(
+            'text' => $message->getSubject(),
+            'url' => $urlMessageBuilder->getUrl()
+        );
+
+        $event->setElements($elements);
     }
 }

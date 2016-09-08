@@ -24,12 +24,13 @@ use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Backend\GetThemeEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Date\ParseDateEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\ContaoWidgetManager;
+use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetBreadcrumbEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
 use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 use ContaoCommunityAlliance\DcGeneral\DcGeneralEvents;
 use ContaoCommunityAlliance\DcGeneral\Event\ActionEvent;
-use Doctrine\ORM\Mapping\Entity;
+use ContaoCommunityAlliance\UrlBuilder\UrlBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -73,6 +74,10 @@ class Message implements EventSubscriberInterface
             DcGeneralEvents::ACTION => array(
                 array('handleActionForSelectri'),
             ),
+
+            GetBreadcrumbEvent::NAME => array(
+                array('getBreadCrumb')
+            )
         );
     }
 
@@ -323,5 +328,74 @@ class Message implements EventSubscriberInterface
 
         $widgetManager = new ContaoWidgetManager($environment, $model);
         $widgetManager->renderWidget($selectriProperty->getName());
+    }
+
+    /**
+     * Get the bread crumb elements.
+     *
+     * @param GetBreadcrumbEvent $event This event.
+     *
+     * @return void
+     */
+    public function getBreadCrumb(GetBreadcrumbEvent $event)
+    {
+        $environment   = $event->getEnvironment();
+        $inputProvider = $environment->getInputProvider();
+
+        $newsletterParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
+
+        if (!$inputProvider->hasParameter($newsletterParameter)) {
+            return;
+        }
+
+        $newsletterModelId = ModelId::fromSerialized($inputProvider->getParameter($newsletterParameter));
+        if ($newsletterModelId->getDataProviderName() !== 'orm_avisota_message') {
+            return;
+        }
+
+        $elements = $event->getElements();
+
+        $urlNewsletterBuilder = new UrlBuilder();
+        $urlNewsletterBuilder->setPath('contao/main.php')
+            ->setQueryParameter('do', $inputProvider->getParameter('do'))
+            ->setQueryParameter('ref', TL_REFERER_ID);
+
+        $elements[] = array(
+            'icon' => 'assets/avisota/message/images/newsletter.png',
+            'text' => $GLOBALS['TL_LANG']['MOD']['avisota_newsletter'][0],
+            'url'  => $urlNewsletterBuilder->getUrl()
+        );
+
+        $dataProvider = $environment->getDataProvider($newsletterModelId->getDataProviderName());
+        $model        = $dataProvider->fetch($dataProvider->getEmptyConfig()->setId($newsletterModelId->getId()));
+        $newsletter   = $model->getEntity();
+
+        $newsletterCategory = $newsletter->getCategory();
+
+        $urlNewsletterBuilder = new UrlBuilder();
+        $urlNewsletterBuilder->setPath('contao/main.php')
+            ->setQueryParameter(
+                'do',
+                $inputProvider->getParameter('do')
+            )
+            ->setQueryParameter(
+                'table',
+                $newsletterModelId->getDataProviderName()
+            )
+            ->setQueryParameter(
+                'pid',
+                ModelId::fromValues(
+                    'orm_avisota_message_category',
+                    $newsletterCategory->getId()
+                )->getSerialized()
+            )
+            ->setQueryParameter('ref', TL_REFERER_ID);
+
+        $elements[] = array(
+            'text' => $newsletterCategory->getTitle(),
+            'url'  => $urlNewsletterBuilder->getUrl()
+        );
+
+        $event->setElements($elements);
     }
 }
