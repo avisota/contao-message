@@ -65,6 +65,15 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
                         'remote'    => 'id',
                         'operation' => '=',
                     )
+                ),
+                'inverse' => array
+                (
+                    array
+                    (
+                        'local'     => 'theme',
+                        'remote'    => 'id',
+                        'operation' => '=',
+                    ),
                 )
             )
         )
