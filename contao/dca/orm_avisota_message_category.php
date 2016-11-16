@@ -42,7 +42,17 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
             (
                 'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider',
                 'source' => 'orm_avisota_message_category'
-            )
+            ),
+            'orm_avisota_message' => array
+            (
+                'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider',
+                'source' => 'orm_avisota_message'
+            ),
+            'orm_avisota_message_content' => array
+            (
+                'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider',
+                'source' => 'orm_avisota_message_content'
+            ),
         ),
         'childCondition' => array(
             array(
@@ -60,6 +70,26 @@ $GLOBALS['TL_DCA']['orm_avisota_message_category'] = array
                     array
                     (
                         'local'     => 'category',
+                        'remote'    => 'id',
+                        'operation' => '=',
+                    )
+                )
+            ),
+            array(
+                'from'   => 'orm_avisota_message',
+                'to'     => 'orm_avisota_message_content',
+                'setOn'  => array
+                (
+                    array(
+                        'to_field'   => 'message',
+                        'from_field' => 'id',
+                    ),
+                ),
+                'filter' => array
+                (
+                    array
+                    (
+                        'local'     => 'message',
                         'remote'    => 'id',
                         'operation' => '=',
                     )

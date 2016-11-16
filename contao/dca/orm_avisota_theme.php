@@ -41,9 +41,43 @@ $GLOBALS['TL_DCA']['orm_avisota_theme'] = array
             (
                 'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider',
                 'source' => 'orm_avisota_theme'
+            ),
+            'orm_avisota_layout' => array
+            (
+                'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider',
+                'source' => 'orm_avisota_layout'
             )
         ),
         'childCondition' => array(
+            array(
+                'from'   => 'orm_avisota_theme',
+                'to'     => 'orm_avisota_layout',
+                'setOn'  => array
+                (
+                    array(
+                        'to_field'   => 'theme',
+                        'from_field' => 'id',
+                    ),
+                ),
+                'filter' => array
+                (
+                    array
+                    (
+                        'local'     => 'theme',
+                        'remote'    => 'id',
+                        'operation' => '=',
+                    )
+                ),
+                'inverse' => array
+                (
+                    array
+                    (
+                        'local'     => 'theme',
+                        'remote'    => 'id',
+                        'operation' => '=',
+                    ),
+                )
+            ),
             array(
                 'from'   => 'orm_avisota_theme',
                 'to'     => 'orm_avisota_layout',
