@@ -55,6 +55,10 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
     {
         global $container;
 
+        $general     = new \ContaoCommunityAlliance\DcGeneral\DC_General('orm_avisota_message');
+        $environment = $general->getEnvironment();
+        $translator  = $environment->getTranslator();
+
         $GLOBALS['TL_LANGUAGE'] = $message->getLanguage();
 
         /** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
@@ -90,7 +94,7 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
             $event = new LoadLanguageFileEvent('avisota_message');
             $eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
 
-            $viewOnlineLink = sprintf($GLOBALS['TL_LANG']['avisota_message']['viewOnline'], $url);
+            $viewOnlineLink = sprintf($translator->translate('viewOnline', 'avisota_message'), $url);
         } else {
             $viewOnlineLink = false;
         }
@@ -125,7 +129,7 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
             $event
         );
 
-        $_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['avisota_message_preview']['previewSend'], $email);
+        $_SESSION['TL_CONFIRM'][] = sprintf($translator->translate('previewSend', 'avisota_message_preview'), $email);
 
         header('Location: ' . $url);
         exit;

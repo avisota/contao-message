@@ -72,6 +72,7 @@ class Theme implements EventSubscriberInterface
     {
         $environment   = $event->getEnvironment();
         $inputProvider = $environment->getInputProvider();
+        $translator = $environment->getTranslator();
 
         $modelParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
 
@@ -93,7 +94,7 @@ class Theme implements EventSubscriberInterface
 
         $elements[] = array(
             'icon' => 'assets/avisota/message/images/theme.png',
-            'text' => $GLOBALS['TL_LANG']['MOD']['avisota_theme'][0],
+            'text' => $translator->translate('avisota_theme.0', 'MOD'),
             'url'  => $urlBuilder->getUrl()
         );
 

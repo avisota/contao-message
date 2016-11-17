@@ -25,6 +25,7 @@ use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetBr
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
 use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
+use ContaoCommunityAlliance\DcGeneral\DC_General;
 use ContaoCommunityAlliance\UrlBuilder\UrlBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -88,14 +89,18 @@ class MessageContent implements EventSubscriberInterface
     {
         global $container;
 
+        $general     = new DC_General('orm_avisota_message_content');
+        $environment = $general->getEnvironment();
+        $translator  = $environment->getTranslator();
+
         /** @var Input $input */
         $input = $container['input'];
 
         $user = \BackendUser::getInstance();
 
         if (!($user->isAdmin || $user->hasAccess('send', 'avisota_newsletter_permissions'))) {
-            $label = $GLOBALS['TL_LANG']['orm_avisota_message']['view_only'][0];
-            $title = $GLOBALS['TL_LANG']['orm_avisota_message']['view_only'][1];
+            $label = $translator->translate('view_only.0', 'orm_avisota_message');
+            $title = $translator->translate('view_only.1', 'orm_avisota_message');
         }
         return ' &#160; :: &#160; <a href="' . Controller::addToUrl(
             $href . '&amp;id=' . $input->get('id')
@@ -112,12 +117,12 @@ class MessageContent implements EventSubscriberInterface
             return;
         }
 
-        $model = $event->getModel();
-        $cell = $model->getProperty('cell');
+        $environment = $event->getEnvironment();
+        $translator  = $environment->getTranslator();
 
-        if (isset($GLOBALS['TL_LANG']['orm_avisota_message_content']['cells'][$cell])) {
-            $cell = $GLOBALS['TL_LANG']['orm_avisota_message_content']['cells'][$cell];
-        }
+        $model = $event->getModel();
+
+        $cell = $translator->translate('cells.' . $model->getProperty('cell'), 'orm_avisota_message_content');
 
         $event->setValue($cell);
     }
@@ -177,8 +182,9 @@ class MessageContent implements EventSubscriberInterface
      */
     public function getBreadCrumb(GetBreadcrumbEvent $event)
     {
-        $environment = $event->getEnvironment();
+        $environment   = $event->getEnvironment();
         $inputProvider = $environment->getInputProvider();
+        $translator    = $environment->getTranslator();
 
         if (!$inputProvider->hasParameter('act')
             || !$inputProvider->hasParameter('id')
@@ -207,8 +213,8 @@ class MessageContent implements EventSubscriberInterface
 
         $elements[] = array(
             'icon' => 'assets/avisota/message/images/newsletter.png',
-            'text' => $GLOBALS['TL_LANG']['MOD']['avisota_newsletter'][0],
-            'url' => $urlNewsletterBuilder->getUrl()
+            'text' => $translator->translate('avisota_newsletter.0', 'MOD'),
+            'url'  => $urlNewsletterBuilder->getUrl()
         );
 
         global $container;

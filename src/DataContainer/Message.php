@@ -148,7 +148,6 @@ class Message implements EventSubscriberInterface
 
     /**
      * @param GetGroupHeaderEvent $event
-     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getGroupHeader(GetGroupHeaderEvent $event)
     {
@@ -156,17 +155,16 @@ class Message implements EventSubscriberInterface
             return;
         }
 
+        $environment = $event->getEnvironment();
+        $translator = $environment->getTranslator();
+
         /** @var EntityModel $model */
         $model = $event->getModel();
         /** @var \Avisota\Contao\Entity\Message $message */
         $message = $model->getEntity();
 
         if ($message->getCategory()->getBoilerplates()) {
-            $language = $message->getLanguage();
-
-            if (isset($GLOBALS['TL_LANG']['LNG'][$language])) {
-                $language = $GLOBALS['TL_LANG']['LNG'][$language];
-            }
+            $language = $translator->translate($message->getLanguage(), 'LNG');
 
             $event->setValue($language);
         } else {
@@ -179,7 +177,7 @@ class Message implements EventSubscriberInterface
 
                 $event->setValue($parseDateEvent->getResult());
             } else {
-                $event->setValue($GLOBALS['TL_LANG']['orm_avisota_message']['notSend']);
+                $event->setValue($translator->translate('notSend', 'orm_avisota_message'));
             }
         }
     }
@@ -198,17 +196,16 @@ class Message implements EventSubscriberInterface
             return;
         }
 
+        $environment = $event->getEnvironment();
+        $translator = $environment->getTranslator();
+
         /** @var EntityModel $model */
         $model = $event->getModel();
         /** @var \Avisota\Contao\Entity\Message $message */
         $message = $model->getEntity();
 
         if ($message->getCategory()->getBoilerplates()) {
-            $language = $message->getLanguage();
-
-            if (isset($GLOBALS['TL_LANG']['LNG'][$language])) {
-                $language = $GLOBALS['TL_LANG']['LNG'][$language];
-            }
+            $language = $translator->translate($message->getLanguage(), 'LNG');
 
             $label = sprintf(
                 '%s [%s]',
@@ -233,7 +230,7 @@ class Message implements EventSubscriberInterface
                 $eventDispatcher->dispatch(ContaoEvents::DATE_PARSE, $parseDateEvent);
 
                 $sended = sprintf(
-                    $GLOBALS['TL_LANG']['orm_avisota_message']['sended'],
+                    $translator->translate('sended', 'orm_avisota_message'),
                     $parseDateEvent->getResult()
                 );
                 $label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . $sended . ')</span>';
@@ -341,6 +338,7 @@ class Message implements EventSubscriberInterface
     {
         $environment   = $event->getEnvironment();
         $inputProvider = $environment->getInputProvider();
+        $translator    = $environment->getTranslator();
 
         $newsletterParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
 
@@ -362,7 +360,7 @@ class Message implements EventSubscriberInterface
 
         $elements[] = array(
             'icon' => 'assets/avisota/message/images/newsletter.png',
-            'text' => $GLOBALS['TL_LANG']['MOD']['avisota_newsletter'][0],
+            'text' => $translator->translate('avisota_newsletter.0', 'MOD'),
             'url'  => $urlNewsletterBuilder->getUrl()
         );
 

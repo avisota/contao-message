@@ -65,6 +65,7 @@ class MessageCategory implements EventSubscriberInterface
     {
         $environment   = $event->getEnvironment();
         $inputProvider = $environment->getInputProvider();
+        $translator    = $environment->getTranslator();
 
         $modelParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
 
@@ -86,7 +87,7 @@ class MessageCategory implements EventSubscriberInterface
 
         $elements[] = array(
             'icon' => 'assets/avisota/message/images/newsletter.png',
-            'text' => $GLOBALS['TL_LANG']['MOD']['avisota_newsletter'][0],
+            'text' => $translator->translate('avisota_newsletter.0', 'MOD'),
             'url'  => $urlBuilder->getUrl()
         );
 
