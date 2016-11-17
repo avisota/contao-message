@@ -4,27 +4,35 @@
       <trans-unit id="MCE.texts">
         <source>Text elements</source>
         <target>Elements da text</target>
-        
+
       </trans-unit>
       <trans-unit id="MCE.links">
         <source>Link elements</source>
         <target>Elements da colliaziuns</target>
-        
+
       </trans-unit>
       <trans-unit id="MCE.images">
         <source>Image elements</source>
         <target>Elements da maletgs</target>
-        
+
       </trans-unit>
       <trans-unit id="MCE.files">
         <source>File elements</source>
         <target>Elements da datotecas</target>
-        
+
       </trans-unit>
       <trans-unit id="MCE.includes">
         <source>Include elements</source>
         <target>Elements per includer</target>
-        
+
+      </trans-unit>
+      <trans-unit id="MCE.delete.information.layout">
+        <source>This layout can not be deleted because it is used by the following messages:</source>
+
+      </trans-unit>
+      <trans-unit id="MCE.delete.information.theme">
+        <source>This theme cannot be deleted because the included layouts used by following messages:</source>
+
       </trans-unit>
     </body>
   </file>

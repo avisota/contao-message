@@ -3,23 +3,31 @@
     <body>
       <trans-unit id="MCE.texts">
         <source>Text elements</source>
-        
+
       </trans-unit>
       <trans-unit id="MCE.links">
         <source>Link elements</source>
-        
+
       </trans-unit>
       <trans-unit id="MCE.images">
         <source>Image elements</source>
-        
+
       </trans-unit>
       <trans-unit id="MCE.files">
         <source>File elements</source>
-        
+
       </trans-unit>
       <trans-unit id="MCE.includes">
         <source>Include elements</source>
-        
+
+      </trans-unit>
+      <trans-unit id="MCE.delete.information.layout">
+        <source>This layout can not be deleted because it is used by the following messages:</source>
+
+      </trans-unit>
+      <trans-unit id="MCE.delete.information.theme">
+        <source>This theme cannot be deleted because the included layouts used by following messages:</source>
+
       </trans-unit>
     </body>
   </file>

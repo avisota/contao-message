@@ -16,7 +16,9 @@
 namespace Avisota\Contao\Message\Core\DataContainer;
 
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetBreadcrumbEvent;
+use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetOperationButtonEvent;
 use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
+use ContaoCommunityAlliance\DcGeneral\DataDefinition\Definition\View\Command;
 use ContaoCommunityAlliance\DcGeneral\DC_General;
 use ContaoCommunityAlliance\UrlBuilder\UrlBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -52,6 +54,10 @@ class Layout implements EventSubscriberInterface
         return array(
             GetBreadcrumbEvent::NAME => array(
                 array('getBreadCrumb')
+            ),
+
+            GetOperationButtonEvent::NAME => array(
+                array('deleteInformation')
             )
         );
     }
@@ -109,6 +115,52 @@ class Layout implements EventSubscriberInterface
         );
 
         $event->setElements($elements);
+    }
+
+    /**
+     * Check if the Layout is in used by message.
+     * If this in used, return where and can´t delete it.
+     *
+     * @param GetOperationButtonEvent $event The event.
+     *
+     * @return void
+     */
+    public function deleteInformation(GetOperationButtonEvent $event)
+    {
+        $command        = $event->getCommand();
+        $environment    = $event->getEnvironment();
+        $dataDefinition = $environment->getDataDefinition();
+
+        if ($dataDefinition->getName() !== 'orm_avisota_layout'
+            || $command->getName() !== 'delete'
+        ) {
+            return;
+        }
+
+        $entity        = $event->getModel()->getEntity();
+        $dataProvider  = $environment->getDataProvider();
+        $entityManager = $dataProvider->getEntityManager();
+        $repository    = $entityManager->getRepository('Avisota\Contao:Message');
+
+        $messageResult = $repository->findBy(
+            array('layout' => $entity->getId()),
+            array('subject' => 'ASC')
+        );
+        if (count($messageResult) < 1) {
+            return;
+        }
+
+        $translator = $environment->getTranslator();
+
+        $information = $translator->translate('delete.information.layout', 'MCE');
+        foreach ($messageResult as $message) {
+            $information .= "\\n";
+            $information .= $message->getCategory()->getTitle();
+            $information .= ' => ';
+            $information .= $message->getSubject();
+        }
+
+        $event->setAttributes('onclick="alert(\'' . $information . '\'); Backend.getScrollOffset(); return false;"');
     }
 
     /**
