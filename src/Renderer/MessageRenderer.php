@@ -25,6 +25,7 @@ use Avisota\Contao\Message\Core\Event\RenderMessageContentEvent;
 use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
 use Contao\Doctrine\ORM\EntityHelper;
 use Contao\Doctrine\ORM\EntityInterface;
+use Contao\Frontend;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
@@ -281,8 +282,11 @@ class MessageRenderer implements MessageRendererInterface
         }
 
         $messageCategory = $messageContent->getMessage()->getCategory();
-        //Fixme if no online set, then search the first page (domain)
+
         $viewOnlinePageModel = \PageModel::findByPk($messageCategory->getViewOnlinePage());
+        if (!$viewOnlinePageModel) {
+            $viewOnlinePageModel = \PageModel::findByPk(Frontend::getRootIdFromUrl());
+        }
         $viewOnlinePageModel->loadDetails();
 
         $replaced   = array();
