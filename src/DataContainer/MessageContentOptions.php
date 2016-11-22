@@ -232,7 +232,12 @@ class MessageContentOptions implements EventSubscriberInterface
      */
     public function createContentTypeOptions(GetPropertyOptionsEvent $event, $name, EventDispatcher $eventDispatcher)
     {
-        if ($event->getPropertyName() !== 'allowedCellContents') {
+        $environment = $event->getEnvironment();
+        $dataDefinition = $environment->getDataDefinition();
+
+        if ($dataDefinition->getName() !== 'orm_avisota_layout'
+            || $event->getPropertyName() !== 'allowedCellContents'
+        ) {
             return;
         }
 
