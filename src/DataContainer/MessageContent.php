@@ -17,11 +17,13 @@
 namespace Avisota\Contao\Message\Core\DataContainer;
 
 use Avisota\Contao\Message\Core\Renderer\MessageRendererInterface;
+use Contao\BackendUser;
 use Contao\Controller;
 use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
 use Contao\Doctrine\ORM\EntityAccessor;
 use Contao\Input;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetBreadcrumbEvent;
+use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGlobalButtonEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
 use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
@@ -57,6 +59,10 @@ class MessageContent implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
+            GetGlobalButtonEvent::NAME => array(
+                array('checkPermissionSendMessageButton')
+            ),
+
             GetGroupHeaderEvent::NAME => array(
                 array('getGroupHeader'),
             ),
@@ -72,39 +78,30 @@ class MessageContent implements EventSubscriberInterface
     }
 
     /**
-     * Return the send button
+     * Check the permission for send or preview message button.
      *
-     * @param array
-     * @param string
-     * @param string
-     * @param string
-     * @param string
-     * @param string
+     * @param GetGlobalButtonEvent $event The event.
      *
-     * @return string
-     * @SuppressWarnings(PHPMD.Superglobals)
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @return void
      */
-    public function sendMessageButton($href, $label, $title, $icon, $attributes)
+    public function checkPermissionSendMessageButton(GetGlobalButtonEvent $event)
     {
-        global $container;
+        $environment    = $event->getEnvironment();
+        $dataDefinition = $environment->getDataDefinition();
 
-        $general     = new DC_General('orm_avisota_message_content');
-        $environment = $general->getEnvironment();
-        $translator  = $environment->getTranslator();
-
-        /** @var Input $input */
-        $input = $container['input'];
-
-        $user = \BackendUser::getInstance();
-
-        if (!($user->isAdmin || $user->hasAccess('send', 'avisota_newsletter_permissions'))) {
-            $label = $translator->translate('view_only.0', 'orm_avisota_message');
-            $title = $translator->translate('view_only.1', 'orm_avisota_message');
+        if ($dataDefinition->getName() !== 'orm_avisota_message_content'
+            || $event->getKey() !== 'send'
+        ) {
+            return;
         }
-        return ' &#160; :: &#160; <a href="' . Controller::addToUrl(
-            $href . '&amp;id=' . $input->get('id')
-        ) . '" title="' . specialchars($title) . '"' . $attributes . ' class="header_send">' . $label . '</a> ';
+
+        $user = BackendUser::getInstance();
+
+        if (!$user->isAdmin
+            || !$user->hasAccess('send', 'avisota_newsletter_permission')
+        ) {
+            $event->setHtml('');
+        }
     }
 
     /**

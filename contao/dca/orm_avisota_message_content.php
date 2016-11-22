@@ -116,11 +116,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
             (
                 'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['send'],
                 'href'            => 'table=orm_avisota_message&amp;act=preview',
-                'class'           => 'header_send',
-                'button_callback' => array(
-                    'Avisota\Contao\Message\Core\DataContainer\MessageContent',
-                    'sendMessageButton'
-                )
+                'class'           => 'header_send'
             ),
 
             'all'  => array
