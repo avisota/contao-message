@@ -98,8 +98,8 @@
 
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.cells.header">
-        <source>Header</source>
-        <target>Kopf</target>
+        <source>Header column</source>
+        <target>Kopfspalte</target>
 
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.cells.left">
@@ -118,8 +118,8 @@
 
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.cells.footer">
-        <source>Footer</source>
-        <target>Fuss</target>
+        <source>Footer column</source>
+        <target>Fußspalte</target>
 
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.new.0">

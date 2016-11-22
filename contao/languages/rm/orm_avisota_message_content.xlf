@@ -96,8 +96,7 @@
 
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.cells.header">
-        <source>Header</source>
-        <target>Chau</target>
+        <source>Header column</source>
 
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.cells.left">
@@ -116,8 +115,7 @@
 
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.cells.footer">
-        <source>Footer</source>
-        <target>Pè</target>
+        <source>Footer column</source>
 
       </trans-unit>
       <trans-unit id="orm_avisota_message_content.new.0">
