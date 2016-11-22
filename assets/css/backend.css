@@ -1,5 +1,6 @@
-
+/* line 2, backend.scss */
 .header_send {
-	background: url("../images/send.png") no-repeat scroll left center transparent;
-	padding: 2px 0 3px 20px;
+  background: url("../images/send.png") no-repeat scroll left center transparent;
+  padding: 2px 0 3px 20px;
+  margin-left: 15px;
 }
