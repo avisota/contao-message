@@ -138,12 +138,12 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
         $queueHelper->setMessageTemplate($messageTemplate);
         $queueHelper->setNewsletterData($additionalData);
 
-        $count = $queueHelper->enqueue(30, $turn * 30);
+        $count = $queueHelper->enqueue((integer) $queueData->getMaxSendCount(), $turn * (integer)$queueData->getMaxSendCount());
 
         $event = new \Avisota\Contao\Core\Event\PostSendImmediateEvent($count, $message, $turn, $loop);
         $eventDispatcher->dispatch('avisota.post-send-immediate', $event);
 
-        if ($count || ($turn * 30 + 30) < $recipientSource->countRecipients()) {
+        if ($count || ($turn * (integer) $queueData->getMaxSendCount()) < $recipientSource->countRecipients()) {
             $eventDispatcher->dispatch(
                 ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE,
                 new LoadLanguageFileEvent('avisota_message_preview')
