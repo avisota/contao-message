@@ -28,6 +28,7 @@ use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGr
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
 use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 use ContaoCommunityAlliance\DcGeneral\DC_General;
+use ContaoCommunityAlliance\DcGeneral\Event\PreEditModelEvent;
 use ContaoCommunityAlliance\UrlBuilder\UrlBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -73,6 +74,10 @@ class MessageContent implements EventSubscriberInterface
 
             GetBreadcrumbEvent::NAME => array(
                 array('getBreadCrumb')
+            ),
+
+            PreEditModelEvent::NAME => array(
+                array('addCellFromPreviousModel')
             )
         );
     }
@@ -271,5 +276,38 @@ class MessageContent implements EventSubscriberInterface
         );
 
         $event->setElements($elements);
+    }
+
+    /**
+     * By paste after model. Add the cell information from the parent model.
+     *
+     * @param PreEditModelEvent $event The event.
+     *
+     * @return void
+     */
+    public function addCellFromPreviousModel(PreEditModelEvent $event)
+    {
+        $environment    = $event->getEnvironment();
+        $dataDefinition = $environment->getDataDefinition();
+        $inputProvider  = $environment->getInputProvider();
+
+        if ($dataDefinition->getName() !== 'orm_avisota_message_content'
+            || $inputProvider->getParameter('act') !== 'paste'
+        ) {
+            return;
+        }
+
+        $entity       = $event->getModel()->getEntity();
+        $dataProvider = $environment->getDataProvider();
+        $repository   = $dataProvider->getEntityRepository();
+
+        $modelId = ModelId::fromSerialized($inputProvider->getParameter('after'));
+
+        $parentModel = $repository->find($modelId->getId());
+        if (!$parentModel) {
+            return;
+        }
+
+        $entity->setCell($parentModel->getCell());
     }
 }
