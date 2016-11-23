@@ -62,7 +62,7 @@ class EventsSubscriber implements EventSubscriberInterface
             AvisotaMessageEvents::RENDER_MESSAGE => array(
                 array('renderMessage'),
             ),
-            
+
 
             GetSelectModeButtonsEvent::NAME => array(
                 array('deactivateButtonsForEditAll'),

@@ -337,12 +337,15 @@ class Message implements EventSubscriberInterface
     public function getBreadCrumb(GetBreadcrumbEvent $event)
     {
         $environment   = $event->getEnvironment();
+        $dataDefinition = $environment->getDataDefinition();
         $inputProvider = $environment->getInputProvider();
         $translator    = $environment->getTranslator();
 
         $newsletterParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
 
-        if (!$inputProvider->hasParameter($newsletterParameter)) {
+        if ($dataDefinition->getName() !== 'orm_avisota_message'
+            || !$inputProvider->hasParameter($newsletterParameter)
+        ) {
             return;
         }
 

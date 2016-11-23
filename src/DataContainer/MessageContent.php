@@ -185,10 +185,12 @@ class MessageContent implements EventSubscriberInterface
     public function getBreadCrumb(GetBreadcrumbEvent $event)
     {
         $environment   = $event->getEnvironment();
+        $dataDefinition = $environment->getDataDefinition();
         $inputProvider = $environment->getInputProvider();
         $translator    = $environment->getTranslator();
 
-        if (!$inputProvider->hasParameter('act')
+        if ($dataDefinition->getName() !== 'orm_avisota_message_content'
+            || (!$inputProvider->hasParameter('act') || $inputProvider->getParameter('act') === 'create')
             || !$inputProvider->hasParameter('id')
         ) {
             return;
@@ -292,7 +294,8 @@ class MessageContent implements EventSubscriberInterface
         $inputProvider  = $environment->getInputProvider();
 
         if ($dataDefinition->getName() !== 'orm_avisota_message_content'
-            || $inputProvider->getParameter('act') !== 'paste'
+            || !in_array($inputProvider->getParameter('act'), array('paste', 'create'))
+            || !$inputProvider->hasParameter('after')
         ) {
             return;
         }

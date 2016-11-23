@@ -60,7 +60,7 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
 
         $general     = new \ContaoCommunityAlliance\DcGeneral\DC_General('orm_avisota_message');
         $environment = $general->getEnvironment();
-        $translator = $environment->getTranslator();
+        $translator  = $environment->getTranslator();
 
         $GLOBALS['TL_LANGUAGE'] = $message->getLanguage();
 
@@ -143,7 +143,10 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
         $queueHelper->setMessageTemplate($messageTemplate);
         $queueHelper->setNewsletterData($additionalData);
 
-        $count = $queueHelper->enqueue((integer) $queueData->getMaxSendCount(), $turn * (integer)$queueData->getMaxSendCount());
+        $count = $queueHelper->enqueue(
+            (integer) $queueData->getMaxSendCount(),
+            $turn * (integer) $queueData->getMaxSendCount()
+        );
 
         $event = new \Avisota\Contao\Core\Event\PostSendImmediateEvent($count, $message, $turn, $loop);
         $eventDispatcher->dispatch('avisota.post-send-immediate', $event);
@@ -188,7 +191,8 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
             $entityManager->flush();
         }
 
-        echo '<html><head><meta http-equiv="refresh" content="0; URL=' . $url . '"></head><body>Still generating...</body></html>';
+        echo '<html><head><meta http-equiv="refresh" content="0; URL=' . $url
+             . '"></head><body>Still generating...</body></html>';
         exit;
     }
 

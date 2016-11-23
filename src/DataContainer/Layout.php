@@ -72,15 +72,20 @@ class Layout implements EventSubscriberInterface
     public function getBreadCrumb(GetBreadcrumbEvent $event)
     {
         $environment   = $event->getEnvironment();
+        $dataDefinition = $environment->getDataDefinition();
         $inputProvider = $environment->getInputProvider();
         $translator    = $environment->getTranslator();
 
-        if (!$inputProvider->hasParameter('id')) {
+        $modelParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
+
+        if ($dataDefinition->getName() !== 'orm_avisota_layout'
+            || !$inputProvider->hasParameter($modelParameter)
+        ) {
             return;
         }
 
-        $layoutModelId = ModelId::fromSerialized($inputProvider->getParameter('id'));
-        if ($layoutModelId->getDataProviderName() !== 'orm_avisota_layout') {
+        $layoutModelId = ModelId::fromSerialized($inputProvider->getParameter($modelParameter));
+        if (!in_array($layoutModelId->getDataProviderName(), array('orm_avisota_theme', 'orm_avisota_layout'))) {
             return;
         }
 
@@ -96,6 +101,12 @@ class Layout implements EventSubscriberInterface
             'text' => $translator->translate('avisota_theme.0', 'MOD'),
             'url'  => $urlThemeBuilder->getUrl()
         );
+
+        if ($modelParameter === 'pid') {
+            $event->setElements($elements);
+
+            return;
+        }
 
         $urlLayoutBuilder = new UrlBuilder();
         $urlLayoutBuilder->setPath('contao/main.php')

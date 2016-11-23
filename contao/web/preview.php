@@ -45,9 +45,9 @@ class preview
     {
         global $container;
 
-        $general = new \ContaoCommunityAlliance\DcGeneral\DC_General('orm_avisota_message');
+        $general     = new \ContaoCommunityAlliance\DcGeneral\DC_General('orm_avisota_message');
         $environment = $general->getEnvironment();
-        $translator = $environment->getTranslator();
+        $translator  = $environment->getTranslator();
 
         /** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
         $eventDispatcher = $GLOBALS['container']['event-dispatcher'];

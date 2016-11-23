@@ -66,7 +66,7 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
 
         $email = \Input::get('recipient_email');
 
-        $idSerializer = new ModelId('orm_avisota_message', $message->getId());
+        $idSerializer  = new ModelId('orm_avisota_message', $message->getId());
         $pidSerializer = new ModelId('orm_avisota_message_category', $message->getCategory()->getId());
 
         if (!$email) {
