@@ -15,11 +15,6 @@
 
 namespace Avisota\Contao\Message\Core\Event;
 
-use Avisota\Contao\Core\Message\PreRenderedMessageTemplateInterface;
-use Avisota\Contao\Entity\Message;
-use Avisota\Recipient\RecipientInterface;
-use Symfony\Component\EventDispatcher\Event;
-
 /**
  * Class PreRenderMessageTemplateEvent
  *

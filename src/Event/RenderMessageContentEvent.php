@@ -16,7 +16,6 @@
 namespace Avisota\Contao\Message\Core\Event;
 
 use Avisota\Contao\Entity\Layout;
-
 use Avisota\Contao\Entity\MessageContent;
 use Symfony\Component\EventDispatcher\Event;
 
