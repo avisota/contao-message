@@ -55,6 +55,8 @@ class send_preview_to_email extends \Avisota\Contao\Message\Core\Send\AbstractWe
     {
         global $container;
 
+        $GLOBALS['TL_LANGUAGE'] = $message->getLanguage();
+
         /** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
         $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 
