@@ -60,6 +60,8 @@ class preview
             exit;
         }
 
+        $GLOBALS['TL_LANGUAGE'] = $message->getLanguage();
+
         $event = new \Avisota\Contao\Core\Event\CreateFakeRecipientEvent($message);
         $eventDispatcher->dispatch(\Avisota\Contao\Core\CoreEvents::CREATE_FAKE_RECIPIENT, $event);
 
