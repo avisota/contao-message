@@ -29,6 +29,7 @@ use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\Paren
 use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 use ContaoCommunityAlliance\DcGeneral\DcGeneralEvents;
 use ContaoCommunityAlliance\DcGeneral\Event\ActionEvent;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -69,7 +70,7 @@ class Message implements EventSubscriberInterface
                 array('parentViewChildRecord'),
             ),
 
-            DcGeneralEvents::ACTION          => array(
+            DcGeneralEvents::ACTION => array(
                 array('handleActionForSelectri'),
             ),
         );
@@ -267,24 +268,44 @@ class Message implements EventSubscriberInterface
 
         $environment    = $event->getEnvironment();
         $dataDefinition = $environment->getDataDefinition();
+        $inputProvider  = $environment->getInputProvider();
 
-        $modelId             = ModelId::fromSerialized(\Input::get('id'));
         $providerInformation =
             $dataDefinition->getDataProviderDefinition()->getInformation($dataDefinition->getName());
         $dataProviderClass   = $providerInformation->getClassName();
         /** @var EntityDataProvider $dataProvider */
         $dataProvider = new $dataProviderClass();
         $dataProvider->setBaseConfig(array('source' => $dataDefinition->getName()));
-        $repository     = $dataProvider->getEntityRepository();
-        $messageContent = $repository->find($modelId->getId());
-        $model          = new EntityModel($messageContent);
+        $repository = $dataProvider->getEntityRepository();
+
+        $messageContent = null;
+        if ($inputProvider->hasParameter('id')) {
+            $modelId        = ModelId::fromSerialized(\Input::get('id'));
+            $messageContent = $repository->find($modelId->getId());
+        }
+
+        if (!$messageContent) {
+            $contentModel = $dataProvider->getEmptyModel();
+
+            foreach (array_keys($contentModel->getPropertiesAsArray()) as $property) {
+                if (!$inputProvider->hasValue($property)) {
+                    continue;
+                }
+
+                $contentModel->setProperty($property, $inputProvider->getValue($property));
+            }
+
+            $messageContent = $contentModel->getEntity();
+        }
+
+        $model = new EntityModel($messageContent);
 
         $selectriProperty = null;
         foreach ($dataDefinition->getPalettesDefinition()->getPalettes() as $palette) {
             foreach ($palette->getLegends() as $legend) {
                 foreach ($legend->getProperties() as $legendProperty) {
                     $property = $dataDefinition->getPropertiesDefinition()->getProperty($legendProperty->getName());
-                    if ($property->getWidgetType() != 'selectri'
+                    if (!in_array($property->getWidgetType(), array('selectri', 'avisotaSelectriWithItems'))
                         || $legendProperty->getName() != \Input::get('striID')
                     ) {
                         continue;

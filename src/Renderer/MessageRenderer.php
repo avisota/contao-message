@@ -180,22 +180,18 @@ class MessageRenderer implements MessageRendererInterface
                 break;
         }
 
-        $elementId = explode('@', $messageContent->$elementIdMethod());
-        if (count($elementId) === 2) {
-            unset($elementId[1]);
-        }
-        $elementId = implode('', $elementId);
+        $contents = array();
+        foreach ($messageContent->$elementIdMethod() as $elementId) {
 
-        if ($elementId < 1) {
-            return array();
-        }
+            /** @var \Model $containerModel */
+            $containerModel = $containerModelName::findByPk($elementId);
 
-        /** @var \Model $containerModel */
-        $containerModel = $containerModelName::findByPk($elementId);
+            $elements = array($messageContent);
+            if ($containerModel) {
+                $elements = array_merge($elements, $this->findContainerCustomTemplates($containerModel));
+            }
 
-        $contents = array($messageContent);
-        if ($containerModel) {
-            $contents = array_merge($contents, $this->findContainerCustomTemplates($containerModel));
+            array_push($contents, $elements);
         }
 
         return $contents;
@@ -284,7 +280,8 @@ class MessageRenderer implements MessageRendererInterface
             return array();
         }
 
-        $messageCategory     = $messageContent->getMessage()->getCategory();
+        $messageCategory = $messageContent->getMessage()->getCategory();
+        //Fixme if no online set, then search the first page (domain)
         $viewOnlinePageModel = \PageModel::findByPk($messageCategory->getViewOnlinePage());
         $viewOnlinePageModel->loadDetails();
 
