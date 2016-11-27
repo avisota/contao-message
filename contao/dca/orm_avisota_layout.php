@@ -48,16 +48,16 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
         ),
         'childCondition' => array(
             array(
-                'from'   => 'orm_avisota_theme',
-                'to'     => 'orm_avisota_layout',
-                'setOn'  => array
+                'from'    => 'orm_avisota_theme',
+                'to'      => 'orm_avisota_layout',
+                'setOn'   => array
                 (
                     array(
                         'to_field'   => 'theme',
                         'from_field' => 'id',
                     ),
                 ),
-                'filter' => array
+                'filter'  => array
                 (
                     array
                     (
@@ -65,6 +65,15 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
                         'remote'    => 'id',
                         'operation' => '=',
                     )
+                ),
+                'inverse' => array
+                (
+                    array
+                    (
+                        'local'     => 'theme',
+                        'remote'    => 'id',
+                        'operation' => '=',
+                    ),
                 )
             )
         )
@@ -110,13 +119,13 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
                 'icon'       => 'copy.gif',
                 'attributes' => 'onclick="Backend.getScrollOffset();"',
             ),
-            // TODO description for alert box
             'delete' => array
             (
                 'label'      => &$GLOBALS['TL_LANG']['orm_avisota_layout']['delete'],
                 'href'       => 'act=delete',
                 'icon'       => 'delete.gif',
-                'attributes' => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+                'attributes' => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm']
+                                . '\')) return false; Backend.getScrollOffset();"',
             ),
             'show'   => array
             (

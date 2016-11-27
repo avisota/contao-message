@@ -74,12 +74,12 @@ class CustomMenu extends \BackendModule
     }
 
     /**
-     * @SuppressWarnings(PHPMD.Superglobals)
      * @SuppressWarnings(PHPMD.LongVariable)
      */
     public function injectMenu()
     {
-        global $container;
+        global $container,
+               $TL_LANG;
 
         // initialize the entity manager and class loaders
         $container['doctrine.orm.entityManager'];
@@ -111,7 +111,7 @@ class CustomMenu extends \BackendModule
                         'icon'     => $icon,
                     );
 
-                    $GLOBALS['TL_LANG']['MOD']['avisota_category_' . $id] = array($title);
+                    $TL_LANG['MOD']['avisota_category_' . $id] = array($title);
                 }
             } catch (\Exception $e) {
                 // silently ignore

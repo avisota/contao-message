@@ -80,10 +80,12 @@ class LayoutOptions implements EventSubscriberInterface
      */
     public function getLayoutTypeOptions($options = array())
     {
+        global $container;
+
+        $translator = $container['translator'];
+
         foreach ($GLOBALS['AVISOTA_MESSAGE_RENDERER'] as $rendererKey) {
-            $label = isset($GLOBALS['TL_LANG']['orm_avisota_layout'][$rendererKey])
-                ? $GLOBALS['TL_LANG']['orm_avisota_layout'][$rendererKey]
-                : $rendererKey;
+            $label = $translator->translate($rendererKey, 'orm_avisota_layout');
 
             $options[$rendererKey] = $label;
         }

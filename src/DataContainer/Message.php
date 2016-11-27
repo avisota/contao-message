@@ -24,12 +24,13 @@ use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Backend\GetThemeEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Date\ParseDateEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\ContaoWidgetManager;
+use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetBreadcrumbEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
 use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 use ContaoCommunityAlliance\DcGeneral\DcGeneralEvents;
 use ContaoCommunityAlliance\DcGeneral\Event\ActionEvent;
-use Doctrine\ORM\Mapping\Entity;
+use ContaoCommunityAlliance\UrlBuilder\UrlBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -73,6 +74,10 @@ class Message implements EventSubscriberInterface
             DcGeneralEvents::ACTION => array(
                 array('handleActionForSelectri'),
             ),
+
+            GetBreadcrumbEvent::NAME => array(
+                array('getBreadCrumb')
+            )
         );
     }
 
@@ -143,7 +148,6 @@ class Message implements EventSubscriberInterface
 
     /**
      * @param GetGroupHeaderEvent $event
-     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getGroupHeader(GetGroupHeaderEvent $event)
     {
@@ -151,17 +155,16 @@ class Message implements EventSubscriberInterface
             return;
         }
 
+        $environment = $event->getEnvironment();
+        $translator = $environment->getTranslator();
+
         /** @var EntityModel $model */
         $model = $event->getModel();
         /** @var \Avisota\Contao\Entity\Message $message */
         $message = $model->getEntity();
 
         if ($message->getCategory()->getBoilerplates()) {
-            $language = $message->getLanguage();
-
-            if (isset($GLOBALS['TL_LANG']['LNG'][$language])) {
-                $language = $GLOBALS['TL_LANG']['LNG'][$language];
-            }
+            $language = $translator->translate($message->getLanguage(), 'LNG');
 
             $event->setValue($language);
         } else {
@@ -174,7 +177,7 @@ class Message implements EventSubscriberInterface
 
                 $event->setValue($parseDateEvent->getResult());
             } else {
-                $event->setValue($GLOBALS['TL_LANG']['orm_avisota_message']['notSend']);
+                $event->setValue($translator->translate('notSend', 'orm_avisota_message'));
             }
         }
     }
@@ -193,17 +196,16 @@ class Message implements EventSubscriberInterface
             return;
         }
 
+        $environment = $event->getEnvironment();
+        $translator = $environment->getTranslator();
+
         /** @var EntityModel $model */
         $model = $event->getModel();
         /** @var \Avisota\Contao\Entity\Message $message */
         $message = $model->getEntity();
 
         if ($message->getCategory()->getBoilerplates()) {
-            $language = $message->getLanguage();
-
-            if (isset($GLOBALS['TL_LANG']['LNG'][$language])) {
-                $language = $GLOBALS['TL_LANG']['LNG'][$language];
-            }
+            $language = $translator->translate($message->getLanguage(), 'LNG');
 
             $label = sprintf(
                 '%s [%s]',
@@ -228,7 +230,7 @@ class Message implements EventSubscriberInterface
                 $eventDispatcher->dispatch(ContaoEvents::DATE_PARSE, $parseDateEvent);
 
                 $sended = sprintf(
-                    $GLOBALS['TL_LANG']['orm_avisota_message']['sended'],
+                    $translator->translate('sended', 'orm_avisota_message'),
                     $parseDateEvent->getResult()
                 );
                 $label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . $sended . ')</span>';
@@ -323,5 +325,78 @@ class Message implements EventSubscriberInterface
 
         $widgetManager = new ContaoWidgetManager($environment, $model);
         $widgetManager->renderWidget($selectriProperty->getName());
+    }
+
+    /**
+     * Get the bread crumb elements.
+     *
+     * @param GetBreadcrumbEvent $event This event.
+     *
+     * @return void
+     */
+    public function getBreadCrumb(GetBreadcrumbEvent $event)
+    {
+        $environment   = $event->getEnvironment();
+        $dataDefinition = $environment->getDataDefinition();
+        $inputProvider = $environment->getInputProvider();
+        $translator    = $environment->getTranslator();
+
+        $newsletterParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
+
+        if ($dataDefinition->getName() !== 'orm_avisota_message'
+            || !$inputProvider->hasParameter($newsletterParameter)
+        ) {
+            return;
+        }
+
+        $newsletterModelId = ModelId::fromSerialized($inputProvider->getParameter($newsletterParameter));
+        if ($newsletterModelId->getDataProviderName() !== 'orm_avisota_message') {
+            return;
+        }
+
+        $elements = $event->getElements();
+
+        $urlNewsletterBuilder = new UrlBuilder();
+        $urlNewsletterBuilder->setPath('contao/main.php')
+            ->setQueryParameter('do', $inputProvider->getParameter('do'))
+            ->setQueryParameter('ref', TL_REFERER_ID);
+
+        $elements[] = array(
+            'icon' => 'assets/avisota/message/images/newsletter.png',
+            'text' => $translator->translate('avisota_newsletter.0', 'MOD'),
+            'url'  => $urlNewsletterBuilder->getUrl()
+        );
+
+        $dataProvider = $environment->getDataProvider($newsletterModelId->getDataProviderName());
+        $model        = $dataProvider->fetch($dataProvider->getEmptyConfig()->setId($newsletterModelId->getId()));
+        $newsletter   = $model->getEntity();
+
+        $newsletterCategory = $newsletter->getCategory();
+
+        $urlNewsletterBuilder = new UrlBuilder();
+        $urlNewsletterBuilder->setPath('contao/main.php')
+            ->setQueryParameter(
+                'do',
+                $inputProvider->getParameter('do')
+            )
+            ->setQueryParameter(
+                'table',
+                $newsletterModelId->getDataProviderName()
+            )
+            ->setQueryParameter(
+                'pid',
+                ModelId::fromValues(
+                    'orm_avisota_message_category',
+                    $newsletterCategory->getId()
+                )->getSerialized()
+            )
+            ->setQueryParameter('ref', TL_REFERER_ID);
+
+        $elements[] = array(
+            'text' => $newsletterCategory->getTitle(),
+            'url'  => $urlNewsletterBuilder->getUrl()
+        );
+
+        $event->setElements($elements);
     }
 }
