@@ -38,8 +38,7 @@ if (!is_file($dir . '/system/initialize.php')) {
     exit(1);
 }
 
-define('TL_MODE', 'FE');
-define('BE_USER_LOGGED_IN', false);
+define('TL_MODE', 'BE');
 require($dir . '/system/initialize.php');
 
 BackendUser::getInstance();

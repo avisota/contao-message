@@ -287,6 +287,16 @@
         <target>Gesendet am %s</target>
 
       </trans-unit>
+      <trans-unit id="orm_avisota_message.cut.0">
+        <source>Move element</source>
+        <target>Element verschieben</target>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.cut.1">
+        <source>Move content element ID %s</source>
+        <target>Den Newsletter ID %s verschieben</target>
+
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -45,7 +45,12 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
             (
                 'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider',
                 'source' => 'orm_avisota_message_category'
-            )
+            ),
+            array
+            (
+                'class'  => 'Contao\Doctrine\ORM\DataContainer\General\EntityDataProvider',
+                'source' => 'orm_avisota_message_content'
+            ),
         ),
         'childCondition' => array(
             array(
@@ -118,15 +123,13 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
                 'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="d"'
             ),
             */
-            /*
-            'all'             => array
+            'all' => array
             (
                 'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
                 'href'       => 'act=select',
                 'class'      => 'header_edit_all',
                 'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="e"'
             )
-            */
         ),
         'operations'        => array
         (
@@ -143,18 +146,18 @@ $GLOBALS['TL_DCA']['orm_avisota_message'] = array
                 'href'  => 'act=edit',
                 'icon'  => 'header.gif',
             ),
-            'copy'       => array
-            (
-                'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message']['copy'],
-                'icon'       => 'copy.gif',
-                'attributes' => 'onclick="Backend.getScrollOffset();"',
-            ),
             'copyChilds' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['orm_avisota_message']['copyChilds'],
-                'href'                => 'act=copyChilds&amp;ctable=orm_avisota_message_content',
-                'icon'                => 'copychilds.gif',
-                'attributes'          => 'onclick="Backend.getScrollOffset()"',
+                'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message']['copyChilds'],
+                'href'       => 'act=copyChilds&amp;ctable=orm_avisota_message_content',
+                'icon'       => 'copy.gif',
+                'attributes' => 'onclick="Backend.getScrollOffset()"',
+            ),
+            'cut'        => array
+            (
+                'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message']['cut'],
+                'icon'       => 'cut.gif',
+                'attributes' => 'onclick="Backend.getScrollOffset()"'
             ),
             // Todo add alert box description
             'delete'     => array
