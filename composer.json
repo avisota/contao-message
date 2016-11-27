@@ -31,10 +31,10 @@
         "php": ">=5.4",
         "contao/core": ">=3.5,<3.6",
         "contao-community-alliance/composer-plugin": "~2.4",
-        "avisota/contao-core": "~3.0",
-        "avisota/contao-css-to-inline-style": "~3.0",
+        "avisota/contao-core": "~3.1",
+        "avisota/contao-css-to-inline-style": "~3.1",
         "avisota/recipient-fake": "~1.1",
-        "bit3/php-callback-filter-iterator-polyfill": "~1.2"
+        "bit3/php-callback-filter-iterator-polyfill": "~1."
     },
     "require-dev": {
         "phpcq/all-tasks": "~1.1"
@@ -62,7 +62,7 @@
             }
         },
         "branch-alias": {
-            "dev-develop": "3.0.x-dev"
+            "dev-develop": "3.2.x-dev"
         }
     }
 }

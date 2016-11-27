@@ -36,6 +36,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * Class Message
  *
  * @package Avisota\Contao\Message\Core\DataContainer
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class Message implements EventSubscriberInterface
 {
@@ -252,6 +253,7 @@ class Message implements EventSubscriberInterface
      * @param ActionEvent $event
      *
      * @throws \Exception
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function handleActionForSelectri(ActionEvent $event)
     {

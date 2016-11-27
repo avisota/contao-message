@@ -87,15 +87,14 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
             'format' => '%s'
         ),
         'global_operations' => array
-        (/*
-			'all' => array
-			(
-				'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
-				'href'       => 'act=select',
-				'class'      => 'header_edit_all',
-				'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="e"'
-			)
-			*/
+        (
+            'all' => array
+            (
+                'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
+                'href'       => 'act=select',
+                'class'      => 'header_edit_all',
+                'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+            )
         ),
         'operations'        => array
         (
@@ -256,21 +255,17 @@ $GLOBALS['TL_DCA']['orm_avisota_layout'] = array
         ),
         'allowedCellContents' => array
         (
-            'label'            => &$GLOBALS['TL_LANG']['orm_avisota_layout']['allowedCellContents'],
-            'exclude'          => true,
-            'inputType'        => 'checkbox',
-            'options_callback' => \ContaoCommunityAlliance\Contao\Events\CreateOptions\CreateOptionsEventCallbackFactory::createCallback(
-                'avisota.create-content-type-options',
-                'Avisota\Contao\Core\Event\CreateOptionsEvent'
-            ),
-            'eval'             => array(
+            'label'           => &$GLOBALS['TL_LANG']['orm_avisota_layout']['allowedCellContents'],
+            'exclude'         => true,
+            'inputType'       => 'checkbox',
+            'eval'            => array(
                 'multiple' => true,
             ),
-            'field'            => array(),
-            'getter_callback'  => array(
+            'field'           => array(),
+            'getter_callback' => array(
                 array('Avisota\Contao\Message\Core\DataContainer\Layout', 'getterCallbackAllowedCellContents')
             ),
-            'setter_callback'  => array(
+            'setter_callback' => array(
                 array('Avisota\Contao\Message\Core\DataContainer\Layout', 'setterCallbackAllowedCellContents')
             ),
         ),

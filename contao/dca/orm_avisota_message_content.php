@@ -122,7 +122,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
                     'sendMessageButton'
                 )
             ),
-            /*
+
             'all'  => array
             (
                 'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -130,7 +130,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
                 'class'      => 'header_edit_all',
                 'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="e"'
             )
-            */
+
         ),
         'operations'        => array
         (
@@ -163,7 +163,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
             (
                 'label'          => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['toggle'],
                 'icon'           => 'visible.gif',
-                'attributes'     => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
                 'toggleProperty' => 'invisible',
                 'toggleInverse'  => true,
             ),

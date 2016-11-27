@@ -236,6 +236,14 @@
         <source>Send on %s</source>
 
       </trans-unit>
+      <trans-unit id="orm_avisota_message.cut.0">
+        <source>Move element</source>
+
+      </trans-unit>
+      <trans-unit id="orm_avisota_message.cut.1">
+        <source>Move content element ID %s</source>
+
+      </trans-unit>
     </body>
   </file>
 </xliff>
