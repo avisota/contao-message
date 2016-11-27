@@ -19,6 +19,7 @@ use Avisota\Contao\Core\Event\CreateOptionsEvent;
 use Avisota\Contao\Message\Core\MessageEvents;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
+use ContaoCommunityAlliance\DcGeneral\Contao\Compatibility\DcCompat;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetPropertyOptionsEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -92,24 +93,19 @@ class MessageContentOptions implements EventSubscriberInterface
      */
     public function getMessageContentTypeOptions($dc, $options = array())
     {
+        $environment = $dc->getEnvironment();
+        $translator  = $environment->getTranslator();
+
         if (!count($options)) {
             foreach ($GLOBALS['TL_MCE'] as $elementGroup => $elements) {
-                if (isset($GLOBALS['TL_LANG']['MCE'][$elementGroup])) {
-                    $elementGroup = $GLOBALS['TL_LANG']['MCE'][$elementGroup];
-                }
+                $elementGroup = $translator->translate($elementGroup, 'MCE');
 
                 if (!isset($options[$elementGroup])) {
                     $options[$elementGroup] = array();
                 }
 
                 foreach ($elements as $elementType) {
-                    $label = isset($GLOBALS['TL_LANG']['MCE'][$elementType])
-                        ? $GLOBALS['TL_LANG']['MCE'][$elementType]
-                        : $elementType;
-
-                    if (is_array($label)) {
-                        $label = $label[0];
-                    }
+                    $label = $translator->translate($elementType . '.0', 'MCE');
 
                     $options[$elementGroup][$elementType] = $label;
                 }
@@ -232,9 +228,16 @@ class MessageContentOptions implements EventSubscriberInterface
      */
     public function createContentTypeOptions(GetPropertyOptionsEvent $event, $name, EventDispatcher $eventDispatcher)
     {
-        if ($event->getPropertyName() !== 'allowedCellContents') {
+        $environment = $event->getEnvironment();
+        $dataDefinition = $environment->getDataDefinition();
+
+        if ($dataDefinition->getName() !== 'orm_avisota_layout'
+            || $event->getPropertyName() !== 'allowedCellContents'
+        ) {
             return;
         }
+
+        $translator = $environment->getTranslator();
 
         $options = $event->getOptions();
         if (!is_array($options)) {
@@ -242,17 +245,10 @@ class MessageContentOptions implements EventSubscriberInterface
         }
 
         foreach ($GLOBALS['TL_MCE'] as $elementGroup => $elements) {
-            if (isset($GLOBALS['TL_LANG']['MCE'][$elementGroup])) {
-                $elementGroupLabel = $GLOBALS['TL_LANG']['MCE'][$elementGroup];
-            } else {
-                $elementGroupLabel = $elementGroup;
-            }
+            $elementGroupLabel = $translator->translate($elementGroup, 'MCE');
+
             foreach ($elements as $elementType) {
-                if (isset($GLOBALS['TL_LANG']['MCE'][$elementType])) {
-                    $elementLabel = $GLOBALS['TL_LANG']['MCE'][$elementType][0];
-                } else {
-                    $elementLabel = $elementType;
-                }
+                $elementLabel = $translator->translate($elementType .'.0', 'MCE');
 
                 $options[$elementGroupLabel][$elementType] = sprintf(
                     '%s',

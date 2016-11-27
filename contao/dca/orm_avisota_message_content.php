@@ -101,7 +101,10 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
         'sorting'           => array
         (
             'mode'         => 4,
-            'fields'       => array('cell FIELD(e.cell, \'header\', \'main\', \'left\', \'center\', \'right\', \'footer\')', 'sorting'),
+            'fields'       => array(
+                'cell FIELD(e.cell, \'header\', \'main\', \'left\', \'center\', \'right\', \'footer\')',
+                'sorting'
+            ),
             'panelLayout'  => 'filter;search,limit',
             'headerFields' => array('subject'),
         ),
@@ -114,16 +117,12 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
         (
             'send' => array
             (
-                'label'           => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['send'],
-                'href'            => 'table=orm_avisota_message&amp;act=preview',
-                'class'           => 'header_send',
-                'button_callback' => array(
-                    'Avisota\Contao\Message\Core\DataContainer\MessageContent',
-                    'sendMessageButton'
-                )
+                'label' => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['send'],
+                'href'  => 'table=orm_avisota_message&amp;act=preview',
+                'class' => 'header_send'
             ),
 
-            'all'  => array
+            'all' => array
             (
                 'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
                 'href'       => 'act=select',
@@ -157,7 +156,8 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
                 'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['delete'],
                 'href'       => 'act=delete',
                 'icon'       => 'delete.gif',
-                'attributes' => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+                'attributes' => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm']
+                                . '\')) return false; Backend.getScrollOffset();"'
             ),
             'toggle' => array
             (
@@ -189,9 +189,7 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
     ),
     // Subpalettes
     'metasubpalettes' => array
-    (
-        'protected' => array('groups')
-    ),
+    (),
     // Fields
     'fields'          => array
     (
@@ -278,29 +276,6 @@ $GLOBALS['TL_DCA']['orm_avisota_message_content'] = array
                 'submitOnChange'     => true,
                 'tl_class'           => 'w50'
             )
-        ),
-        'protected'    => array
-        (
-            'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['protected'],
-            'exclude'   => true,
-            'filter'    => true,
-            'inputType' => 'checkbox',
-            'eval'      => array('submitOnChange' => true)
-        ),
-        'groups'       => array
-        (
-            'label'      => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['groups'],
-            'exclude'    => true,
-            'inputType'  => 'checkbox',
-            'foreignKey' => 'tl_member_group.name',
-            'eval'       => array('mandatory' => true, 'multiple' => true)
-        ),
-        'guests'       => array
-        (
-            'label'     => &$GLOBALS['TL_LANG']['orm_avisota_message_content']['guests'],
-            'exclude'   => true,
-            'filter'    => true,
-            'inputType' => 'checkbox'
         ),
         'cssID'        => array
         (

@@ -62,7 +62,7 @@ class EventsSubscriber implements EventSubscriberInterface
             AvisotaMessageEvents::RENDER_MESSAGE => array(
                 array('renderMessage'),
             ),
-            
+
 
             GetSelectModeButtonsEvent::NAME => array(
                 array('deactivateButtonsForEditAll'),
@@ -293,9 +293,12 @@ class EventsSubscriber implements EventSubscriberInterface
      */
     public function deactivateButtonsForEditAll(GetSelectModeButtonsEvent $event)
     {
-        if ($event->getEnvironment()->getInputProvider()->getParameter('act') !== 'select'
+        $environment    = $event->getEnvironment();
+        $dataDefinition = $environment->getDataDefinition();
+
+        if ($environment->getInputProvider()->getParameter('act') !== 'select'
             || !in_array(
-                $event->getEnvironment()->getDataDefinition()->getName(),
+                $dataDefinition->getName(),
                 array(
                     'orm_avisota_layout',
                     'orm_avisota_message_category',
@@ -308,8 +311,28 @@ class EventsSubscriber implements EventSubscriberInterface
 
         $buttons = $event->getButtons();
 
-        foreach (array('cut',) as $button) {
+        foreach (array('cut') as $button) {
+            if (!array_key_exists($button, $buttons)) {
+                continue;
+            }
+
             unset($buttons[$button]);
+        }
+
+        if (in_array(
+            $dataDefinition->getName(),
+            array(
+                'orm_avisota_layout',
+                'orm_avisota_theme',
+            )
+        )) {
+            foreach (array('delete', 'copy') as $button) {
+                if (!array_key_exists($button, $buttons)) {
+                    continue;
+                }
+
+                unset($buttons[$button]);
+            }
         }
 
         $event->setButtons($buttons);

@@ -58,6 +58,10 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
     {
         global $container;
 
+        $general     = new \ContaoCommunityAlliance\DcGeneral\DC_General('orm_avisota_message');
+        $environment = $general->getEnvironment();
+        $translator  = $environment->getTranslator();
+
         $GLOBALS['TL_LANGUAGE'] = $message->getLanguage();
 
         $eventDispatcher = $this->getEventDispatcher();
@@ -77,6 +81,7 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
         $renderer        = $container['avisota.message.renderer'];
         $messageTemplate = $renderer->renderMessage($message);
 
+        // Fixme can i remove this?
         $event = new LoadLanguageFileEvent('avisota_message');
         $eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
 
@@ -108,7 +113,7 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
             $eventDispatcher->dispatch(MessageEvents::GENERATE_VIEW_ONLINE_URL, $generateViewOnlineUrlEvent);
 
             $url = sprintf(
-                $GLOBALS['TL_LANG']['avisota_message']['viewOnline'],
+                $translator->translate('viewOnline', 'avisota_message'),
                 $generateViewOnlineUrlEvent->getUrl()
             );
         } else {
@@ -138,19 +143,22 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
         $queueHelper->setMessageTemplate($messageTemplate);
         $queueHelper->setNewsletterData($additionalData);
 
-        $count = $queueHelper->enqueue(30, $turn * 30);
+        $count = $queueHelper->enqueue(
+            (integer) $queueData->getMaxSendCount(),
+            $turn * (integer) $queueData->getMaxSendCount()
+        );
 
         $event = new \Avisota\Contao\Core\Event\PostSendImmediateEvent($count, $message, $turn, $loop);
         $eventDispatcher->dispatch('avisota.post-send-immediate', $event);
 
-        if ($count || ($turn * 30 + 30) < $recipientSource->countRecipients()) {
+        if ($count || ($turn * (integer) $queueData->getMaxSendCount()) < $recipientSource->countRecipients()) {
             $eventDispatcher->dispatch(
                 ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE,
                 new LoadLanguageFileEvent('avisota_message_preview')
             );
 
             $_SESSION['TL_CONFIRM'][] = sprintf(
-                $GLOBALS['TL_LANG']['avisota_message_preview']['messagesEnqueued'],
+                $translator->translate('messagesEnqueued', 'avisota_message_preview'),
                 $count,
                 $turn + 1
             );
@@ -183,7 +191,8 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
             $entityManager->flush();
         }
 
-        echo '<html><head><meta http-equiv="refresh" content="0; URL=' . $url . '"></head><body>Still generating...</body></html>';
+        echo '<html><head><meta http-equiv="refresh" content="0; URL=' . $url
+             . '"></head><body>Still generating...</body></html>';
         exit;
     }
 

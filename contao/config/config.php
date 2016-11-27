@@ -16,8 +16,10 @@
 /**
  * Entities
  */
-$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Layout']  = 'Avisota\Contao\Message\Core\Entity\AbstractLayout';
-$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Message'] = 'Avisota\Contao\Message\Core\Entity\AbstractMessage';
+$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Layout']  =
+    'Avisota\Contao\Message\Core\Entity\AbstractLayout';
+$GLOBALS['DOCTRINE_ENTITY_CLASS']['Avisota\Contao\Entity\Message'] =
+    'Avisota\Contao\Message\Core\Entity\AbstractMessage';
 
 $GLOBALS['DOCTRINE_ENTITIES'][] = 'orm_avisota_layout';
 $GLOBALS['DOCTRINE_ENTITIES'][] = 'orm_avisota_message';
@@ -77,8 +79,10 @@ $GLOBALS['TL_HOOKS']['getUserNavigation']['avisota-custom-menu']             = a
  * Send modules
  */
 $GLOBALS['AVISOTA_SEND_MODULE']['avisota_preview']          = 'Avisota\Contao\Message\Core\Send\PreviewModule';
-$GLOBALS['AVISOTA_SEND_MODULE']['avisota_preview_to_user']  = 'Avisota\Contao\Message\Core\Send\SendPreviewToUserModule';
-$GLOBALS['AVISOTA_SEND_MODULE']['avisota_preview_to_email'] = 'Avisota\Contao\Message\Core\Send\SendPreviewToEmailModule';
+$GLOBALS['AVISOTA_SEND_MODULE']['avisota_preview_to_user']  =
+    'Avisota\Contao\Message\Core\Send\SendPreviewToUserModule';
+$GLOBALS['AVISOTA_SEND_MODULE']['avisota_preview_to_email'] =
+    'Avisota\Contao\Message\Core\Send\SendPreviewToEmailModule';
 $GLOBALS['AVISOTA_SEND_MODULE']['avisota_send_immediate']   = 'Avisota\Contao\Message\Core\Send\SendImmediateModule';
 
 /**

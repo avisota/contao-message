@@ -37,7 +37,7 @@ class SendPreviewToUserModule implements SendModuleInterface
 
         $sendPreviewToUser = \Session::getInstance()
             ->get('AVISOTA_SEND_PREVIEW_TO_USER_EMPTY');
-        $userMissing = isset($sendPreviewToUser)
+        $userMissing       = isset($sendPreviewToUser)
             ? $sendPreviewToUser
             : false;
         unset($sendPreviewToUser);

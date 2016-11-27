@@ -45,6 +45,10 @@ class preview
     {
         global $container;
 
+        $general     = new \ContaoCommunityAlliance\DcGeneral\DC_General('orm_avisota_message');
+        $environment = $general->getEnvironment();
+        $translator  = $environment->getTranslator();
+
         /** @var \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher */
         $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
 
@@ -68,11 +72,12 @@ class preview
         $recipient = $event->getRecipient();
 
         if ($message->getCategory()->getViewOnlinePage()) {
+            // Fixme can rmove this?
             $event = new LoadLanguageFileEvent('avisota_message');
             $eventDispatcher->dispatch(ContaoEvents::SYSTEM_LOAD_LANGUAGE_FILE, $event);
 
             $url = sprintf(
-                $GLOBALS['TL_LANG']['avisota_message']['viewOnline'],
+                $translator->translate('viewOnline', 'avisota_message'),
                 sprintf(
                     '%ssystem/modules/avisota-message/web/preview.php?id=%s',
                     \Environment::get('base'),
@@ -92,7 +97,10 @@ class preview
         $messageTemplate = $renderer->renderMessage($message);
         $messagePreview  = $messageTemplate->renderPreview($recipient, $additionalData);
 
-        header('Content-Type: ' . $messageTemplate->getContentType() . '; charset=' . $messageTemplate->getContentEncoding());
+        header(
+            'Content-Type: ' . $messageTemplate->getContentType() . '; charset=' . $messageTemplate->getContentEncoding(
+            )
+        );
         header('Content-Disposition: inline; filename="' . $messageTemplate->getContentName() . '"');
         echo $messagePreview;
         exit;
