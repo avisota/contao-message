@@ -80,6 +80,7 @@ class Layout implements EventSubscriberInterface
 
         if ($dataDefinition->getName() !== 'orm_avisota_layout'
             || !$inputProvider->hasParameter($modelParameter)
+            || !$inputProvider->getParameter($modelParameter)
         ) {
             return;
         }
