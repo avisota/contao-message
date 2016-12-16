@@ -189,25 +189,31 @@ class MessageContent implements EventSubscriberInterface
         $inputProvider = $environment->getInputProvider();
         $translator    = $environment->getTranslator();
 
+        $messageContentParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
+
         if ($dataDefinition->getName() !== 'orm_avisota_message_content'
-            || (!$inputProvider->hasParameter('act') || $inputProvider->getParameter('act') === 'create')
-            || !$inputProvider->hasParameter('id')
+            || !$inputProvider->hasParameter($messageContentParameter)
         ) {
             return;
         }
 
-        $messageContentModelId = ModelId::fromSerialized($inputProvider->getParameter('id'));
-        if ($messageContentModelId->getDataProviderName() !== 'orm_avisota_message_content') {
-            return;
-        }
 
         $elements = $event->getElements();
 
+        $messageContentModelId = ModelId::fromSerialized($inputProvider->getParameter($messageContentParameter));
         $dataProvider = $environment->getDataProvider($messageContentModelId->getDataProviderName());
         $model = $dataProvider->fetch($dataProvider->getEmptyConfig()->setId($messageContentModelId->getId()));
 
-        $messageContent = $model->getEntity();
-        $message = $messageContent->getMessage();
+        $messageContent = $message = null;
+        if ($model->getDataDefinitionName() === 'orm_avisota_message_content') {
+            $messageContent = $model->getEntity();
+            $message = $messageContent->getMessage();
+        }
+
+        if ($model->getDataDefinitionName() === 'orm_avisota_message') {
+            $message = $model->getEntity();
+        }
+
         $messageCategory = $message->getCategory();
 
         $urlNewsletterBuilder = new UrlBuilder();
@@ -227,7 +233,6 @@ class MessageContent implements EventSubscriberInterface
 
         $messageMeta = $entityManager->getClassMetadata(get_class($message));
         $messageCategoryMeta = $entityManager->getClassMetadata(get_class($messageCategory));
-        $messageContentMeta = $entityManager->getClassMetadata(get_class($messageContent));
 
         $urlMessageCategoryBuilder = new UrlBuilder();
         $urlMessageCategoryBuilder->setPath('contao/main.php')
@@ -252,6 +257,14 @@ class MessageContent implements EventSubscriberInterface
             'text' => $messageCategory->getTitle(),
             'url' => $urlMessageCategoryBuilder->getUrl()
         );
+
+        if (!$messageContent) {
+            $event->setElements($elements);
+
+            return;
+        }
+
+        $messageContentMeta = $entityManager->getClassMetadata(get_class($messageContent));
 
         $urlMessageBuilder = new UrlBuilder();
         $urlMessageBuilder->setPath('contao/main.php')
