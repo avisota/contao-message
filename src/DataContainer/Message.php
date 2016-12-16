@@ -156,7 +156,7 @@ class Message implements EventSubscriberInterface
         }
 
         $environment = $event->getEnvironment();
-        $translator = $environment->getTranslator();
+        $translator  = $environment->getTranslator();
 
         /** @var EntityModel $model */
         $model = $event->getModel();
@@ -197,7 +197,7 @@ class Message implements EventSubscriberInterface
         }
 
         $environment = $event->getEnvironment();
-        $translator = $environment->getTranslator();
+        $translator  = $environment->getTranslator();
 
         /** @var EntityModel $model */
         $model = $event->getModel();
@@ -336,21 +336,16 @@ class Message implements EventSubscriberInterface
      */
     public function getBreadCrumb(GetBreadcrumbEvent $event)
     {
-        $environment   = $event->getEnvironment();
+        $environment    = $event->getEnvironment();
         $dataDefinition = $environment->getDataDefinition();
-        $inputProvider = $environment->getInputProvider();
-        $translator    = $environment->getTranslator();
+        $inputProvider  = $environment->getInputProvider();
+        $translator     = $environment->getTranslator();
 
         $newsletterParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
 
         if ($dataDefinition->getName() !== 'orm_avisota_message'
             || !$inputProvider->hasParameter($newsletterParameter)
         ) {
-            return;
-        }
-
-        $newsletterModelId = ModelId::fromSerialized($inputProvider->getParameter($newsletterParameter));
-        if ($newsletterModelId->getDataProviderName() !== 'orm_avisota_message') {
             return;
         }
 
@@ -366,6 +361,13 @@ class Message implements EventSubscriberInterface
             'text' => $translator->translate('avisota_newsletter.0', 'MOD'),
             'url'  => $urlNewsletterBuilder->getUrl()
         );
+
+        $newsletterModelId = ModelId::fromSerialized($inputProvider->getParameter($newsletterParameter));
+        if ($newsletterModelId->getDataProviderName() !== 'orm_avisota_message') {
+            $event->setElements($elements);
+
+            return;
+        }
 
         $dataProvider = $environment->getDataProvider($newsletterModelId->getDataProviderName());
         $model        = $dataProvider->fetch($dataProvider->getEmptyConfig()->setId($newsletterModelId->getId()));
