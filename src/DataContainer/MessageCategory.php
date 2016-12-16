@@ -68,16 +68,8 @@ class MessageCategory implements EventSubscriberInterface
         $inputProvider = $environment->getInputProvider();
         $translator    = $environment->getTranslator();
 
-        $modelParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
-
         if ($dataDefinition->getName() !== 'orm_avisota_message_category'
-            || !$inputProvider->hasParameter($modelParameter)
         ) {
-            return;
-        }
-
-        $modelId = ModelId::fromSerialized($inputProvider->getParameter($modelParameter));
-        if ($modelId->getDataProviderName() !== 'orm_avisota_message_category') {
             return;
         }
 
