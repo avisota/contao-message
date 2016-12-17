@@ -20,6 +20,7 @@ use Avisota\Contao\Core\Event\CreatePublicEmptyRecipientEvent;
 use Avisota\Contao\Core\Recipient\SynonymizerService;
 use Avisota\Contao\Message\Core\Renderer\MessageRenderer;
 use Avisota\Contao\Message\Core\Renderer\TagReplacementService;
+use Contao\BackendTemplate;
 use Contao\Doctrine\ORM\EntityHelper;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -35,6 +36,37 @@ class Reader extends \TwigModule
      * {@inheritdoc}
      */
     protected $strTemplate = 'avisota/frontend/module/mod_reader';
+
+    /**
+     * Generate string for this module. If stay in backend return the wildcard.
+     *
+     * @return string
+     */
+    public function generate()
+    {
+        if (TL_MODE === 'BE') {
+            global $container;
+
+            $translator = $container['translator'];
+
+            $template = new BackendTemplate('be_wildcard');
+
+            $template->wildcard = '### AVISOTA '
+                                  . utf8_strtoupper($translator->translate('avisota_message_reader.0', 'FMD'))
+                                  . ' ###';
+            $template->title    = $this->headline;
+            $template->id       = $this->id;
+            $template->link     = $this->name;
+            $template->href     = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
+
+            return $template->parse();
+        }
+
+        return parent::generate();
+
+        #return !empty($this->Template->articles) ? $strBuffer : '';
+    }
+
 
     /**
      * Compile the current element
