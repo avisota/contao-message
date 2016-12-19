@@ -28,6 +28,8 @@ use Avisota\Contao\Message\Core\Event\PreRenderMessageTemplateEvent;
 use Avisota\Contao\Message\Core\Event\PreRenderMessageTemplatePreviewEvent;
 use Avisota\Contao\Message\Core\Renderer\TagReplacementService;
 use Avisota\Recipient\RecipientInterface;
+use Contao\File;
+use Contao\FilesModel;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
@@ -182,12 +184,15 @@ abstract class AbstractPostRenderingMessageTemplate implements PreRenderedMessag
             $files = deserialize($this->message->getFiles(), true);
 
             foreach ($files as $file) {
-                $file = \Compat::resolveFile($file);
+                $filePath = FilesModel::findByUuid($file)->path;
 
-                if ($file) {
-                    $attachment = \Swift_Attachment::fromPath(TL_ROOT . '/' . $file);
-                    $swiftMessage->attach($attachment);
+                $file = new File($filePath, true);
+                if (!$file->exists()) {
+                    continue;
                 }
+
+                $attachment = \Swift_Attachment::fromPath(TL_ROOT . '/' . $file->path);
+                $swiftMessage->attach($attachment);
             }
         }
 
