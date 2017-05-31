@@ -2,11 +2,11 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright © 2016 Sven Baumann
+ * Copyright © 2017 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  way.vision 2016
+ * @copyright  way.vision 2017
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-core
  * @license    LGPL-3.0+
@@ -18,7 +18,6 @@ namespace Avisota\Contao\Message\Core\DataContainer;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetBreadcrumbEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetOperationButtonEvent;
 use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
-use ContaoCommunityAlliance\DcGeneral\DataDefinition\Definition\View\Command;
 use ContaoCommunityAlliance\DcGeneral\DC_General;
 use ContaoCommunityAlliance\UrlBuilder\UrlBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -30,7 +29,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class Layout implements EventSubscriberInterface
 {
-
     /**
      * Returns an array of event names this subscriber wants to listen to.
      *
@@ -65,66 +63,60 @@ class Layout implements EventSubscriberInterface
     /**
      * Get the bread crumb elements.
      *
-     * @param GetBreadcrumbEvent $event This event.
+     * @param GetBreadcrumbEvent $event The event.
      *
      * @return void
      */
     public function getBreadCrumb(GetBreadcrumbEvent $event)
     {
-        $environment   = $event->getEnvironment();
+        $environment    = $event->getEnvironment();
         $dataDefinition = $environment->getDataDefinition();
-        $inputProvider = $environment->getInputProvider();
-        $translator    = $environment->getTranslator();
+        $inputProvider  = $environment->getInputProvider();
 
-        $modelParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
-
-        if ($dataDefinition->getName() !== 'orm_avisota_layout'
-            || !$inputProvider->hasParameter($modelParameter)
-            || !$inputProvider->getParameter($modelParameter)
-        ) {
+        if ('orm_avisota_layout' !== $dataDefinition->getName()) {
             return;
         }
 
-        $layoutModelId = ModelId::fromSerialized($inputProvider->getParameter($modelParameter));
-        if (!in_array($layoutModelId->getDataProviderName(), array('orm_avisota_theme', 'orm_avisota_layout'))) {
+        if (false === $inputProvider->hasParameter('id')) {
             return;
         }
 
         $elements = $event->getElements();
 
-        $urlThemeBuilder = new UrlBuilder();
-        $urlThemeBuilder->setPath('contao/main.php')
+        $modelId = ModelId::fromSerialized($inputProvider->getParameter('id'));
+
+        $dataProvider = $environment->getDataProvider($modelId->getDataProviderName());
+        $repository   = $dataProvider->getEntityRepository();
+
+        $layoutEntity = $repository->findOneBy(array('id' => $modelId->getId()));
+        $themeEntity  = $layoutEntity->getTheme();
+
+        $parentUrlBuilder = new UrlBuilder();
+        $parentUrlBuilder->setPath('contao/main.php')
             ->setQueryParameter('do', $inputProvider->getParameter('do'))
+            ->setQueryParameter('table', $dataDefinition->getName())
+            ->setQueryParameter('pid', $inputProvider->getParameter('pid'))
             ->setQueryParameter('ref', TL_REFERER_ID);
 
         $elements[] = array(
             'icon' => 'assets/avisota/message/images/theme.png',
-            'text' => $translator->translate('avisota_theme.0', 'MOD'),
-            'url'  => $urlThemeBuilder->getUrl()
+            'text' => $themeEntity->getTitle(),
+            'url'  => $parentUrlBuilder->getUrl()
         );
 
-        if ($modelParameter === 'pid') {
-            $event->setElements($elements);
-
-            return;
-        }
-
-        $urlLayoutBuilder = new UrlBuilder();
-        $urlLayoutBuilder->setPath('contao/main.php')
+        $entityUrlBuilder = new UrlBuilder();
+        $entityUrlBuilder->setPath('contao/main.php')
             ->setQueryParameter('do', $inputProvider->getParameter('do'))
-            ->setQueryParameter('table', $inputProvider->getParameter('table'))
+            ->setQueryParameter('table', $dataDefinition->getName())
+            ->setQueryParameter('act', $inputProvider->getParameter('act'))
+            ->setQueryParameter('id', $inputProvider->getParameter('id'))
             ->setQueryParameter('pid', $inputProvider->getParameter('pid'))
             ->setQueryParameter('ref', TL_REFERER_ID);
 
-        $themeModelId = ModelId::fromSerialized($inputProvider->getParameter('pid'));
-        $dataProvider = $environment->getDataProvider($themeModelId->getDataProviderName());
-        $model        = $dataProvider->fetch($dataProvider->getEmptyConfig()->setId($themeModelId->getId()));
-        $entity       = $model->getEntity();
-
         $elements[] = array(
             'icon' => 'assets/avisota/message/images/layout.png',
-            'text' => $entity->getTitle(),
-            'url'  => $urlLayoutBuilder->getUrl()
+            'text' => $layoutEntity->getTitle(),
+            'url'  => $entityUrlBuilder->getUrl()
         );
 
         $event->setElements($elements);

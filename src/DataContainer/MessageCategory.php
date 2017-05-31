@@ -2,11 +2,11 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright © 2016 Sven Baumann
+ * Copyright © 2017 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  way.vision 2016
+ * @copyright  way.vision 2017
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-core
  * @license    LGPL-3.0+
@@ -49,7 +49,7 @@ class MessageCategory implements EventSubscriberInterface
     {
         return array(
             GetBreadcrumbEvent::NAME => array(
-                array('getBreadCrumb')
+                array('getBreadCrumb', 2)
             )
         );
     }
@@ -57,33 +57,71 @@ class MessageCategory implements EventSubscriberInterface
     /**
      * Get the bread crumb elements.
      *
-     * @param GetBreadcrumbEvent $event This event.
+     * @param GetBreadcrumbEvent $event The event.
      *
      * @return void
      */
     public function getBreadCrumb(GetBreadcrumbEvent $event)
     {
-        $environment   = $event->getEnvironment();
+        $environment    = $event->getEnvironment();
         $dataDefinition = $environment->getDataDefinition();
-        $inputProvider = $environment->getInputProvider();
-        $translator    = $environment->getTranslator();
+        $inputProvider  = $environment->getInputProvider();
+        $translator     = $environment->getTranslator();
 
-        if ($dataDefinition->getName() !== 'orm_avisota_message_category'
-        ) {
+        if (false === strpos($dataDefinition->getName(), 'orm_avisota_message')) {
             return;
         }
 
         $elements = $event->getElements();
 
-        $urlBuilder = new UrlBuilder();
-        $urlBuilder->setPath('contao/main.php')
+        $rootUrlBuilder = new UrlBuilder();
+        $rootUrlBuilder->setPath('contao/main.php')
             ->setQueryParameter('do', $inputProvider->getParameter('do'))
             ->setQueryParameter('ref', TL_REFERER_ID);
 
         $elements[] = array(
             'icon' => 'assets/avisota/message/images/newsletter.png',
             'text' => $translator->translate('avisota_newsletter.0', 'MOD'),
-            'url'  => $urlBuilder->getUrl()
+            'url'  => $rootUrlBuilder->getUrl()
+        );
+
+        $modelParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
+        if (false === $inputProvider->hasParameter($modelParameter)) {
+            $event->setElements($elements);
+
+            return;
+        }
+
+        $modelId = ModelId::fromSerialized($inputProvider->getParameter($modelParameter));
+        if ('orm_avisota_message_category' !== $modelId->getDataProviderName()) {
+            $event->setElements($elements);
+
+            return;
+        }
+
+        $dataProvider = $environment->getDataProvider($modelId->getDataProviderName());
+        $repository   = $dataProvider->getEntityRepository();
+
+        $entity = $repository->findOneBy(array('id' => $modelId->getId()));
+
+        $entityUrlBuilder = new UrlBuilder();
+        $entityUrlBuilder->setPath('contao/main.php')
+            ->setQueryParameter('do', $inputProvider->getParameter('do'))
+            ->setQueryParameter($modelParameter, $inputProvider->getParameter($modelParameter))
+            ->setQueryParameter('ref', TL_REFERER_ID);
+
+        if ('id' === $modelParameter) {
+            $entityUrlBuilder->setQueryParameter('act', $inputProvider->getParameter('act'));
+        }
+
+        if ('pid' === $modelParameter) {
+            $entityUrlBuilder->setQueryParameter('table', $dataDefinition->getName());
+        }
+
+        $elements[] = array(
+            'icon' => 'assets/avisota/message/images/newsletter.png',
+            'text' => $entity->getTitle(),
+            'url'  => $entityUrlBuilder->getUrl()
         );
 
         $event->setElements($elements);
