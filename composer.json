@@ -34,7 +34,7 @@
         "avisota/contao-core": "~3.1",
         "avisota/contao-css-to-inline-style": "~3.1",
         "avisota/recipient-fake": "~1.1",
-        "bit3/php-callback-filter-iterator-polyfill": "~1."
+        "bit3/php-callback-filter-iterator-polyfill": "~1.0"
     },
     "require-dev": {
         "phpcq/all-tasks": "~1.1"
