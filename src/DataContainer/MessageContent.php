@@ -2,12 +2,11 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright © 2016 Sven Baumann
+ * Copyright © 2017 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  way.vision 2016
- * @author     Sven Baumann <baumann.sv@gmail.com>
+ * @copyright  way.vision 2017
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-core
  * @license    LGPL-3.0+
@@ -18,16 +17,13 @@ namespace Avisota\Contao\Message\Core\DataContainer;
 
 use Avisota\Contao\Message\Core\Renderer\MessageRendererInterface;
 use Contao\BackendUser;
-use Contao\Controller;
 use Contao\Doctrine\ORM\DataContainer\General\EntityModel;
 use Contao\Doctrine\ORM\EntityAccessor;
-use Contao\Input;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetBreadcrumbEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGlobalButtonEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\GetGroupHeaderEvent;
 use ContaoCommunityAlliance\DcGeneral\Contao\View\Contao2BackendView\Event\ParentViewChildRecordEvent;
 use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
-use ContaoCommunityAlliance\DcGeneral\DC_General;
 use ContaoCommunityAlliance\DcGeneral\Event\PreEditModelEvent;
 use ContaoCommunityAlliance\UrlBuilder\UrlBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -110,8 +106,11 @@ class MessageContent implements EventSubscriberInterface
     }
 
     /**
-     * @param GetGroupHeaderEvent $event
-     * @SuppressWarnings(PHPMD.Superglobals)
+     * Get the group header.
+     *
+     * @param GetGroupHeaderEvent $event The event.
+     *
+     * @return void
      */
     public function getGroupHeader(GetGroupHeaderEvent $event)
     {
@@ -132,9 +131,8 @@ class MessageContent implements EventSubscriberInterface
     /**
      * Add the recipient row.
      *
-     * @param ParentViewChildRecordEvent $event
+     * @param ParentViewChildRecordEvent $event The event.
      *
-     * @internal param $array
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function parentViewChildRecord(ParentViewChildRecordEvent $event)
@@ -165,8 +163,8 @@ class MessageContent implements EventSubscriberInterface
         /** @var EntityAccessor $entityAccessor */
         $entityAccessor = $GLOBALS['container']['doctrine.orm.entityAccessor'];
 
-        $context = $entityAccessor->getProperties($content);
-        $context['key'] = $key;
+        $context            = $entityAccessor->getProperties($content);
+        $context['key']     = $key;
         $context['element'] = $element;
 
         $template = new \TwigTemplate('avisota/backend/mce_element', 'html5');
@@ -180,101 +178,91 @@ class MessageContent implements EventSubscriberInterface
      *
      * @return void
      *
-     * @SuppressWarnings(PHPMD.LongVariable)
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getBreadCrumb(GetBreadcrumbEvent $event)
     {
-        $environment   = $event->getEnvironment();
-        $dataDefinition = $environment->getDataDefinition();
-        $inputProvider = $environment->getInputProvider();
-        $translator    = $environment->getTranslator();
+        $environment          = $event->getEnvironment();
+        $dataDefinition       = $environment->getDataDefinition();
+        $propertiesDefinition = $dataDefinition->getPropertiesDefinition();
+        $inputProvider        = $environment->getInputProvider();
 
         if ($dataDefinition->getName() !== 'orm_avisota_message_content'
-            || (!$inputProvider->hasParameter('act') || $inputProvider->getParameter('act') === 'create')
             || !$inputProvider->hasParameter('id')
         ) {
             return;
         }
 
-        $messageContentModelId = ModelId::fromSerialized($inputProvider->getParameter('id'));
-        if ($messageContentModelId->getDataProviderName() !== 'orm_avisota_message_content') {
-            return;
-        }
-
         $elements = $event->getElements();
 
-        $dataProvider = $environment->getDataProvider($messageContentModelId->getDataProviderName());
-        $model = $dataProvider->fetch($dataProvider->getEmptyConfig()->setId($messageContentModelId->getId()));
+        $modelId      = ModelId::fromSerialized($inputProvider->getParameter('id'));
+        $dataProvider = $environment->getDataProvider($modelId->getDataProviderName());
+        $repository   = $dataProvider->getEntityRepository();
 
-        $messageContent = $model->getEntity();
-        $message = $messageContent->getMessage();
-        $messageCategory = $message->getCategory();
+        $contentEntity  = $repository->findOneBy(array('id' => $modelId->getId()));
+        $messageEntity  = $contentEntity->getMessage();
+        $categoryEntity = $messageEntity->getCategory();
 
-        $urlNewsletterBuilder = new UrlBuilder();
-        $urlNewsletterBuilder->setPath('contao/main.php')
+        $entityManager = $GLOBALS['container']['doctrine.orm.entityManager'];
+
+        $categoryMeta = $entityManager->getClassMetadata(get_class($categoryEntity));
+        $messageMeta  = $entityManager->getClassMetadata(get_class($messageEntity));
+        $contentMeta  = $entityManager->getClassMetadata(get_class($contentEntity));
+
+        $categoryModelId    = ModelId::fromValues($categoryMeta->getTableName(), $categoryEntity->getId());
+        $categoryUrlBuilder = new UrlBuilder();
+        $categoryUrlBuilder
+            ->setPath('contao/main.php')
             ->setQueryParameter('do', $inputProvider->getParameter('do'))
+            ->setQueryParameter('table', $messageMeta->getTableName())
+            ->setQueryParameter('pid', $categoryModelId->getSerialized())
             ->setQueryParameter('ref', TL_REFERER_ID);
 
         $elements[] = array(
             'icon' => 'assets/avisota/message/images/newsletter.png',
-            'text' => $translator->translate('avisota_newsletter.0', 'MOD'),
-            'url'  => $urlNewsletterBuilder->getUrl()
+            'text' => $categoryEntity->getTitle(),
+            'url'  => $categoryUrlBuilder->getUrl()
         );
 
-        global $container;
-
-        $entityManager = $container['doctrine.orm.entityManager'];
-
-        $messageMeta = $entityManager->getClassMetadata(get_class($message));
-        $messageCategoryMeta = $entityManager->getClassMetadata(get_class($messageCategory));
-        $messageContentMeta = $entityManager->getClassMetadata(get_class($messageContent));
-
-        $urlMessageCategoryBuilder = new UrlBuilder();
-        $urlMessageCategoryBuilder->setPath('contao/main.php')
-            ->setQueryParameter(
-                'do',
-                $inputProvider->getParameter('do')
-            )
-            ->setQueryParameter(
-                'table',
-                $messageMeta->getTableName()
-            )
-            ->setQueryParameter(
-                'pid',
-                ModelId::fromValues(
-                    $messageCategoryMeta->getTableName(),
-                    $messageCategory->getId()
-                )->getSerialized()
-            )
+        $messageModelId    = ModelId::fromValues($messageMeta->getTableName(), $messageEntity->getId());
+        $messageUrlBuilder = new UrlBuilder();
+        $messageUrlBuilder
+            ->setPath('contao/main.php')
+            ->setQueryParameter('do', $inputProvider->getParameter('do'))
+            ->setQueryParameter('table', $contentMeta->getTableName())
+            ->setQueryParameter('pid', $messageModelId->getSerialized())
             ->setQueryParameter('ref', TL_REFERER_ID);
 
         $elements[] = array(
-            'text' => $messageCategory->getTitle(),
-            'url' => $urlMessageCategoryBuilder->getUrl()
+            'icon' => 'assets/avisota/message/images/newsletter.png',
+            'text' => $messageEntity->getSubject(),
+            'url'  => $messageUrlBuilder->getUrl()
         );
 
-        $urlMessageBuilder = new UrlBuilder();
-        $urlMessageBuilder->setPath('contao/main.php')
-            ->setQueryParameter(
-                'do',
-                $inputProvider->getParameter('do')
-            )
-            ->setQueryParameter(
-                'table',
-                $messageContentMeta->getTableName()
-            )
-            ->setQueryParameter(
-                'pid',
-                ModelId::fromValues(
-                    $messageMeta->getTableName(),
-                    $message->getId()
-                )->getSerialized()
-            )
+        $contentUrlBuilder = new UrlBuilder();
+        $contentUrlBuilder
+            ->setPath('contao/main.php')
+            ->setQueryParameter('do', $inputProvider->getParameter('do'))
+            ->setQueryParameter('table', $inputProvider->getParameter('table'))
+            ->setQueryParameter('act', $inputProvider->getParameter('act'))
+            ->setQueryParameter('id', $inputProvider->getParameter('id'))
+            ->setQueryParameter('pid', $inputProvider->getParameter('pid'))
             ->setQueryParameter('ref', TL_REFERER_ID);
 
+        $cellProperty = $propertiesDefinition->getProperty('cell');
+        $cellLanguage = $cellProperty->getExtra()['reference'];
+        $typeProperty = $propertiesDefinition->getProperty('type');
+        $typeLanguage = $typeProperty->getExtra()['reference'];
+
+        $cellName = $cellLanguage[$contentEntity->getCell()];
+        $typeName =
+            is_string($typeLanguage[$contentEntity->getType()]) ?: $typeLanguage[$contentEntity->getType()][0];
+
         $elements[] = array(
-            'text' => $message->getSubject(),
-            'url' => $urlMessageBuilder->getUrl()
+            'icon' => 'assets/avisota/message/images/newsletter.png',
+            'text' =>
+                $typeName . "<span style='font-weight: bold; color: #b3b3b3; padding-left: 3px;'>[$cellName]</span>",
+            'url'  => $contentUrlBuilder->getUrl()
         );
 
         $event->setElements($elements);
