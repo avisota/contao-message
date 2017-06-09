@@ -2,11 +2,11 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright © 2016 Sven Baumann
+ * Copyright © 2017 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  way.vision 2016
+ * @copyright  way.vision 2017
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-core
  * @license    LGPL-3.0+
@@ -38,7 +38,7 @@ if (!is_file($dir . '/system/initialize.php')) {
     exit(1);
 }
 
-define('TL_MODE', 'BE');
+define('TL_MODE', 'FE');
 require($dir . '/system/initialize.php');
 
 BackendUser::getInstance();

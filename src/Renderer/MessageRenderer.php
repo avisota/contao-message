@@ -2,11 +2,11 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright © 2016 Sven Baumann
+ * Copyright © 2017 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  way.vision 2016
+ * @copyright  way.vision 2017
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-message
  * @license    LGPL-3.0+
@@ -26,14 +26,11 @@ use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
 use Contao\Doctrine\ORM\EntityHelper;
 use Contao\Doctrine\ORM\EntityInterface;
 use Contao\Frontend;
+use Contao\TemplateLoader;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
- * Class MessageRenderer
- *
- * @package Avisota\Contao\Message\Core\Renderer
- * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * The message renderer.
  */
 class MessageRenderer implements MessageRendererInterface
 {
@@ -62,13 +59,13 @@ class MessageRenderer implements MessageRendererInterface
     /**
      * Render content from a cell.
      *
-     * @param Message $message
-     * @param string  $cell
+     * @param Message $message The message.
      *
-     * @param Layout  $layout
+     * @param string  $cell    The cell.
      *
-     * @return \string[]
-     * @SuppressWarnings(PHPMD.LongVariable)
+     * @param Layout  $layout  The layout.
+     *
+     * @return array
      */
     public function renderCell(Message $message, $cell, Layout $layout = null)
     {
@@ -82,7 +79,9 @@ class MessageRenderer implements MessageRendererInterface
             ->setParameter('message', $message->getId())
             ->setParameter('cell', $cell);
 
-        if (TL_MODE != 'BE' && (!defined('BE_USER_LOGGED_IN') || !BE_USER_LOGGED_IN)) {
+        if (('BE' !== TL_MODE)
+            && (!defined('BE_USER_LOGGED_IN') || !BE_USER_LOGGED_IN)
+        ) {
             $queryBuilder
                 ->andWhere('mc.invisible=:invisible')
                 ->setParameter('invisible', false);
@@ -102,35 +101,38 @@ class MessageRenderer implements MessageRendererInterface
     /**
      * Render a single message content element.
      *
-     * @param MessageContent $messageContent
+     * @param MessageContent $messageContent The message content.
      *
-     * @param Layout         $layout
+     * @param Layout         $layout         The layout.
      *
      * @return string
+     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function renderContent(MessageContent $messageContent, Layout $layout = null)
     {
-        if ($messageContent->getInvisible() && TL_MODE != 'BE' && !BE_USER_LOGGED_IN) {
+        if ($messageContent->getInvisible()
+            && 'BE' !== TL_MODE
+            && !BE_USER_LOGGED_IN
+        ) {
             return '';
         }
 
         $event = new RenderMessageContentEvent($messageContent, $layout ?: $messageContent->getMessage()->getLayout());
 
-        $replaced = $this->findMessageContentCustomTemplates($messageContent);
+        $this->findMessageContentCustomTemplates($messageContent);
 
         /** @var EventDispatcher $eventDispatcher */
         $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
         $eventDispatcher->dispatch(AvisotaMessageEvents::RENDER_MESSAGE_CONTENT, $event);
 
-        $this->removeEachTemplate($replaced[0]);
-        $this->resetContent($replaced[1]);
-
         return $event->getRenderedContent();
     }
 
     /**
-     * @param MessageContent $messageContent
+     * Find the custom templates in message content.
+     *
+     * @param MessageContent $messageContent The message content.
      *
      * @return array
      */
@@ -138,24 +140,14 @@ class MessageRenderer implements MessageRendererInterface
     {
         if (in_array(
             $messageContent->getType(),
-            array(
-                'headline',
-                'hyperlink',
-                'list',
-                'salutation',
-                'table',
-                'image',
-                'gallery',
-                'text',
-            )
-        )
-        ) {
+            array('headline', 'hyperlink', 'list', 'salutation', 'table', 'image', 'gallery', 'text',)
+        )) {
             return array();
         }
 
         $contents = $this->handleMessageContent($messageContent);
 
-        return $this->handleFoundedContent($messageContent, $contents);
+        $this->handleFoundedContent($messageContent, $contents);
     }
 
     /**
@@ -289,48 +281,26 @@ class MessageRenderer implements MessageRendererInterface
         }
         $viewOnlinePageModel->loadDetails();
 
-        $replaced   = array();
-        $replacedIn = array();
-
         foreach ($contents as $content) {
-            foreach (array('type', 'galleryTpl', 'customTpl', 'eventTemplate', 'newsTemplate',) as $propertyTemplate) {
+            foreach (array('type', 'galleryTpl', 'customTpl', 'eventTemplate', 'newsTemplate') as $propertyTemplate) {
                 if ($content instanceof \Model) {
                     if (empty($content->$propertyTemplate)) {
                         continue;
                     }
 
-                    $template = $this->findTemplate($content->$propertyTemplate, $messageCategory);
-
-                    if ($content->$propertyTemplate === $template) {
-                        continue;
-                    }
-
-                    $content->$propertyTemplate = $template;
-                    $replaced[]                 = $template;
-                    $replacedIn[]               = $content;
+                    $this->findTemplate($content->$propertyTemplate, $messageCategory);
                 }
                 if ($content instanceof EntityInterface) {
                     $getPropertyTemplate = 'get' . ucfirst($propertyTemplate);
-                    $setPropertyTemplate = 'set' . ucfirst($propertyTemplate);
 
                     if (!method_exists($content, $getPropertyTemplate) || !$content->$getPropertyTemplate()) {
                         continue;
                     }
 
-                    $template = $this->findTemplate($content->$getPropertyTemplate(), $messageCategory);
-
-                    if ($content->$getPropertyTemplate() === $template) {
-                        continue;
-                    }
-
-                    $content->$setPropertyTemplate($template);
-                    $replaced[]   = $template;
-                    $replacedIn[] = $content;
+                    $this->findTemplate($content->$getPropertyTemplate(), $messageCategory);
                 }
             }
         }
-
-        return array($replaced, $replacedIn);
     }
 
     /**
@@ -351,10 +321,7 @@ class MessageRenderer implements MessageRendererInterface
                 TL_ROOT . '/templates/' . $messageTheme->getTemplateDirectory() . '/' . $searchTemplate . '.html5'
             )
         ) {
-            $template = $this->copyTemplateInRootTemplates(
-                $messageTheme->getTemplateDirectory() . '/' . $searchTemplate,
-                '.' . microtime(true)
-            );
+            $this->copyTemplateInRootTemplates($messageTheme->getTemplateDirectory() . '/' . $searchTemplate);
         }
 
         if (!$template
@@ -371,81 +338,24 @@ class MessageRenderer implements MessageRendererInterface
             if ($pageTheme
                 && file_exists(TL_ROOT . '/' . $pageTheme->templates . '/' . $searchTemplate . '.html5')
             ) {
-                $source = $pageTheme->templates;
-                $chunks = explode('/', $source);
-                if (count($chunks) > 1) {
-                    if (in_array('templates', array_values($chunks))) {
-                        $unset = array_flip($chunks)['templates'];
-                        unset($chunks[$unset]);
-                    }
-                }
-                $source = implode('/', $chunks);
-
-                $template = $this->copyTemplateInRootTemplates(
-                    $source . '/' . $searchTemplate,
-                    '.avisota-' . microtime(true)
-                );
+                $this->copyTemplateInRootTemplates($pageTheme->templates . '/' . $searchTemplate);
             }
         }
-
-        if (!$template) {
-            $template = $searchTemplate;
-        }
-
-        return $template;
     }
 
     /**
      * @param $source
-     * @param $destination
      *
      * @return mixed
+     * @internal param $destination
+     *
      */
-    protected function copyTemplateInRootTemplates($source, $destination)
+    protected function copyTemplateInRootTemplates($source)
     {
-        $sourceFile = new \File('templates/' . $source . '.html5');
-        $sourceFile->copyTo('templates/' . $destination . '.html5');
+        $chunks       = explode('/', $source);
+        $templateName = array_pop($chunks);
+        $templatePath = implode('/', $chunks);
 
-        return $destination;
-    }
-
-    /**
-     * @param $removes
-     */
-    protected function removeEachTemplate($removes)
-    {
-        if (count($removes) < 1) {
-            return;
-        }
-
-        foreach ($removes as $remove) {
-            $removeFile = new \File('templates/' . $remove . '.html5', true);
-            if (!$removeFile->exists()) {
-                continue;
-            }
-
-            $removeFile->delete();
-        }
-    }
-
-    /**
-     * @param $contents
-     */
-    protected function resetContent($contents)
-    {
-        if (count($contents) < 1) {
-            return;
-        }
-
-        $entityManager = EntityHelper::getEntityManager();
-        foreach ($contents as $content) {
-            if ($content instanceof EntityInterface) {
-                $entityManager->refresh($content);
-            }
-
-            if ($content instanceof \Model) {
-                $content->refresh();
-            }
-        }
+        TemplateLoader::addFile($templateName, $templatePath);
     }
 }

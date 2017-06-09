@@ -2,11 +2,11 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright © 2016 Sven Baumann
+ * Copyright © 2017 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  way.vision 2016
+ * @copyright  way.vision 2017
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-core
  * @license    LGPL-3.0+
@@ -70,35 +70,66 @@ class Theme implements EventSubscriberInterface
      */
     public function getBreadCrumb(GetBreadcrumbEvent $event)
     {
-        $environment   = $event->getEnvironment();
+        $environment    = $event->getEnvironment();
         $dataDefinition = $environment->getDataDefinition();
-        $inputProvider = $environment->getInputProvider();
-        $translator = $environment->getTranslator();
+        $inputProvider  = $environment->getInputProvider();
 
-        $modelParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
-
-        if ($dataDefinition->getName() !== 'orm_avisota_theme'
-            || !$inputProvider->hasParameter($modelParameter)
-        ) {
-            return;
-        }
-
-        $modelId = ModelId::fromSerialized($inputProvider->getParameter($modelParameter));
-        if ($modelId->getDataProviderName() !== 'orm_avisota_theme') {
+        if ('avisota_theme' !== $inputProvider->getParameter('do')) {
             return;
         }
 
         $elements = $event->getElements();
 
-        $urlBuilder = new UrlBuilder();
-        $urlBuilder->setPath('contao/main.php')
+        $rootUrlBuilder = new UrlBuilder();
+        $rootUrlBuilder->setPath('contao/main.php')
             ->setQueryParameter('do', $inputProvider->getParameter('do'))
             ->setQueryParameter('ref', TL_REFERER_ID);
+
+        $translator = $environment->getTranslator();
 
         $elements[] = array(
             'icon' => 'assets/avisota/message/images/theme.png',
             'text' => $translator->translate('avisota_theme.0', 'MOD'),
-            'url'  => $urlBuilder->getUrl()
+            'url'  => $rootUrlBuilder->getUrl()
+        );
+
+        $modelParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
+        if (false === $inputProvider->hasParameter($modelParameter)) {
+            $event->setElements($elements);
+
+            return;
+        }
+
+        $modelId = ModelId::fromSerialized($inputProvider->getParameter($modelParameter));
+        if ('orm_avisota_theme' !== $modelId->getDataProviderName()) {
+            $event->setElements($elements);
+
+            return;
+        }
+
+        $dataProvider = $environment->getDataProvider($modelId->getDataProviderName());
+        $repository   = $dataProvider->getEntityRepository();
+
+        $entity = $repository->findOneBy(array('id' => $modelId->getId()));
+
+        $entityUrlBuilder = new UrlBuilder();
+        $entityUrlBuilder->setPath('contao/main.php')
+            ->setQueryParameter('do', $inputProvider->getParameter('do'))
+            ->setQueryParameter($modelParameter, $inputProvider->getParameter($modelParameter))
+            ->setQueryParameter('ref', TL_REFERER_ID);
+
+        if ('id' === $modelParameter) {
+            $entityUrlBuilder->setQueryParameter('act', $inputProvider->getParameter('act'));
+        }
+
+        if ('pid' === $modelParameter) {
+            $entityUrlBuilder->setQueryParameter('table', $dataDefinition->getName());
+        }
+
+        $elements[] = array(
+            'icon' => 'assets/avisota/message/images/theme.png',
+            'text' => $entity->getTitle(),
+            'url'  => $entityUrlBuilder->getUrl()
         );
 
         $event->setElements($elements);
