@@ -1,4 +1,6 @@
-<form action="system/modules/avisota-message/web/send_immediate.php" class="tl_form tl_form_avisota_inline" method="get">
+<form action="contao/main.php" class="tl_form tl_form_avisota_inline" method="get">
+    <input name="do" value="avisota_outbox" type="hidden">
+    <input name="send" value="immediate" type="hidden">
     <input name="id" value="{{ message.id }}" type="hidden">
 
     <fieldset id="pal_avisota_send_immediate" class="tl_box block">

@@ -18,8 +18,8 @@ use Avisota\Contao\Message\Core\Event\GenerateViewOnlineUrlEvent;
 use Avisota\Contao\Message\Core\MessageEvents;
 use Contao\Doctrine\ORM\EntityHelper;
 use ContaoCommunityAlliance\Contao\Bindings\ContaoEvents;
-use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GetPageDetailsEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GenerateFrontendUrlEvent;
+use ContaoCommunityAlliance\Contao\Bindings\Events\Controller\GetPageDetailsEvent;
 use ContaoCommunityAlliance\Contao\Bindings\Events\System\LoadLanguageFileEvent;
 use ContaoCommunityAlliance\DcGeneral\Data\ModelId;
 
@@ -165,14 +165,11 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
             );
 
             $parameters = array(
-                'id'   => $message->getId(),
-                'turn' => $turn + 1,
-                'loop' => $loop,
-            );
-            $url        = sprintf(
-                '%ssystem/modules/avisota-message/web/send_immediate.php?%s',
-                \Environment::get('base'),
-                http_build_query($parameters)
+                'id'        => $message->getId(),
+                'turn'      => $turn + 1,
+                'loop'      => $loop,
+                'turnCount' => $turn * (integer) $queueData->getMaxSendCount(),
+                'maxCount'  => $recipientSource->countRecipients()
             );
 
             $entityManager->flush();
@@ -181,20 +178,15 @@ class send_immediate extends \Avisota\Contao\Message\Core\Send\AbstractWebRunner
                 'do'      => 'avisota_outbox',
                 'execute' => $queueData->getId(),
             );
-            $url        = sprintf(
-                '%scontao/main.php?%s',
-                \Environment::get('base'),
-                http_build_query($parameters)
-            );
 
             $message->setSendOn(new \DateTime());
             $entityManager->persist($message);
             $entityManager->flush();
         }
 
-        echo '<html><head><meta http-equiv="refresh" content="0; URL=' . $url
-             . '"></head><body>Still generating...</body></html>';
-        exit;
+        echo json_encode($parameters);
+
+        exit();
     }
 
     /**
