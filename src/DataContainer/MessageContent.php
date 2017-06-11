@@ -189,6 +189,7 @@ class MessageContent implements EventSubscriberInterface
 
         if ($dataDefinition->getName() !== 'orm_avisota_message_content'
             || !$inputProvider->hasParameter('id')
+            || empty($inputProvider->getParameter('id'))
         ) {
             return;
         }

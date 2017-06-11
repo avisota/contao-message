@@ -350,7 +350,9 @@ class Message implements EventSubscriberInterface
         }
 
         $modelParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
-        if (false === $inputProvider->hasParameter($modelParameter)) {
+        if (false === $inputProvider->hasParameter($modelParameter)
+            || empty($inputProvider->getParameter($modelParameter))
+        ) {
             return;
         }
 
