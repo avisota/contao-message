@@ -350,7 +350,13 @@ class Message implements EventSubscriberInterface
         }
 
         $modelParameter = $inputProvider->hasParameter('act') ? 'id' : 'pid';
-        if (false === $inputProvider->hasParameter($modelParameter)) {
+        if ('create' === $inputProvider->getParameter('act')) {
+            $inputProvider
+                ->setParameter($modelParameter, ModelId::fromValues('orm_avisota_message', 0)->getSerialized());
+        }
+        if (false === $inputProvider->hasParameter($modelParameter)
+            || empty($inputProvider->getParameter($modelParameter))
+        ) {
             return;
         }
 
@@ -366,10 +372,25 @@ class Message implements EventSubscriberInterface
         $dataProvider = $environment->getDataProvider($modelId->getDataProviderName());
         $repository   = $dataProvider->getEntityRepository();
 
-        $messageEntity  = $repository->findOneBy(array('id' => $modelId->getId()));
-        $categoryEntity = $messageEntity->getCategory();
-
         $parentDataDefinition = $environment->getParentDataDefinition();
+        if (null === $parentDataDefinition) {
+            $event->setElements($elements);
+
+            return;
+        }
+
+        $messageEntity  = $repository->findOneBy(array('id' => $modelId->getId()));
+        if ('create' === $inputProvider->getParameter('act')) {
+            $parentDataProvider = $environment->getDataProvider($parentDataDefinition->getName());
+            $parentRepository = $parentDataProvider->getEntityRepository();
+
+            $parentModelId = ModelId::fromSerialized($inputProvider->getParameter('pid'));
+            $categoryEntity  = $parentRepository->findOneBy(array('id' => $parentModelId->getId()));
+        }
+
+        if ('create' !== $inputProvider->getParameter('act')) {
+            $categoryEntity = $messageEntity->getCategory();
+        }
 
         $entityManager = $GLOBALS['container']['doctrine.orm.entityManager'];
 
@@ -393,6 +414,12 @@ class Message implements EventSubscriberInterface
             'text' => $categoryEntity->getTitle(),
             'url'  => $parentUrlBuilder->getUrl()
         );
+
+        if (null === $messageEntity) {
+            $event->setElements($elements);
+
+            return;
+        }
 
         $entityUrlBuilder = new UrlBuilder();
         $entityUrlBuilder

@@ -90,6 +90,15 @@ class Layout implements EventSubscriberInterface
 
         $layoutEntity = $repository->findOneBy(array('id' => $modelId->getId()));
         $themeEntity  = $layoutEntity->getTheme();
+        if (null === $themeEntity) {
+            $parentDataDefinition = $environment->getParentDataDefinition();
+
+            $parentDataProvider = $environment->getDataProvider($parentDataDefinition->getName());
+            $parentRepository = $parentDataProvider->getEntityRepository();
+
+            $parentModelId = ModelId::fromSerialized($inputProvider->getParameter('pid'));
+            $themeEntity  = $parentRepository->findOneBy(array('id' => $parentModelId->getId()));
+        }
 
         $parentUrlBuilder = new UrlBuilder();
         $parentUrlBuilder->setPath('contao/main.php')
@@ -103,6 +112,12 @@ class Layout implements EventSubscriberInterface
             'text' => $themeEntity->getTitle(),
             'url'  => $parentUrlBuilder->getUrl()
         );
+
+        if (null === $layoutEntity->getTitle()) {
+            $event->setElements($elements);
+
+            return;
+        }
 
         $entityUrlBuilder = new UrlBuilder();
         $entityUrlBuilder->setPath('contao/main.php')

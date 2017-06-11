@@ -174,8 +174,7 @@ class MessageRenderer implements MessageRendererInterface
         }
 
         $contents = array();
-        foreach ($messageContent->$elementIdMethod() as $elementId) {
-
+        foreach (array_keys($messageContent->$elementIdMethod()) as $elementId) {
             /** @var \Model $containerModel */
             $containerModel = $containerModelName::findByPk($elementId);
 
