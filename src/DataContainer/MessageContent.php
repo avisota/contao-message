@@ -188,15 +188,19 @@ class MessageContent implements EventSubscriberInterface
         $inputProvider        = $environment->getInputProvider();
 
         if ($dataDefinition->getName() !== 'orm_avisota_message_content'
-            || !$inputProvider->hasParameter('id')
-            || empty($inputProvider->getParameter('id'))
+            || !$inputProvider->hasParameter('act')
         ) {
+            return;
+        }
+
+        $modelParameter = $inputProvider->hasParameter('id') ? 'id' : 'after';
+        if (empty($inputProvider->getParameter($modelParameter))) {
             return;
         }
 
         $elements = $event->getElements();
 
-        $modelId      = ModelId::fromSerialized($inputProvider->getParameter('id'));
+        $modelId      = ModelId::fromSerialized($inputProvider->getParameter($modelParameter));
         $dataProvider = $environment->getDataProvider($modelId->getDataProviderName());
         $repository   = $dataProvider->getEntityRepository();
 
@@ -239,6 +243,12 @@ class MessageContent implements EventSubscriberInterface
             'text' => $messageEntity->getSubject(),
             'url'  => $messageUrlBuilder->getUrl()
         );
+
+        if ('after' === $modelParameter) {
+            $event->setElements($elements);
+
+            return;
+        }
 
         $contentUrlBuilder = new UrlBuilder();
         $contentUrlBuilder
