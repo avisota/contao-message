@@ -198,6 +198,12 @@ class MessageContent implements EventSubscriberInterface
             return;
         }
 
+        if ('after' === $modelParameter) {
+            $parentDataDefinition = $environment->getParentDataDefinition();
+            $inputProvider
+                ->setParameter('id', ModelId::fromValues($parentDataDefinition->getName(), 0)->getSerialized());
+        }
+
         $elements = $event->getElements();
 
         $modelId      = ModelId::fromSerialized($inputProvider->getParameter($modelParameter));
@@ -205,14 +211,22 @@ class MessageContent implements EventSubscriberInterface
         $repository   = $dataProvider->getEntityRepository();
 
         $contentEntity  = $repository->findOneBy(array('id' => $modelId->getId()));
-        $messageEntity  = $contentEntity->getMessage();
+        if ('edit' === $inputProvider->getParameter('act')) {
+            $messageEntity  = $contentEntity->getMessage();
+        }
+        if (null === $contentEntity) {
+            $parentDataProvider = $environment->getDataProvider($parentDataDefinition->getName());
+            $parentRepository = $parentDataProvider->getEntityRepository();
+
+            $parentModelId = ModelId::fromSerialized($inputProvider->getParameter('pid'));
+            $messageEntity = $parentRepository->findOneBy(array('id' => $parentModelId->getId()));
+        }
         $categoryEntity = $messageEntity->getCategory();
 
         $entityManager = $GLOBALS['container']['doctrine.orm.entityManager'];
 
         $categoryMeta = $entityManager->getClassMetadata(get_class($categoryEntity));
         $messageMeta  = $entityManager->getClassMetadata(get_class($messageEntity));
-        $contentMeta  = $entityManager->getClassMetadata(get_class($contentEntity));
 
         $categoryModelId    = ModelId::fromValues($categoryMeta->getTableName(), $categoryEntity->getId());
         $categoryUrlBuilder = new UrlBuilder();
@@ -234,7 +248,7 @@ class MessageContent implements EventSubscriberInterface
         $messageUrlBuilder
             ->setPath('contao/main.php')
             ->setQueryParameter('do', $inputProvider->getParameter('do'))
-            ->setQueryParameter('table', $contentMeta->getTableName())
+            ->setQueryParameter('table', $dataDefinition->getName())
             ->setQueryParameter('pid', $messageModelId->getSerialized())
             ->setQueryParameter('ref', TL_REFERER_ID);
 
