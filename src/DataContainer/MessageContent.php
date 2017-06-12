@@ -193,34 +193,24 @@ class MessageContent implements EventSubscriberInterface
             return;
         }
 
-        $modelParameter = $inputProvider->hasParameter('id') ? 'id' : 'after';
-        if (empty($inputProvider->getParameter($modelParameter))) {
+        if (empty($inputProvider->getParameter('id'))) {
             return;
-        }
-
-        if ('after' === $modelParameter) {
-            $parentDataDefinition = $environment->getParentDataDefinition();
-            $inputProvider
-                ->setParameter('id', ModelId::fromValues($parentDataDefinition->getName(), 0)->getSerialized());
         }
 
         $elements = $event->getElements();
 
-        $modelId      = ModelId::fromSerialized($inputProvider->getParameter($modelParameter));
+        $modelId      = ModelId::fromSerialized($inputProvider->getParameter('id'));
         $dataProvider = $environment->getDataProvider($modelId->getDataProviderName());
         $repository   = $dataProvider->getEntityRepository();
 
-        $contentEntity  = $repository->findOneBy(array('id' => $modelId->getId()));
-        if ('edit' === $inputProvider->getParameter('act')) {
-            $messageEntity  = $contentEntity->getMessage();
-        }
+        $contentEntity = $repository->findOneBy(array('id' => $modelId->getId()));
         if (null === $contentEntity) {
-            $parentDataProvider = $environment->getDataProvider($parentDataDefinition->getName());
-            $parentRepository = $parentDataProvider->getEntityRepository();
+            $event->setElements($elements);
 
-            $parentModelId = ModelId::fromSerialized($inputProvider->getParameter('pid'));
-            $messageEntity = $parentRepository->findOneBy(array('id' => $parentModelId->getId()));
+            return;
         }
+
+        $messageEntity  = $contentEntity->getMessage();
         $categoryEntity = $messageEntity->getCategory();
 
         $entityManager = $GLOBALS['container']['doctrine.orm.entityManager'];
@@ -258,11 +248,11 @@ class MessageContent implements EventSubscriberInterface
             'url'  => $messageUrlBuilder->getUrl()
         );
 
-        if ('after' === $modelParameter) {
+        /*if ('after' === $modelParameter) {
             $event->setElements($elements);
 
             return;
-        }
+        }*/
 
         $contentUrlBuilder = new UrlBuilder();
         $contentUrlBuilder
