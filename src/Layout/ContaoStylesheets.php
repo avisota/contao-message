@@ -2,11 +2,11 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright © 2016 Sven Baumann
+ * Copyright © 2017 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  way.vision 2016
+ * @copyright  way.vision 2017
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-core
  * @license    LGPL-3.0+
@@ -99,11 +99,8 @@ class ContaoStylesheets implements EventSubscriberInterface
         $stylesheet = $event->getStylesheet();
 
         if (preg_match('#^contao:(.*)$#', $stylesheet, $matches)) {
-            if (version_compare(VERSION, '3', '>=')) {
-                $stylesheet = 'assets/css/' . $matches[1] . '.css';
-            } else {
-                $stylesheet = 'system/scripts/' . $matches[1] . '.css';
-            }
+            $stylesheet = 'assets/css/' . $matches[1] . '.css';
+
             $event->setStylesheet($stylesheet);
         }
     }
