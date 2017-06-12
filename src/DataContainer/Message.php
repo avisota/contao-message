@@ -379,18 +379,16 @@ class Message implements EventSubscriberInterface
             return;
         }
 
-        $messageEntity  = $repository->findOneBy(array('id' => $modelId->getId()));
+        $messageEntity = $repository->findOneBy(array('id' => $modelId->getId()));
         if ('create' === $inputProvider->getParameter('act')) {
             $parentDataProvider = $environment->getDataProvider($parentDataDefinition->getName());
-            $parentRepository = $parentDataProvider->getEntityRepository();
+            $parentRepository   = $parentDataProvider->getEntityRepository();
 
             $parentModelId = ModelId::fromSerialized($inputProvider->getParameter('pid'));
-            $categoryEntity  = $parentRepository->findOneBy(array('id' => $parentModelId->getId()));
+            $messageEntity = $parentRepository->findOneBy(array('id' => $parentModelId->getId()));
         }
 
-        if ('create' !== $inputProvider->getParameter('act')) {
-            $categoryEntity = $messageEntity->getCategory();
-        }
+        $categoryEntity = $messageEntity->getCategory();
 
         $entityManager = $GLOBALS['container']['doctrine.orm.entityManager'];
 
