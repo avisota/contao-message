@@ -355,7 +355,7 @@ class Message implements EventSubscriberInterface
                 ->setParameter($modelParameter, ModelId::fromValues('orm_avisota_message', 0)->getSerialized());
         }
         if (false === $inputProvider->hasParameter($modelParameter)
-            || empty($inputProvider->getParameter($modelParameter))
+            || !$inputProvider->getParameter($modelParameter)
         ) {
             return;
         }
@@ -385,10 +385,12 @@ class Message implements EventSubscriberInterface
             $parentRepository   = $parentDataProvider->getEntityRepository();
 
             $parentModelId = ModelId::fromSerialized($inputProvider->getParameter('pid'));
-            $messageEntity = $parentRepository->findOneBy(array('id' => $parentModelId->getId()));
+            $categoryEntity = $parentRepository->findOneBy(array('id' => $parentModelId->getId()));
         }
 
-        $categoryEntity = $messageEntity->getCategory();
+        if ('create' !== $inputProvider->getParameter('act')) {
+            $categoryEntity = $messageEntity->getCategory();
+        }
 
         $entityManager = $GLOBALS['container']['doctrine.orm.entityManager'];
 
