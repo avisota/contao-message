@@ -193,7 +193,7 @@ class MessageContent implements EventSubscriberInterface
             return;
         }
 
-        if (empty($inputProvider->getParameter('id'))) {
+        if (!$inputProvider->getParameter('id')) {
             return;
         }
 
