@@ -69,8 +69,8 @@ class MessageRenderer implements MessageRendererInterface
      */
     public function renderCell(Message $message, $cell, Layout $layout = null)
     {
-        $messageContentRepository = EntityHelper::getRepository('Avisota\Contao:MessageContent');
-        $queryBuilder             = $messageContentRepository->createQueryBuilder('mc');
+        $repository   = EntityHelper::getRepository('Avisota\Contao:MessageContent');
+        $queryBuilder = $repository->createQueryBuilder('mc');
         $queryBuilder
             ->select('mc')
             ->where('mc.message=:message')
