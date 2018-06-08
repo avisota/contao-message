@@ -2,11 +2,11 @@
 
 /**
  * Avisota newsletter and mailing system
- * Copyright © 2017 Sven Baumann
+ * Copyright © 2018 Sven Baumann
  *
  * PHP version 5
  *
- * @copyright  way.vision 2017
+ * @copyright  way.vision 2018
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @package    avisota/contao-message
  * @license    LGPL-3.0+
@@ -26,6 +26,7 @@ use Avisota\Contao\Message\Core\Event\RenderMessageEvent;
 use Contao\Doctrine\ORM\EntityHelper;
 use Contao\Doctrine\ORM\EntityInterface;
 use Contao\Frontend;
+use Contao\StringUtil;
 use Contao\TemplateLoader;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -126,7 +127,7 @@ class MessageRenderer implements MessageRendererInterface
         $eventDispatcher = $GLOBALS['container']['event-dispatcher'];
         $eventDispatcher->dispatch(AvisotaMessageEvents::RENDER_MESSAGE_CONTENT, $event);
 
-        return $event->getRenderedContent();
+        return StringUtil::insertTagToSrc($event->getRenderedContent());
     }
 
     /**
