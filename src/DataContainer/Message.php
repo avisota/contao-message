@@ -381,11 +381,13 @@ class Message implements EventSubscriberInterface
 
         $messageEntity = $repository->findOneBy(array('id' => $modelId->getId()));
         if ('create' === $inputProvider->getParameter('act')) {
-            $parentDataProvider = $environment->getDataProvider($parentDataDefinition->getName());
-            $parentRepository   = $parentDataProvider->getEntityRepository();
+            $messageDataProvider = $environment->getDataProvider('orm_avisota_message');
+            $messageRepository   = $messageDataProvider->getEntityRepository();
 
             $parentModelId = ModelId::fromSerialized($inputProvider->getParameter('pid'));
-            $categoryEntity = $parentRepository->findOneBy(array('id' => $parentModelId->getId()));
+            $messageEntity = $messageRepository->findOneBy(array('id' => $parentModelId->getId()));
+
+            $categoryEntity = $messageEntity->getCategory();
         }
 
         if ('create' !== $inputProvider->getParameter('act')) {
